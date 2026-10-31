@@ -88,8 +88,6 @@ export const loginOrRegisterCandidate = async (name, mobile, passcode) => {
           localStorage.setItem(CANDIDATE_STORAGE_KEY, JSON.stringify(candidateData));
           return { success: true, candidate: candidateData, isNew: true };
         } else {
-          // If insert failed due to DB schema not ready, fallback gracefully
-          console.warn("Remote candidate insert returned status", createRes.status);
           throw new Error("Remote DB table pending");
         }
       }
@@ -98,7 +96,6 @@ export const loginOrRegisterCandidate = async (name, mobile, passcode) => {
     }
   } catch (err) {
     console.warn("Operating with local candidate session backup:", err.message);
-    // Graceful offline/pending-schema fallback so user can always evaluate the portal
     const fallbackRoll = 'RRB26' + cleanMobile.slice(-4) + '101';
     const fallbackCandidate = {
       name: cleanName,
@@ -119,10 +116,11 @@ export const loginOrRegisterCandidate = async (name, mobile, passcode) => {
 };
 
 /**
- * Fetch Questions (Tries remote DB first, falls back to pre-seeded 100 questions)
+ * Fetch Questions from Database (Supports existing database schema & JSON options)
  */
-export const fetchTestQuestions = async (testId = 'rrb-group-d-01') => {
+export const fetchTestQuestions = async (testId = 'rrb_cbt_mock_1') => {
   try {
+    // Try provided testId, fallback to rrb_cbt_mock_1 or rrb-group-d-01
     const url = `${API_ENDPOINT}/questions?test_id=eq.${testId}&order=question_number.asc`;
     const res = await fetch(url, {
       method: 'GET',
@@ -132,19 +130,54 @@ export const fetchTestQuestions = async (testId = 'rrb-group-d-01') => {
     if (res.ok) {
       const data = await res.json();
       if (data && data.length > 0) {
-        return data.map((q) => ({
-          id: q.question_number || q.id,
-          section: q.section,
-          question_en: q.question_en,
-          question_hi: q.question_hi,
-          options_en: [q.option_a_en, q.option_b_en, q.option_c_en, q.option_d_en],
-          options_hi: [q.option_a_hi, q.option_b_hi, q.option_c_hi, q.option_d_hi],
-          correct_option: q.correct_option,
-          positive_marks: Number(q.positive_marks || 1.0),
-          negative_marks: Number(q.negative_marks || 0.33),
-          explanation_en: q.explanation_en,
-          explanation_hi: q.explanation_hi
-        }));
+        return data.map((q) => {
+          // Parse options (handles both JSON object {a, b, c, d} and array)
+          let optsEn = [];
+          if (q.options) {
+            if (Array.isArray(q.options)) {
+              optsEn = q.options;
+            } else {
+              optsEn = [q.options.a || '', q.options.b || '', q.options.c || '', q.options.d || ''];
+            }
+          } else {
+            optsEn = [q.option_a_en || '', q.option_b_en || '', q.option_c_en || '', q.option_d_en || ''];
+          }
+
+          let optsHi = [];
+          if (q.options_hi) {
+            if (Array.isArray(q.options_hi)) {
+              optsHi = q.options_hi;
+            } else {
+              optsHi = [
+                q.options_hi.a || optsEn[0],
+                q.options_hi.b || optsEn[1],
+                q.options_hi.c || optsEn[2],
+                q.options_hi.d || optsEn[3]
+              ];
+            }
+          } else {
+            optsHi = [
+              q.option_a_hi || optsEn[0],
+              q.option_b_hi || optsEn[1],
+              q.option_c_hi || optsEn[2],
+              q.option_d_hi || optsEn[3]
+            ];
+          }
+
+          return {
+            id: q.question_number || q.id,
+            section: q.section_title || q.section || 'General Science',
+            question_en: q.question_text || q.question_en || '',
+            question_hi: q.question_text_hi || q.question_hi || q.question_text || '',
+            options_en: optsEn,
+            options_hi: optsHi,
+            correct_option: (q.correct_option || 'A').toUpperCase(),
+            positive_marks: Number(q.positive_marks || 1.0),
+            negative_marks: Number(q.negative_marks || 0.33),
+            explanation_en: q.solution_text || q.explanation_en || '',
+            explanation_hi: q.solution_text_hi || q.explanation_hi || ''
+          };
+        });
       }
     }
   } catch (err) {
@@ -160,7 +193,7 @@ export const syncTestAttempt = async (attemptData) => {
   const { candidateMobile, testId } = attemptData;
   const storageKey = `${ATTEMPT_STORAGE_KEY_PREFIX}${testId}_${candidateMobile}`;
 
-  // Always sync to local storage immediately
+  // Local storage cache
   try {
     localStorage.setItem(storageKey, JSON.stringify({
       ...attemptData,
@@ -200,7 +233,6 @@ export const syncTestAttempt = async (attemptData) => {
       body: JSON.stringify(payload)
     });
   } catch (err) {
-    // Silent fail for background sync to prevent disrupting active exam
     console.warn("Live DB sync background heartbeat notice:", err.message);
   }
 };
@@ -208,7 +240,7 @@ export const syncTestAttempt = async (attemptData) => {
 /**
  * Load test attempt state for resuming
  */
-export const getTestAttempt = async (candidateMobile, testId = 'rrb-group-d-01') => {
+export const getTestAttempt = async (candidateMobile, testId = 'rrb_cbt_mock_1') => {
   const storageKey = `${ATTEMPT_STORAGE_KEY_PREFIX}${testId}_${candidateMobile}`;
   let localData = null;
   try {
@@ -216,7 +248,7 @@ export const getTestAttempt = async (candidateMobile, testId = 'rrb-group-d-01')
     if (raw) localData = JSON.parse(raw);
   } catch (e) {}
 
-  // Also query remote backend
+  // Query remote backend
   try {
     const url = `${API_ENDPOINT}/test_attempts?candidate_mobile=eq.${candidateMobile}&test_id=eq.${testId}&select=*`;
     const res = await fetch(url, {

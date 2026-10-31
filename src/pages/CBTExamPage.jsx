@@ -48,7 +48,7 @@ export default function CBTExamPage({
   // 1. Load questions (remote DB or local fallback)
   useEffect(() => {
     let mounted = true;
-    fetchTestQuestions('rrb-group-d-01').then((loaded) => {
+    fetchTestQuestions('rrb_cbt_mock_1').then((loaded) => {
       if (mounted) {
         setQuestions(loaded);
         setLoadingQuestions(false);
@@ -109,7 +109,7 @@ export default function CBTExamPage({
     const attemptData = {
       candidateMobile: candidate.mobile_number,
       candidateName: candidate.name,
-      testId: 'rrb-group-d-01',
+      testId: 'rrb_cbt_mock_1',
       remainingSeconds,
       currentQuestionIndex,
       responses,
@@ -297,7 +297,7 @@ export default function CBTExamPage({
       syncTestAttempt({
         candidateMobile: candidate.mobile_number,
         candidateName: candidate.name,
-        testId: 'rrb-group-d-01',
+        testId: 'rrb_cbt_mock_1',
         remainingSeconds,
         currentQuestionIndex,
         responses,
@@ -496,3 +496,4 @@ export default function CBTExamPage({
     </div>
   );
 }
+

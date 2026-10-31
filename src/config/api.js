@@ -8,3 +8,4 @@ export const getHeaders = () => ({
   "Authorization": `Bearer ${API_KEY}`,
   "Prefer": "return=representation"
 });
+

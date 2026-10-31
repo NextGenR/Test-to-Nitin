@@ -157,3 +157,4 @@ export default function QuestionPalette({
     </aside>
   );
 }
+

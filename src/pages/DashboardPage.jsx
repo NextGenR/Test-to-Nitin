@@ -18,7 +18,7 @@ export default function DashboardPage({
   // Check if candidate has an existing paused or completed attempt
   useEffect(() => {
     if (candidate?.mobile_number) {
-      getTestAttempt(candidate.mobile_number, 'rrb-group-d-01').then((attempt) => {
+      getTestAttempt(candidate.mobile_number, 'rrb_cbt_mock_1').then((attempt) => {
         if (attempt) {
           setSavedAttempt(attempt);
         }
@@ -371,3 +371,4 @@ export default function DashboardPage({
     </div>
   );
 }
+

@@ -1321,3 +1321,4 @@ export const MOCK_QUESTIONS = [
     explanation_hi: "IRCTC का पूर्ण रूप 'इंडियन रेलवे कैटरिंग एंड टूरिज्म कॉर्पोरेशन' है।"
   }
 ];
+
