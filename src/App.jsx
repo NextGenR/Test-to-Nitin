@@ -36,7 +36,12 @@ export default function App() {
     setCurrentPage('exam');
   };
 
-  const handleResumeExam = (savedAttempt) => {
+  const handleResumeExam = (savedAttempt, mock) => {
+    setActiveExamConfig({
+      mockNumber: mock?.id || 1,
+      testId: mock?.testId || 'rrb_cbt_mock_1',
+      title: mock?.title || 'RRB Group D CBT Mock Test 01'
+    });
     setInitialAttemptData(savedAttempt);
     setCurrentPage('exam');
   };
@@ -64,6 +69,9 @@ export default function App() {
         <CBTExamPage
           candidate={activeCandidate}
           initialAttempt={initialAttemptData}
+          mockNumber={activeExamConfig?.mockNumber || 1}
+          testId={activeExamConfig?.testId || 'rrb_cbt_mock_1'}
+          testTitle={activeExamConfig?.title || 'RRB Group D CBT Mock Test 01'}
           defaultLang={activeExamConfig?.defaultLang || 'en'}
           onFinishExam={handleFinishExam}
         />

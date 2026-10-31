@@ -1,9 +1,10 @@
 -- =========================================================================
--- RRB MOCK TEST PORTAL - DATABASE SETUP SCRIPT
--- Execute this script in your Remote Database SQL Editor
+-- RRB MOCK TEST PLATFORM - COMPLETE DATABASE SCHEMA
+-- Execute this script in your Database SQL Editor
+-- Creates response tables: RRB_MOCK_1_responses, RRB_MOCK_2_responses, RRB_MOCK_3_responses
 -- =========================================================================
 
--- 1. CANDIDATES TABLE (Stores Candidate Name, 10-digit Mobile, 4-digit Passcode)
+-- 1. CANDIDATES AUTHENTICATION TABLE
 CREATE TABLE IF NOT EXISTS public.candidates (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name TEXT NOT NULL,
@@ -14,18 +15,95 @@ CREATE TABLE IF NOT EXISTS public.candidates (
     last_login_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Enable RLS & Allow Public Access
 ALTER TABLE public.candidates ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Allow anon all on candidates" ON public.candidates;
 CREATE POLICY "Allow anon all on candidates"
-ON public.candidates
-FOR ALL
-TO anon, authenticated
-USING (true)
-WITH CHECK (true);
+ON public.candidates FOR ALL TO anon, authenticated
+USING (true) WITH CHECK (true);
 
--- 2. TEST ATTEMPTS TABLE (Fixes existing table column mismatch & enables live sync)
--- Drop existing table if you want a clean slate, OR add missing columns:
+-- =========================================================================
+-- 2. INDIVIDUAL RESPONSE TABLES FOR EACH MOCK TEST
+-- Exact columns required:
+-- - name_of_candidate
+-- - question_number
+-- - section
+-- - correct_answer
+-- - his_answer
+-- - time_taken_by_him
+-- =========================================================================
+
+-- MOCK TEST 1 RESPONSES
+CREATE TABLE IF NOT EXISTS public."RRB_MOCK_1_responses" (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name_of_candidate TEXT NOT NULL,
+    candidate_mobile VARCHAR(15),
+    question_number INTEGER NOT NULL,
+    section VARCHAR(100) NOT NULL,
+    correct_answer VARCHAR(10) NOT NULL,
+    his_answer VARCHAR(10),
+    time_taken_by_him INTEGER DEFAULT 0, -- Time in seconds
+    is_correct BOOLEAN GENERATED ALWAYS AS (
+        CASE WHEN his_answer IS NOT NULL AND UPPER(TRIM(correct_answer)) = UPPER(TRIM(his_answer)) THEN TRUE ELSE FALSE END
+    ) STORED,
+    submitted_at TIMESTAMPTZ DEFAULT NOW(),
+    CONSTRAINT unique_mock1_candidate_q UNIQUE (candidate_mobile, question_number)
+);
+
+ALTER TABLE public."RRB_MOCK_1_responses" ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Allow anon all on RRB_MOCK_1_responses" ON public."RRB_MOCK_1_responses";
+CREATE POLICY "Allow anon all on RRB_MOCK_1_responses"
+ON public."RRB_MOCK_1_responses" FOR ALL TO anon, authenticated
+USING (true) WITH CHECK (true);
+
+-- MOCK TEST 2 RESPONSES
+CREATE TABLE IF NOT EXISTS public."RRB_MOCK_2_responses" (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name_of_candidate TEXT NOT NULL,
+    candidate_mobile VARCHAR(15),
+    question_number INTEGER NOT NULL,
+    section VARCHAR(100) NOT NULL,
+    correct_answer VARCHAR(10) NOT NULL,
+    his_answer VARCHAR(10),
+    time_taken_by_him INTEGER DEFAULT 0, -- Time in seconds
+    is_correct BOOLEAN GENERATED ALWAYS AS (
+        CASE WHEN his_answer IS NOT NULL AND UPPER(TRIM(correct_answer)) = UPPER(TRIM(his_answer)) THEN TRUE ELSE FALSE END
+    ) STORED,
+    submitted_at TIMESTAMPTZ DEFAULT NOW(),
+    CONSTRAINT unique_mock2_candidate_q UNIQUE (candidate_mobile, question_number)
+);
+
+ALTER TABLE public."RRB_MOCK_2_responses" ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Allow anon all on RRB_MOCK_2_responses" ON public."RRB_MOCK_2_responses";
+CREATE POLICY "Allow anon all on RRB_MOCK_2_responses"
+ON public."RRB_MOCK_2_responses" FOR ALL TO anon, authenticated
+USING (true) WITH CHECK (true);
+
+-- MOCK TEST 3 RESPONSES
+CREATE TABLE IF NOT EXISTS public."RRB_MOCK_3_responses" (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name_of_candidate TEXT NOT NULL,
+    candidate_mobile VARCHAR(15),
+    question_number INTEGER NOT NULL,
+    section VARCHAR(100) NOT NULL,
+    correct_answer VARCHAR(10) NOT NULL,
+    his_answer VARCHAR(10),
+    time_taken_by_him INTEGER DEFAULT 0, -- Time in seconds
+    is_correct BOOLEAN GENERATED ALWAYS AS (
+        CASE WHEN his_answer IS NOT NULL AND UPPER(TRIM(correct_answer)) = UPPER(TRIM(his_answer)) THEN TRUE ELSE FALSE END
+    ) STORED,
+    submitted_at TIMESTAMPTZ DEFAULT NOW(),
+    CONSTRAINT unique_mock3_candidate_q UNIQUE (candidate_mobile, question_number)
+);
+
+ALTER TABLE public."RRB_MOCK_3_responses" ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Allow anon all on RRB_MOCK_3_responses" ON public."RRB_MOCK_3_responses";
+CREATE POLICY "Allow anon all on RRB_MOCK_3_responses"
+ON public."RRB_MOCK_3_responses" FOR ALL TO anon, authenticated
+USING (true) WITH CHECK (true);
+
+-- =========================================================================
+-- 3. TEST ATTEMPTS TABLE (Overall Scorecard, Timer & Pause/Resume state)
+-- =========================================================================
 DO $$
 BEGIN
     IF NOT EXISTS (
@@ -52,7 +130,6 @@ BEGIN
             CONSTRAINT unique_candidate_test UNIQUE (candidate_mobile, test_id)
         );
     ELSE
-        -- Table already exists: safely add missing columns
         ALTER TABLE public.test_attempts ADD COLUMN IF NOT EXISTS candidate_mobile VARCHAR(15);
         ALTER TABLE public.test_attempts ADD COLUMN IF NOT EXISTS responses JSONB DEFAULT '{}'::jsonb;
         ALTER TABLE public.test_attempts ADD COLUMN IF NOT EXISTS remaining_seconds INTEGER DEFAULT 5400;
@@ -68,23 +145,19 @@ END $$;
 ALTER TABLE public.test_attempts ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Allow anon all on test_attempts" ON public.test_attempts;
 CREATE POLICY "Allow anon all on test_attempts"
-ON public.test_attempts
-FOR ALL
-TO anon, authenticated
-USING (true)
-WITH CHECK (true);
+ON public.test_attempts FOR ALL TO anon, authenticated
+USING (true) WITH CHECK (true);
 
--- 3. QUESTIONS TABLE (Already exists in your database with 100 RRB questions!)
--- Ensure RLS allows anonymous reading
-ALTER TABLE public.questions ENABLE ROW LEVEL SECURITY;
+-- 4. QUESTIONS TABLE (If using unified questions table)
+ALTER TABLE IF EXISTS public.questions ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Allow anon select on questions" ON public.questions;
 CREATE POLICY "Allow anon select on questions"
-ON public.questions
-FOR SELECT
-TO anon, authenticated
+ON public.questions FOR SELECT TO anon, authenticated
 USING (true);
 
--- 4. PERFORMANCE INDEXES
+-- 5. PERFORMANCE INDEXES
 CREATE INDEX IF NOT EXISTS idx_candidates_mobile ON public.candidates(mobile_number);
 CREATE INDEX IF NOT EXISTS idx_attempts_candidate ON public.test_attempts(candidate_mobile, test_id);
-CREATE INDEX IF NOT EXISTS idx_questions_test ON public.questions(test_id, question_number);
+CREATE INDEX IF NOT EXISTS idx_mock1_resp_mobile ON public."RRB_MOCK_1_responses"(candidate_mobile);
+CREATE INDEX IF NOT EXISTS idx_mock2_resp_mobile ON public."RRB_MOCK_2_responses"(candidate_mobile);
+CREATE INDEX IF NOT EXISTS idx_mock3_resp_mobile ON public."RRB_MOCK_3_responses"(candidate_mobile);

@@ -9,13 +9,16 @@ import ScorecardModal from '../components/ScorecardModal';
 import PauseModal from '../components/PauseModal';
 import { Clock } from 'lucide-react';
 import { SECTIONS } from '../data/mockQuestions';
-import { fetchTestQuestions, syncTestAttempt } from '../services/apiService';
+import { fetchTestQuestions, syncTestAttempt, saveMockResponses } from '../services/apiService';
 
 const TOTAL_DURATION_SECONDS = 90 * 60; // 90 minutes (5400 seconds)
 
 export default function CBTExamPage({
   candidate,
   initialAttempt,
+  mockNumber = 1,
+  testId = 'rrb_cbt_mock_1',
+  testTitle = 'RRB Group D CBT Mock Test 01',
   defaultLang = 'en',
   onFinishExam
 }) {
@@ -34,6 +37,7 @@ export default function CBTExamPage({
   const [responses, setResponses] = useState(initialAttempt?.responses || {});
   const [questionStates, setQuestionStates] = useState(initialAttempt?.questionStates || {});
   const [selectedOption, setSelectedOption] = useState(null);
+  const [timeSpentMap, setTimeSpentMap] = useState({});
 
   // Modals
   const [showInstructions, setShowInstructions] = useState(false);
@@ -45,10 +49,10 @@ export default function CBTExamPage({
   // Periodic heartbeat sync reference
   const syncTimeoutRef = useRef(null);
 
-  // 1. Load questions (remote DB or local fallback)
+  // 1. Load questions (remote DB or local fallback for Mock 1, 2, or 3)
   useEffect(() => {
     let mounted = true;
-    fetchTestQuestions('rrb_cbt_mock_1').then((loaded) => {
+    fetchTestQuestions(mockNumber).then((loaded) => {
       if (mounted) {
         setQuestions(loaded);
         setLoadingQuestions(false);
@@ -57,7 +61,7 @@ export default function CBTExamPage({
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [mockNumber]);
 
   // 2. Active section computation
   const activeSection = SECTIONS.find((s) => s.id === activeSectionId) || SECTIONS[0];
@@ -84,7 +88,7 @@ export default function CBTExamPage({
     });
   }, [currentQuestionIndex]);
 
-  // 3. Countdown timer
+  // 3. Countdown timer & per-question time tracking
   useEffect(() => {
     if (isPaused || showScorecard) return;
 
@@ -97,19 +101,25 @@ export default function CBTExamPage({
         }
         return prev - 1;
       });
+
+      // Track seconds spent on the current question
+      setTimeSpentMap((prev) => ({
+        ...prev,
+        [currentQuestionIndex]: (prev[currentQuestionIndex] || 0) + 1
+      }));
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [isPaused, showScorecard]);
+  }, [isPaused, showScorecard, currentQuestionIndex]);
 
-  // 4. Live Sync to DB (Heartbeat every 15 seconds or on important state change)
+  // 4. Live Sync to DB (Heartbeat every 15 seconds or on state change)
   const triggerSync = (forcedStatus = null) => {
     if (!candidate?.mobile_number) return;
 
     const attemptData = {
       candidateMobile: candidate.mobile_number,
       candidateName: candidate.name,
-      testId: 'rrb_cbt_mock_1',
+      testId: testId || `rrb_cbt_mock_${mockNumber}`,
       remainingSeconds,
       currentQuestionIndex,
       responses,
@@ -292,12 +302,24 @@ export default function CBTExamPage({
     setFinalResults(results);
     setShowScorecard(true);
 
-    // Live sync completion state to remote DB
+    const activeTestId = testId || `rrb_cbt_mock_${mockNumber}`;
+
+    // 1. Save question-level responses to table: RRB_MOCK_1_responses, RRB_MOCK_2_responses, or RRB_MOCK_3_responses
+    saveMockResponses({
+      mockNumber,
+      candidateName: candidate?.name,
+      candidateMobile: candidate?.mobile_number,
+      questions,
+      responses,
+      timeSpentMap
+    });
+
+    // 2. Save overall test attempt scorecard
     if (candidate?.mobile_number) {
       syncTestAttempt({
         candidateMobile: candidate.mobile_number,
         candidateName: candidate.name,
-        testId: 'rrb_cbt_mock_1',
+        testId: activeTestId,
         remainingSeconds,
         currentQuestionIndex,
         responses,
@@ -316,10 +338,10 @@ export default function CBTExamPage({
     handleFinalSubmit();
   };
 
-  // Re-attempt
   const handleReattempt = () => {
     setResponses({});
     setQuestionStates({});
+    setTimeSpentMap({});
     setCurrentQuestionIndex(0);
     setRemainingSeconds(TOTAL_DURATION_SECONDS);
     setShowScorecard(false);
@@ -327,20 +349,19 @@ export default function CBTExamPage({
     triggerSync('in_progress');
   };
 
-  // Format Timer
   const timerHours = Math.floor(remainingSeconds / 3600);
   const timerMinutes = Math.floor((remainingSeconds % 3600) / 60);
   const timerSecs = remainingSeconds % 60;
   const formattedTimer = `${String(timerHours).padStart(2, '0')}:${String(timerMinutes).padStart(2, '0')}:${String(timerSecs).padStart(2, '0')}`;
-  const isTimerCritical = remainingSeconds < 300; // < 5 mins
-  const isTimerWarning = remainingSeconds < 900; // < 15 mins
+  const isTimerCritical = remainingSeconds < 300;
+  const isTimerWarning = remainingSeconds < 900;
 
   if (loadingQuestions) {
     return (
       <div className="min-h-screen bg-slate-900 text-white flex flex-col items-center justify-center p-6">
         <div className="w-12 h-12 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mb-4"></div>
         <h2 className="text-xl font-bold">Initializing TCS iON CBT Examination Engine...</h2>
-        <p className="text-xs text-slate-400 mt-2">Loading bilingual RRB Group D question paper.</p>
+        <p className="text-xs text-slate-400 mt-2">Loading {testTitle} question paper.</p>
       </div>
     );
   }
@@ -354,7 +375,7 @@ export default function CBTExamPage({
       <Navbar
         candidate={candidate}
         isTestMode={true}
-        testTitle="RRB Group D CBT Mock Test 01"
+        testTitle={testTitle}
         onOpenInstructions={() => setShowInstructions(true)}
         onOpenQuestionPaper={() => setShowQuestionPaper(true)}
         isPaused={isPaused}
@@ -392,7 +413,7 @@ export default function CBTExamPage({
           })}
         </div>
 
-        {/* Live Timer Display (TCS iON Standard) */}
+        {/* Live Timer Display */}
         <div className="flex items-center gap-2 bg-slate-900/90 px-3 py-1.5 rounded border border-slate-700">
           <Clock className={`w-4 h-4 ${
             isTimerCritical ? 'text-red-500 animate-pulse' : isTimerWarning ? 'text-amber-400' : 'text-emerald-400'
@@ -496,4 +517,3 @@ export default function CBTExamPage({
     </div>
   );
 }
-

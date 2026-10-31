@@ -1,5 +1,5 @@
 import { API_ENDPOINT, getHeaders } from '../config/api';
-import { MOCK_QUESTIONS } from '../data/mockQuestions';
+import { MOCK_TESTS_DATA, MOCK_QUESTIONS } from '../data/mockQuestions';
 
 const CANDIDATE_STORAGE_KEY = 'rrb_active_candidate';
 const ATTEMPT_STORAGE_KEY_PREFIX = 'rrb_test_attempt_';
@@ -30,14 +30,12 @@ export const clearCandidateSession = () => {
 
 /**
  * Login or Register Candidate
- * Saves passcode to remote database and caches session locally
  */
 export const loginOrRegisterCandidate = async (name, mobile, passcode) => {
   const cleanMobile = mobile.trim();
   const cleanPasscode = passcode.trim();
   const cleanName = name.trim();
 
-  // Primary attempt: Remote Backend Cloud DB
   try {
     const checkUrl = `${API_ENDPOINT}/candidates?mobile_number=eq.${cleanMobile}&select=*`;
     const checkRes = await fetch(checkUrl, {
@@ -49,13 +47,11 @@ export const loginOrRegisterCandidate = async (name, mobile, passcode) => {
       const candidates = await checkRes.json();
 
       if (candidates && candidates.length > 0) {
-        // Returning candidate
         const existing = candidates[0];
         if (existing.passcode !== cleanPasscode) {
           return { success: false, error: 'Incorrect 4-digit passcode for this mobile number.' };
         }
 
-        // Update last login
         fetch(`${API_ENDPOINT}/candidates?mobile_number=eq.${cleanMobile}`, {
           method: 'PATCH',
           headers: getHeaders(),
@@ -65,7 +61,6 @@ export const loginOrRegisterCandidate = async (name, mobile, passcode) => {
         localStorage.setItem(CANDIDATE_STORAGE_KEY, JSON.stringify(existing));
         return { success: true, candidate: existing, isNew: false };
       } else {
-        // New candidate: Record in remote database
         const rollNumber = 'RRB26' + cleanMobile.slice(-4) + Math.floor(100 + Math.random() * 900);
         const newRecord = {
           name: cleanName,
@@ -88,14 +83,14 @@ export const loginOrRegisterCandidate = async (name, mobile, passcode) => {
           localStorage.setItem(CANDIDATE_STORAGE_KEY, JSON.stringify(candidateData));
           return { success: true, candidate: candidateData, isNew: true };
         } else {
-          throw new Error("Remote DB table pending");
+          throw new Error("Remote DB candidate registration pending");
         }
       }
     } else {
-      throw new Error(`Remote DB responded with status ${checkRes.status}`);
+      throw new Error(`Remote DB status ${checkRes.status}`);
     }
   } catch (err) {
-    console.warn("Operating with local candidate session backup:", err.message);
+    console.warn("Using local candidate session backup:", err.message);
     const fallbackRoll = 'RRB26' + cleanMobile.slice(-4) + '101';
     const fallbackCandidate = {
       name: cleanName,
@@ -116,11 +111,12 @@ export const loginOrRegisterCandidate = async (name, mobile, passcode) => {
 };
 
 /**
- * Fetch Questions from Database (Supports existing database schema & JSON options)
+ * Fetch Questions for Mock 1, 2, or 3
  */
-export const fetchTestQuestions = async (testId = 'rrb_cbt_mock_1') => {
+export const fetchTestQuestions = async (mockNumber = 1) => {
+  const testId = `rrb_cbt_mock_${mockNumber}`;
+
   try {
-    // Try provided testId, fallback to rrb_cbt_mock_1 or rrb-group-d-01
     const url = `${API_ENDPOINT}/questions?test_id=eq.${testId}&order=question_number.asc`;
     const res = await fetch(url, {
       method: 'GET',
@@ -131,7 +127,6 @@ export const fetchTestQuestions = async (testId = 'rrb_cbt_mock_1') => {
       const data = await res.json();
       if (data && data.length > 0) {
         return data.map((q) => {
-          // Parse options (handles both JSON object {a, b, c, d} and array)
           let optsEn = [];
           if (q.options) {
             if (Array.isArray(q.options)) {
@@ -181,9 +176,64 @@ export const fetchTestQuestions = async (testId = 'rrb_cbt_mock_1') => {
       }
     }
   } catch (err) {
-    console.warn("Using built-in question bank:", err.message);
+    console.warn(`Database questions fetch for mock ${mockNumber} fell back to local bank:`, err.message);
   }
-  return MOCK_QUESTIONS;
+
+  // Fallback to loaded Mock 1, 2, or 3 JSON datasets
+  return MOCK_TESTS_DATA[mockNumber] || MOCK_QUESTIONS;
+};
+
+/**
+ * Save candidate responses to table: RRB_MOCK_1_responses, RRB_MOCK_2_responses, or RRB_MOCK_3_responses
+ * Columns:
+ * - name_of_candidate
+ * - candidate_mobile
+ * - question_number
+ * - section
+ * - correct_answer
+ * - his_answer
+ * - time_taken_by_him
+ */
+export const saveMockResponses = async ({
+  mockNumber = 1,
+  candidateName,
+  candidateMobile,
+  questions,
+  responses,
+  timeSpentMap = {}
+}) => {
+  const tableName = `RRB_MOCK_${mockNumber}_responses`;
+
+  const rows = questions.map((q, idx) => {
+    const userOptIdx = responses[idx];
+    const hisAnswer = userOptIdx !== undefined && userOptIdx !== null ? String.fromCharCode(65 + userOptIdx) : null;
+    const timeTaken = timeSpentMap[idx] || 0;
+
+    return {
+      name_of_candidate: candidateName || 'Candidate',
+      candidate_mobile: candidateMobile || 'N/A',
+      question_number: idx + 1,
+      section: q.section,
+      correct_answer: q.correct_option,
+      his_answer: hisAnswer,
+      time_taken_by_him: timeTaken
+    };
+  });
+
+  try {
+    const url = `${API_ENDPOINT}/${tableName}`;
+    await fetch(url, {
+      method: 'POST',
+      headers: {
+        ...getHeaders(),
+        "Prefer": "resolution=merge-duplicates"
+      },
+      body: JSON.stringify(rows)
+    });
+    console.log(`Saved ${rows.length} question responses to table ${tableName}`);
+  } catch (err) {
+    console.warn(`Notice while saving to ${tableName}:`, err.message);
+  }
 };
 
 /**
@@ -193,7 +243,6 @@ export const syncTestAttempt = async (attemptData) => {
   const { candidateMobile, testId } = attemptData;
   const storageKey = `${ATTEMPT_STORAGE_KEY_PREFIX}${testId}_${candidateMobile}`;
 
-  // Local storage cache
   try {
     localStorage.setItem(storageKey, JSON.stringify({
       ...attemptData,
@@ -203,7 +252,6 @@ export const syncTestAttempt = async (attemptData) => {
     console.error("Local sync error:", e);
   }
 
-  // Live Sync to remote backend DB
   try {
     const payload = {
       candidate_mobile: candidateMobile,
@@ -233,7 +281,7 @@ export const syncTestAttempt = async (attemptData) => {
       body: JSON.stringify(payload)
     });
   } catch (err) {
-    console.warn("Live DB sync background heartbeat notice:", err.message);
+    console.warn("Live DB sync heartbeat notice:", err.message);
   }
 };
 
@@ -248,7 +296,6 @@ export const getTestAttempt = async (candidateMobile, testId = 'rrb_cbt_mock_1')
     if (raw) localData = JSON.parse(raw);
   } catch (e) {}
 
-  // Query remote backend
   try {
     const url = `${API_ENDPOINT}/test_attempts?candidate_mobile=eq.${candidateMobile}&test_id=eq.${testId}&select=*`;
     const res = await fetch(url, {
