@@ -9,7 +9,13 @@ import ScorecardModal from '../components/ScorecardModal';
 import PauseModal from '../components/PauseModal';
 import { Clock } from 'lucide-react';
 import { SECTIONS } from '../data/mockQuestions';
-import { fetchTestQuestions, syncTestAttempt, saveMockResponses } from '../services/apiService';
+import {
+  fetchTestQuestions,
+  syncTestAttempt,
+  saveMockResponses,
+  saveSingleQuestionResponse,
+  getCandidateAttemptNumber
+} from '../services/apiService';
 
 const TOTAL_DURATION_SECONDS = 90 * 60; // 90 minutes (5400 seconds)
 
@@ -20,6 +26,7 @@ export default function CBTExamPage({
   testId = 'rrb_cbt_mock_1',
   testTitle = 'RRB Group D CBT Mock Test 01',
   defaultLang = 'en',
+  isRetake = false,
   onFinishExam
 }) {
   const activeTestId = testId || `rrb_cbt_mock_${mockNumber}`;
@@ -44,6 +51,7 @@ export default function CBTExamPage({
   const [activeSectionId, setActiveSectionId] = useState('science');
   const [currentLang, setCurrentLang] = useState(defaultLang);
   const [fontSize, setFontSize] = useState('normal');
+  const [attemptNumber, setAttemptNumber] = useState(savedState?.attemptNumber || (isRetake ? 2 : 1));
 
   // Exam state (recovered immediately on reload)
   const [remainingSeconds, setRemainingSeconds] = useState(
@@ -74,10 +82,28 @@ export default function CBTExamPage({
         setLoadingQuestions(false);
       }
     });
+
+    // Detect candidate attempt number
+    if (candidate?.mobile_number) {
+      getCandidateAttemptNumber(mockNumber, candidate.mobile_number).then((maxNum) => {
+        if (!mounted) return;
+        if (savedState?.attemptNumber) {
+          setAttemptNumber(savedState.attemptNumber);
+        } else if (isRetake) {
+          const nextAttempt = Math.min(maxNum + 1, 5);
+          setAttemptNumber(nextAttempt);
+          saveLocalSnapshot({ attemptNumber: nextAttempt });
+        } else {
+          setAttemptNumber(maxNum);
+          saveLocalSnapshot({ attemptNumber: maxNum });
+        }
+      });
+    }
+
     return () => {
       mounted = false;
     };
-  }, [mockNumber]);
+  }, [mockNumber, candidate?.mobile_number, isRetake]);
 
   // 2. Active section computation
   const activeSection = SECTIONS.find((s) => s.id === activeSectionId) || SECTIONS[0];
@@ -120,6 +146,7 @@ export default function CBTExamPage({
         responses,
         questionStates,
         status: isPaused ? 'paused' : 'in_progress',
+        attemptNumber,
         ...overrides,
         updated_at: new Date().toISOString()
       };
@@ -203,16 +230,36 @@ export default function CBTExamPage({
   const handleSaveAndNext = () => {
     const updatedResponses = { ...responses };
     const updatedStates = { ...questionStates };
+    const currentQ = questions[currentQuestionIndex];
 
+    let userOptLetter = null;
     if (selectedOption !== null && selectedOption !== undefined) {
       updatedResponses[currentQuestionIndex] = selectedOption;
       updatedStates[currentQuestionIndex] = 'answered';
+      userOptLetter = String.fromCharCode(65 + selectedOption);
     } else {
       updatedStates[currentQuestionIndex] = 'not_answered';
     }
 
     setResponses(updatedResponses);
     setQuestionStates(updatedStates);
+
+    const qTime = timeSpentMap[currentQuestionIndex] || 0;
+
+    // Real-time live sync for this question directly to RRB_MOCK_X_responses
+    if (currentQ && candidate?.mobile_number) {
+      saveSingleQuestionResponse({
+        mockNumber,
+        candidateName: candidate.name,
+        candidateMobile: candidate.mobile_number,
+        questionNumber: currentQuestionIndex + 1,
+        section: currentQ.section,
+        correctAnswer: currentQ.correct_option,
+        hisAnswer: userOptLetter,
+        timeTaken: qTime,
+        attemptNumber
+      });
+    }
 
     const nextIndex = currentQuestionIndex < questions.length - 1 ? currentQuestionIndex + 1 : currentQuestionIndex;
     setCurrentQuestionIndex(nextIndex);
@@ -221,17 +268,21 @@ export default function CBTExamPage({
     saveLocalSnapshot({
       responses: updatedResponses,
       questionStates: updatedStates,
-      currentQuestionIndex: nextIndex
+      currentQuestionIndex: nextIndex,
+      attemptNumber
     });
   };
 
   const handleSaveAndMarkReview = () => {
     const updatedResponses = { ...responses };
     const updatedStates = { ...questionStates };
+    const currentQ = questions[currentQuestionIndex];
 
+    let userOptLetter = null;
     if (selectedOption !== null && selectedOption !== undefined) {
       updatedResponses[currentQuestionIndex] = selectedOption;
       updatedStates[currentQuestionIndex] = 'review_answered';
+      userOptLetter = String.fromCharCode(65 + selectedOption);
     } else {
       updatedStates[currentQuestionIndex] = 'review';
     }
@@ -239,13 +290,31 @@ export default function CBTExamPage({
     setResponses(updatedResponses);
     setQuestionStates(updatedStates);
 
+    const qTime = timeSpentMap[currentQuestionIndex] || 0;
+
+    // Real-time live sync for this question directly to RRB_MOCK_X_responses
+    if (currentQ && candidate?.mobile_number) {
+      saveSingleQuestionResponse({
+        mockNumber,
+        candidateName: candidate.name,
+        candidateMobile: candidate.mobile_number,
+        questionNumber: currentQuestionIndex + 1,
+        section: currentQ.section,
+        correctAnswer: currentQ.correct_option,
+        hisAnswer: userOptLetter,
+        timeTaken: qTime,
+        attemptNumber
+      });
+    }
+
     const nextIndex = currentQuestionIndex < questions.length - 1 ? currentQuestionIndex + 1 : currentQuestionIndex;
     setCurrentQuestionIndex(nextIndex);
 
     saveLocalSnapshot({
       responses: updatedResponses,
       questionStates: updatedStates,
-      currentQuestionIndex: nextIndex
+      currentQuestionIndex: nextIndex,
+      attemptNumber
     });
   };
 
@@ -263,7 +332,8 @@ export default function CBTExamPage({
 
     saveLocalSnapshot({
       questionStates: updatedStates,
-      currentQuestionIndex: nextIndex
+      currentQuestionIndex: nextIndex,
+      attemptNumber
     });
   };
 
@@ -280,9 +350,28 @@ export default function CBTExamPage({
     setResponses(updatedResponses);
     setQuestionStates(updatedStates);
 
+    const currentQ = questions[currentQuestionIndex];
+    const qTime = timeSpentMap[currentQuestionIndex] || 0;
+
+    // Real-time live sync: clear answer in DB
+    if (currentQ && candidate?.mobile_number) {
+      saveSingleQuestionResponse({
+        mockNumber,
+        candidateName: candidate.name,
+        candidateMobile: candidate.mobile_number,
+        questionNumber: currentQuestionIndex + 1,
+        section: currentQ.section,
+        correctAnswer: currentQ.correct_option,
+        hisAnswer: null,
+        timeTaken: qTime,
+        attemptNumber
+      });
+    }
+
     saveLocalSnapshot({
       responses: updatedResponses,
-      questionStates: updatedStates
+      questionStates: updatedStates,
+      attemptNumber
     });
   };
 
@@ -379,7 +468,8 @@ export default function CBTExamPage({
       candidateMobile: candidate?.mobile_number,
       questions,
       responses,
-      timeSpentMap
+      timeSpentMap,
+      attemptNumber
     });
 
     // 2. Save overall test attempt scorecard
@@ -407,9 +497,12 @@ export default function CBTExamPage({
   };
 
   const handleReattempt = () => {
+    const nextAttempt = Math.min(attemptNumber + 1, 5);
+    setAttemptNumber(nextAttempt);
     setResponses({});
     setQuestionStates({});
     setTimeSpentMap({});
+    setSelectedOption(null);
     setCurrentQuestionIndex(0);
     setRemainingSeconds(TOTAL_DURATION_SECONDS);
     setShowScorecard(false);
@@ -417,9 +510,11 @@ export default function CBTExamPage({
     saveLocalSnapshot({
       responses: {},
       questionStates: {},
+      timeSpentMap: {},
       currentQuestionIndex: 0,
       remainingSeconds: TOTAL_DURATION_SECONDS,
-      status: 'in_progress'
+      status: 'in_progress',
+      attemptNumber: nextAttempt
     });
     triggerSync('in_progress');
   };

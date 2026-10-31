@@ -26,14 +26,16 @@ export default function App() {
         try {
           const config = JSON.parse(savedConfigRaw);
           setActiveExamConfig(config);
+          setCurrentPage('exam'); // Render CBT exam right away without falling back to dashboard
 
           // Restore saved attempt from localStorage/DB
-          getTestAttempt(cached.mobile_number, config.testId || `rrb_cbt_mock_${config.mockNumber || 1}`).then((attempt) => {
-            if (attempt) {
-              setInitialAttemptData(attempt);
-            }
-            setCurrentPage('exam');
-          });
+          getTestAttempt(cached.mobile_number, config.testId || `rrb_cbt_mock_${config.mockNumber || 1}`)
+            .then((attempt) => {
+              if (attempt) {
+                setInitialAttemptData(attempt);
+              }
+            })
+            .catch(() => {});
           return;
         } catch (e) {
           console.warn("Failed to parse saved exam config:", e);
@@ -67,8 +69,15 @@ export default function App() {
       mockNumber: config.mockNumber || 1,
       testId: config.testId || `rrb_cbt_mock_${config.mockNumber || 1}`,
       title: config.title || `RRB Group D CBT Mock Test 0${config.mockNumber || 1}`,
-      defaultLang: config.defaultLang || 'en'
+      defaultLang: config.defaultLang || 'en',
+      isRetake: !!config.isRetake
     };
+
+    // If starting a fresh exam or retake, clear the old local snapshot
+    if (activeCandidate?.mobile_number) {
+      const storageKey = `rrb_test_attempt_${examConfig.testId}_${activeCandidate.mobile_number}`;
+      localStorage.removeItem(storageKey);
+    }
 
     setActiveExamConfig(examConfig);
     setInitialAttemptData(null);
@@ -123,6 +132,7 @@ export default function App() {
           testId={activeExamConfig?.testId || 'rrb_cbt_mock_1'}
           testTitle={activeExamConfig?.title || 'RRB Group D CBT Mock Test 01'}
           defaultLang={activeExamConfig?.defaultLang || 'en'}
+          isRetake={activeExamConfig?.isRetake || false}
           onFinishExam={handleFinishExam}
         />
       )}

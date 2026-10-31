@@ -66,11 +66,14 @@ export default function DashboardPage({
 
   const handleInstructionsProceed = () => {
     setShowInstructions(false);
+    const existing = savedAttempts[selectedMock.id];
+    const isRetake = existing && existing.status === 'completed';
     onStartExam({
       mockNumber: selectedMock.id,
       testId: selectedMock.testId,
       title: selectedMock.title,
-      defaultLang
+      defaultLang,
+      isRetake
     });
   };
 

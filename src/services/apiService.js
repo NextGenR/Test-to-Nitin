@@ -183,6 +183,89 @@ export const fetchTestQuestions = async (mockNumber = 1) => {
 };
 
 /**
+ * Detect current attempt number for candidate on given mock test
+ */
+export const getCandidateAttemptNumber = async (mockNumber = 1, candidateMobile) => {
+  if (!candidateMobile) return 1;
+  const tableName = `RRB_MOCK_${mockNumber}_responses`;
+
+  try {
+    const checkUrl = `${API_ENDPOINT}/${tableName}?candidate_mobile=eq.${candidateMobile}&select=attempt_number,try1,try2,try3,try4,try5&order=attempt_number.desc&limit=1`;
+    const res = await fetch(checkUrl, {
+      method: 'GET',
+      headers: getHeaders()
+    });
+
+    if (res.ok) {
+      const rows = await res.json();
+      if (rows && rows.length > 0) {
+        const row = rows[0];
+        let maxAttempt = row.attempt_number || 1;
+        if (row.try5 !== null && row.try5 !== undefined) maxAttempt = Math.max(maxAttempt, 5);
+        else if (row.try4 !== null && row.try4 !== undefined) maxAttempt = Math.max(maxAttempt, 4);
+        else if (row.try3 !== null && row.try3 !== undefined) maxAttempt = Math.max(maxAttempt, 3);
+        else if (row.try2 !== null && row.try2 !== undefined) maxAttempt = Math.max(maxAttempt, 2);
+        else if (row.try1 !== null && row.try1 !== undefined) maxAttempt = Math.max(maxAttempt, 1);
+        return maxAttempt;
+      }
+    }
+  } catch (err) {
+    console.warn("Could not determine attempt number:", err);
+  }
+  return 1;
+};
+
+/**
+ * Real-time sync for a single question response.
+ * Called immediately when candidate clicks "Save & Next", "Save & Mark for Review", or "Clear Response".
+ * Writes directly to the candidate's active attempt column (try1, try2, try3...) and his_answer in RRB_MOCK_X_responses.
+ */
+export const saveSingleQuestionResponse = async ({
+  mockNumber = 1,
+  candidateName,
+  candidateMobile,
+  questionNumber,
+  section,
+  correctAnswer,
+  hisAnswer, // 'A', 'B', 'C', 'D' or null
+  timeTaken = 0,
+  attemptNumber = 1
+}) => {
+  if (!candidateMobile || !questionNumber) return;
+  const tableName = `RRB_MOCK_${mockNumber}_responses`;
+  const tryCol = `try${attemptNumber}`;
+  const timeCol = `time_taken_try${Math.min(attemptNumber, 3)}`;
+
+  // Notice: We do NOT insert 'is_correct' because it is a generated stored column in PostgreSQL
+  const payload = {
+    name_of_candidate: candidateName || 'Candidate',
+    candidate_mobile: candidateMobile,
+    question_number: questionNumber,
+    section: section || 'General Science',
+    correct_answer: correctAnswer || '',
+    his_answer: hisAnswer || null,
+    time_taken_by_him: timeTaken,
+    attempt_number: attemptNumber,
+    [tryCol]: hisAnswer || null,
+    [timeCol]: timeTaken
+  };
+
+  try {
+    const url = `${API_ENDPOINT}/${tableName}?on_conflict=candidate_mobile,question_number`;
+    await fetch(url, {
+      method: 'POST',
+      headers: {
+        ...getHeaders(),
+        "Prefer": "resolution=merge-duplicates"
+      },
+      body: JSON.stringify([payload])
+    });
+  } catch (err) {
+    console.warn(`Real-time question sync notice (Q${questionNumber}):`, err.message);
+  }
+};
+
+/**
  * Save candidate responses to table: RRB_MOCK_1_responses, RRB_MOCK_2_responses, or RRB_MOCK_3_responses
  * Supports Retakes: saves answers into try1, try2, try3, try4, try5 columns!
  */
@@ -192,12 +275,13 @@ export const saveMockResponses = async ({
   candidateMobile,
   questions,
   responses,
-  timeSpentMap = {}
+  timeSpentMap = {},
+  attemptNumber = 1
 }) => {
+  if (!candidateMobile || !questions || questions.length === 0) return;
   const tableName = `RRB_MOCK_${mockNumber}_responses`;
 
-  // 1. Detect prior attempts for this candidate to determine try number
-  let nextAttemptNum = 1;
+  let nextAttemptNum = attemptNumber || 1;
   const existingMap = {};
 
   try {
@@ -214,19 +298,18 @@ export const saveMockResponses = async ({
           existingMap[r.question_number] = r;
         });
 
-        const sample = records[0];
-        if (sample.try4 !== undefined && sample.try4 !== null) {
-          nextAttemptNum = 5;
-        } else if (sample.try3 !== undefined && sample.try3 !== null) {
-          nextAttemptNum = 4;
-        } else if (sample.try2 !== undefined && sample.try2 !== null) {
-          nextAttemptNum = 3;
-        } else if (sample.try1 !== undefined && sample.try1 !== null) {
-          nextAttemptNum = 2;
-        } else if (sample.attempt_number) {
-          nextAttemptNum = sample.attempt_number + 1;
-        } else {
-          nextAttemptNum = 2;
+        if (!attemptNumber || attemptNumber === 1) {
+          // If caller didn't specify attemptNumber > 1, determine from DB records
+          let maxTry = 1;
+          for (const r of records) {
+            if (r.try5 !== null && r.try5 !== undefined) maxTry = Math.max(maxTry, 5);
+            else if (r.try4 !== null && r.try4 !== undefined) maxTry = Math.max(maxTry, 4);
+            else if (r.try3 !== null && r.try3 !== undefined) maxTry = Math.max(maxTry, 3);
+            else if (r.try2 !== null && r.try2 !== undefined) maxTry = Math.max(maxTry, 2);
+            else if (r.try1 !== null && r.try1 !== undefined) maxTry = Math.max(maxTry, 1);
+            if (r.attempt_number) maxTry = Math.max(maxTry, r.attempt_number);
+          }
+          nextAttemptNum = maxTry;
         }
       }
     }
@@ -235,7 +318,7 @@ export const saveMockResponses = async ({
   }
 
   const tryCol = `try${nextAttemptNum}`;
-  const timeCol = `time_taken_try${nextAttemptNum}`;
+  const timeCol = `time_taken_try${Math.min(nextAttemptNum, 3)}`;
 
   const rows = questions.map((q, idx) => {
     const qNum = idx + 1;
@@ -285,9 +368,12 @@ export const saveMockResponses = async ({
 
 /**
  * Live sync test attempt to database and local cache
+ * Uses resilient GET check followed by PATCH or POST to avoid ON CONFLICT constraint mismatch
  */
 export const syncTestAttempt = async (attemptData) => {
   const { candidateMobile, testId } = attemptData;
+  if (!candidateMobile || !testId) return;
+
   const storageKey = `${ATTEMPT_STORAGE_KEY_PREFIX}${testId}_${candidateMobile}`;
 
   try {
@@ -304,8 +390,8 @@ export const syncTestAttempt = async (attemptData) => {
       candidate_mobile: candidateMobile,
       candidate_name: attemptData.candidateName || 'Candidate',
       test_id: testId,
-      remaining_seconds: attemptData.remainingSeconds,
-      current_question_index: attemptData.currentQuestionIndex,
+      remaining_seconds: attemptData.remainingSeconds !== undefined ? attemptData.remainingSeconds : 5400,
+      current_question_index: attemptData.currentQuestionIndex || 0,
       responses: attemptData.responses || {},
       question_states: attemptData.questionStates || {},
       status: attemptData.status || 'in_progress',
@@ -318,13 +404,31 @@ export const syncTestAttempt = async (attemptData) => {
       completed_at: attemptData.status === 'completed' ? new Date().toISOString() : null
     };
 
-    const url = `${API_ENDPOINT}/test_attempts?on_conflict=candidate_mobile,test_id`;
-    await fetch(url, {
+    // First check if a record for this candidate and test already exists
+    const checkUrl = `${API_ENDPOINT}/test_attempts?candidate_mobile=eq.${candidateMobile}&test_id=eq.${testId}&select=id`;
+    const checkRes = await fetch(checkUrl, {
+      method: 'GET',
+      headers: getHeaders()
+    });
+
+    if (checkRes.ok) {
+      const records = await checkRes.json();
+      if (records && records.length > 0) {
+        // Record exists -> PATCH
+        const targetId = records[0].id;
+        await fetch(`${API_ENDPOINT}/test_attempts?id=eq.${targetId}`, {
+          method: 'PATCH',
+          headers: getHeaders(),
+          body: JSON.stringify(payload)
+        });
+        return;
+      }
+    }
+
+    // Record does not exist -> POST
+    await fetch(`${API_ENDPOINT}/test_attempts`, {
       method: 'POST',
-      headers: {
-        ...getHeaders(),
-        "Prefer": "resolution=merge-duplicates"
-      },
+      headers: getHeaders(),
       body: JSON.stringify(payload)
     });
   } catch (err) {
