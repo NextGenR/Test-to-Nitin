@@ -179,20 +179,12 @@ export const fetchTestQuestions = async (mockNumber = 1) => {
     console.warn(`Database questions fetch for mock ${mockNumber} fell back to local bank:`, err.message);
   }
 
-  // Fallback to loaded Mock 1, 2, or 3 JSON datasets
   return MOCK_TESTS_DATA[mockNumber] || MOCK_QUESTIONS;
 };
 
 /**
  * Save candidate responses to table: RRB_MOCK_1_responses, RRB_MOCK_2_responses, or RRB_MOCK_3_responses
- * Columns:
- * - name_of_candidate
- * - candidate_mobile
- * - question_number
- * - section
- * - correct_answer
- * - his_answer
- * - time_taken_by_him
+ * Supports Retakes: saves answers into try1, try2, try3, try4, try5 columns!
  */
 export const saveMockResponses = async ({
   mockNumber = 1,
@@ -204,24 +196,79 @@ export const saveMockResponses = async ({
 }) => {
   const tableName = `RRB_MOCK_${mockNumber}_responses`;
 
+  // 1. Detect prior attempts for this candidate to determine try number
+  let nextAttemptNum = 1;
+  const existingMap = {};
+
+  try {
+    const checkUrl = `${API_ENDPOINT}/${tableName}?candidate_mobile=eq.${candidateMobile}&select=question_number,attempt_number,try1,try2,try3,try4,try5`;
+    const checkRes = await fetch(checkUrl, {
+      method: 'GET',
+      headers: getHeaders()
+    });
+
+    if (checkRes.ok) {
+      const records = await checkRes.json();
+      if (records && records.length > 0) {
+        records.forEach((r) => {
+          existingMap[r.question_number] = r;
+        });
+
+        const sample = records[0];
+        if (sample.try4 !== undefined && sample.try4 !== null) {
+          nextAttemptNum = 5;
+        } else if (sample.try3 !== undefined && sample.try3 !== null) {
+          nextAttemptNum = 4;
+        } else if (sample.try2 !== undefined && sample.try2 !== null) {
+          nextAttemptNum = 3;
+        } else if (sample.try1 !== undefined && sample.try1 !== null) {
+          nextAttemptNum = 2;
+        } else if (sample.attempt_number) {
+          nextAttemptNum = sample.attempt_number + 1;
+        } else {
+          nextAttemptNum = 2;
+        }
+      }
+    }
+  } catch (e) {
+    console.warn("Could not query prior attempts, defaulting to try 1:", e);
+  }
+
+  const tryCol = `try${nextAttemptNum}`;
+  const timeCol = `time_taken_try${nextAttemptNum}`;
+
   const rows = questions.map((q, idx) => {
+    const qNum = idx + 1;
     const userOptIdx = responses[idx];
     const hisAnswer = userOptIdx !== undefined && userOptIdx !== null ? String.fromCharCode(65 + userOptIdx) : null;
     const timeTaken = timeSpentMap[idx] || 0;
+    const existing = existingMap[qNum] || {};
 
-    return {
+    const payload = {
       name_of_candidate: candidateName || 'Candidate',
       candidate_mobile: candidateMobile || 'N/A',
-      question_number: idx + 1,
+      question_number: qNum,
       section: q.section,
       correct_answer: q.correct_option,
       his_answer: hisAnswer,
-      time_taken_by_him: timeTaken
+      time_taken_by_him: timeTaken,
+      attempt_number: nextAttemptNum,
+      [tryCol]: hisAnswer,
+      [timeCol]: timeTaken
     };
+
+    // Preserve earlier attempt answers
+    if (existing.try1) payload.try1 = existing.try1;
+    if (existing.try2 && nextAttemptNum > 2) payload.try2 = existing.try2;
+    if (existing.try3 && nextAttemptNum > 3) payload.try3 = existing.try3;
+    if (existing.try4 && nextAttemptNum > 4) payload.try4 = existing.try4;
+    if (nextAttemptNum === 1) payload.try1 = hisAnswer;
+
+    return payload;
   });
 
   try {
-    const url = `${API_ENDPOINT}/${tableName}`;
+    const url = `${API_ENDPOINT}/${tableName}?on_conflict=candidate_mobile,question_number`;
     await fetch(url, {
       method: 'POST',
       headers: {
@@ -230,9 +277,9 @@ export const saveMockResponses = async ({
       },
       body: JSON.stringify(rows)
     });
-    console.log(`Saved ${rows.length} question responses to table ${tableName}`);
+    console.log(`Successfully recorded attempt ${nextAttemptNum} into column ${tryCol} of ${tableName}`);
   } catch (err) {
-    console.warn(`Notice while saving to ${tableName}:`, err.message);
+    console.warn(`Notice while saving attempt ${nextAttemptNum} to ${tableName}:`, err.message);
   }
 };
 
