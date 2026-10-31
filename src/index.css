@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#f4f7f9] text-gray-800 antialiased font-sans select-none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* TCS iON palette shape badge definitions */
+.palette-btn {
+  @apply relative inline-flex items-center justify-center font-bold text-xs transition-transform active:scale-95;
+  width: 36px;
+  height: 34px;
+}
+
+/* State 1: Answered - Green polygon / teardrop */
+.badge-answered {
+  background-color: #2e7d32;
+  color: white;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 50% 100%, 0% 75%);
+}
+
+/* State 2: Not Answered - Red polygon / inverted */
+.badge-not-answered {
+  background-color: #d32f2f;
+  color: white;
+  clip-path: polygon(0% 25%, 50% 0%, 100% 25%, 100% 100%, 0% 100%);
+}
+
+/* State 3: Not Visited - Grey square */
+.badge-not-visited {
+  background-color: #e2e8f0;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+}
+
+/* State 4: Marked for Review - Purple circle */
+.badge-review {
+  background-color: #7b1fa2;
+  color: white;
+  border-radius: 9999px;
+}
+
+/* State 5: Answered and Marked for Review - Purple circle with green indicator */
+.badge-review-answered {
+  background-color: #512da8;
+  color: white;
+  border-radius: 9999px;
+}
+
+/* Scrollbar polish */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
