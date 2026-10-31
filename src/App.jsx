@@ -77,6 +77,16 @@ export default function App() {
     if (activeCandidate?.mobile_number) {
       const storageKey = `rrb_test_attempt_${examConfig.testId}_${activeCandidate.mobile_number}`;
       localStorage.removeItem(storageKey);
+
+      if (config.isRetake) {
+        try {
+          Object.keys(localStorage).forEach(key => {
+            if (key.startsWith(`rrb_shuffled_qs_${examConfig.testId}_${activeCandidate.mobile_number}`)) {
+              localStorage.removeItem(key);
+            }
+          });
+        } catch (e) {}
+      }
     }
 
     setActiveExamConfig(examConfig);

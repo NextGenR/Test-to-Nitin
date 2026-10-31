@@ -16,6 +16,7 @@ import {
   saveSingleQuestionResponse,
   getCandidateAttemptNumber
 } from '../services/apiService';
+import { randomizeQuestionsOptions } from '../utils/randomizer';
 
 const TOTAL_DURATION_SECONDS = 90 * 60; // 90 minutes (5400 seconds)
 
@@ -73,31 +74,63 @@ export default function CBTExamPage({
   // Periodic heartbeat sync reference
   const syncTimeoutRef = useRef(null);
 
-  // 1. Load questions (remote DB or local fallback for Mock 1, 2, or 3)
+  // 1. Load questions (remote DB or local fallback for Mock 1, 2, or 3) with randomized options
   useEffect(() => {
     let mounted = true;
-    fetchTestQuestions(mockNumber).then((loaded) => {
+
+    const loadExamQuestions = async (activeAttempt) => {
+      const qCacheKey = `rrb_shuffled_qs_${activeTestId}_${candidate?.mobile_number}_att_${activeAttempt}`;
+      try {
+        const cached = localStorage.getItem(qCacheKey);
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (parsed && parsed.length > 0) {
+            if (mounted) {
+              setQuestions(parsed);
+              setLoadingQuestions(false);
+            }
+            return;
+          }
+        }
+      } catch (e) {}
+
+      const rawQuestions = await fetchTestQuestions(mockNumber);
+      if (!mounted) return;
+
+      const seedKey = `${candidate?.mobile_number || 'cand'}_mock_${mockNumber}_att_${activeAttempt}`;
+      const randomized = randomizeQuestionsOptions(rawQuestions, seedKey);
+
+      try {
+        localStorage.setItem(qCacheKey, JSON.stringify(randomized));
+      } catch (e) {}
+
       if (mounted) {
-        setQuestions(loaded);
+        setQuestions(randomized);
         setLoadingQuestions(false);
       }
-    });
+    };
 
-    // Detect candidate attempt number
+    // Detect candidate attempt number and load questions
     if (candidate?.mobile_number) {
       getCandidateAttemptNumber(mockNumber, candidate.mobile_number).then((maxNum) => {
         if (!mounted) return;
+        let resolvedAttempt = attemptNumber;
         if (savedState?.attemptNumber) {
-          setAttemptNumber(savedState.attemptNumber);
+          resolvedAttempt = savedState.attemptNumber;
+          setAttemptNumber(resolvedAttempt);
         } else if (isRetake) {
-          const nextAttempt = Math.min(maxNum + 1, 5);
-          setAttemptNumber(nextAttempt);
-          saveLocalSnapshot({ attemptNumber: nextAttempt });
+          resolvedAttempt = Math.min(maxNum + 1, 5);
+          setAttemptNumber(resolvedAttempt);
+          saveLocalSnapshot({ attemptNumber: resolvedAttempt });
         } else {
-          setAttemptNumber(maxNum);
-          saveLocalSnapshot({ attemptNumber: maxNum });
+          resolvedAttempt = maxNum;
+          setAttemptNumber(resolvedAttempt);
+          saveLocalSnapshot({ attemptNumber: resolvedAttempt });
         }
+        loadExamQuestions(resolvedAttempt);
       });
+    } else {
+      loadExamQuestions(attemptNumber);
     }
 
     return () => {
@@ -507,6 +540,20 @@ export default function CBTExamPage({
     setRemainingSeconds(TOTAL_DURATION_SECONDS);
     setShowScorecard(false);
     setFinalResults(null);
+    setLoadingQuestions(true);
+
+    // Randomize new option order for the new attempt!
+    const seedKey = `${candidate?.mobile_number || 'cand'}_mock_${mockNumber}_att_${nextAttempt}`;
+    fetchTestQuestions(mockNumber).then((rawQuestions) => {
+      const randomized = randomizeQuestionsOptions(rawQuestions, seedKey);
+      const qCacheKey = `rrb_shuffled_qs_${activeTestId}_${candidate?.mobile_number}_att_${nextAttempt}`;
+      try {
+        localStorage.setItem(qCacheKey, JSON.stringify(randomized));
+      } catch (e) {}
+      setQuestions(randomized);
+      setLoadingQuestions(false);
+    });
+
     saveLocalSnapshot({
       responses: {},
       questionStates: {},
