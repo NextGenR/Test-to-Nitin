@@ -1,5 +1,6 @@
 import React from 'react';
 import { X, FileText } from 'lucide-react';
+import MathRenderer from './MathRenderer';
 
 export default function QuestionPaperModal({
   isOpen,
@@ -49,7 +50,7 @@ export default function QuestionPaperModal({
                     return (
                       <div key={q.id || idx} className="p-3.5 bg-slate-50 border border-slate-200 rounded-lg">
                         <div className="font-semibold text-slate-900 mb-2.5">
-                          Q.{qNumber} : {questionText}
+                          Q.{qNumber} : <MathRenderer text={questionText} />
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                           {options.map((opt, oIdx) => {
@@ -59,10 +60,12 @@ export default function QuestionPaperModal({
                                 key={oIdx}
                                 className="p-2 bg-white rounded border border-slate-200 text-slate-700 flex items-center gap-2"
                               >
-                                <span className="w-5 h-5 rounded-full bg-slate-100 border border-slate-300 flex items-center justify-center font-bold text-[10px]">
+                                <span className="w-5 h-5 rounded-full bg-slate-100 border border-slate-300 flex items-center justify-center font-bold text-[10px] shrink-0">
                                   {optLetter}
                                 </span>
-                                <span>{opt}</span>
+                                <div>
+                                  <MathRenderer text={opt} />
+                                </div>
                               </div>
                             );
                           })}
@@ -90,4 +93,3 @@ export default function QuestionPaperModal({
     </div>
   );
 }
-

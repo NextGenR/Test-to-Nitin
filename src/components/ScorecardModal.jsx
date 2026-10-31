@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Award, CheckCircle2, XCircle, MinusCircle, ArrowRight, RotateCcw, ChevronDown, ChevronUp } from 'lucide-react';
+import MathRenderer from './MathRenderer';
 
 export default function ScorecardModal({
   isOpen,
@@ -25,7 +26,7 @@ export default function ScorecardModal({
     responses = {}
   } = results;
 
-  const isPassed = score >= 40.0; // 40% qualifying threshold for General category
+  const isPassed = score >= 40.0;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
@@ -167,8 +168,10 @@ export default function ScorecardModal({
                     >
                       <div className="flex items-start justify-between gap-2 mb-2">
                         <div className="font-bold text-slate-900">
-                          Q.{idx + 1} ({q.section}): {q.question_en}
-                          <div className="text-slate-600 font-normal mt-0.5">{q.question_hi}</div>
+                          Q.{idx + 1} ({q.section}): <MathRenderer text={q.question_en} />
+                          <div className="text-slate-600 font-normal mt-0.5">
+                            <MathRenderer text={q.question_hi} />
+                          </div>
                         </div>
                         <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase shrink-0 ${
                           !isAttempted
@@ -198,9 +201,12 @@ export default function ScorecardModal({
                                   : 'bg-white border-slate-200 text-slate-700'
                               }`}
                             >
-                              <span>{letter}. {opt}</span>
-                              {isThisCorrect && <span className="text-[10px] font-black text-emerald-800">Correct Ans</span>}
-                              {!isThisCorrect && isThisUser && <span className="text-[10px] font-black text-red-800">Your Choice</span>}
+                              <div className="flex items-center gap-1.5">
+                                <span className="font-bold">{letter}.</span>
+                                <MathRenderer text={opt} />
+                              </div>
+                              {isThisCorrect && <span className="text-[10px] font-black text-emerald-800 shrink-0">Correct Ans</span>}
+                              {!isThisCorrect && isThisUser && <span className="text-[10px] font-black text-red-800 shrink-0">Your Choice</span>}
                             </div>
                           );
                         })}
@@ -208,7 +214,7 @@ export default function ScorecardModal({
 
                       {q.explanation_en && (
                         <div className="mt-2 pt-2 border-t border-slate-200 text-[11px] text-slate-600">
-                          <strong>Explanation:</strong> {q.explanation_en}
+                          <strong>Explanation:</strong> <MathRenderer text={q.explanation_en} />
                         </div>
                       )}
                     </div>
@@ -243,4 +249,3 @@ export default function ScorecardModal({
     </div>
   );
 }
-

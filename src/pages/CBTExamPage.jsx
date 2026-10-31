@@ -22,20 +22,36 @@ export default function CBTExamPage({
   defaultLang = 'en',
   onFinishExam
 }) {
+  const activeTestId = testId || `rrb_cbt_mock_${mockNumber}`;
+  const storageKey = `rrb_test_attempt_${activeTestId}_${candidate?.mobile_number}`;
+
+  // Instant synchronous recovery from localStorage on page refresh
+  const getInitialState = () => {
+    if (initialAttempt) return initialAttempt;
+    try {
+      const raw = localStorage.getItem(storageKey);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) {
+      return null;
+    }
+  };
+
+  const savedState = getInitialState();
+
   const [questions, setQuestions] = useState([]);
   const [loadingQuestions, setLoadingQuestions] = useState(true);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(initialAttempt?.currentQuestionIndex || 0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(savedState?.currentQuestionIndex || 0);
   const [activeSectionId, setActiveSectionId] = useState('science');
   const [currentLang, setCurrentLang] = useState(defaultLang);
   const [fontSize, setFontSize] = useState('normal');
 
-  // Exam state
+  // Exam state (recovered immediately on reload)
   const [remainingSeconds, setRemainingSeconds] = useState(
-    initialAttempt?.remainingSeconds !== undefined ? initialAttempt.remainingSeconds : TOTAL_DURATION_SECONDS
+    savedState?.remainingSeconds !== undefined ? savedState.remainingSeconds : TOTAL_DURATION_SECONDS
   );
-  const [isPaused, setIsPaused] = useState(false);
-  const [responses, setResponses] = useState(initialAttempt?.responses || {});
-  const [questionStates, setQuestionStates] = useState(initialAttempt?.questionStates || {});
+  const [isPaused, setIsPaused] = useState(savedState?.status === 'paused');
+  const [responses, setResponses] = useState(savedState?.responses || {});
+  const [questionStates, setQuestionStates] = useState(savedState?.questionStates || {});
   const [selectedOption, setSelectedOption] = useState(null);
   const [timeSpentMap, setTimeSpentMap] = useState({});
 
@@ -79,14 +95,37 @@ export default function CBTExamPage({
     setQuestionStates((prev) => {
       const currentState = prev[currentQuestionIndex];
       if (!currentState || currentState === 'not_visited') {
-        return {
+        const next = {
           ...prev,
           [currentQuestionIndex]: 'not_answered'
         };
+        // Persist to local storage immediately
+        saveLocalSnapshot({ questionStates: next });
+        return next;
       }
       return prev;
     });
   }, [currentQuestionIndex]);
+
+  // Helper to instantly save local snapshot to avoid refresh data loss
+  const saveLocalSnapshot = (overrides = {}) => {
+    if (!candidate?.mobile_number) return;
+    try {
+      const snapshot = {
+        candidateMobile: candidate.mobile_number,
+        candidateName: candidate.name,
+        testId: activeTestId,
+        remainingSeconds,
+        currentQuestionIndex,
+        responses,
+        questionStates,
+        status: isPaused ? 'paused' : 'in_progress',
+        ...overrides,
+        updated_at: new Date().toISOString()
+      };
+      localStorage.setItem(storageKey, JSON.stringify(snapshot));
+    } catch (e) {}
+  };
 
   // 3. Countdown timer & per-question time tracking
   useEffect(() => {
@@ -99,10 +138,15 @@ export default function CBTExamPage({
           handleAutoSubmit();
           return 0;
         }
-        return prev - 1;
+        const updated = prev - 1;
+        // Save timer snapshot every 5 seconds to local storage
+        if (updated % 5 === 0) {
+          saveLocalSnapshot({ remainingSeconds: updated });
+        }
+        return updated;
       });
 
-      // Track seconds spent on the current question
+      // Track seconds spent on current question
       setTimeSpentMap((prev) => ({
         ...prev,
         [currentQuestionIndex]: (prev[currentQuestionIndex] || 0) + 1
@@ -112,14 +156,14 @@ export default function CBTExamPage({
     return () => clearInterval(timer);
   }, [isPaused, showScorecard, currentQuestionIndex]);
 
-  // 4. Live Sync to DB (Heartbeat every 15 seconds or on state change)
+  // 4. Live Sync to DB (Heartbeat every 15 seconds)
   const triggerSync = (forcedStatus = null) => {
     if (!candidate?.mobile_number) return;
 
     const attemptData = {
       candidateMobile: candidate.mobile_number,
       candidateName: candidate.name,
-      testId: testId || `rrb_cbt_mock_${mockNumber}`,
+      testId: activeTestId,
       remainingSeconds,
       currentQuestionIndex,
       responses,
@@ -144,6 +188,7 @@ export default function CBTExamPage({
   // Question navigation actions
   const handleSelectQuestion = (index) => {
     setCurrentQuestionIndex(index);
+    saveLocalSnapshot({ currentQuestionIndex: index });
   };
 
   const handleSelectSection = (sectionId) => {
@@ -151,6 +196,7 @@ export default function CBTExamPage({
     const sec = SECTIONS.find((s) => s.id === sectionId);
     if (sec) {
       setCurrentQuestionIndex(sec.startIndex);
+      saveLocalSnapshot({ currentQuestionIndex: sec.startIndex });
     }
   };
 
@@ -168,9 +214,15 @@ export default function CBTExamPage({
     setResponses(updatedResponses);
     setQuestionStates(updatedStates);
 
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    }
+    const nextIndex = currentQuestionIndex < questions.length - 1 ? currentQuestionIndex + 1 : currentQuestionIndex;
+    setCurrentQuestionIndex(nextIndex);
+
+    // Instant local save
+    saveLocalSnapshot({
+      responses: updatedResponses,
+      questionStates: updatedStates,
+      currentQuestionIndex: nextIndex
+    });
   };
 
   const handleSaveAndMarkReview = () => {
@@ -187,9 +239,14 @@ export default function CBTExamPage({
     setResponses(updatedResponses);
     setQuestionStates(updatedStates);
 
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    }
+    const nextIndex = currentQuestionIndex < questions.length - 1 ? currentQuestionIndex + 1 : currentQuestionIndex;
+    setCurrentQuestionIndex(nextIndex);
+
+    saveLocalSnapshot({
+      responses: updatedResponses,
+      questionStates: updatedStates,
+      currentQuestionIndex: nextIndex
+    });
   };
 
   const handleMarkReviewAndNext = () => {
@@ -201,27 +258,39 @@ export default function CBTExamPage({
     }
     setQuestionStates(updatedStates);
 
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    }
+    const nextIndex = currentQuestionIndex < questions.length - 1 ? currentQuestionIndex + 1 : currentQuestionIndex;
+    setCurrentQuestionIndex(nextIndex);
+
+    saveLocalSnapshot({
+      questionStates: updatedStates,
+      currentQuestionIndex: nextIndex
+    });
   };
 
   const handleClearResponse = () => {
     setSelectedOption(null);
-    setResponses((prev) => {
-      const copy = { ...prev };
-      delete copy[currentQuestionIndex];
-      return copy;
-    });
-    setQuestionStates((prev) => ({
-      ...prev,
+    const updatedResponses = { ...responses };
+    delete updatedResponses[currentQuestionIndex];
+
+    const updatedStates = {
+      ...questionStates,
       [currentQuestionIndex]: 'not_answered'
-    }));
+    };
+
+    setResponses(updatedResponses);
+    setQuestionStates(updatedStates);
+
+    saveLocalSnapshot({
+      responses: updatedResponses,
+      questionStates: updatedStates
+    });
   };
 
   const handlePreviousQuestion = () => {
     if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(currentQuestionIndex - 1);
+      const prevIndex = currentQuestionIndex - 1;
+      setCurrentQuestionIndex(prevIndex);
+      saveLocalSnapshot({ currentQuestionIndex: prevIndex });
     }
   };
 
@@ -229,6 +298,7 @@ export default function CBTExamPage({
   const handleTogglePause = () => {
     const nextPause = !isPaused;
     setIsPaused(nextPause);
+    saveLocalSnapshot({ status: nextPause ? 'paused' : 'in_progress' });
     triggerSync(nextPause ? 'paused' : 'in_progress');
   };
 
@@ -302,8 +372,6 @@ export default function CBTExamPage({
     setFinalResults(results);
     setShowScorecard(true);
 
-    const activeTestId = testId || `rrb_cbt_mock_${mockNumber}`;
-
     // 1. Save question-level responses to table: RRB_MOCK_1_responses, RRB_MOCK_2_responses, or RRB_MOCK_3_responses
     saveMockResponses({
       mockNumber,
@@ -346,6 +414,13 @@ export default function CBTExamPage({
     setRemainingSeconds(TOTAL_DURATION_SECONDS);
     setShowScorecard(false);
     setFinalResults(null);
+    saveLocalSnapshot({
+      responses: {},
+      questionStates: {},
+      currentQuestionIndex: 0,
+      remainingSeconds: TOTAL_DURATION_SECONDS,
+      status: 'in_progress'
+    });
     triggerSync('in_progress');
   };
 

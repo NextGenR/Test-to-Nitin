@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowLeft, ArrowRight, RotateCcw, Bookmark, CheckSquare } from 'lucide-react';
+import MathRenderer from './MathRenderer';
 
 export default function QuestionPanel({
   question,
@@ -108,7 +109,7 @@ export default function QuestionPanel({
         {/* Question Statement */}
         <div className={`text-slate-900 font-medium leading-relaxed mb-6 ${fontClass}`}>
           <div className="whitespace-pre-line">
-            {questionText}
+            <MathRenderer text={questionText} />
           </div>
         </div>
 
@@ -140,7 +141,7 @@ export default function QuestionPanel({
                 {/* Option Letter Badge & Text */}
                 <div className={`flex-1 text-slate-800 ${fontClass}`}>
                   <span className="font-bold text-slate-900 mr-2">({optionLetter})</span>
-                  <span>{optText}</span>
+                  <MathRenderer text={optText} />
                 </div>
               </label>
             );
@@ -221,4 +222,3 @@ export default function QuestionPanel({
     </div>
   );
 }
-
