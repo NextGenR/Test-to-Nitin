@@ -109,6 +109,18 @@ export default function CBTExamPage({
   const [showScratchpad, setShowScratchpad] = useState(false);
   const [showMobilePalette, setShowMobilePalette] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isOnline, setIsOnline] = useState(typeof navigator !== 'undefined' ? navigator.onLine : true);
+
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
 
   // Automatic fullscreen trigger on entering the test
   useEffect(() => {
@@ -724,18 +736,25 @@ export default function CBTExamPage({
           })}
         </div>
 
-        {/* Live Timer Display */}
-        <div className="flex items-center gap-2 bg-slate-900/90 px-3 py-1.5 rounded border border-slate-700">
-          <Clock className={`w-4 h-4 ${
-            isTimerCritical ? 'text-red-500 animate-pulse' : isTimerWarning ? 'text-amber-400' : 'text-emerald-400'
-          }`} />
-          <div className="text-left leading-none">
-            <span className="text-[9px] uppercase tracking-wider text-slate-400 font-semibold block">Time Left</span>
-            <span className={`font-mono text-sm sm:text-base font-black ${
-              isTimerCritical ? 'text-red-400 animate-pulse' : isTimerWarning ? 'text-amber-300' : 'text-emerald-300'
-            }`}>
-              {formattedTimer}
+        {/* Live Timer Display and Connectivity Status */}
+        <div className="flex items-center gap-2.5">
+          {!isOnline && (
+            <span className="hidden sm:inline-flex items-center gap-1 text-[11px] bg-amber-500/20 text-amber-300 border border-amber-500/40 px-2 py-0.5 rounded font-bold animate-pulse">
+              ⚡ Offline Mode (Saved Locally)
             </span>
+          )}
+          <div className="flex items-center gap-2 bg-slate-900/90 px-3 py-1.5 rounded border border-slate-700">
+            <Clock className={`w-4 h-4 ${
+              isTimerCritical ? 'text-red-500 animate-pulse' : isTimerWarning ? 'text-amber-400' : 'text-emerald-400'
+            }`} />
+            <div className="text-left leading-none">
+              <span className="text-[9px] uppercase tracking-wider text-slate-400 font-semibold block">Time Left</span>
+              <span className={`font-mono text-sm sm:text-base font-black ${
+                isTimerCritical ? 'text-red-400 animate-pulse' : isTimerWarning ? 'text-amber-300' : 'text-emerald-300'
+              }`}>
+                {formattedTimer}
+              </span>
+            </div>
           </div>
         </div>
 

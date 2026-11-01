@@ -152,3 +152,17 @@ CREATE INDEX IF NOT EXISTS idx_test_attempts_mobile ON public.test_attempts(cand
 CREATE INDEX IF NOT EXISTS idx_mock1_candidate ON public."RRB_MOCK_1_responses"(candidate_mobile);
 CREATE INDEX IF NOT EXISTS idx_mock2_candidate ON public."RRB_MOCK_2_responses"(candidate_mobile);
 CREATE INDEX IF NOT EXISTS idx_mock3_candidate ON public."RRB_MOCK_3_responses"(candidate_mobile);
+
+-- 7. Questions Table Schema Enhancements for Inline SVG Diagrams & Visual Options
+ALTER TABLE IF EXISTS public.questions ADD COLUMN IF NOT EXISTS image_svg TEXT;
+ALTER TABLE IF EXISTS public.questions ADD COLUMN IF NOT EXISTS image_svg_hi TEXT;
+ALTER TABLE IF EXISTS public.questions ADD COLUMN IF NOT EXISTS image_url TEXT;
+ALTER TABLE IF EXISTS public.questions ADD COLUMN IF NOT EXISTS image_url_hi TEXT;
+ALTER TABLE IF EXISTS public.questions ADD COLUMN IF NOT EXISTS option_svgs JSONB;
+ALTER TABLE IF EXISTS public.questions ADD COLUMN IF NOT EXISTS option_images JSONB;
+
+ALTER TABLE IF EXISTS public.questions ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Allow anon read on questions" ON public.questions;
+CREATE POLICY "Allow anon read on questions" ON public.questions FOR SELECT TO anon, authenticated USING (true);
+DROP POLICY IF EXISTS "Allow anon write on questions" ON public.questions;
+CREATE POLICY "Allow anon write on questions" ON public.questions FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);

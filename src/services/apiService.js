@@ -3,6 +3,68 @@ import { MOCK_TESTS_DATA, MOCK_QUESTIONS } from '../data/mockQuestions';
 
 const CANDIDATE_STORAGE_KEY = 'rrb_active_candidate';
 const ATTEMPT_STORAGE_KEY_PREFIX = 'rrb_test_attempt_';
+const OFFLINE_SYNC_QUEUE_KEY = 'rrb_offline_sync_queue';
+
+/**
+ * Enqueue a failed or offline request to local storage queue
+ */
+const enqueueOfflineSync = (url, options) => {
+  try {
+    const raw = localStorage.getItem(OFFLINE_SYNC_QUEUE_KEY);
+    const queue = raw ? JSON.parse(raw) : [];
+    queue.push({
+      id: Date.now() + Math.random().toString(36).substring(2, 7),
+      url,
+      options,
+      timestamp: new Date().toISOString()
+    });
+    // Cap at 250 requests
+    if (queue.length > 250) queue.splice(0, queue.length - 250);
+    localStorage.setItem(OFFLINE_SYNC_QUEUE_KEY, JSON.stringify(queue));
+  } catch (err) {
+    console.warn("Failed to buffer offline sync:", err);
+  }
+};
+
+/**
+ * Flush all buffered offline sync requests to the remote database
+ */
+export const flushOfflineSyncQueue = async () => {
+  if (typeof window === 'undefined' || !navigator.onLine) return;
+  try {
+    const raw = localStorage.getItem(OFFLINE_SYNC_QUEUE_KEY);
+    if (!raw) return;
+    const queue = JSON.parse(raw);
+    if (!Array.isArray(queue) || queue.length === 0) return;
+
+    const remaining = [];
+    for (const item of queue) {
+      try {
+        const res = await fetch(item.url, item.options);
+        if (!res.ok && res.status >= 500) {
+          remaining.push(item);
+        }
+      } catch (err) {
+        remaining.push(item);
+      }
+    }
+
+    if (remaining.length > 0) {
+      localStorage.setItem(OFFLINE_SYNC_QUEUE_KEY, JSON.stringify(remaining));
+    } else {
+      localStorage.removeItem(OFFLINE_SYNC_QUEUE_KEY);
+    }
+  } catch (err) {
+    console.warn("Error processing offline sync queue:", err);
+  }
+};
+
+// Auto-trigger queue flush whenever connectivity is restored
+if (typeof window !== 'undefined') {
+  window.addEventListener('online', () => {
+    flushOfflineSyncQueue();
+  });
+}
 
 /**
  * Get cached candidate session
@@ -264,17 +326,29 @@ export const saveSingleQuestionResponse = async ({
     [timeCol]: timeTaken
   };
 
+  const url = `${API_ENDPOINT}/${tableName}?on_conflict=candidate_mobile,question_number`;
+  const options = {
+    method: 'POST',
+    headers: {
+      ...getHeaders(),
+      "Prefer": "resolution=merge-duplicates"
+    },
+    body: JSON.stringify([payload])
+  };
+
   try {
-    const url = `${API_ENDPOINT}/${tableName}?on_conflict=candidate_mobile,question_number`;
-    await fetch(url, {
-      method: 'POST',
-      headers: {
-        ...getHeaders(),
-        "Prefer": "resolution=merge-duplicates"
-      },
-      body: JSON.stringify([payload])
-    });
+    if (typeof navigator !== 'undefined' && !navigator.onLine) {
+      enqueueOfflineSync(url, options);
+      return;
+    }
+    const res = await fetch(url, options);
+    if (!res.ok && res.status >= 500) {
+      enqueueOfflineSync(url, options);
+    } else {
+      flushOfflineSyncQueue();
+    }
   } catch (err) {
+    enqueueOfflineSync(url, options);
     console.warn(`Real-time question sync notice (Q${questionNumber}):`, err.message);
   }
 };
