@@ -41,7 +41,21 @@ export default function DashboardPage({
   onLogout
 }) {
   const [activeTab, setActiveTab] = useState('rrb-series');
-  const [savedAttempts, setSavedAttempts] = useState({});
+  // Instant recovery from local snapshot for 0ms dashboard render
+  const getInitialAttempts = () => {
+    const attempts = {};
+    if (candidate?.mobile_number) {
+      MOCK_TESTS_CATALOG.forEach((mock) => {
+        try {
+          const key = `rrb_test_attempt_${mock.testId}_${candidate.mobile_number}`;
+          const raw = localStorage.getItem(key);
+          if (raw) attempts[mock.id] = JSON.parse(raw);
+        } catch (e) {}
+      });
+    }
+    return attempts;
+  };
+  const [savedAttempts, setSavedAttempts] = useState(getInitialAttempts);
   const [selectedMock, setSelectedMock] = useState(MOCK_TESTS_CATALOG[0]);
   const [showInstructions, setShowInstructions] = useState(false);
   const [defaultLang, setDefaultLang] = useState('en');

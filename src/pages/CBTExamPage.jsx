@@ -10,7 +10,7 @@ import PauseModal from '../components/PauseModal';
 import ScratchpadModal from '../components/ScratchpadModal';
 import { X } from 'lucide-react';
 import { Clock } from 'lucide-react';
-import { SECTIONS } from '../data/mockQuestions';
+import { SECTIONS, MOCK_TESTS_DATA, MOCK_QUESTIONS } from '../data/mockQuestions';
 import {
   fetchTestQuestions,
   syncTestAttempt,
@@ -48,8 +48,31 @@ export default function CBTExamPage({
 
   const savedState = getInitialState();
 
-  const [questions, setQuestions] = useState([]);
-  const [loadingQuestions, setLoadingQuestions] = useState(true);
+  // Instant 0ms question loader from cache or local bank
+  const getInitialQuestions = () => {
+    const activeAtt = savedState?.attemptNumber || (isRetake ? 2 : 1);
+    const qCacheKey = `rrb_shuffled_qs_v4_${activeTestId}_${candidate?.mobile_number}_att_${activeAtt}`;
+    try {
+      const cached = localStorage.getItem(qCacheKey);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (parsed && parsed.length > 0 && parsed.some(q => q.image_svg || q.option_svgs)) {
+          return parsed;
+        }
+      }
+    } catch (e) {}
+
+    const seedKey = `${candidate?.mobile_number || 'cand'}_mock_${mockNumber}_att_${activeAtt}`;
+    const localBank = MOCK_TESTS_DATA[mockNumber] || MOCK_QUESTIONS;
+    const initialShuffled = randomizeQuestionsOptions(localBank, seedKey);
+    try {
+      localStorage.setItem(qCacheKey, JSON.stringify(initialShuffled));
+    } catch (e) {}
+    return initialShuffled;
+  };
+
+  const [questions, setQuestions] = useState(getInitialQuestions);
+  const [loadingQuestions, setLoadingQuestions] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(savedState?.currentQuestionIndex || 0);
   const [activeSectionId, setActiveSectionId] = useState('science');
   const [currentLang, setCurrentLang] = useState(defaultLang);

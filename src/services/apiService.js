@@ -38,7 +38,7 @@ export const loginOrRegisterCandidate = async (name, mobile, passcode, category 
 
   try {
     const checkUrl = `${API_ENDPOINT}/candidates?mobile_number=eq.${cleanMobile}&select=*`;
-    const checkRes = await fetch(checkUrl, {
+    const checkRes = await fetchWithTimeout(checkUrl, {
       method: 'GET',
       headers: getHeaders()
     });
@@ -122,7 +122,7 @@ export const fetchTestQuestions = async (mockNumber = 1) => {
 
   try {
     const url = `${API_ENDPOINT}/questions?test_id=eq.${testId}&order=question_number.asc`;
-    const res = await fetch(url, {
+    const res = await fetchWithTimeout(url, {
       method: 'GET',
       headers: getHeaders()
     });
