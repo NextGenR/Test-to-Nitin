@@ -31,6 +31,15 @@ export default function QuestionPanel({
   const questionText = currentLang === 'hi' && question.question_hi ? question.question_hi : question.question_en;
   const options = currentLang === 'hi' && question.options_hi ? question.options_hi : question.options_en;
 
+  // Language-specific diagram selection (Official TCS iON Dual-Language support)
+  const activeSvg = (currentLang === 'hi' && question.image_svg_hi)
+    ? question.image_svg_hi
+    : (question.image_svg || question.question_image_svg);
+
+  const activeImg = (currentLang === 'hi' && question.image_url_hi)
+    ? question.image_url_hi
+    : (question.image_url || question.question_image_url);
+
   // Font size multiplier
   const fontClass = fontSize === 'large' ? 'text-base sm:text-lg' : fontSize === 'small' ? 'text-xs' : 'text-sm';
 
@@ -50,7 +59,7 @@ export default function QuestionPanel({
             <span className="text-slate-300">|</span>
             <span className="text-red-600 font-semibold">Negative: -{question.negative_marks || 0.33}</span>
           </div>
-          {(question.image_svg || question.image_url || question.option_svgs || question.option_images) && (
+          {(activeSvg || activeImg || question.option_svgs || question.option_images) && (
             <span className="px-2 py-0.5 bg-blue-100 text-blue-800 font-bold text-[10px] rounded-full flex items-center gap-1 border border-blue-200">
               🖼 Visual Diagram
             </span>
@@ -118,20 +127,26 @@ export default function QuestionPanel({
           </div>
         </div>
 
-        {/* Question Diagram / Figure Container (Fixed Height 220px-260px) */}
-        {(question.image_svg || question.image_url) && (
+        {/* Question Diagram / Figure Container (Official TCS iON Layout & Security) */}
+        {(activeSvg || activeImg) && (
           <div className="mb-6 flex justify-center">
-            <div className="w-full max-w-md h-[220px] sm:h-[250px] bg-slate-50 border border-slate-300 rounded-xl p-3 flex items-center justify-center shadow-xs overflow-hidden select-none">
-              {question.image_svg ? (
+            <div
+              onContextMenu={(e) => e.preventDefault()}
+              onDragStart={(e) => e.preventDefault()}
+              className="w-full max-w-lg h-[220px] sm:h-[250px] bg-slate-50 border border-slate-300 rounded-xl p-3 flex items-center justify-center shadow-xs overflow-hidden select-none"
+            >
+              {activeSvg ? (
                 <div
-                  className="svg-container"
-                  dangerouslySetInnerHTML={{ __html: question.image_svg }}
+                  className="svg-container pointer-events-none select-none"
+                  dangerouslySetInnerHTML={{ __html: activeSvg }}
                 />
               ) : (
                 <img
-                  src={question.image_url}
+                  src={activeImg}
                   alt="Question Diagram"
-                  className="max-h-full max-w-full object-contain"
+                  draggable={false}
+                  onContextMenu={(e) => e.preventDefault()}
+                  className="max-h-full max-w-full object-contain pointer-events-none select-none"
                   loading="lazy"
                 />
               )}
