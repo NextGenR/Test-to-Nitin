@@ -223,6 +223,7 @@ export default function CBTExamPage({
     const attemptData = {
       candidateMobile: candidate.mobile_number,
       candidateName: candidate.name,
+      rollNumber: candidate.roll_number,
       testId: activeTestId,
       remainingSeconds,
       currentQuestionIndex,
@@ -510,6 +511,7 @@ export default function CBTExamPage({
       syncTestAttempt({
         candidateMobile: candidate.mobile_number,
         candidateName: candidate.name,
+        rollNumber: candidate.roll_number,
         testId: activeTestId,
         remainingSeconds,
         currentQuestionIndex,

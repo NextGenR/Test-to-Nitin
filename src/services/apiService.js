@@ -389,6 +389,7 @@ export const syncTestAttempt = async (attemptData) => {
     const payload = {
       candidate_mobile: candidateMobile,
       candidate_name: attemptData.candidateName || 'Candidate',
+      roll_number: attemptData.rollNumber || null,
       test_id: testId,
       remaining_seconds: attemptData.remainingSeconds !== undefined ? attemptData.remainingSeconds : 5400,
       current_question_index: attemptData.currentQuestionIndex || 0,
@@ -401,7 +402,7 @@ export const syncTestAttempt = async (attemptData) => {
       unattempted_count: attemptData.unattemptedCount || 0,
       accuracy: attemptData.accuracy || 0,
       updated_at: new Date().toISOString(),
-      completed_at: attemptData.status === 'completed' ? new Date().toISOString() : null
+      submitted_at: attemptData.status === 'completed' ? new Date().toISOString() : null
     };
 
     // First check if a record for this candidate and test already exists
@@ -480,4 +481,27 @@ export const getTestAttempt = async (candidateMobile, testId = 'rrb_cbt_mock_1')
   }
 
   return localData;
+};
+
+/**
+ * Fetch leaderboard rankings for all candidates or a specific mock test
+ */
+export const fetchLeaderboard = async (testId = null) => {
+  try {
+    let url = `${API_ENDPOINT}/test_attempts?select=candidate_name,candidate_mobile,roll_number,test_id,score,accuracy,status,submitted_at,updated_at&order=score.desc,accuracy.desc&limit=50`;
+    if (testId && testId !== 'all') {
+      url += `&test_id=eq.${testId}`;
+    }
+    const res = await fetch(url, {
+      method: 'GET',
+      headers: getHeaders()
+    });
+    if (res.ok) {
+      const data = await res.json();
+      return data || [];
+    }
+  } catch (err) {
+    console.warn("Could not fetch remote leaderboard:", err.message);
+  }
+  return [];
 };

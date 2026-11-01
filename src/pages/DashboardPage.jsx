@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import InstructionsModal from '../components/InstructionsModal';
-import { Play, RotateCcw, Clock, Award, BookOpen, CheckCircle, BarChart3, AlertCircle, FileCheck2, Sparkles } from 'lucide-react';
-import { getTestAttempt } from '../services/apiService';
+import { Play, RotateCcw, Clock, Award, BookOpen, CheckCircle, BarChart3, AlertCircle, FileCheck2, Sparkles, Trophy, Medal, Users, TrendingUp, Target } from 'lucide-react';
+import { getTestAttempt, fetchLeaderboard } from '../services/apiService';
 
 const MOCK_TESTS_CATALOG = [
   {
@@ -45,6 +45,42 @@ export default function DashboardPage({
   const [selectedMock, setSelectedMock] = useState(MOCK_TESTS_CATALOG[0]);
   const [showInstructions, setShowInstructions] = useState(false);
   const [defaultLang, setDefaultLang] = useState('en');
+  const [leaderboardFilter, setLeaderboardFilter] = useState('all');
+  const [leaderboardData, setLeaderboardData] = useState([]);
+  const [loadingLeaderboard, setLoadingLeaderboard] = useState(false);
+
+  useEffect(() => {
+    if (activeTab === 'leaderboard') {
+      setLoadingLeaderboard(true);
+      fetchLeaderboard(leaderboardFilter).then((data) => {
+        setLeaderboardData(data);
+        setLoadingLeaderboard(false);
+      });
+    }
+  }, [activeTab, leaderboardFilter]);
+
+  // Leaderboard statistics computation
+  const rankedList = leaderboardData.filter(d => d.score !== undefined && d.score !== null);
+  const totalRanked = rankedList.length;
+  const highestScore = totalRanked > 0 ? Math.max(...rankedList.map(d => Number(d.score || 0))) : 0;
+  const avgScore = totalRanked > 0
+    ? rankedList.reduce((acc, cur) => acc + Number(cur.score || 0), 0) / totalRanked
+    : 0;
+
+  let myRank = -1;
+  let myScore = 0;
+  let myAccuracy = 0;
+  let myPercentile = 0;
+
+  if (candidate?.mobile_number && totalRanked > 0) {
+    const idx = rankedList.findIndex(d => d.candidate_mobile === candidate.mobile_number);
+    if (idx >= 0) {
+      myRank = idx + 1;
+      myScore = Number(rankedList[idx].score || 0);
+      myAccuracy = Number(rankedList[idx].accuracy || 0);
+      myPercentile = (((totalRanked - myRank + 1) / totalRanked) * 100).toFixed(1);
+    }
+  }
 
   // Load attempts for all 3 mocks
   useEffect(() => {
@@ -293,6 +329,275 @@ export default function DashboardPage({
                 );
               })}
             </div>
+          </div>
+        )}
+
+        {/* Tab: Live Leaderboard & All-India Rank */}
+        {activeTab === 'leaderboard' && (
+          <div className="space-y-6">
+            
+            {/* Header & Filter Controls */}
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <Trophy className="w-6 h-6 text-amber-500" />
+                  <h3 className="text-xl font-black text-slate-900">
+                    All-India CBT Leaderboard & Rank
+                  </h3>
+                </div>
+                <p className="text-xs text-slate-500">
+                  Live All-India ranking across candidates based on score and accuracy.
+                </p>
+              </div>
+
+              {/* Filter Pills */}
+              <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl text-xs font-bold">
+                <button
+                  onClick={() => setLeaderboardFilter('all')}
+                  className={`px-3 py-1.5 rounded-lg transition ${
+                    leaderboardFilter === 'all'
+                      ? 'bg-blue-600 text-white shadow-sm'
+                      : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                >
+                  All Mocks
+                </button>
+                <button
+                  onClick={() => setLeaderboardFilter('rrb_cbt_mock_1')}
+                  className={`px-3 py-1.5 rounded-lg transition ${
+                    leaderboardFilter === 'rrb_cbt_mock_1'
+                      ? 'bg-blue-600 text-white shadow-sm'
+                      : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                >
+                  Mock 1
+                </button>
+                <button
+                  onClick={() => setLeaderboardFilter('rrb_cbt_mock_2')}
+                  className={`px-3 py-1.5 rounded-lg transition ${
+                    leaderboardFilter === 'rrb_cbt_mock_2'
+                      ? 'bg-blue-600 text-white shadow-sm'
+                      : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                >
+                  Mock 2
+                </button>
+                <button
+                  onClick={() => setLeaderboardFilter('rrb_cbt_mock_3')}
+                  className={`px-3 py-1.5 rounded-lg transition ${
+                    leaderboardFilter === 'rrb_cbt_mock_3'
+                      ? 'bg-blue-600 text-white shadow-sm'
+                      : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                >
+                  Mock 3
+                </button>
+              </div>
+            </div>
+
+            {/* Metric Cards Grid */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center">
+                  <Users className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-xs text-slate-500 font-medium">Candidates Ranked</div>
+                  <div className="text-xl font-bold text-slate-900">{totalRanked}</div>
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center">
+                  <Trophy className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-xs text-slate-500 font-medium">Highest Score</div>
+                  <div className="text-xl font-bold text-amber-600">
+                    {highestScore.toFixed(2)} <span className="text-xs text-slate-400 font-normal">/ 100</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center">
+                  <TrendingUp className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-xs text-slate-500 font-medium">Batch Average</div>
+                  <div className="text-xl font-bold text-slate-900">{avgScore.toFixed(2)}</div>
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-purple-100 text-purple-600 flex items-center justify-center">
+                  <Target className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-xs text-slate-500 font-medium">Your Standing</div>
+                  <div className="text-xl font-bold text-purple-600">
+                    {myRank > 0 ? `#${myRank} (${myPercentile}%)` : 'Not Ranked'}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Candidate Standing Banner (if ranked) */}
+            {myRank > 0 && (
+              <div className="bg-gradient-to-r from-blue-900 to-indigo-900 rounded-2xl p-5 text-white flex flex-wrap items-center justify-between gap-4 shadow-md">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-xl bg-amber-400/20 border border-amber-400/40 text-amber-300 flex items-center justify-center font-black text-xl">
+                    #{myRank}
+                  </div>
+                  <div>
+                    <div className="text-xs text-blue-200 uppercase tracking-wider font-semibold">
+                      Your Official Ranking
+                    </div>
+                    <div className="text-base sm:text-lg font-bold">
+                      {candidate?.name} &bull; Roll: <span className="font-mono text-amber-300">{candidate?.roll_number}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-6 text-sm">
+                  <div>
+                    <div className="text-[11px] text-blue-200">Percentile</div>
+                    <div className="text-xl font-black text-emerald-400">{myPercentile}%</div>
+                  </div>
+                  <div>
+                    <div className="text-[11px] text-blue-200">Your Score</div>
+                    <div className="text-xl font-black text-amber-300">{myScore.toFixed(2)}</div>
+                  </div>
+                  <div>
+                    <div className="text-[11px] text-blue-200">Accuracy</div>
+                    <div className="text-xl font-black text-sky-300">{myAccuracy.toFixed(1)}%</div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Top 10 Table */}
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+              <div className="p-4 sm:p-5 border-b border-slate-200 flex items-center justify-between">
+                <h4 className="font-bold text-slate-900 text-sm flex items-center gap-2">
+                  <Medal className="w-4 h-4 text-amber-500" />
+                  <span>Top 10 Performers Leaderboard</span>
+                </h4>
+                <span className="text-xs text-slate-500">
+                  Sorted by Score & Accuracy
+                </span>
+              </div>
+
+              {loadingLeaderboard ? (
+                <div className="p-12 text-center text-slate-500">
+                  <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+                  <p className="text-xs">Fetching live All-India rankings...</p>
+                </div>
+              ) : rankedList.length === 0 ? (
+                <div className="p-12 text-center text-slate-500">
+                  <FileCheck2 className="w-12 h-12 text-slate-300 mx-auto mb-2" />
+                  <p className="text-sm font-semibold text-slate-700">No attempts ranked yet for this test.</p>
+                  <p className="text-xs text-slate-400 mt-1">Complete a mock test to appear on the All-India leaderboard.</p>
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs">
+                    <thead className="bg-slate-50 text-slate-600 uppercase font-semibold text-[11px] border-b border-slate-200">
+                      <tr>
+                        <th className="px-4 py-3 text-center w-16">Rank</th>
+                        <th className="px-4 py-3">Candidate Name</th>
+                        <th className="px-4 py-3">Roll Number</th>
+                        <th className="px-4 py-3">Test</th>
+                        <th className="px-4 py-3 text-center">Score</th>
+                        <th className="px-4 py-3 text-center">Accuracy</th>
+                        <th className="px-4 py-3 text-right">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100">
+                      {rankedList.slice(0, 10).map((item, idx) => {
+                        const rank = idx + 1;
+                        const isMe = candidate?.mobile_number && item.candidate_mobile === candidate.mobile_number;
+
+                        return (
+                          <tr
+                            key={idx}
+                            className={`transition hover:bg-slate-50 ${
+                              isMe ? 'bg-blue-50/70 font-semibold' : ''
+                            }`}
+                          >
+                            <td className="px-4 py-3 text-center">
+                              {rank === 1 ? (
+                                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 text-amber-800 font-black text-sm shadow-sm ring-1 ring-amber-300">
+                                  🥇 1
+                                </span>
+                              ) : rank === 2 ? (
+                                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-slate-200 text-slate-700 font-black text-sm shadow-sm ring-1 ring-slate-300">
+                                  🥈 2
+                                </span>
+                              ) : rank === 3 ? (
+                                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-amber-50 text-amber-900 font-black text-sm shadow-sm ring-1 ring-amber-400">
+                                  🥉 3
+                                </span>
+                              ) : (
+                                <span className="font-bold text-slate-500">#{rank}</span>
+                              )}
+                            </td>
+
+                            <td className="px-4 py-3">
+                              <div className="flex items-center gap-2">
+                                <span className="text-slate-900 font-bold">{item.candidate_name || 'Candidate'}</span>
+                                {isMe && (
+                                  <span className="px-2 py-0.5 bg-blue-600 text-white text-[10px] font-black rounded-full uppercase tracking-wider">
+                                    You
+                                  </span>
+                                )}
+                              </div>
+                            </td>
+
+                            <td className="px-4 py-3 font-mono text-slate-600">
+                              {item.roll_number || (item.candidate_mobile ? `RRB26***${item.candidate_mobile.slice(-3)}` : 'ANONYMOUS')}
+                            </td>
+
+                            <td className="px-4 py-3 text-slate-600">
+                              {item.test_id === 'rrb_cbt_mock_1'
+                                ? 'Mock 01'
+                                : item.test_id === 'rrb_cbt_mock_2'
+                                ? 'Mock 02'
+                                : item.test_id === 'rrb_cbt_mock_3'
+                                ? 'Mock 03'
+                                : item.test_id}
+                            </td>
+
+                            <td className="px-4 py-3 text-center">
+                              <span className="font-black text-blue-700 text-sm">
+                                {Number(item.score || 0).toFixed(2)}
+                              </span>
+                            </td>
+
+                            <td className="px-4 py-3 text-center">
+                              <span className="font-bold text-emerald-600">
+                                {Number(item.accuracy || 0).toFixed(1)}%
+                              </span>
+                            </td>
+
+                            <td className="px-4 py-3 text-right">
+                              <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                                item.status === 'completed'
+                                  ? 'bg-emerald-100 text-emerald-800'
+                                  : 'bg-amber-100 text-amber-800'
+                              }`}>
+                                {item.status || 'completed'}
+                              </span>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+
           </div>
         )}
 
