@@ -129,17 +129,21 @@ export default function CBTExamPage({
     let mounted = true;
 
     const loadExamQuestions = async (activeAttempt) => {
-      const qCacheKey = `rrb_shuffled_qs_${activeTestId}_${candidate?.mobile_number}_att_${activeAttempt}`;
+      // Invalidate old cache without SVGs by bumping cache key to v4
+      const qCacheKey = `rrb_shuffled_qs_v4_${activeTestId}_${candidate?.mobile_number}_att_${activeAttempt}`;
       try {
         const cached = localStorage.getItem(qCacheKey);
         if (cached) {
           const parsed = JSON.parse(cached);
           if (parsed && parsed.length > 0) {
-            if (mounted) {
-              setQuestions(parsed);
-              setLoadingQuestions(false);
+            const hasSvgInCache = parsed.some(q => q.image_svg || q.option_svgs);
+            if (hasSvgInCache) {
+              if (mounted) {
+                setQuestions(parsed);
+                setLoadingQuestions(false);
+              }
+              return;
             }
-            return;
           }
         }
       } catch (e) {}

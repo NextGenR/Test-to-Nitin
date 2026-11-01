@@ -40,7 +40,7 @@ export default function QuestionPanel({
       {/* Question Header Bar (TCS iON standard) */}
       <div className="bg-slate-100 border-b border-slate-300 px-4 py-2 flex flex-wrap items-center justify-between gap-2 text-xs">
         
-        {/* Left: Question Number and Marks */}
+        {/* Left: Question Number, Marks & Visual Figure Indicator */}
         <div className="flex items-center gap-3">
           <span className="font-bold text-slate-900 text-sm">
             Question No. {questionNumber}
@@ -50,6 +50,11 @@ export default function QuestionPanel({
             <span className="text-slate-300">|</span>
             <span className="text-red-600 font-semibold">Negative: -{question.negative_marks || 0.33}</span>
           </div>
+          {(question.image_svg || question.image_url || question.option_svgs || question.option_images) && (
+            <span className="px-2 py-0.5 bg-blue-100 text-blue-800 font-bold text-[10px] rounded-full flex items-center gap-1 border border-blue-200">
+              🖼 Visual Diagram
+            </span>
+          )}
         </div>
 
         {/* Right: Language Switcher and Font Size */}
@@ -119,7 +124,7 @@ export default function QuestionPanel({
             <div className="w-full max-w-md h-[220px] sm:h-[250px] bg-slate-50 border border-slate-300 rounded-xl p-3 flex items-center justify-center shadow-xs overflow-hidden select-none">
               {question.image_svg ? (
                 <div
-                  className="w-full h-full flex items-center justify-center [&>svg]:max-h-full [&>svg]:max-w-full [&>svg]:h-auto [&>svg]:w-auto"
+                  className="svg-container"
                   dangerouslySetInnerHTML={{ __html: question.image_svg }}
                 />
               ) : (
@@ -176,7 +181,7 @@ export default function QuestionPanel({
                   <div className="h-28 w-full bg-slate-50 border border-slate-200 rounded-lg p-2 flex items-center justify-center overflow-hidden">
                     {svgContent ? (
                       <div
-                        className="w-full h-full flex items-center justify-center [&>svg]:max-h-full [&>svg]:max-w-full"
+                        className="option-svg-container"
                         dangerouslySetInnerHTML={{ __html: svgContent }}
                       />
                     ) : imgUrl ? (

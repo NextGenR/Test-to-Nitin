@@ -118,6 +118,7 @@ export const loginOrRegisterCandidate = async (name, mobile, passcode, category 
  */
 export const fetchTestQuestions = async (mockNumber = 1) => {
   const testId = `rrb_cbt_mock_${mockNumber}`;
+  const localBank = MOCK_TESTS_DATA[mockNumber] || MOCK_QUESTIONS;
 
   try {
     const url = `${API_ENDPOINT}/questions?test_id=eq.${testId}&order=question_number.asc`;
@@ -130,6 +131,8 @@ export const fetchTestQuestions = async (mockNumber = 1) => {
       const data = await res.json();
       if (data && data.length > 0) {
         return data.map((q) => {
+          const qNum = q.question_number || q.id;
+          const localQ = localBank.find(l => (l.id || l.question_number) === qNum);
           let optsEn = [];
           if (q.options) {
             if (Array.isArray(q.options)) {
@@ -163,7 +166,7 @@ export const fetchTestQuestions = async (mockNumber = 1) => {
           }
 
           return {
-            id: q.question_number || q.id,
+            id: qNum,
             section: q.section_title || q.section || 'General Science',
             question_en: q.question_text || q.question_en || '',
             question_hi: q.question_text_hi || q.question_hi || q.question_text || '',
@@ -172,10 +175,10 @@ export const fetchTestQuestions = async (mockNumber = 1) => {
             correct_option: (q.correct_option || 'A').toUpperCase(),
             positive_marks: Number(q.positive_marks || 1.0),
             negative_marks: Number(q.negative_marks || 0.33),
-            image_svg: q.image_svg || q.question_image_svg || null,
-            image_url: q.image_url || q.question_image_url || null,
-            option_svgs: q.option_svgs || null,
-            option_images: q.option_images || null,
+            image_svg: q.image_svg || q.question_image_svg || localQ?.image_svg || null,
+            image_url: q.image_url || q.question_image_url || localQ?.image_url || null,
+            option_svgs: q.option_svgs || localQ?.option_svgs || null,
+            option_images: q.option_images || localQ?.option_images || null,
             explanation_en: q.solution_text || q.explanation_en || '',
             explanation_hi: q.solution_text_hi || q.explanation_hi || ''
           };
