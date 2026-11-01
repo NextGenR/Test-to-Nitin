@@ -357,7 +357,7 @@ export default function ScorecardModal({
 
                       {/* Figure / Diagram if present */}
                       {(q.image_svg || q.image_url) && (
-                        <div className="my-2.5 max-w-xs h-36 bg-white border border-slate-200 rounded-lg p-2 flex items-center justify-center overflow-hidden">
+                        <div className="my-2.5 max-w-xs h-36 bg-white border border-slate-200 rounded-lg p-2 flex items-center justify-center overflow-hidden print-omit-diagram print:hidden">
                           {q.image_svg ? (
                             <div
                               className="w-full h-full flex items-center justify-center [&>svg]:max-h-full [&>svg]:max-w-full"
@@ -398,7 +398,7 @@ export default function ScorecardModal({
                               </div>
                               {svgOpt && (
                                 <div
-                                  className="h-16 w-full flex items-center justify-center [&>svg]:max-h-full [&>svg]:max-w-full py-1 bg-white/70 rounded border border-slate-100"
+                                  className="h-16 w-full flex items-center justify-center [&>svg]:max-h-full [&>svg]:max-w-full py-1 bg-white/70 rounded border border-slate-100 print-omit-diagram print:hidden"
                                   dangerouslySetInnerHTML={{ __html: svgOpt }}
                                 />
                               )}
