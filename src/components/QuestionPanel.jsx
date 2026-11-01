@@ -133,11 +133,11 @@ export default function QuestionPanel({
             <div
               onContextMenu={(e) => e.preventDefault()}
               onDragStart={(e) => e.preventDefault()}
-              className="bg-white border border-slate-200 rounded-xl p-3 sm:p-4 flex items-center justify-center shadow-xs overflow-hidden select-none max-w-xl"
+              className="w-full max-w-sm sm:max-w-md md:max-w-lg min-h-[190px] h-52 sm:h-64 bg-white border-2 border-[#00a8b5] rounded-xl p-3 sm:p-4 flex items-center justify-center shadow-xs overflow-hidden select-none"
             >
               {activeSvg ? (
                 <div
-                  className="svg-container pointer-events-none select-none [&>svg]:max-h-[220px] [&>svg]:w-auto [&>svg]:max-w-full"
+                  className="w-full h-full flex items-center justify-center [&>svg]:w-full [&>svg]:h-full [&>svg]:max-h-full [&>svg]:max-w-full [&>svg]:object-contain pointer-events-none select-none"
                   dangerouslySetInnerHTML={{ __html: activeSvg }}
                 />
               ) : (
@@ -146,7 +146,7 @@ export default function QuestionPanel({
                   alt="Question Diagram"
                   draggable={false}
                   onContextMenu={(e) => e.preventDefault()}
-                  className="max-h-[220px] max-w-full object-contain pointer-events-none select-none"
+                  className="w-full h-full max-h-[220px] max-w-full object-contain pointer-events-none select-none"
                   loading="lazy"
                 />
               )}
