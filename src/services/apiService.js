@@ -5,6 +5,67 @@ const CANDIDATE_STORAGE_KEY = 'rrb_active_candidate';
 const ATTEMPT_STORAGE_KEY_PREFIX = 'rrb_test_attempt_';
 const OFFLINE_SYNC_QUEUE_KEY = 'rrb_offline_sync_queue';
 
+export const MOCK_TESTS_CATALOG = [
+  {
+    id: 1,
+    testId: 'rrb_cbt_mock_1',
+    title: 'RRB Group D CBT Mock Test 01',
+    description: 'Based on official Railway Recruitment Board pattern with high-yield General Science and Math.',
+    questionsCount: 100,
+    durationMins: 90,
+    responseTable: 'RRB_MOCK_1_responses'
+  },
+  {
+    id: 2,
+    testId: 'rrb_cbt_mock_2',
+    title: 'RRB Group D CBT Mock Test 02',
+    description: 'Comprehensive evaluation covering Physics, Chemistry, Reasoning series, and Railway GK.',
+    questionsCount: 100,
+    durationMins: 90,
+    responseTable: 'RRB_MOCK_2_responses'
+  },
+  {
+    id: 3,
+    testId: 'rrb_cbt_mock_3',
+    title: 'RRB Group D CBT Mock Test 03',
+    description: 'Advanced full-length test simulation with authentic TCS iON timing and negative marking.',
+    questionsCount: 100,
+    durationMins: 90,
+    responseTable: 'RRB_MOCK_3_responses'
+  }
+];
+
+/**
+ * Dynamically fetch published active tests from the cloud database
+ * Falls back to default catalog if table does not exist or network unavailable
+ */
+export const fetchPublishedTests = async () => {
+  try {
+    const res = await fetchWithTimeout(`${API_ENDPOINT}/tests?is_active=eq.true&order=id.asc`, {
+      method: 'GET',
+      headers: getHeaders()
+    }, 6000);
+
+    if (res.ok) {
+      const data = await res.json();
+      if (data && Array.isArray(data) && data.length > 0) {
+        return data.map((t) => ({
+          id: Number(t.id),
+          testId: t.test_id,
+          title: t.title,
+          description: t.description || '',
+          questionsCount: Number(t.questions_count || 100),
+          durationMins: Number(t.duration_mins || 90),
+          responseTable: t.response_table || `RRB_MOCK_${t.id}_responses`
+        }));
+      }
+    }
+  } catch (e) {
+    // Graceful fallback to default catalog
+  }
+  return MOCK_TESTS_CATALOG;
+};
+
 /**
  * Robust fetch with timeout wrapper
  */
@@ -509,6 +570,16 @@ export const syncTestAttempt = async (attemptData) => {
       submitted_at: attemptData.status === 'completed' ? new Date().toISOString() : null
     };
 
+    // If offline, enqueue update to push when back online
+    if (typeof navigator !== 'undefined' && !navigator.onLine) {
+      enqueueOfflineSync(`${API_ENDPOINT}/test_attempts?candidate_mobile=eq.${candidateMobile}&test_id=eq.${testId}`, {
+        method: 'POST',
+        headers: getHeaders(),
+        body: JSON.stringify(payload)
+      });
+      return;
+    }
+
     // First check if a record for this candidate and test already exists
     const checkUrl = `${API_ENDPOINT}/test_attempts?candidate_mobile=eq.${candidateMobile}&test_id=eq.${testId}&select=id`;
     const checkRes = await fetch(checkUrl, {
@@ -537,7 +608,7 @@ export const syncTestAttempt = async (attemptData) => {
       body: JSON.stringify(payload)
     });
   } catch (err) {
-    console.warn("Live DB sync heartbeat notice:", err.message);
+    console.warn("Live DB sync heartbeat buffered locally:", err.message);
   }
 };
 

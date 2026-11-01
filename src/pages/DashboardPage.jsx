@@ -2,45 +2,24 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import InstructionsModal from '../components/InstructionsModal';
 import { Play, RotateCcw, Clock, Award, BookOpen, CheckCircle, BarChart3, AlertCircle, FileCheck2, Sparkles, Trophy, Medal, Users, TrendingUp, Target, Shield, Download, Search, KeyRound, Check, RefreshCw } from 'lucide-react';
-import { getTestAttempt, fetchLeaderboard, fetchAllCandidates, fetchAllAttempts } from '../services/apiService';
+import { getTestAttempt, fetchLeaderboard, fetchAllCandidates, fetchAllAttempts, fetchPublishedTests, MOCK_TESTS_CATALOG } from '../services/apiService';
 
-const MOCK_TESTS_CATALOG = [
-  {
-    id: 1,
-    testId: 'rrb_cbt_mock_1',
-    title: 'RRB Group D CBT Mock Test 01',
-    description: 'Based on official Railway Recruitment Board pattern with high-yield General Science and Math.',
-    questionsCount: 100,
-    durationMins: 90,
-    responseTable: 'RRB_MOCK_1_responses'
-  },
-  {
-    id: 2,
-    testId: 'rrb_cbt_mock_2',
-    title: 'RRB Group D CBT Mock Test 02',
-    description: 'Comprehensive evaluation covering Physics, Chemistry, Reasoning series, and Railway GK.',
-    questionsCount: 100,
-    durationMins: 90,
-    responseTable: 'RRB_MOCK_2_responses'
-  },
-  {
-    id: 3,
-    testId: 'rrb_cbt_mock_3',
-    title: 'RRB Group D CBT Mock Test 03',
-    description: 'Advanced full-length test simulation with authentic TCS iON timing and negative marking.',
-    questionsCount: 100,
-    durationMins: 90,
-    responseTable: 'RRB_MOCK_3_responses'
-  }
-];
 
 export default function DashboardPage({
   candidate,
   onStartExam,
   onResumeExam,
+  onReviewExam,
   onLogout
 }) {
   const [activeTab, setActiveTab] = useState('rrb-series');
+  const [testsCatalog, setTestsCatalog] = useState(MOCK_TESTS_CATALOG);
+
+  useEffect(() => {
+    fetchPublishedTests().then((data) => {
+      if (data && data.length > 0) setTestsCatalog(data);
+    });
+  }, []);
   // Instant recovery from local snapshot for 0ms dashboard render
   const getInitialAttempts = () => {
     const attempts = {};
@@ -193,10 +172,10 @@ export default function DashboardPage({
     }
   }
 
-  // Load attempts for all 3 mocks
+  // Load attempts for all published mocks
   useEffect(() => {
     if (candidate?.mobile_number) {
-      MOCK_TESTS_CATALOG.forEach((mock) => {
+      testsCatalog.forEach((mock) => {
         getTestAttempt(candidate.mobile_number, mock.testId).then((attempt) => {
           if (attempt) {
             setSavedAttempts((prev) => ({ ...prev, [mock.id]: attempt }));
@@ -204,7 +183,7 @@ export default function DashboardPage({
         });
       });
     }
-  }, [candidate]);
+  }, [candidate, testsCatalog]);
 
   const handleStartClick = (mock) => {
     setSelectedMock(mock);
@@ -264,7 +243,7 @@ export default function DashboardPage({
             </div>
             <div>
               <div className="text-xs text-slate-500 font-medium">Available Mocks</div>
-              <div className="text-lg font-bold text-slate-900">3 Full Length Tests</div>
+              <div className="text-lg font-bold text-slate-900">{testsCatalog.length} Full Length Tests</div>
             </div>
           </div>
 
@@ -310,7 +289,7 @@ export default function DashboardPage({
                   : 'border-transparent text-slate-500 hover:text-slate-800'
               }`}
             >
-              Test Series (3 Tests)
+              Test Series ({testsCatalog.length} Tests)
             </button>
             <button
               onClick={() => setActiveTab('leaderboard')}
@@ -351,7 +330,7 @@ export default function DashboardPage({
         {activeTab === 'rrb-series' && (
           <div className="space-y-6">
             <div className="grid grid-cols-1 gap-5">
-              {MOCK_TESTS_CATALOG.map((mock) => {
+              {testsCatalog.map((mock) => {
                 const attempt = savedAttempts[mock.id];
                 const isPaused = attempt && attempt.status === 'paused';
                 const isCompleted = attempt && attempt.status === 'completed';
@@ -395,7 +374,16 @@ export default function DashboardPage({
                         </p>
                       </div>
 
-                      <div className="flex items-center gap-3">
+                      <div className="flex flex-wrap items-center gap-3">
+                        {isCompleted && onReviewExam && (
+                          <button
+                            onClick={() => onReviewExam(attempt, mock)}
+                            className="flex items-center gap-2 px-5 py-3 bg-white border-2 border-indigo-600 text-indigo-700 hover:bg-indigo-50 font-bold text-sm uppercase tracking-wider rounded-xl shadow-xs transition transform active:scale-95"
+                          >
+                            <BookOpen className="w-4 h-4" />
+                            <span>Review Solutions</span>
+                          </button>
+                        )}
                         {isPaused ? (
                           <button
                             onClick={() => handleResumeClick(mock)}

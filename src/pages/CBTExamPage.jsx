@@ -8,15 +8,15 @@ import SubmitConfirmModal from '../components/SubmitConfirmModal';
 import ScorecardModal from '../components/ScorecardModal';
 import PauseModal from '../components/PauseModal';
 import ScratchpadModal from '../components/ScratchpadModal';
-import { X } from 'lucide-react';
-import { Clock } from 'lucide-react';
+import { X, Clock, BookOpen } from 'lucide-react';
 import { SECTIONS, MOCK_TESTS_DATA, MOCK_QUESTIONS } from '../data/mockQuestions';
 import {
   fetchTestQuestions,
   syncTestAttempt,
   saveMockResponses,
   saveSingleQuestionResponse,
-  getCandidateAttemptNumber
+  getCandidateAttemptNumber,
+  flushOfflineSyncQueue
 } from '../services/apiService';
 import { randomizeQuestionsOptions } from '../utils/randomizer';
 
@@ -30,6 +30,7 @@ export default function CBTExamPage({
   testTitle = 'RRB Group D CBT Mock Test 01',
   defaultLang = 'en',
   isRetake = false,
+  isReviewMode: initialReviewMode = false,
   onFinishExam
 }) {
   const activeTestId = testId || `rrb_cbt_mock_${mockNumber}`;
@@ -85,6 +86,7 @@ export default function CBTExamPage({
   const [currentLang, setCurrentLang] = useState(defaultLang);
   const [fontSize, setFontSize] = useState('normal');
   const [attemptNumber, setAttemptNumber] = useState(savedState?.attemptNumber || (isRetake ? 2 : 1));
+  const [isReviewMode, setIsReviewMode] = useState(initialReviewMode || (savedState?.status === 'completed' && !isRetake));
 
   // Exam state (recovered immediately on reload)
   const [remainingSeconds, setRemainingSeconds] = useState(
@@ -107,7 +109,11 @@ export default function CBTExamPage({
   const [isOnline, setIsOnline] = useState(typeof navigator !== 'undefined' ? navigator.onLine : true);
 
   useEffect(() => {
-    const handleOnline = () => setIsOnline(true);
+    const handleOnline = () => {
+      setIsOnline(true);
+      flushOfflineSyncQueue();
+      triggerSync();
+    };
     const handleOffline = () => setIsOnline(false);
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
@@ -253,25 +259,27 @@ export default function CBTExamPage({
     // Update selectedOption from stored responses
     setSelectedOption(responses[currentQuestionIndex] !== undefined ? responses[currentQuestionIndex] : null);
 
-    // If question is not visited, mark as not_answered when first viewed
-    setQuestionStates((prev) => {
-      const currentState = prev[currentQuestionIndex];
-      if (!currentState || currentState === 'not_visited') {
-        const next = {
-          ...prev,
-          [currentQuestionIndex]: 'not_answered'
-        };
-        // Persist to local storage immediately
-        saveLocalSnapshot({ questionStates: next });
-        return next;
-      }
-      return prev;
-    });
-  }, [currentQuestionIndex]);
+    // If question is not visited, mark as not_answered when first viewed (exam mode only)
+    if (!isReviewMode) {
+      setQuestionStates((prev) => {
+        const currentState = prev[currentQuestionIndex];
+        if (!currentState || currentState === 'not_visited') {
+          const next = {
+            ...prev,
+            [currentQuestionIndex]: 'not_answered'
+          };
+          // Persist to local storage immediately
+          saveLocalSnapshot({ questionStates: next });
+          return next;
+        }
+        return prev;
+      });
+    }
+  }, [currentQuestionIndex, isReviewMode]);
 
   // Helper to instantly save local snapshot to avoid refresh data loss
   const saveLocalSnapshot = (overrides = {}) => {
-    if (!candidate?.mobile_number) return;
+    if (!candidate?.mobile_number || isReviewMode) return;
     try {
       const snapshot = {
         candidateMobile: candidate.mobile_number,
@@ -292,7 +300,7 @@ export default function CBTExamPage({
 
   // 3. Countdown timer & per-question time tracking
   useEffect(() => {
-    if (isPaused || showScorecard) return;
+    if (isPaused || showScorecard || isReviewMode) return;
 
     const timer = setInterval(() => {
       setRemainingSeconds((prev) => {
@@ -352,7 +360,9 @@ export default function CBTExamPage({
   // Question navigation actions
   const handleSelectQuestion = (index) => {
     setCurrentQuestionIndex(index);
-    saveLocalSnapshot({ currentQuestionIndex: index });
+    if (!isReviewMode) {
+      saveLocalSnapshot({ currentQuestionIndex: index });
+    }
   };
 
   const handleSelectSection = (sectionId) => {
@@ -360,11 +370,20 @@ export default function CBTExamPage({
     const sec = SECTIONS.find((s) => s.id === sectionId);
     if (sec) {
       setCurrentQuestionIndex(sec.startIndex);
-      saveLocalSnapshot({ currentQuestionIndex: sec.startIndex });
+      if (!isReviewMode) {
+        saveLocalSnapshot({ currentQuestionIndex: sec.startIndex });
+      }
     }
   };
 
   const handleSaveAndNext = () => {
+    if (isReviewMode) {
+      if (currentQuestionIndex < questions.length - 1) {
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
+      }
+      return;
+    }
+
     const updatedResponses = { ...responses };
     const updatedStates = { ...questionStates };
     const currentQ = questions[currentQuestionIndex];
@@ -516,7 +535,9 @@ export default function CBTExamPage({
     if (currentQuestionIndex > 0) {
       const prevIndex = currentQuestionIndex - 1;
       setCurrentQuestionIndex(prevIndex);
-      saveLocalSnapshot({ currentQuestionIndex: prevIndex });
+      if (!isReviewMode) {
+        saveLocalSnapshot({ currentQuestionIndex: prevIndex });
+      }
     }
   };
 
@@ -700,6 +721,10 @@ export default function CBTExamPage({
         candidate={candidate}
         isTestMode={true}
         testTitle={testTitle}
+        isReviewMode={isReviewMode}
+        onOpenScorecard={() => setShowScorecard(true)}
+        onExitReview={onFinishExam}
+        isOnline={isOnline}
         onOpenInstructions={() => setShowInstructions(true)}
         onOpenQuestionPaper={() => setShowQuestionPaper(true)}
         onOpenScratchpad={() => setShowScratchpad(true)}
@@ -747,19 +772,29 @@ export default function CBTExamPage({
               ⚡ Offline Mode (Saved Locally)
             </span>
           )}
-          <div className="flex items-center gap-2 bg-slate-900/90 px-3 py-1.5 rounded border border-slate-700">
-            <Clock className={`w-4 h-4 ${
-              isTimerCritical ? 'text-red-500 animate-pulse' : isTimerWarning ? 'text-amber-400' : 'text-emerald-400'
-            }`} />
-            <div className="text-left leading-none">
-              <span className="text-[9px] uppercase tracking-wider text-slate-400 font-semibold block">Time Left</span>
-              <span className={`font-mono text-sm sm:text-base font-black ${
-                isTimerCritical ? 'text-red-400 animate-pulse' : isTimerWarning ? 'text-amber-300' : 'text-emerald-300'
-              }`}>
-                {formattedTimer}
-              </span>
+          {isReviewMode ? (
+            <div className="flex items-center gap-2 bg-purple-900/80 px-3 py-1.5 rounded border border-purple-500 text-white shadow-xs">
+              <BookOpen className="w-4 h-4 text-purple-300" />
+              <div className="text-left leading-none">
+                <span className="text-[9px] uppercase tracking-wider text-purple-300 font-bold block">Status</span>
+                <span className="text-xs sm:text-sm font-black text-white">Solution Review</span>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="flex items-center gap-2 bg-slate-900/90 px-3 py-1.5 rounded border border-slate-700">
+              <Clock className={`w-4 h-4 ${
+                isTimerCritical ? 'text-red-500 animate-pulse' : isTimerWarning ? 'text-amber-400' : 'text-emerald-400'
+              }`} />
+              <div className="text-left leading-none">
+                <span className="text-[9px] uppercase tracking-wider text-slate-400 font-semibold block">Time Left</span>
+                <span className={`font-mono text-sm sm:text-base font-black ${
+                  isTimerCritical ? 'text-red-400 animate-pulse' : isTimerWarning ? 'text-amber-300' : 'text-emerald-300'
+                }`}>
+                  {formattedTimer}
+                </span>
+              </div>
+            </div>
+          )}
         </div>
 
       </div>
@@ -786,6 +821,9 @@ export default function CBTExamPage({
             onPreviousQuestion={handlePreviousQuestion}
             isFirstQuestion={currentQuestionIndex === 0}
             isLastQuestion={currentQuestionIndex === questions.length - 1}
+            isReviewMode={isReviewMode}
+            onOpenScorecard={() => setShowScorecard(true)}
+            onExitReview={onFinishExam}
           />
         </div>
 
@@ -801,6 +839,11 @@ export default function CBTExamPage({
             questionStates={questionStates}
             responses={responses}
             onSubmitClick={() => setShowSubmitConfirm(true)}
+            questions={questions}
+            isReviewMode={isReviewMode}
+            onExitReview={onFinishExam}
+            onOpenScorecard={() => setShowScorecard(true)}
+            isOnline={isOnline}
           />
         </div>
 
@@ -810,7 +853,7 @@ export default function CBTExamPage({
             onClick={() => setShowMobilePalette(true)}
             className="flex items-center gap-1.5 px-3.5 py-2 bg-[#30475e] text-white font-bold text-xs rounded-full shadow-lg border-2 border-amber-400 active:scale-95 transition"
           >
-            <span>Palette (100 Qs)</span>
+            <span>{isReviewMode ? "Solutions (100 Qs)" : "Palette (100 Qs)"}</span>
           </button>
         </div>
 
@@ -819,7 +862,7 @@ export default function CBTExamPage({
           <div className="lg:hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex flex-col justify-end">
             <div className="bg-white rounded-t-2xl max-h-[85vh] flex flex-col overflow-hidden shadow-2xl animate-in slide-in-from-bottom duration-200">
               <div className="p-3 bg-slate-800 text-white flex items-center justify-between border-b border-amber-500">
-                <span className="font-bold text-xs">Question Palette</span>
+                <span className="font-bold text-xs">{isReviewMode ? "Solution Review Palette" : "Question Palette"}</span>
                 <button
                   onClick={() => setShowMobilePalette(false)}
                   className="p-1 text-slate-300 hover:text-white"
@@ -844,6 +887,11 @@ export default function CBTExamPage({
                     setShowMobilePalette(false);
                     setShowSubmitConfirm(true);
                   }}
+                  questions={questions}
+                  isReviewMode={isReviewMode}
+                  onExitReview={onFinishExam}
+                  onOpenScorecard={() => setShowScorecard(true)}
+                  isOnline={isOnline}
                 />
               </div>
             </div>
@@ -892,6 +940,11 @@ export default function CBTExamPage({
         sections={SECTIONS}
         candidate={candidate}
         timeSpentMap={timeSpentMap}
+        onOpenReviewMode={() => {
+          setShowScorecard(false);
+          setIsReviewMode(true);
+          setCurrentQuestionIndex(0);
+        }}
         onGoToDashboard={onFinishExam}
         onReattempt={handleReattempt}
       />

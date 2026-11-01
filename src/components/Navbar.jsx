@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, LogOut, ShieldCheck, HelpCircle, FileText, Pause, Play, Edit3, Maximize2, Minimize2 } from 'lucide-react';
+import { User, LogOut, ShieldCheck, HelpCircle, FileText, Pause, Play, Edit3, Maximize2, Minimize2, BookOpen, ArrowLeft, Wifi, WifiOff } from 'lucide-react';
 
 export default function Navbar({
   candidate,
@@ -12,7 +12,11 @@ export default function Navbar({
   onToggleFullscreen,
   isPaused = false,
   onTogglePause,
-  onLogout
+  onLogout,
+  isReviewMode = false,
+  onOpenScorecard,
+  onExitReview,
+  isOnline = true
 }) {
   return (
     <header className="bg-[#30475e] text-white shadow-md border-b-2 border-amber-500 sticky top-0 z-40 select-none">
@@ -26,12 +30,19 @@ export default function Navbar({
           <div>
             <h1 className="font-bold text-base sm:text-lg leading-tight tracking-wide text-white flex items-center gap-1.5">
               RRB Mock Test
-              <span className="text-[10px] bg-amber-500/90 text-slate-900 font-extrabold uppercase px-1.5 py-0.5 rounded tracking-wider">
-                CBT Portal
+              <span className={`text-[10px] font-extrabold uppercase px-1.5 py-0.5 rounded tracking-wider ${
+                isReviewMode ? 'bg-purple-500 text-white' : 'bg-amber-500/90 text-slate-900'
+              }`}>
+                {isReviewMode ? "Solution Review" : "CBT Portal"}
               </span>
+              {!isOnline && (
+                <span className="text-[10px] bg-amber-500 text-slate-900 font-extrabold uppercase px-1.5 py-0.5 rounded flex items-center gap-1">
+                  <WifiOff className="w-3 h-3" /> Offline Mode
+                </span>
+              )}
             </h1>
             <p className="text-xs text-slate-300 font-medium">
-              {isTestMode ? testTitle : "Railway Recruitment Board Examination System"}
+              {isTestMode ? `${testTitle} ${isReviewMode ? '(Interactive Review)' : ''}` : "Railway Recruitment Board Examination System"}
             </p>
           </div>
         </div>
@@ -55,34 +66,62 @@ export default function Navbar({
               <FileText className="w-3.5 h-3.5 text-sky-400" />
               <span>Question Paper</span>
             </button>
-            <button
-              onClick={onOpenScratchpad}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-700/80 hover:bg-slate-700 text-xs font-semibold rounded border border-slate-600 transition"
-              title="Open Digital Rough Sheet / Scratchpad"
-            >
-              <Edit3 className="w-3.5 h-3.5 text-amber-300" />
-              <span>Scratchpad</span>
-            </button>
-            <button
-              onClick={onToggleFullscreen}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-700/80 hover:bg-slate-700 text-xs font-semibold rounded border border-slate-600 transition"
-              title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
-            >
-              {isFullscreen ? <Minimize2 className="w-3.5 h-3.5 text-emerald-400" /> : <Maximize2 className="w-3.5 h-3.5 text-emerald-400" />}
-              <span>{isFullscreen ? 'Exit' : 'Fullscreen'}</span>
-            </button>
-            <button
-              onClick={onTogglePause}
-              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded border transition ${
-                isPaused
-                  ? 'bg-emerald-600 hover:bg-emerald-700 text-white border-emerald-500'
-                  : 'bg-amber-600 hover:bg-amber-700 text-white border-amber-500'
-              }`}
-              title={isPaused ? "Resume Test" : "Pause Test"}
-            >
-              {isPaused ? <Play className="w-3.5 h-3.5 fill-current" /> : <Pause className="w-3.5 h-3.5 fill-current" />}
-              <span>{isPaused ? 'Resume' : 'Pause'}</span>
-            </button>
+
+            {isReviewMode ? (
+              <>
+                {onOpenScorecard && (
+                  <button
+                    onClick={onOpenScorecard}
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-xs font-semibold rounded border border-indigo-500 transition"
+                    title="View Test Scorecard"
+                  >
+                    <BookOpen className="w-3.5 h-3.5 text-white" />
+                    <span>Scorecard</span>
+                  </button>
+                )}
+                {onExitReview && (
+                  <button
+                    onClick={onExitReview}
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-600 hover:bg-slate-500 text-xs font-semibold rounded border border-slate-500 transition"
+                    title="Exit to Dashboard"
+                  >
+                    <ArrowLeft className="w-3.5 h-3.5 text-white" />
+                    <span>Exit Review</span>
+                  </button>
+                )}
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={onOpenScratchpad}
+                  className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-700/80 hover:bg-slate-700 text-xs font-semibold rounded border border-slate-600 transition"
+                  title="Open Digital Rough Sheet / Scratchpad"
+                >
+                  <Edit3 className="w-3.5 h-3.5 text-amber-300" />
+                  <span>Scratchpad</span>
+                </button>
+                <button
+                  onClick={onToggleFullscreen}
+                  className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-700/80 hover:bg-slate-700 text-xs font-semibold rounded border border-slate-600 transition"
+                  title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
+                >
+                  {isFullscreen ? <Minimize2 className="w-3.5 h-3.5 text-emerald-400" /> : <Maximize2 className="w-3.5 h-3.5 text-emerald-400" />}
+                  <span>{isFullscreen ? 'Exit' : 'Fullscreen'}</span>
+                </button>
+                <button
+                  onClick={onTogglePause}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded border transition ${
+                    isPaused
+                      ? 'bg-emerald-600 hover:bg-emerald-700 text-white border-emerald-500'
+                      : 'bg-amber-600 hover:bg-amber-700 text-white border-amber-500'
+                  }`}
+                  title={isPaused ? "Resume Test" : "Pause Test"}
+                >
+                  {isPaused ? <Play className="w-3.5 h-3.5 fill-current" /> : <Pause className="w-3.5 h-3.5 fill-current" />}
+                  <span>{isPaused ? 'Resume' : 'Pause'}</span>
+                </button>
+              </>
+            )}
           </div>
         )}
 
@@ -94,7 +133,9 @@ export default function Navbar({
               <div className="w-9 h-9 rounded bg-slate-600 flex items-center justify-center text-slate-200 border border-slate-500 overflow-hidden font-bold">
                 {candidate.name ? candidate.name.charAt(0).toUpperCase() : <User className="w-5 h-5" />}
               </div>
-              <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-[#30475e]"></span>
+              <span className={`absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full border-2 border-[#30475e] ${
+                isOnline ? 'bg-emerald-500' : 'bg-amber-500'
+              }`}></span>
             </div>
 
             {/* Candidate Details */}
@@ -107,8 +148,9 @@ export default function Navbar({
                 Roll: {candidate.roll_number || 'RRB268041'}
               </div>
               {isTestMode && (
-                <div className="text-[10px] text-slate-400 font-mono">
+                <div className="text-[10px] text-slate-400 font-mono flex items-center gap-1">
                   System ID: <span className="text-sky-300 font-bold">C001</span>
+                  {!isOnline && <span className="text-amber-400 font-bold ml-1">(Offline)</span>}
                 </div>
               )}
             </div>
@@ -130,4 +172,3 @@ export default function Navbar({
     </header>
   );
 }
-

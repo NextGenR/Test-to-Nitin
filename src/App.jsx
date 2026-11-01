@@ -111,6 +111,22 @@ export default function App() {
     setCurrentPage('exam');
   };
 
+  const handleReviewExam = (savedAttempt, mock) => {
+    const examConfig = {
+      mockNumber: mock?.id || 1,
+      testId: mock?.testId || `rrb_cbt_mock_${mock?.id || 1}`,
+      title: mock?.title || `RRB Group D CBT Mock Test 0${mock?.id || 1}`,
+      defaultLang: 'en',
+      isReviewMode: true
+    };
+
+    setActiveExamConfig(examConfig);
+    setInitialAttemptData(savedAttempt);
+    localStorage.setItem(ACTIVE_PAGE_KEY, 'exam');
+    localStorage.setItem(ACTIVE_CONFIG_KEY, JSON.stringify(examConfig));
+    setCurrentPage('exam');
+  };
+
   const handleFinishExam = () => {
     localStorage.setItem(ACTIVE_PAGE_KEY, 'dashboard');
     localStorage.removeItem(ACTIVE_CONFIG_KEY);
@@ -130,6 +146,7 @@ export default function App() {
           candidate={activeCandidate}
           onStartExam={handleStartExam}
           onResumeExam={handleResumeExam}
+          onReviewExam={handleReviewExam}
           onLogout={handleLogout}
         />
       )}
@@ -143,6 +160,7 @@ export default function App() {
           testTitle={activeExamConfig?.title || 'RRB Group D CBT Mock Test 01'}
           defaultLang={activeExamConfig?.defaultLang || 'en'}
           isRetake={activeExamConfig?.isRetake || false}
+          isReviewMode={activeExamConfig?.isReviewMode || false}
           onFinishExam={handleFinishExam}
         />
       )}
