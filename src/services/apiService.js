@@ -6,6 +6,24 @@ const ATTEMPT_STORAGE_KEY_PREFIX = 'rrb_test_attempt_';
 const OFFLINE_SYNC_QUEUE_KEY = 'rrb_offline_sync_queue';
 
 /**
+ * Robust fetch with timeout wrapper
+ */
+const fetchWithTimeout = async (url, options = {}, timeoutMs = 15000) => {
+  const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+  const timeoutId = controller ? setTimeout(() => controller.abort(), timeoutMs) : null;
+
+  try {
+    const fetchOptions = controller ? { ...options, signal: controller.signal } : options;
+    const response = await fetch(url, fetchOptions);
+    if (timeoutId) clearTimeout(timeoutId);
+    return response;
+  } catch (error) {
+    if (timeoutId) clearTimeout(timeoutId);
+    throw error;
+  }
+};
+
+/**
  * Enqueue a failed or offline request to local storage queue
  */
 const enqueueOfflineSync = (url, options) => {

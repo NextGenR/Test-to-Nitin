@@ -51,16 +51,17 @@ export default function CBTExamPage({
   // Instant 0ms question loader from cache or local bank
   const getInitialQuestions = () => {
     const activeAtt = savedState?.attemptNumber || (isRetake ? 2 : 1);
-    const qCacheKey = `rrb_shuffled_qs_v7_${activeTestId}_${candidate?.mobile_number}_att_${activeAtt}`;
+    const qCacheKey = `rrb_shuffled_qs_v8_${activeTestId}_${candidate?.mobile_number}_att_${activeAtt}`;
     try {
-      // Purge stale caches from earlier schema revisions (v1 to v6)
+      // Purge stale caches from earlier schema revisions (v1 to v7)
       Object.keys(localStorage).forEach(key => {
         if (key.startsWith(`rrb_shuffled_qs_v1_`) ||
             key.startsWith(`rrb_shuffled_qs_v2_`) ||
             key.startsWith(`rrb_shuffled_qs_v3_`) ||
             key.startsWith(`rrb_shuffled_qs_v4_`) ||
             key.startsWith(`rrb_shuffled_qs_v5_`) ||
-            key.startsWith(`rrb_shuffled_qs_v6_`)) {
+            key.startsWith(`rrb_shuffled_qs_v6_`) ||
+            key.startsWith(`rrb_shuffled_qs_v7_`)) {
           localStorage.removeItem(key);
         }
       });
@@ -170,8 +171,8 @@ export default function CBTExamPage({
     let mounted = true;
 
     const loadExamQuestions = async (activeAttempt) => {
-      // Invalidate old cache without SVGs by bumping cache key to v7
-      const qCacheKey = `rrb_shuffled_qs_v7_${activeTestId}_${candidate?.mobile_number}_att_${activeAttempt}`;
+      // Invalidate old cache without SVGs by bumping cache key to v8
+      const qCacheKey = `rrb_shuffled_qs_v8_${activeTestId}_${candidate?.mobile_number}_att_${activeAttempt}`;
       try {
         const cached = localStorage.getItem(qCacheKey);
         if (cached) {
@@ -192,16 +193,23 @@ export default function CBTExamPage({
       const rawQuestions = await fetchTestQuestions(mockNumber);
       if (!mounted) return;
 
+      if (!rawQuestions || rawQuestions.length === 0) {
+        console.warn("Retrying fetch from remote database...");
+        return;
+      }
+
       const seedKey = `${candidate?.mobile_number || 'cand'}_mock_${mockNumber}_att_${activeAttempt}`;
       const randomized = randomizeQuestionsOptions(rawQuestions, seedKey);
 
-      try {
-        localStorage.setItem(qCacheKey, JSON.stringify(randomized));
-      } catch (e) {}
+      if (randomized && randomized.length > 0) {
+        try {
+          localStorage.setItem(qCacheKey, JSON.stringify(randomized));
+        } catch (e) {}
 
-      if (mounted) {
-        setQuestions(randomized);
-        setLoadingQuestions(false);
+        if (mounted) {
+          setQuestions(randomized);
+          setLoadingQuestions(false);
+        }
       }
     };
 
@@ -643,12 +651,14 @@ export default function CBTExamPage({
     const seedKey = `${candidate?.mobile_number || 'cand'}_mock_${mockNumber}_att_${nextAttempt}`;
     fetchTestQuestions(mockNumber).then((rawQuestions) => {
       const randomized = randomizeQuestionsOptions(rawQuestions, seedKey);
-      const qCacheKey = `rrb_shuffled_qs_v7_${activeTestId}_${candidate?.mobile_number}_att_${nextAttempt}`;
-      try {
-        localStorage.setItem(qCacheKey, JSON.stringify(randomized));
-      } catch (e) {}
-      setQuestions(randomized);
-      setLoadingQuestions(false);
+      const qCacheKey = `rrb_shuffled_qs_v8_${activeTestId}_${candidate?.mobile_number}_att_${nextAttempt}`;
+      if (randomized && randomized.length > 0) {
+        try {
+          localStorage.setItem(qCacheKey, JSON.stringify(randomized));
+        } catch (e) {}
+        setQuestions(randomized);
+        setLoadingQuestions(false);
+      }
     });
 
     saveLocalSnapshot({
@@ -670,12 +680,12 @@ export default function CBTExamPage({
   const isTimerCritical = remainingSeconds < 300;
   const isTimerWarning = remainingSeconds < 900;
 
-  if (loadingQuestions) {
+  if (loadingQuestions || !questions || questions.length === 0) {
     return (
       <div className="min-h-screen bg-slate-900 text-white flex flex-col items-center justify-center p-6">
         <div className="w-12 h-12 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mb-4"></div>
         <h2 className="text-xl font-bold">Initializing TCS iON CBT Examination Engine...</h2>
-        <p className="text-xs text-slate-400 mt-2">Loading {testTitle} question paper.</p>
+        <p className="text-xs text-slate-400 mt-2">Loading {testTitle} question paper from secure remote server.</p>
       </div>
     );
   }
