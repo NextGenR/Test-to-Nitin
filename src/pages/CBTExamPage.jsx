@@ -68,23 +68,17 @@ export default function CBTExamPage({
       const cached = localStorage.getItem(qCacheKey);
       if (cached) {
         const parsed = JSON.parse(cached);
-        if (parsed && parsed.length > 0 && parsed.some(q => q.image_svg || q.option_svgs)) {
+        if (parsed && parsed.length > 0) {
           return parsed;
         }
       }
     } catch (e) {}
 
-    const seedKey = `${candidate?.mobile_number || 'cand'}_mock_${mockNumber}_att_${activeAtt}`;
-    const localBank = MOCK_TESTS_DATA[mockNumber] || MOCK_QUESTIONS;
-    const initialShuffled = randomizeQuestionsOptions(localBank, seedKey);
-    try {
-      localStorage.setItem(qCacheKey, JSON.stringify(initialShuffled));
-    } catch (e) {}
-    return initialShuffled;
+    return [];
   };
 
   const [questions, setQuestions] = useState(getInitialQuestions);
-  const [loadingQuestions, setLoadingQuestions] = useState(false);
+  const [loadingQuestions, setLoadingQuestions] = useState(questions.length === 0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(savedState?.currentQuestionIndex || 0);
   const [activeSectionId, setActiveSectionId] = useState('science');
   const [currentLang, setCurrentLang] = useState(defaultLang);
