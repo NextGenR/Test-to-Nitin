@@ -51,15 +51,16 @@ export default function CBTExamPage({
   // Instant 0ms question loader from cache or local bank
   const getInitialQuestions = () => {
     const activeAtt = savedState?.attemptNumber || (isRetake ? 2 : 1);
-    const qCacheKey = `rrb_shuffled_qs_v6_${activeTestId}_${candidate?.mobile_number}_att_${activeAtt}`;
+    const qCacheKey = `rrb_shuffled_qs_v7_${activeTestId}_${candidate?.mobile_number}_att_${activeAtt}`;
     try {
-      // Purge stale caches from earlier schema revisions (v1 to v5)
+      // Purge stale caches from earlier schema revisions (v1 to v6)
       Object.keys(localStorage).forEach(key => {
         if (key.startsWith(`rrb_shuffled_qs_v1_`) ||
             key.startsWith(`rrb_shuffled_qs_v2_`) ||
             key.startsWith(`rrb_shuffled_qs_v3_`) ||
             key.startsWith(`rrb_shuffled_qs_v4_`) ||
-            key.startsWith(`rrb_shuffled_qs_v5_`)) {
+            key.startsWith(`rrb_shuffled_qs_v5_`) ||
+            key.startsWith(`rrb_shuffled_qs_v6_`)) {
           localStorage.removeItem(key);
         }
       });
@@ -163,8 +164,8 @@ export default function CBTExamPage({
     let mounted = true;
 
     const loadExamQuestions = async (activeAttempt) => {
-      // Invalidate old cache without SVGs by bumping cache key to v6
-      const qCacheKey = `rrb_shuffled_qs_v6_${activeTestId}_${candidate?.mobile_number}_att_${activeAttempt}`;
+      // Invalidate old cache without SVGs by bumping cache key to v7
+      const qCacheKey = `rrb_shuffled_qs_v7_${activeTestId}_${candidate?.mobile_number}_att_${activeAttempt}`;
       try {
         const cached = localStorage.getItem(qCacheKey);
         if (cached) {
@@ -636,7 +637,7 @@ export default function CBTExamPage({
     const seedKey = `${candidate?.mobile_number || 'cand'}_mock_${mockNumber}_att_${nextAttempt}`;
     fetchTestQuestions(mockNumber).then((rawQuestions) => {
       const randomized = randomizeQuestionsOptions(rawQuestions, seedKey);
-      const qCacheKey = `rrb_shuffled_qs_v6_${activeTestId}_${candidate?.mobile_number}_att_${nextAttempt}`;
+      const qCacheKey = `rrb_shuffled_qs_v7_${activeTestId}_${candidate?.mobile_number}_att_${nextAttempt}`;
       try {
         localStorage.setItem(qCacheKey, JSON.stringify(randomized));
       } catch (e) {}

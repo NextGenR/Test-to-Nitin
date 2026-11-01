@@ -355,8 +355,8 @@ export default function ScorecardModal({
                         </span>
                       </div>
 
-                      {/* Figure / Diagram if present */}
-                      {(q.image_svg || q.image_url) && (
+                      {/* Figure / Diagram if present (Omit for General Science) */}
+                      {!((q.section === 'General Science' || q.part_number === 1 || (q.id && Number(q.id) <= 25))) && (q.image_svg || q.image_url) && (
                         <div className="my-2.5 max-w-xs h-36 bg-white border border-slate-200 rounded-lg p-2 flex items-center justify-center overflow-hidden print-omit-diagram print:hidden">
                           {q.image_svg ? (
                             <div

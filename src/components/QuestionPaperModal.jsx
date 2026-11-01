@@ -52,8 +52,8 @@ export default function QuestionPaperModal({
                         <div className="font-semibold text-slate-900 mb-2.5">
                           Q.{qNumber} : <MathRenderer text={questionText} />
                         </div>
-                        {/* Figure / Diagram if present */}
-                        {(q.image_svg || q.image_url) && (
+                        {/* Figure / Diagram if present (Omit for General Science) */}
+                        {!((q.section === 'General Science' || q.part_number === 1 || (q.id && Number(q.id) <= 25))) && (q.image_svg || q.image_url) && (
                           <div className="my-2 max-w-xs h-32 bg-slate-50 border border-slate-200 rounded p-2 flex items-center justify-center overflow-hidden">
                             {q.image_svg ? (
                               <div

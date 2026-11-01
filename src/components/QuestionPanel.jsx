@@ -31,12 +31,19 @@ export default function QuestionPanel({
   const questionText = currentLang === 'hi' && question.question_hi ? question.question_hi : question.question_en;
   const options = currentLang === 'hi' && question.options_hi ? question.options_hi : question.options_en;
 
+  // Completely suppress images for General Science (per requirement)
+  const isScienceSection = question.part_number === 1 ||
+    question.section === 'General Science' ||
+    question.section_title === 'General Science' ||
+    Number(questionNumber) <= 25 ||
+    (question.id && Number(question.id) <= 25);
+
   // Language-specific diagram selection (Official TCS iON Dual-Language support)
-  const activeSvg = (currentLang === 'hi' && question.image_svg_hi)
+  const activeSvg = isScienceSection ? null : (currentLang === 'hi' && question.image_svg_hi)
     ? question.image_svg_hi
     : (question.image_svg || question.question_image_svg);
 
-  const activeImg = (currentLang === 'hi' && question.image_url_hi)
+  const activeImg = isScienceSection ? null : (currentLang === 'hi' && question.image_url_hi)
     ? question.image_url_hi
     : (question.image_url || question.question_image_url);
 
@@ -59,7 +66,7 @@ export default function QuestionPanel({
             <span className="text-slate-300">|</span>
             <span className="text-red-600 font-semibold">Negative: -{question.negative_marks || 0.33}</span>
           </div>
-          {(activeSvg || activeImg || question.option_svgs || question.option_images) && (
+          {!isScienceSection && (activeSvg || activeImg || question.option_svgs || question.option_images) && (
             <span className="px-2 py-0.5 bg-blue-100 text-blue-800 font-bold text-[10px] rounded-full flex items-center gap-1 border border-blue-200">
               🖼 Visual Diagram
             </span>
@@ -155,7 +162,7 @@ export default function QuestionPanel({
         )}
 
         {/* Visual Option Cards (Exact Testbook Style from Pictures 1 & 4) */}
-        {question.option_svgs || question.option_images ? (
+        {!isScienceSection && (question.option_svgs || question.option_images) ? (
           <div className="space-y-3 max-w-3xl">
             {options.map((optText, oIdx) => {
               const isSelected = selectedOption === oIdx;
