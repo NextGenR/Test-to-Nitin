@@ -51,7 +51,7 @@ export default function CBTExamPage({
   // Instant 0ms question loader from cache or local bank
   const getInitialQuestions = () => {
     const activeAtt = savedState?.attemptNumber || (isRetake ? 2 : 1);
-    const qCacheKey = `rrb_shuffled_qs_v4_${activeTestId}_${candidate?.mobile_number}_att_${activeAtt}`;
+    const qCacheKey = `rrb_shuffled_qs_v5_${activeTestId}_${candidate?.mobile_number}_att_${activeAtt}`;
     try {
       const cached = localStorage.getItem(qCacheKey);
       if (cached) {
@@ -152,8 +152,8 @@ export default function CBTExamPage({
     let mounted = true;
 
     const loadExamQuestions = async (activeAttempt) => {
-      // Invalidate old cache without SVGs by bumping cache key to v4
-      const qCacheKey = `rrb_shuffled_qs_v4_${activeTestId}_${candidate?.mobile_number}_att_${activeAttempt}`;
+      // Invalidate old cache without SVGs by bumping cache key to v5
+      const qCacheKey = `rrb_shuffled_qs_v5_${activeTestId}_${candidate?.mobile_number}_att_${activeAttempt}`;
       try {
         const cached = localStorage.getItem(qCacheKey);
         if (cached) {

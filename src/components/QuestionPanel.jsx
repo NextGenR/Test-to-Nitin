@@ -127,17 +127,17 @@ export default function QuestionPanel({
           </div>
         </div>
 
-        {/* Question Diagram / Figure Container (Official TCS iON Layout & Security) */}
+        {/* Question Diagram / Figure Container (Clean Testbook Cyan Style) */}
         {(activeSvg || activeImg) && (
-          <div className="mb-6 flex justify-center">
+          <div className="mb-6 flex justify-start sm:justify-center">
             <div
               onContextMenu={(e) => e.preventDefault()}
               onDragStart={(e) => e.preventDefault()}
-              className="w-full max-w-lg h-[220px] sm:h-[250px] bg-slate-50 border border-slate-300 rounded-xl p-3 flex items-center justify-center shadow-xs overflow-hidden select-none"
+              className="bg-white border border-slate-200 rounded-xl p-3 sm:p-4 flex items-center justify-center shadow-xs overflow-hidden select-none max-w-xl"
             >
               {activeSvg ? (
                 <div
-                  className="svg-container pointer-events-none select-none"
+                  className="svg-container pointer-events-none select-none [&>svg]:max-h-[220px] [&>svg]:w-auto [&>svg]:max-w-full"
                   dangerouslySetInnerHTML={{ __html: activeSvg }}
                 />
               ) : (
@@ -146,7 +146,7 @@ export default function QuestionPanel({
                   alt="Question Diagram"
                   draggable={false}
                   onContextMenu={(e) => e.preventDefault()}
-                  className="max-h-full max-w-full object-contain pointer-events-none select-none"
+                  className="max-h-[220px] max-w-full object-contain pointer-events-none select-none"
                   loading="lazy"
                 />
               )}
@@ -154,12 +154,12 @@ export default function QuestionPanel({
           </div>
         )}
 
-        {/* Visual 2x2 Grid or Standard 1-Column Options */}
+        {/* Visual Option Cards (Exact Testbook Style from Pictures 1 & 4) */}
         {question.option_svgs || question.option_images ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 max-w-3xl">
+          <div className="space-y-3 max-w-3xl">
             {options.map((optText, oIdx) => {
               const isSelected = selectedOption === oIdx;
-              const optionLetter = String.fromCharCode(65 + oIdx);
+              const optionNumber = oIdx + 1;
               const letterKey = String.fromCharCode(97 + oIdx); // 'a', 'b', 'c', 'd'
               const svgContent = question.option_svgs ? question.option_svgs[letterKey] : null;
               const imgUrl = question.option_images ? question.option_images[letterKey] : null;
@@ -168,41 +168,39 @@ export default function QuestionPanel({
                 <label
                   key={oIdx}
                   onClick={() => onSelectOption(oIdx)}
-                  className={`flex flex-col p-3 rounded-xl border-2 cursor-pointer transition select-none ${
+                  className={`flex items-center gap-4 p-3 rounded-xl border-2 cursor-pointer transition select-none ${
                     isSelected
-                      ? 'border-blue-600 bg-blue-50/80 shadow-md ring-1 ring-blue-500'
-                      : 'border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300'
+                      ? 'border-cyan-600 bg-cyan-50/60 shadow-sm ring-1 ring-cyan-500'
+                      : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/80 shadow-2xs'
                   }`}
                 >
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${
-                        isSelected ? 'border-blue-600 bg-blue-600' : 'border-slate-400 bg-white'
-                      }`}>
-                        {isSelected && <div className="w-2 h-2 rounded-full bg-white"></div>}
-                      </div>
-                      <span className="font-extrabold text-slate-900 text-sm">
-                        ({optionLetter})
-                      </span>
-                    </div>
-                    {optText && (
-                      <span className="text-xs text-slate-600 font-medium truncate max-w-[160px]">
-                        <MathRenderer text={optText} />
-                      </span>
-                    )}
+                  {/* Option Circular Number Badge: 1, 2, 3, 4 */}
+                  <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center font-bold text-xs shrink-0 transition ${
+                    isSelected
+                      ? 'border-cyan-600 bg-cyan-600 text-white shadow-xs'
+                      : 'border-slate-300 bg-white text-slate-600'
+                  }`}>
+                    {optionNumber}
                   </div>
 
-                  {/* SVG / Image Figure */}
-                  <div className="h-28 w-full bg-slate-50 border border-slate-200 rounded-lg p-2 flex items-center justify-center overflow-hidden">
+                  {/* Square Cyan Diagram Frame (Pictures 1 & 4 style) */}
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 bg-white rounded-md p-1 flex items-center justify-center shrink-0">
                     {svgContent ? (
                       <div
-                        className="option-svg-container"
+                        className="w-full h-full flex items-center justify-center [&>svg]:w-full [&>svg]:h-full"
                         dangerouslySetInnerHTML={{ __html: svgContent }}
                       />
                     ) : imgUrl ? (
-                      <img src={imgUrl} alt={`Option ${optionLetter}`} className="max-h-full max-w-full object-contain" />
+                      <img src={imgUrl} alt={`Option ${optionNumber}`} className="max-h-full max-w-full object-contain" />
                     ) : null}
                   </div>
+
+                  {/* Optional Text Label beside figure */}
+                  {optText && (
+                    <div className="text-slate-800 text-sm font-semibold pl-2">
+                      <MathRenderer text={optText} />
+                    </div>
+                  )}
                 </label>
               );
             })}
