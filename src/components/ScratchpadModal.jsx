@@ -200,3 +200,4 @@ export default function ScratchpadModal({ isOpen, onClose }) {
     </div>
   );
 }
+

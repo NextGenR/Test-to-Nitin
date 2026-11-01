@@ -1285,7 +1285,8 @@
     },
     "correct_option": "c",
     "solution_text": "In a 5-pointed star:\n- There are 5 small obvious outer triangular tips at the vertices.\n- Each vertex also forms one large triangle by connecting across the internal pentagon.\nTotal triangles = 5 (small outer) + 5 (large intersecting) = 10 triangles.\n\nCorrect Option: (c)",
-    "solution_text_hi": "5-कोणीय तारे में:\n- 5 छोटे बाहरी शीर्ष त्रिभुज\n- आंतरिक पंचभुज से जुड़े 5 बड़े त्रिभुज (प्रत्येक शीर्ष पर एक बड़ा त्रिभुज)\nकुल त्रिभुज = 5 + 5 = 10.\n\nअतः सही उत्तर (c) है।"
+    "solution_text_hi": "5-कोणीय तारे में:\n- 5 छोटे बाहरी शीर्ष त्रिभुज\n- आंतरिक पंचभुज से जुड़े 5 बड़े त्रिभुज (प्रत्येक शीर्ष पर एक बड़ा त्रिभुज)\nकुल त्रिभुज = 5 + 5 = 10.\n\nअतः सही उत्तर (c) है।",
+    "image_svg": "<svg viewBox=\"0 0 180 180\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n  <polygon points=\"90,15 112,68 168,68 123,102 140,155 90,122 40,155 57,102 12,68 68,68\" \n           fill=\"#fef3c7\" stroke=\"#b45309\" stroke-width=\"3\" fill-opacity=\"0.7\" stroke-linejoin=\"round\" />\n</svg>"
   },
   {
     "question_number": 57,
@@ -1308,7 +1309,8 @@
     },
     "correct_option": "a",
     "solution_text": "Formula for a triangle divided into n base segments from a vertex:\nTotal triangles = 1 + 2 + ... + n = n * (n + 1) / 2\nHere n = 4 segments:\nTotal = 1 + 2 + 3 + 4 = 10 triangles.\n\nCorrect Option: (a)",
-    "solution_text_hi": "शीर्ष से आधार को n भागों में बांटने पर कुल त्रिभुजों की संख्या = 1 + 2 + 3 + ... + n\nयहाँ n = 4:\nकुल त्रिभुज = 1 + 2 + 3 + 4 = 10.\n\nअतः सही उत्तर (a) है।"
+    "solution_text_hi": "शीर्ष से आधार को n भागों में बांटने पर कुल त्रिभुजों की संख्या = 1 + 2 + 3 + ... + n\nयहाँ n = 4:\nकुल त्रिभुज = 1 + 2 + 3 + 4 = 10.\n\nअतः सही उत्तर (a) है।",
+    "image_svg": "<svg viewBox=\"0 0 200 160\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n  <polygon points=\"100,15 15,145 185,145\" fill=\"#fdf4ff\" stroke=\"#7e22ce\" stroke-width=\"3\" />\n  <line x1=\"100\" y1=\"15\" x2=\"57\" y2=\"145\" stroke=\"#7e22ce\" stroke-width=\"2\" />\n  <line x1=\"100\" y1=\"15\" x2=\"100\" y2=\"145\" stroke=\"#7e22ce\" stroke-width=\"2\" />\n  <line x1=\"100\" y1=\"15\" x2=\"142\" y2=\"145\" stroke=\"#7e22ce\" stroke-width=\"2\" />\n</svg>"
   },
   {
     "question_number": 58,
@@ -1354,7 +1356,8 @@
     },
     "correct_option": "a",
     "solution_text": "For two adjacent squares sharing a common side with full diagonals:\n- Left square contains: 8 triangles\n- Right square contains: 8 triangles\n- Combination triangles formed across the common boundary: 2 large triangles (one pointing upward, one pointing downward)\nTotal triangles = 8 + 8 + 2 = 18 triangles.\n\nCorrect Option: (a)",
-    "solution_text_hi": "दो संलग्न वर्गों में:\n- पहले वर्ग में त्रिभुज = 8\n- दूसरे वर्ग में त्रिभुज = 8\n- दोनों के मिलने से उभयनिष्ठ भुजा पर बनने वाले बड़े त्रिभुज = 2\nकुल त्रिभुज = 8 + 8 + 2 = 18.\n\nअतः सही उत्तर (a) है।"
+    "solution_text_hi": "दो संलग्न वर्गों में:\n- पहले वर्ग में त्रिभुज = 8\n- दूसरे वर्ग में त्रिभुज = 8\n- दोनों के मिलने से उभयनिष्ठ भुजा पर बनने वाले बड़े त्रिभुज = 2\nकुल त्रिभुज = 8 + 8 + 2 = 18.\n\nअतः सही उत्तर (a) है।",
+    "image_svg": "<svg viewBox=\"0 0 260 140\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n  <!-- Square 1 -->\n  <rect x=\"15\" y=\"15\" width=\"110\" height=\"110\" fill=\"#fff7ed\" stroke=\"#c2410c\" stroke-width=\"2.5\" />\n  <line x1=\"15\" y1=\"15\" x2=\"125\" y2=\"125\" stroke=\"#c2410c\" stroke-width=\"2\" />\n  <line x1=\"125\" y1=\"15\" x2=\"15\" y2=\"125\" stroke=\"#c2410c\" stroke-width=\"2\" />\n  <!-- Square 2 -->\n  <rect x=\"125\" y=\"15\" width=\"110\" height=\"110\" fill=\"#fff7ed\" stroke=\"#c2410c\" stroke-width=\"2.5\" />\n  <line x1=\"125\" y1=\"15\" x2=\"235\" y2=\"125\" stroke=\"#c2410c\" stroke-width=\"2\" />\n  <line x1=\"235\" y1=\"15\" x2=\"125\" y2=\"125\" stroke=\"#c2410c\" stroke-width=\"2\" />\n</svg>"
   },
   {
     "question_number": 60,
@@ -1377,7 +1380,8 @@
     },
     "correct_option": "c",
     "solution_text": "A square divided by two intersecting diagonals contains 4 small individual triangles and 4 larger triangles formed by pairs of adjacent small triangles. Total = 4 × 2 = 8 triangles.",
-    "solution_text_hi": "दो विकर्णों द्वारा विभाजित वर्ग में 4 छोटे व्यक्तिगत त्रिभुज और 4 बड़े संयुक्त त्रिभुज बनते हैं। कुल त्रिभुज = 4 × 2 = 8।"
+    "solution_text_hi": "दो विकर्णों द्वारा विभाजित वर्ग में 4 छोटे व्यक्तिगत त्रिभुज और 4 बड़े संयुक्त त्रिभुज बनते हैं। कुल त्रिभुज = 4 × 2 = 8।",
+    "image_svg": "<svg viewBox=\"0 0 160 160\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n      <rect x=\"15\" y=\"15\" width=\"130\" height=\"130\" fill=\"#f8fafc\" stroke=\"#1e293b\" stroke-width=\"3\" />\n      <line x1=\"15\" y1=\"15\" x2=\"145\" y2=\"145\" stroke=\"#1e293b\" stroke-width=\"2.5\" />\n      <line x1=\"145\" y1=\"15\" x2=\"15\" y2=\"145\" stroke=\"#1e293b\" stroke-width=\"2.5\" />\n    </svg>"
   },
   {
     "question_number": 61,
@@ -1584,7 +1588,13 @@
     },
     "correct_option": "b",
     "solution_text": "All mothers are necessarily women (Mothers circle is entirely inside Women circle). Engineers can be women, mothers, or men. Thus, the Engineers circle partially intersects both the Mothers circle and the Women circle.\n\nCorrect Option: (b)",
-    "solution_text_hi": "सभी माताएं अनिवार्य रूप से महिलाएं होती हैं (माताएं ⊂ महिलाएं)। इंजीनियर महिलाएं भी हो सकती हैं, माताएं भी और पुरुष भी। अतः इंजीनियर का वृत्त दोनों वृत्तों को आंशिक रूप से काटता है।\n\nअतः सही उत्तर (b) है।"
+    "solution_text_hi": "सभी माताएं अनिवार्य रूप से महिलाएं होती हैं (माताएं ⊂ महिलाएं)। इंजीनियर महिलाएं भी हो सकती हैं, माताएं भी और पुरुष भी। अतः इंजीनियर का वृत्त दोनों वृत्तों को आंशिक रूप से काटता है।\n\nअतः सही उत्तर (b) है।",
+    "option_svgs": {
+      "a": "<svg viewBox=\"0 0 160 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <circle cx=\"62\" cy=\"42\" r=\"28\" fill=\"#3b82f6\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"98\" cy=\"42\" r=\"28\" fill=\"#10b981\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"80\" cy=\"68\" r=\"28\" fill=\"#f59e0b\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n  </svg>",
+      "b": "<svg viewBox=\"0 0 160 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <circle cx=\"65\" cy=\"50\" r=\"42\" fill=\"#3b82f6\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"58\" cy=\"50\" r=\"22\" fill=\"#10b981\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"102\" cy=\"50\" r=\"28\" fill=\"#f59e0b\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n  </svg>",
+      "c": "<svg viewBox=\"0 0 160 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <circle cx=\"80\" cy=\"50\" r=\"44\" fill=\"#3b82f6\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"80\" cy=\"50\" r=\"30\" fill=\"#10b981\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"80\" cy=\"50\" r=\"16\" fill=\"#f59e0b\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n  </svg>",
+      "d": "<svg viewBox=\"0 0 160 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <circle cx=\"80\" cy=\"50\" r=\"45\" fill=\"#3b82f6\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"58\" cy=\"50\" r=\"18\" fill=\"#10b981\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"102\" cy=\"50\" r=\"18\" fill=\"#f59e0b\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n  </svg>"
+    }
   },
   {
     "question_number": 70,
@@ -1745,7 +1755,13 @@
     },
     "correct_option": "a",
     "solution_text": "All tigers are obligate carnivores, and all carnivores in this biological category are animals. Thus, Tigers ⊂ Carnivores ⊂ Animals, forming three concentric circles.\n\nCorrect Option: (a)",
-    "solution_text_hi": "सभी बाघ अनिवार्य रूप से मांसाहारी हैं, और सभी मांसाहारी पशु (Animals) हैं। अतः यह तीन संकेंद्रित वृत्तों (Concentric circles) द्वारा निरूपित होगा।\n\nअतः सही उत्तर (a) है।"
+    "solution_text_hi": "सभी बाघ अनिवार्य रूप से मांसाहारी हैं, और सभी मांसाहारी पशु (Animals) हैं। अतः यह तीन संकेंद्रित वृत्तों (Concentric circles) द्वारा निरूपित होगा।\n\nअतः सही उत्तर (a) है।",
+    "option_svgs": {
+      "a": "<svg viewBox=\"0 0 160 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <circle cx=\"80\" cy=\"50\" r=\"44\" fill=\"#3b82f6\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"80\" cy=\"50\" r=\"30\" fill=\"#10b981\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"80\" cy=\"50\" r=\"16\" fill=\"#f59e0b\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n  </svg>",
+      "b": "<svg viewBox=\"0 0 160 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <circle cx=\"55\" cy=\"50\" r=\"42\" fill=\"#3b82f6\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"48\" cy=\"50\" r=\"22\" fill=\"#10b981\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"128\" cy=\"50\" r=\"22\" fill=\"#f59e0b\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n  </svg>",
+      "c": "<svg viewBox=\"0 0 160 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <circle cx=\"62\" cy=\"42\" r=\"28\" fill=\"#3b82f6\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"98\" cy=\"42\" r=\"28\" fill=\"#10b981\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"80\" cy=\"68\" r=\"28\" fill=\"#f59e0b\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n  </svg>",
+      "d": "<svg viewBox=\"0 0 160 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <circle cx=\"80\" cy=\"50\" r=\"45\" fill=\"#3b82f6\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"58\" cy=\"50\" r=\"18\" fill=\"#10b981\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"102\" cy=\"50\" r=\"18\" fill=\"#f59e0b\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n  </svg>"
+    }
   },
   {
     "question_number": 77,
@@ -1837,7 +1853,13 @@
     },
     "correct_option": "a",
     "solution_text": "- All Whales are Mammals (Whale circle is completely enclosed inside Mammals circle).\n- Reptiles is an entirely separate biological class with no overlap with mammals.\nTherefore, one circle inside another, and the third circle completely separate.\n\nCorrect Option: (a)",
-    "solution_text_hi": "सभी व्हेल स्तनधारी (Mammals) होती हैं, इसलिए व्हेल का वृत्त पूरी तरह स्तनधारी के वृत्त के भीतर आएगा।\nसरीसृप (Reptiles) एक अलग वर्ग है जिसका स्तनधारियों से कोई संबंध नहीं है, अतः इसका वृत्त पूर्णतः पृथक रहेगा।\n\nअतः सही उत्तर (a) है।"
+    "solution_text_hi": "सभी व्हेल स्तनधारी (Mammals) होती हैं, इसलिए व्हेल का वृत्त पूरी तरह स्तनधारी के वृत्त के भीतर आएगा।\nसरीसृप (Reptiles) एक अलग वर्ग है जिसका स्तनधारियों से कोई संबंध नहीं है, अतः इसका वृत्त पूर्णतः पृथक रहेगा।\n\nअतः सही उत्तर (a) है।",
+    "option_svgs": {
+      "a": "<svg viewBox=\"0 0 160 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <circle cx=\"55\" cy=\"50\" r=\"42\" fill=\"#3b82f6\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"48\" cy=\"50\" r=\"22\" fill=\"#10b981\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"128\" cy=\"50\" r=\"22\" fill=\"#f59e0b\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n  </svg>",
+      "b": "<svg viewBox=\"0 0 160 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <circle cx=\"62\" cy=\"42\" r=\"28\" fill=\"#3b82f6\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"98\" cy=\"42\" r=\"28\" fill=\"#10b981\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"80\" cy=\"68\" r=\"28\" fill=\"#f59e0b\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n  </svg>",
+      "c": "<svg viewBox=\"0 0 160 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <circle cx=\"35\" cy=\"50\" r=\"22\" fill=\"#3b82f6\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"80\" cy=\"50\" r=\"22\" fill=\"#10b981\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"125\" cy=\"50\" r=\"22\" fill=\"#f59e0b\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n  </svg>",
+      "d": "<svg viewBox=\"0 0 160 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <circle cx=\"80\" cy=\"50\" r=\"45\" fill=\"#3b82f6\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"68\" cy=\"50\" r=\"20\" fill=\"#10b981\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"92\" cy=\"50\" r=\"20\" fill=\"#f59e0b\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n  </svg>"
+    }
   },
   {
     "question_number": 81,

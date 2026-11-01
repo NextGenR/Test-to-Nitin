@@ -113,40 +113,115 @@ export default function QuestionPanel({
           </div>
         </div>
 
-        {/* Options */}
-        <div className="space-y-3 max-w-3xl">
-          {options.map((optText, oIdx) => {
-            const isSelected = selectedOption === oIdx;
-            const optionLetter = String.fromCharCode(65 + oIdx);
+        {/* Question Diagram / Figure Container (Fixed Height 220px-260px) */}
+        {(question.image_svg || question.image_url) && (
+          <div className="mb-6 flex justify-center">
+            <div className="w-full max-w-md h-[220px] sm:h-[250px] bg-slate-50 border border-slate-300 rounded-xl p-3 flex items-center justify-center shadow-xs overflow-hidden select-none">
+              {question.image_svg ? (
+                <div
+                  className="w-full h-full flex items-center justify-center [&>svg]:max-h-full [&>svg]:max-w-full [&>svg]:h-auto [&>svg]:w-auto"
+                  dangerouslySetInnerHTML={{ __html: question.image_svg }}
+                />
+              ) : (
+                <img
+                  src={question.image_url}
+                  alt="Question Diagram"
+                  className="max-h-full max-w-full object-contain"
+                  loading="lazy"
+                />
+              )}
+            </div>
+          </div>
+        )}
 
-            return (
-              <label
-                key={oIdx}
-                onClick={() => onSelectOption(oIdx)}
-                className={`flex items-start gap-3.5 p-3.5 rounded-lg border cursor-pointer transition select-none ${
-                  isSelected
-                    ? 'border-blue-600 bg-blue-50/70 shadow-sm ring-1 ring-blue-600'
-                    : 'border-slate-200 bg-white hover:bg-slate-50'
-                }`}
-              >
-                {/* Radio Button */}
-                <div className="mt-0.5 shrink-0">
-                  <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${
-                    isSelected ? 'border-blue-600 bg-blue-600' : 'border-slate-400 bg-white'
-                  }`}>
-                    {isSelected && <div className="w-2 h-2 rounded-full bg-white"></div>}
+        {/* Visual 2x2 Grid or Standard 1-Column Options */}
+        {question.option_svgs || question.option_images ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 max-w-3xl">
+            {options.map((optText, oIdx) => {
+              const isSelected = selectedOption === oIdx;
+              const optionLetter = String.fromCharCode(65 + oIdx);
+              const letterKey = String.fromCharCode(97 + oIdx); // 'a', 'b', 'c', 'd'
+              const svgContent = question.option_svgs ? question.option_svgs[letterKey] : null;
+              const imgUrl = question.option_images ? question.option_images[letterKey] : null;
+
+              return (
+                <label
+                  key={oIdx}
+                  onClick={() => onSelectOption(oIdx)}
+                  className={`flex flex-col p-3 rounded-xl border-2 cursor-pointer transition select-none ${
+                    isSelected
+                      ? 'border-blue-600 bg-blue-50/80 shadow-md ring-1 ring-blue-500'
+                      : 'border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${
+                        isSelected ? 'border-blue-600 bg-blue-600' : 'border-slate-400 bg-white'
+                      }`}>
+                        {isSelected && <div className="w-2 h-2 rounded-full bg-white"></div>}
+                      </div>
+                      <span className="font-extrabold text-slate-900 text-sm">
+                        ({optionLetter})
+                      </span>
+                    </div>
+                    {optText && (
+                      <span className="text-xs text-slate-600 font-medium truncate max-w-[160px]">
+                        <MathRenderer text={optText} />
+                      </span>
+                    )}
                   </div>
-                </div>
 
-                {/* Option Letter Badge & Text */}
-                <div className={`flex-1 text-slate-800 ${fontClass}`}>
-                  <span className="font-bold text-slate-900 mr-2">({optionLetter})</span>
-                  <MathRenderer text={optText} />
-                </div>
-              </label>
-            );
-          })}
-        </div>
+                  {/* SVG / Image Figure */}
+                  <div className="h-28 w-full bg-slate-50 border border-slate-200 rounded-lg p-2 flex items-center justify-center overflow-hidden">
+                    {svgContent ? (
+                      <div
+                        className="w-full h-full flex items-center justify-center [&>svg]:max-h-full [&>svg]:max-w-full"
+                        dangerouslySetInnerHTML={{ __html: svgContent }}
+                      />
+                    ) : imgUrl ? (
+                      <img src={imgUrl} alt={`Option ${optionLetter}`} className="max-h-full max-w-full object-contain" />
+                    ) : null}
+                  </div>
+                </label>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="space-y-3 max-w-3xl">
+            {options.map((optText, oIdx) => {
+              const isSelected = selectedOption === oIdx;
+              const optionLetter = String.fromCharCode(65 + oIdx);
+
+              return (
+                <label
+                  key={oIdx}
+                  onClick={() => onSelectOption(oIdx)}
+                  className={`flex items-start gap-3.5 p-3.5 rounded-lg border cursor-pointer transition select-none ${
+                    isSelected
+                      ? 'border-blue-600 bg-blue-50/70 shadow-sm ring-1 ring-blue-600'
+                      : 'border-slate-200 bg-white hover:bg-slate-50'
+                  }`}
+                >
+                  {/* Radio Button */}
+                  <div className="mt-0.5 shrink-0">
+                    <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${
+                      isSelected ? 'border-blue-600 bg-blue-600' : 'border-slate-400 bg-white'
+                    }`}>
+                      {isSelected && <div className="w-2 h-2 rounded-full bg-white"></div>}
+                    </div>
+                  </div>
+
+                  {/* Option Letter Badge & Text */}
+                  <div className={`flex-1 text-slate-800 ${fontClass}`}>
+                    <span className="font-bold text-slate-900 mr-2">({optionLetter})</span>
+                    <MathRenderer text={optText} />
+                  </div>
+                </label>
+              );
+            })}
+          </div>
+        )}
 
       </div>
 

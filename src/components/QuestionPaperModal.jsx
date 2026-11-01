@@ -52,20 +52,47 @@ export default function QuestionPaperModal({
                         <div className="font-semibold text-slate-900 mb-2.5">
                           Q.{qNumber} : <MathRenderer text={questionText} />
                         </div>
+                        {/* Figure / Diagram if present */}
+                        {(q.image_svg || q.image_url) && (
+                          <div className="my-2 max-w-xs h-32 bg-slate-50 border border-slate-200 rounded p-2 flex items-center justify-center overflow-hidden">
+                            {q.image_svg ? (
+                              <div
+                                className="w-full h-full flex items-center justify-center [&>svg]:max-h-full [&>svg]:max-w-full"
+                                dangerouslySetInnerHTML={{ __html: q.image_svg }}
+                              />
+                            ) : (
+                              <img src={q.image_url} alt="Figure" className="max-h-full max-w-full object-contain" />
+                            )}
+                          </div>
+                        )}
+
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                           {options.map((opt, oIdx) => {
                             const optLetter = String.fromCharCode(65 + oIdx);
+                            const letterKey = String.fromCharCode(97 + oIdx);
+                            const svgOpt = q.option_svgs ? q.option_svgs[letterKey] : null;
+
                             return (
                               <div
                                 key={oIdx}
-                                className="p-2 bg-white rounded border border-slate-200 text-slate-700 flex items-center gap-2"
+                                className="p-2 bg-white rounded border border-slate-200 text-slate-700 flex flex-col gap-1.5"
                               >
-                                <span className="w-5 h-5 rounded-full bg-slate-100 border border-slate-300 flex items-center justify-center font-bold text-[10px] shrink-0">
-                                  {optLetter}
-                                </span>
-                                <div>
-                                  <MathRenderer text={opt} />
+                                <div className="flex items-center gap-2">
+                                  <span className="w-5 h-5 rounded-full bg-slate-100 border border-slate-300 flex items-center justify-center font-bold text-[10px] shrink-0">
+                                    {optLetter}
+                                  </span>
+                                  {opt && (
+                                    <div>
+                                      <MathRenderer text={opt} />
+                                    </div>
+                                  )}
                                 </div>
+                                {svgOpt && (
+                                  <div
+                                    className="h-16 w-full flex items-center justify-center [&>svg]:max-h-full [&>svg]:max-w-full py-1 bg-slate-50 rounded"
+                                    dangerouslySetInnerHTML={{ __html: svgOpt }}
+                                  />
+                                )}
                               </div>
                             );
                           })}

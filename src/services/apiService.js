@@ -172,6 +172,10 @@ export const fetchTestQuestions = async (mockNumber = 1) => {
             correct_option: (q.correct_option || 'A').toUpperCase(),
             positive_marks: Number(q.positive_marks || 1.0),
             negative_marks: Number(q.negative_marks || 0.33),
+            image_svg: q.image_svg || q.question_image_svg || null,
+            image_url: q.image_url || q.question_image_url || null,
+            option_svgs: q.option_svgs || null,
+            option_images: q.option_images || null,
             explanation_en: q.solution_text || q.explanation_en || '',
             explanation_hi: q.solution_text_hi || q.explanation_hi || ''
           };

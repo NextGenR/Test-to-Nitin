@@ -355,16 +355,32 @@ export default function ScorecardModal({
                         </span>
                       </div>
 
+                      {/* Figure / Diagram if present */}
+                      {(q.image_svg || q.image_url) && (
+                        <div className="my-2.5 max-w-xs h-36 bg-white border border-slate-200 rounded-lg p-2 flex items-center justify-center overflow-hidden">
+                          {q.image_svg ? (
+                            <div
+                              className="w-full h-full flex items-center justify-center [&>svg]:max-h-full [&>svg]:max-w-full"
+                              dangerouslySetInnerHTML={{ __html: q.image_svg }}
+                            />
+                          ) : (
+                            <img src={q.image_url} alt="Figure" className="max-h-full max-w-full object-contain" />
+                          )}
+                        </div>
+                      )}
+
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 my-2">
                         {q.options_en.map((opt, oIdx) => {
                           const letter = String.fromCharCode(65 + oIdx);
+                          const letterKey = String.fromCharCode(97 + oIdx);
                           const isThisCorrect = letter === q.correct_option;
                           const isThisUser = letter === userOptionLetter;
+                          const svgOpt = q.option_svgs ? q.option_svgs[letterKey] : null;
 
                           return (
                             <div
                               key={oIdx}
-                              className={`p-2 rounded border flex items-center justify-between text-xs ${
+                              className={`p-2.5 rounded-lg border flex flex-col justify-between text-xs gap-1.5 ${
                                 isThisCorrect
                                   ? 'bg-emerald-100 border-emerald-400 font-bold text-emerald-900'
                                   : isThisUser
@@ -372,12 +388,20 @@ export default function ScorecardModal({
                                   : 'bg-white border-slate-200 text-slate-700'
                               }`}
                             >
-                              <div className="flex items-center gap-1.5">
-                                <span className="font-bold">{letter}.</span>
-                                <MathRenderer text={opt} />
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-1.5">
+                                  <span className="font-bold">{letter}.</span>
+                                  {opt && <MathRenderer text={opt} />}
+                                </div>
+                                {isThisCorrect && <span className="text-[10px] font-black text-emerald-800 shrink-0">Correct Ans</span>}
+                                {!isThisCorrect && isThisUser && <span className="text-[10px] font-black text-red-800 shrink-0">Your Choice</span>}
                               </div>
-                              {isThisCorrect && <span className="text-[10px] font-black text-emerald-800 shrink-0">Correct Ans</span>}
-                              {!isThisCorrect && isThisUser && <span className="text-[10px] font-black text-red-800 shrink-0">Your Choice</span>}
+                              {svgOpt && (
+                                <div
+                                  className="h-16 w-full flex items-center justify-center [&>svg]:max-h-full [&>svg]:max-w-full py-1 bg-white/70 rounded border border-slate-100"
+                                  dangerouslySetInnerHTML={{ __html: svgOpt }}
+                                />
+                              )}
                             </div>
                           );
                         })}

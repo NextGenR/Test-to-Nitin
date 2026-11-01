@@ -1,7 +1,7 @@
 /**
  * Option Randomizer Utility for RRB CBT Exam
  * Shuffles answer options deterministically per candidate exam attempt,
- * keeping bilingual translations in sync and accurately updating correct_option.
+ * keeping bilingual translations and visual option SVGs in sync, and accurately updating correct_option.
  */
 
 function createSeededRNG(seedStr) {
@@ -26,6 +26,8 @@ function createSeededRNG(seedStr) {
  */
 export function randomizeQuestionsOptions(questions, seedKey = '') {
   if (!questions || !Array.isArray(questions)) return [];
+
+  const optionKeys = ['a', 'b', 'c', 'd'];
 
   return questions.map((q, qIndex) => {
     const qNum = q.id || q.question_number || qIndex + 1;
@@ -56,6 +58,32 @@ export function randomizeQuestionsOptions(questions, seedKey = '') {
     const newOptsEn = indices.map(idx => optsEn[idx]);
     const newOptsHi = indices.map(idx => (optsHi[idx] !== undefined ? optsHi[idx] : optsEn[idx]));
 
+    // Reorder visual SVGs if present
+    let newOptionSvgs = null;
+    if (q.option_svgs) {
+      newOptionSvgs = {};
+      indices.forEach((origPos, newPos) => {
+        const origKey = optionKeys[origPos];
+        const newKey = optionKeys[newPos];
+        if (q.option_svgs[origKey] !== undefined) {
+          newOptionSvgs[newKey] = q.option_svgs[origKey];
+        }
+      });
+    }
+
+    // Reorder visual image URLs if present
+    let newOptionImages = null;
+    if (q.option_images) {
+      newOptionImages = {};
+      indices.forEach((origPos, newPos) => {
+        const origKey = optionKeys[origPos];
+        const newKey = optionKeys[newPos];
+        if (q.option_images[origKey] !== undefined) {
+          newOptionImages[newKey] = q.option_images[origKey];
+        }
+      });
+    }
+
     // Find where the original correct answer moved
     const newCorrectIdx = indices.indexOf(origIdx);
     const newCorrectLetter = String.fromCharCode(65 + (newCorrectIdx >= 0 ? newCorrectIdx : 0));
@@ -64,9 +92,10 @@ export function randomizeQuestionsOptions(questions, seedKey = '') {
       ...q,
       options_en: newOptsEn,
       options_hi: newOptsHi,
+      option_svgs: newOptionSvgs || q.option_svgs || null,
+      option_images: newOptionImages || q.option_images || null,
       correct_option: newCorrectLetter,
       original_correct_option: origLetter
     };
   });
 }
-

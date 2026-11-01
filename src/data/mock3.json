@@ -1239,7 +1239,13 @@
     },
     "correct_option": "a",
     "solution_text": "Both Lizards and Snakes are distinct biological classes of Reptiles, but no lizard is a snake. Hence, it is represented by one large circle (Reptiles) containing two separate non-overlapping circles (Lizards and Snakes).\n\nCorrect Option: (a)",
-    "solution_text_hi": "छिपकली और साँप दोनों ही सरीसृप वर्ग के अंतर्गत आते हैं, लेकिन छिपकली और साँप दो पूर्णतः भिन्न जीव हैं। अतः एक बड़े वृत्त के अंदर दो अलग-अलग वृत्त बनेंगे।\n\nअतः सही उत्तर (a) है।"
+    "solution_text_hi": "छिपकली और साँप दोनों ही सरीसृप वर्ग के अंतर्गत आते हैं, लेकिन छिपकली और साँप दो पूर्णतः भिन्न जीव हैं। अतः एक बड़े वृत्त के अंदर दो अलग-अलग वृत्त बनेंगे।\n\nअतः सही उत्तर (a) है।",
+    "option_svgs": {
+      "a": "<svg viewBox=\"0 0 160 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <circle cx=\"80\" cy=\"50\" r=\"45\" fill=\"#3b82f6\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"58\" cy=\"50\" r=\"18\" fill=\"#10b981\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"102\" cy=\"50\" r=\"18\" fill=\"#f59e0b\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n  </svg>",
+      "b": "<svg viewBox=\"0 0 160 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <circle cx=\"80\" cy=\"50\" r=\"44\" fill=\"#3b82f6\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"80\" cy=\"50\" r=\"30\" fill=\"#10b981\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"80\" cy=\"50\" r=\"16\" fill=\"#f59e0b\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n  </svg>",
+      "c": "<svg viewBox=\"0 0 160 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <circle cx=\"62\" cy=\"42\" r=\"28\" fill=\"#3b82f6\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"98\" cy=\"42\" r=\"28\" fill=\"#10b981\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"80\" cy=\"68\" r=\"28\" fill=\"#f59e0b\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n  </svg>",
+      "d": "<svg viewBox=\"0 0 160 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <circle cx=\"80\" cy=\"50\" r=\"45\" fill=\"#3b82f6\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"68\" cy=\"50\" r=\"20\" fill=\"#10b981\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n    <circle cx=\"92\" cy=\"50\" r=\"20\" fill=\"#f59e0b\" stroke=\"#1e293b\" stroke-width=\"2.5\" fill-opacity=\"0.15\" />\n  </svg>"
+    }
   },
   {
     "question_number": 55,
@@ -1262,7 +1268,8 @@
     },
     "correct_option": "b",
     "solution_text": "A square divided by 2 diagonals has 8 triangles (4 small + 4 composite).\nWhen a horizontal line divides it:\n- The square is split into 6 elementary parts.\n- Triangles with 1 part = 6\n- Triangles formed by combination of 2 adjacent parts = 4\n- Triangles formed by combination of 3 parts (halves formed by diagonals) = 2\nTotal triangles = 6 + 4 + 2 = 12.\n\nCorrect Option: (b)",
-    "solution_text_hi": "एक वर्ग में दोनों विकर्ण और एक क्षैतिज मध्य रेखा खींचने पर:\n- 1 भाग वाले एकल त्रिभुज = 6\n- 2 भागों के संयोजन से बने त्रिभुज = 4\n- 3 भागों के संयोजन से बने बड़े त्रिभुज = 2\nकुल त्रिभुज = 6 + 4 + 2 = 12.\n\nअतः सही उत्तर (b) है।"
+    "solution_text_hi": "एक वर्ग में दोनों विकर्ण और एक क्षैतिज मध्य रेखा खींचने पर:\n- 1 भाग वाले एकल त्रिभुज = 6\n- 2 भागों के संयोजन से बने त्रिभुज = 4\n- 3 भागों के संयोजन से बने बड़े त्रिभुज = 2\nकुल त्रिभुज = 6 + 4 + 2 = 12.\n\nअतः सही उत्तर (b) है।",
+    "image_svg": "<svg viewBox=\"0 0 180 180\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n  <rect x=\"15\" y=\"15\" width=\"150\" height=\"150\" fill=\"#f0fdf4\" stroke=\"#15803d\" stroke-width=\"3\" />\n  <line x1=\"15\" y1=\"15\" x2=\"165\" y2=\"165\" stroke=\"#15803d\" stroke-width=\"2.5\" />\n  <line x1=\"165\" y1=\"15\" x2=\"15\" y2=\"165\" stroke=\"#15803d\" stroke-width=\"2.5\" />\n  <line x1=\"15\" y1=\"90\" x2=\"165\" y2=\"90\" stroke=\"#059669\" stroke-width=\"2.5\" stroke-dasharray=\"5,3\" />\n  <circle cx=\"90\" cy=\"90\" r=\"4\" fill=\"#15803d\" />\n</svg>"
   },
   {
     "question_number": 56,
