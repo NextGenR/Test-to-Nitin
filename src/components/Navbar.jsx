@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, LogOut, ShieldCheck, HelpCircle, FileText, Pause, Play } from 'lucide-react';
+import { User, LogOut, ShieldCheck, HelpCircle, FileText, Pause, Play, Edit3, Maximize2, Minimize2 } from 'lucide-react';
 
 export default function Navbar({
   candidate,
@@ -7,6 +7,9 @@ export default function Navbar({
   testTitle = "RRB Group D CBT Mock Test 01",
   onOpenInstructions,
   onOpenQuestionPaper,
+  onOpenScratchpad,
+  isFullscreen = false,
+  onToggleFullscreen,
   isPaused = false,
   onTogglePause,
   onLogout
@@ -51,6 +54,22 @@ export default function Navbar({
             >
               <FileText className="w-3.5 h-3.5 text-sky-400" />
               <span>Question Paper</span>
+            </button>
+            <button
+              onClick={onOpenScratchpad}
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-700/80 hover:bg-slate-700 text-xs font-semibold rounded border border-slate-600 transition"
+              title="Open Digital Rough Sheet / Scratchpad"
+            >
+              <Edit3 className="w-3.5 h-3.5 text-amber-300" />
+              <span>Scratchpad</span>
+            </button>
+            <button
+              onClick={onToggleFullscreen}
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-700/80 hover:bg-slate-700 text-xs font-semibold rounded border border-slate-600 transition"
+              title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
+            >
+              {isFullscreen ? <Minimize2 className="w-3.5 h-3.5 text-emerald-400" /> : <Maximize2 className="w-3.5 h-3.5 text-emerald-400" />}
+              <span>{isFullscreen ? 'Exit' : 'Fullscreen'}</span>
             </button>
             <button
               onClick={onTogglePause}

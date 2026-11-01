@@ -7,6 +7,8 @@ import QuestionPaperModal from '../components/QuestionPaperModal';
 import SubmitConfirmModal from '../components/SubmitConfirmModal';
 import ScorecardModal from '../components/ScorecardModal';
 import PauseModal from '../components/PauseModal';
+import ScratchpadModal from '../components/ScratchpadModal';
+import { X } from 'lucide-react';
 import { Clock } from 'lucide-react';
 import { SECTIONS } from '../data/mockQuestions';
 import {
@@ -69,6 +71,54 @@ export default function CBTExamPage({
   const [showQuestionPaper, setShowQuestionPaper] = useState(false);
   const [showSubmitConfirm, setShowSubmitConfirm] = useState(false);
   const [showScorecard, setShowScorecard] = useState(false);
+  const [showScratchpad, setShowScratchpad] = useState(false);
+  const [showMobilePalette, setShowMobilePalette] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  // Automatic fullscreen trigger on entering the test
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+
+    const tryFullscreen = () => {
+      if (!document.fullscreenElement) {
+        const el = document.documentElement;
+        if (el.requestFullscreen) {
+          el.requestFullscreen().catch(() => {});
+        } else if (el.webkitRequestFullscreen) {
+          el.webkitRequestFullscreen();
+        }
+      }
+    };
+
+    // Attempt automatic fullscreen
+    tryFullscreen();
+
+    // Also trigger on first interaction if blocked by browser policy
+    window.addEventListener('click', tryFullscreen, { once: true });
+
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      window.removeEventListener('click', tryFullscreen);
+    };
+  }, []);
+
+  const handleToggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      const el = document.documentElement;
+      if (el.requestFullscreen) {
+        el.requestFullscreen().catch(() => {});
+      } else if (el.webkitRequestFullscreen) {
+        el.webkitRequestFullscreen();
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+  };
   const [finalResults, setFinalResults] = useState(null);
 
   // Periodic heartbeat sync reference
@@ -597,6 +647,9 @@ export default function CBTExamPage({
         testTitle={testTitle}
         onOpenInstructions={() => setShowInstructions(true)}
         onOpenQuestionPaper={() => setShowQuestionPaper(true)}
+        onOpenScratchpad={() => setShowScratchpad(true)}
+        isFullscreen={isFullscreen}
+        onToggleFullscreen={handleToggleFullscreen}
         isPaused={isPaused}
         onTogglePause={handleTogglePause}
       />
@@ -674,8 +727,8 @@ export default function CBTExamPage({
           />
         </div>
 
-        {/* Right: TCS iON Question Palette Drawer */}
-        <div className="w-full lg:w-80 h-auto lg:h-full shrink-0">
+        {/* Right: Desktop Question Palette */}
+        <div className="hidden lg:block w-80 h-full shrink-0">
           <QuestionPalette
             candidate={candidate}
             sections={SECTIONS}
@@ -688,6 +741,52 @@ export default function CBTExamPage({
             onSubmitClick={() => setShowSubmitConfirm(true)}
           />
         </div>
+
+        {/* Mobile Floating Palette Trigger */}
+        <div className="lg:hidden fixed bottom-3 right-3 z-30">
+          <button
+            onClick={() => setShowMobilePalette(true)}
+            className="flex items-center gap-1.5 px-3.5 py-2 bg-[#30475e] text-white font-bold text-xs rounded-full shadow-lg border-2 border-amber-400 active:scale-95 transition"
+          >
+            <span>Palette (100 Qs)</span>
+          </button>
+        </div>
+
+        {/* Mobile Sliding Bottom Sheet Palette */}
+        {showMobilePalette && (
+          <div className="lg:hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex flex-col justify-end">
+            <div className="bg-white rounded-t-2xl max-h-[85vh] flex flex-col overflow-hidden shadow-2xl animate-in slide-in-from-bottom duration-200">
+              <div className="p-3 bg-slate-800 text-white flex items-center justify-between border-b border-amber-500">
+                <span className="font-bold text-xs">Question Palette</span>
+                <button
+                  onClick={() => setShowMobilePalette(false)}
+                  className="p-1 text-slate-300 hover:text-white"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+              <div className="flex-1 overflow-y-auto">
+                <QuestionPalette
+                  candidate={candidate}
+                  sections={SECTIONS}
+                  activeSection={activeSection}
+                  onSelectSection={handleSelectSection}
+                  currentQuestionIndex={currentQuestionIndex}
+                  onSelectQuestion={(idx) => {
+                    handleSelectQuestion(idx);
+                    setShowMobilePalette(false);
+                  }}
+                  questionStates={questionStates}
+                  responses={responses}
+                  onSubmitClick={() => {
+                    setShowMobilePalette(false);
+                    setShowSubmitConfirm(true);
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        )}
 
       </div>
 
@@ -729,8 +828,15 @@ export default function CBTExamPage({
         results={finalResults}
         questions={questions}
         sections={SECTIONS}
+        candidate={candidate}
+        timeSpentMap={timeSpentMap}
         onGoToDashboard={onFinishExam}
         onReattempt={handleReattempt}
+      />
+
+      <ScratchpadModal
+        isOpen={showScratchpad}
+        onClose={() => setShowScratchpad(false)}
       />
 
     </div>

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { Award, CheckCircle2, XCircle, MinusCircle, ArrowRight, RotateCcw, ChevronDown, ChevronUp } from 'lucide-react';
+import { Award, CheckCircle2, XCircle, MinusCircle, ArrowRight, RotateCcw, ChevronDown, ChevronUp, Clock, Zap, Target, TrendingUp, AlertTriangle } from 'lucide-react';
 import MathRenderer from './MathRenderer';
 
 export default function ScorecardModal({
   isOpen,
   results,
-  questions,
-  sections,
+  questions = [],
+  sections = [],
+  candidate = null,
+  timeSpentMap = {},
   onGoToDashboard,
   onReattempt
 }) {
@@ -26,7 +28,82 @@ export default function ScorecardModal({
     responses = {}
   } = results;
 
-  const isPassed = score >= 40.0;
+  // 1. Category-Wise Cutoff Benchmark
+  const candidateCategory = candidate?.category || 'UR';
+  const cutoffRequirement = candidateCategory === 'ST' ? 25.0 : (candidateCategory === 'SC' || candidateCategory === 'OBC') ? 30.0 : 40.0;
+  const isPassed = score >= cutoffRequirement;
+
+  // 2. Speed & Time Analytics Computation
+  let correctTime = 0;
+  let incorrectTime = 0;
+  let unattemptedTime = 0;
+
+  questions.forEach((q, idx) => {
+    const t = timeSpentMap[idx] || 0;
+    const userOptIdx = responses[idx];
+    if (userOptIdx === undefined || userOptIdx === null) {
+      unattemptedTime += t;
+    } else {
+      const userLetter = String.fromCharCode(65 + userOptIdx);
+      if (userLetter === q.correct_option) {
+        correctTime += t;
+      } else {
+        incorrectTime += t;
+      }
+    }
+  });
+
+  const avgCorrectTime = correctCount > 0 ? Math.round(correctTime / correctCount) : 0;
+  const avgIncorrectTime = incorrectCount > 0 ? Math.round(incorrectTime / incorrectCount) : 0;
+  const avgUnattemptedTime = unattemptedCount > 0 ? Math.round(unattemptedTime / unattemptedCount) : 0;
+  const totalTimeSpentSecs = correctTime + incorrectTime + unattemptedTime;
+
+  // 3. Topic-Level Weakness Diagnostics
+  const TOPIC_RANGES = [
+    { name: 'Physics & Mechanics', start: 0, end: 8, section: 'General Science' },
+    { name: 'Chemistry & Elements', start: 9, end: 17, section: 'General Science' },
+    { name: 'Life Sciences & Biology', start: 18, end: 24, section: 'General Science' },
+    { name: 'Arithmetic & Percentages', start: 25, end: 32, section: 'Mathematics' },
+    { name: 'Algebra & Number Systems', start: 33, end: 40, section: 'Mathematics' },
+    { name: 'Geometry & Mensuration', start: 41, end: 49, section: 'Mathematics' },
+    { name: 'Analogy & Series', start: 50, end: 64, section: 'Reasoning' },
+    { name: 'Logic, Puzzles & Syllogisms', start: 65, end: 79, section: 'Reasoning' },
+    { name: 'Polity & History', start: 80, end: 89, section: 'General Awareness' },
+    { name: 'Current Affairs & Railway GK', start: 90, end: 99, section: 'General Awareness' }
+  ];
+
+  const topicAnalytics = TOPIC_RANGES.map(t => {
+    let tTotal = 0;
+    let tCorrect = 0;
+    let tWrong = 0;
+    for (let i = t.start; i <= t.end; i++) {
+      if (!questions[i]) continue;
+      tTotal++;
+      const userOptIdx = responses[i];
+      if (userOptIdx !== undefined && userOptIdx !== null) {
+        const userLetter = String.fromCharCode(65 + userOptIdx);
+        if (userLetter === questions[i].correct_option) {
+          tCorrect++;
+        } else {
+          tWrong++;
+        }
+      }
+    }
+    const tAcc = tTotal > 0 ? Math.round((tCorrect / tTotal) * 100) : 0;
+    let status = 'strong';
+    if (tAcc < 40) status = 'weak';
+    else if (tAcc < 70) status = 'moderate';
+
+    return {
+      name: t.name,
+      section: t.section,
+      total: tTotal,
+      correct: tCorrect,
+      wrong: tWrong,
+      accuracy: tAcc,
+      status
+    };
+  });
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
@@ -53,10 +130,15 @@ export default function ScorecardModal({
                 {score.toFixed(2)} <span className="text-xs text-white/80 font-normal">/ {totalMarks}</span>
               </div>
             </div>
-            <div className={`px-2.5 py-1 rounded text-xs font-bold uppercase tracking-wider ${
-              isPassed ? 'bg-emerald-500 text-white' : 'bg-red-500 text-white'
-            }`}>
-              {isPassed ? 'Qualified' : 'Needs Practice'}
+            <div className="text-right">
+              <div className={`px-2.5 py-1 rounded text-xs font-bold uppercase tracking-wider ${
+                isPassed ? 'bg-emerald-500 text-white shadow-sm' : 'bg-red-500 text-white'
+              }`}>
+                {isPassed ? 'Qualified' : 'Needs Practice'}
+              </div>
+              <div className="text-[10px] text-amber-200 mt-0.5">
+                {candidateCategory} Cutoff: {cutoffRequirement.toFixed(1)} Marks
+              </div>
             </div>
           </div>
         </div>
@@ -100,6 +182,95 @@ export default function ScorecardModal({
               </div>
               <div className="text-xl font-black text-sky-700">{accuracy.toFixed(1)}%</div>
               <div className="text-[10px] text-sky-600">Attempt Efficiency</div>
+            </div>
+          </div>
+
+          {/* Speed & Time Management Analytics */}
+          <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-3">
+            <div className="flex items-center justify-between">
+              <h3 className="font-bold text-sm text-slate-900 flex items-center gap-1.5">
+                <Clock className="w-4 h-4 text-blue-600" />
+                <span>Time Management & Solving Speed</span>
+              </h3>
+              <span className="text-xs font-mono text-slate-500">
+                Total Exam Time: {Math.floor(totalTimeSpentSecs / 60)}m {totalTimeSpentSecs % 60}s
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="p-3 bg-white rounded-lg border border-emerald-200 flex items-center gap-3">
+                <div className="w-9 h-9 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+                  <CheckCircle2 className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-[11px] text-slate-500 font-medium">Avg Time (Correct)</div>
+                  <div className="text-lg font-black text-emerald-700">{avgCorrectTime}s <span className="text-xs font-normal text-slate-400">/ question</span></div>
+                </div>
+              </div>
+
+              <div className="p-3 bg-white rounded-lg border border-red-200 flex items-center gap-3">
+                <div className="w-9 h-9 rounded-full bg-red-100 text-red-700 flex items-center justify-center font-bold">
+                  <XCircle className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-[11px] text-slate-500 font-medium">Avg Time (Incorrect)</div>
+                  <div className="text-lg font-black text-red-700">{avgIncorrectTime}s <span className="text-xs font-normal text-slate-400">/ question</span></div>
+                </div>
+              </div>
+
+              <div className="p-3 bg-white rounded-lg border border-slate-200 flex items-center gap-3">
+                <div className="w-9 h-9 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold">
+                  <MinusCircle className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-[11px] text-slate-500 font-medium">Avg Time (Skipped)</div>
+                  <div className="text-lg font-black text-slate-700">{avgUnattemptedTime}s <span className="text-xs font-normal text-slate-400">/ question</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Topic-Wise Strengths & Weakness Diagnostics */}
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <h3 className="font-bold text-sm text-slate-900 flex items-center gap-1.5">
+                <Target className="w-4 h-4 text-purple-600" />
+                <span>Strengths & Weak Areas Diagnostics</span>
+              </h3>
+              <span className="text-xs text-slate-500">Chapter Level Accuracy</span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {topicAnalytics.map((top, idx) => (
+                <div
+                  key={idx}
+                  className={`p-3 rounded-lg border flex items-center justify-between text-xs ${
+                    top.status === 'strong'
+                      ? 'bg-emerald-50/60 border-emerald-200'
+                      : top.status === 'moderate'
+                      ? 'bg-amber-50/60 border-amber-200'
+                      : 'bg-red-50/60 border-red-200'
+                  }`}
+                >
+                  <div>
+                    <div className="font-bold text-slate-900">{top.name}</div>
+                    <div className="text-[11px] text-slate-500">{top.section} &bull; {top.correct}/{top.total} Correct</div>
+                  </div>
+
+                  <div className="text-right">
+                    <span className={`inline-block px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider ${
+                      top.status === 'strong'
+                        ? 'bg-emerald-600 text-white'
+                        : top.status === 'moderate'
+                        ? 'bg-amber-600 text-white'
+                        : 'bg-red-600 text-white'
+                    }`}>
+                      {top.status === 'strong' ? 'Strong' : top.status === 'moderate' ? 'Moderate' : 'Needs Practice'}
+                    </span>
+                    <div className="text-xs font-bold text-slate-700 mt-0.5">{top.accuracy}%</div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 

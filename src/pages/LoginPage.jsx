@@ -6,6 +6,7 @@ export default function LoginPage({ onLoginSuccess }) {
   const [name, setName] = useState('');
   const [mobile, setMobile] = useState('');
   const [passcode, setPasscode] = useState('');
+  const [category, setCategory] = useState('UR');
   const [captchaInput, setCaptchaInput] = useState('');
   const [captchaProblem, setCaptchaProblem] = useState({ num1: 3, num2: 8, answer: 11 });
   const [loading, setLoading] = useState(false);
@@ -67,7 +68,7 @@ export default function LoginPage({ onLoginSuccess }) {
     setLoading(true);
 
     try {
-      const result = await loginOrRegisterCandidate(cleanName, cleanMobile, cleanPasscode);
+      const result = await loginOrRegisterCandidate(cleanName, cleanMobile, cleanPasscode, category);
 
       if (result.success) {
         if (result.notice) {

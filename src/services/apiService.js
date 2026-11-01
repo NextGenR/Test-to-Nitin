@@ -31,7 +31,7 @@ export const clearCandidateSession = () => {
 /**
  * Login or Register Candidate
  */
-export const loginOrRegisterCandidate = async (name, mobile, passcode) => {
+export const loginOrRegisterCandidate = async (name, mobile, passcode, category = "UR") => {
   const cleanMobile = mobile.trim();
   const cleanPasscode = passcode.trim();
   const cleanName = name.trim();
@@ -58,8 +58,9 @@ export const loginOrRegisterCandidate = async (name, mobile, passcode) => {
           body: JSON.stringify({ last_login_at: new Date().toISOString() })
         }).catch(() => {});
 
-        localStorage.setItem(CANDIDATE_STORAGE_KEY, JSON.stringify(existing));
-        return { success: true, candidate: existing, isNew: false };
+        const updatedCandidate = { ...existing, category: category || existing.category || "UR" };
+        localStorage.setItem(CANDIDATE_STORAGE_KEY, JSON.stringify(updatedCandidate));
+        return { success: true, candidate: updatedCandidate, isNew: false };
       } else {
         const rollNumber = 'RRB26' + cleanMobile.slice(-4) + Math.floor(100 + Math.random() * 900);
         const newRecord = {
@@ -67,6 +68,7 @@ export const loginOrRegisterCandidate = async (name, mobile, passcode) => {
           mobile_number: cleanMobile,
           passcode: cleanPasscode,
           roll_number: rollNumber,
+          category: category || "UR",
           created_at: new Date().toISOString(),
           last_login_at: new Date().toISOString()
         };
@@ -97,6 +99,7 @@ export const loginOrRegisterCandidate = async (name, mobile, passcode) => {
       mobile_number: cleanMobile,
       passcode: cleanPasscode,
       roll_number: fallbackRoll,
+      category: category || "UR",
       created_at: new Date().toISOString(),
       is_local_session: true
     };
@@ -502,6 +505,43 @@ export const fetchLeaderboard = async (testId = null) => {
     }
   } catch (err) {
     console.warn("Could not fetch remote leaderboard:", err.message);
+  }
+  return [];
+};
+
+
+/**
+ * Fetch all candidates for Admin View
+ */
+export const fetchAllCandidates = async () => {
+  try {
+    const res = await fetch(`${API_ENDPOINT}/candidates?select=*&order=created_at.desc&limit=100`, {
+      method: 'GET',
+      headers: getHeaders()
+    });
+    if (res.ok) {
+      return await res.json();
+    }
+  } catch (e) {
+    console.warn("Could not fetch candidates:", e);
+  }
+  return [];
+};
+
+/**
+ * Fetch all test attempts for Admin View
+ */
+export const fetchAllAttempts = async () => {
+  try {
+    const res = await fetch(`${API_ENDPOINT}/test_attempts?select=*&order=updated_at.desc&limit=100`, {
+      method: 'GET',
+      headers: getHeaders()
+    });
+    if (res.ok) {
+      return await res.json();
+    }
+  } catch (e) {
+    console.warn("Could not fetch attempts:", e);
   }
   return [];
 };

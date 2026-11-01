@@ -3,7 +3,7 @@ import katex from 'katex';
 import 'katex/dist/katex.min.css';
 
 /**
- * Clean up text encoding artifacts
+ * Clean up text encoding artifacts & common units
  */
 function sanitizeText(raw) {
   if (!raw || typeof raw !== 'string') return '';
@@ -11,28 +11,31 @@ function sanitizeText(raw) {
     .replace(/m\/s\uFFFD/g, 'm/s²')
     .replace(/m\/sA/g, 'm/s²')
     .replace(/\uFFFDC/g, '°C')
-    .replace(/\s*C/g, '°C')
+    .replace(/\s*C(?=[,\.\s]|$)/g, '°C')
     .replace(/\uFFFD/g, '');
 }
 
 /**
- * MathRenderer component: Parses LaTeX ($...$, $$...$$, or raw math symbols) and renders crisp KaTeX math
+ * MathRenderer component: Parses LaTeX ($...$, $$...$$, or raw math symbols) and renders crisp KaTeX math.
+ * Fallback gracefully to clean text if parsing fails.
  */
 export default function MathRenderer({ text, className = '' }) {
   if (!text) return null;
 
   const sanitized = sanitizeText(text);
 
-  // If text contains math delimiters like $...$ or $$...$$
+  // Check if text already has $...$ or $$...$$
   const hasDelimiters = /\$([^$]+)\$/.test(sanitized);
-
-  // If text doesn't have $ delimiters but has LaTeX commands like \times, \pi, \frac, \sqrt, \theta
-  const hasRawLatex = !hasDelimiters && /(\\[a-zA-Z]+|\^|\_)/.test(sanitized);
 
   let processedText = sanitized;
 
-  if (hasRawLatex) {
-    processedText = `$${sanitized}$`;
+  // If there are no $ delimiters, but the entire string is a math formula (like 'f \times T = 1' or '2\pi r')
+  if (!hasDelimiters) {
+    const isShortFormula = sanitized.length < 80 && /(\\[a-zA-Z]+|\^|\_|[=<>+\-*/])/.test(sanitized);
+    const hasLatexCommands = /\\[a-zA-Z]+/.test(sanitized);
+    if (hasLatexCommands && isShortFormula) {
+      processedText = `$${sanitized}$`;
+    }
   }
 
   // Split by $...$ (inline math) and $$...$$ (display math)
@@ -42,7 +45,7 @@ export default function MathRenderer({ text, className = '' }) {
   let match;
 
   while ((match = regex.exec(processedText)) !== null) {
-    // Plain text before match
+    // Plain text preceding match
     if (match.index > lastIndex) {
       tokens.push({
         type: 'text',
@@ -52,12 +55,14 @@ export default function MathRenderer({ text, className = '' }) {
 
     const rawToken = match[0];
     const isDisplay = rawToken.startsWith('$$');
-    const mathContent = isDisplay ? rawToken.slice(2, -2).trim() : rawToken.slice(1, -1).trim();
+    let mathContent = isDisplay ? rawToken.slice(2, -2).trim() : rawToken.slice(1, -1).trim();
 
     try {
       const renderedHtml = katex.renderToString(mathContent, {
         displayMode: isDisplay,
-        throwOnError: false
+        throwOnError: false,
+        strict: 'ignore', // Crucial: avoid breaking on ₹, Unicode, or unknown text symbols
+        trust: true
       });
       tokens.push({
         type: 'html',
@@ -88,7 +93,7 @@ export default function MathRenderer({ text, className = '' }) {
           return (
             <span
               key={idx}
-              className="inline-math mx-0.5"
+              className="inline-math mx-0.5 align-middle"
               dangerouslySetInnerHTML={{ __html: token.content }}
             />
           );
