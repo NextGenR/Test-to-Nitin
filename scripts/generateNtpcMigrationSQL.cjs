@@ -12,7 +12,10 @@ function escapeJson(obj) {
 }
 
 function run() {
-  let jsonPath = path.join(__dirname, '..', 'RRB_NTPC_GRADUATE_MOCK', 'mock_test_1_v2.json');
+  let jsonPath = path.join(__dirname, '..', 'RRB_NTPC_GRADUATE_MOCK', 'mock_test_1_v3.json');
+  if (!fs.existsSync(jsonPath)) {
+    jsonPath = path.join(__dirname, '..', 'RRB_NTPC_GRADUATE_MOCK', 'mock_test_1_v2.json');
+  }
   if (!fs.existsSync(jsonPath)) {
     jsonPath = path.join(__dirname, '..', 'RRB_NTPC_GRADUATE_MOCK', 'mock_test_1.json');
   }
@@ -23,12 +26,12 @@ function run() {
 
   const rawQuestions = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
   const testId = 'rrb_ntpc_graduate_mock_1';
-  const testTitle = 'RRB NTPC (Graduate Level) CBT-1 Mock Test 01 (v2 Fresh)';
+  const testTitle = 'RRB NTPC (Graduate Level) CBT-1 Mock Test 01 (v3 Fresh)';
   const responseTable = 'RRB_NTPC_MOCK_1_responses';
 
   let sql = `-- =========================================================================\n`;
-  sql += `-- TURNKEY REMOTE CLOUD DATABASE MIGRATION FOR RRB NTPC GRADUATE MOCK TEST 01 (v2 FRESH)\n`;
-  sql += `-- Source: mock_test_1_v2.json (${rawQuestions.length} Questions)\n`;
+  sql += `-- TURNKEY REMOTE CLOUD DATABASE MIGRATION FOR RRB NTPC GRADUATE MOCK TEST 01 (v3 FRESH)\n`;
+  sql += `-- Source: mock_test_1_v3.json (${rawQuestions.length} Questions)\n`;
   sql += `-- Schema: mock_tests entry, "${responseTable}" table, clean slate DELETE & fresh INSERT\n`;
   sql += `-- Safe, Idempotent, and Fully Compatible with PostgreSQL\n`;
   sql += `-- =========================================================================\n\n`;
@@ -185,15 +188,11 @@ function run() {
     sql += `  option_svgs = EXCLUDED.option_svgs;\n\n`;
   }
 
-  const outPath1 = path.join(__dirname, '..', 'src', 'sql', 'migrate_ntpc_mock_1.sql');
-  const outPath2 = path.join(__dirname, '..', 'src', 'sql', 'migrate_ntpc_mock_1_v2.sql');
+  const outPath = path.join(__dirname, '..', 'src', 'sql', 'migrate_ntpc_mock_1_v3.sql');
+  fs.writeFileSync(outPath, sql, 'utf8');
 
-  fs.writeFileSync(outPath1, sql, 'utf8');
-  fs.writeFileSync(outPath2, sql, 'utf8');
-
-  console.log(`Successfully generated fresh turnkey SQL migrations:`);
-  console.log(`  1. ${outPath1} (${rawQuestions.length} questions)`);
-  console.log(`  2. ${outPath2} (${rawQuestions.length} questions)`);
+  console.log(`Successfully generated fresh turnkey SQL migration:`);
+  console.log(`  ${outPath} (${rawQuestions.length} questions)`);
 }
 
 run();
