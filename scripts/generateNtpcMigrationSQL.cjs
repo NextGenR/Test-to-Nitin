@@ -114,15 +114,34 @@ function run() {
     const sectionTitle = q.section_title || (qNum <= 30 ? 'Mathematics' : qNum <= 60 ? 'General Intelligence & Reasoning' : 'General Awareness');
     const chapterName = q.topic || q.chapter_name || null;
     const difficulty = q.difficulty || 'Moderate';
-    const qText = q.question_text || '';
-    const qTextHi = q.question_text_hi || qText;
+    let qText = q.question_text || '';
+    let qTextHi = q.question_text_hi || qText;
+
+    let extractedSvgEn = null;
+    if (typeof qText === 'string' && qText.includes('<svg')) {
+      const m = qText.match(/<svg[\s\S]*?<\/svg>/i);
+      if (m) {
+        extractedSvgEn = m[0];
+        qText = qText.replace(/<svg[\s\S]*?<\/svg>/i, '').trim();
+      }
+    }
+
+    let extractedSvgHi = null;
+    if (typeof qTextHi === 'string' && qTextHi.includes('<svg')) {
+      const m = qTextHi.match(/<svg[\s\S]*?<\/svg>/i);
+      if (m) {
+        extractedSvgHi = m[0];
+        qTextHi = qTextHi.replace(/<svg[\s\S]*?<\/svg>/i, '').trim();
+      }
+    }
+
     const options = q.options || {};
     const optionsHi = q.options_hi || options;
     const correctOption = (q.correct_option || 'a').toLowerCase();
     const solutionText = q.solution_text || '';
     const solutionTextHi = q.solution_text_hi || solutionText;
-    const imageSvg = q.image_svg || null;
-    const imageSvgHi = q.image_svg_hi || null;
+    const imageSvg = q.image_svg || q.svg_content || extractedSvgEn || extractedSvgHi || null;
+    const imageSvgHi = q.image_svg_hi || extractedSvgHi || imageSvg || null;
     const optionSvgs = q.option_svgs || null;
 
     sql += `INSERT INTO public.questions (\n`;

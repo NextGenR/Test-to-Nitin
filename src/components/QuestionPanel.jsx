@@ -31,30 +31,54 @@ export default function QuestionPanel({
     );
   }
 
-  const questionText = currentLang === 'hi' && question.question_hi ? question.question_hi : question.question_en;
+  const rawQuestionText = currentLang === 'hi' && question.question_hi ? question.question_hi : (question.question_en || question.question_text || '');
   const options = currentLang === 'hi' && question.options_hi ? question.options_hi : question.options_en;
-  const explanationText = currentLang === 'hi' && question.explanation_hi ? question.explanation_hi : question.explanation_en;
+  const rawExplanationText = currentLang === 'hi' && question.explanation_hi ? question.explanation_hi : (question.explanation_en || question.solution_text || '');
+
+  // Resilient Inline SVG Extraction (Frontend Defense-in-Depth)
+  let inlineSvg = null;
+  let cleanQuestionText = rawQuestionText;
+  if (typeof rawQuestionText === 'string' && rawQuestionText.includes('<svg')) {
+    const svgMatch = rawQuestionText.match(/<svg[\s\S]*?<\/svg>/i);
+    if (svgMatch) {
+      inlineSvg = svgMatch[0];
+      cleanQuestionText = rawQuestionText.replace(/<svg[\s\S]*?<\/svg>/i, '').trim();
+    }
+  }
+
+  // Explanation inline SVG extraction
+  let inlineExplSvg = null;
+  let cleanExplanationText = rawExplanationText;
+  if (typeof rawExplanationText === 'string' && rawExplanationText.includes('<svg')) {
+    const explMatch = rawExplanationText.match(/<svg[\s\S]*?<\/svg>/i);
+    if (explMatch) {
+      inlineExplSvg = explMatch[0];
+      cleanExplanationText = rawExplanationText.replace(/<svg[\s\S]*?<\/svg>/i, '').trim();
+    }
+  }
 
   // Candidate choice details
   const userOptionLetter = selectedOption !== null && selectedOption !== undefined ? String.fromCharCode(65 + selectedOption) : null;
   const isCorrect = userOptionLetter === question.correct_option;
   const isAttempted = userOptionLetter !== null;
 
-  // Completely suppress images for General Science (per requirement)
-  const isScienceSection = question.part_number === 1 ||
-    question.section === 'General Science' ||
+  // Suppress images ONLY for genuine General Science section (per RRB Group D requirement)
+  const isScienceSection = question.section === 'General Science' ||
     question.section_title === 'General Science' ||
-    Number(questionNumber) <= 25 ||
-    (question.id && Number(question.id) <= 25);
+    (question.part_number === 1 && (question.section === 'General Science' || question.section_title === 'General Science'));
 
-  // Language-specific diagram selection (Official TCS iON Dual-Language support)
-  const activeSvg = isScienceSection ? null : (currentLang === 'hi' && question.image_svg_hi)
-    ? question.image_svg_hi
-    : (question.image_svg || question.question_image_svg);
+  // Language-specific diagram selection with seamless automatic fallback (A3 & A4)
+  const dbSvg = currentLang === 'hi'
+    ? (question.image_svg_hi || question.image_svg || question.question_image_svg)
+    : (question.image_svg || question.question_image_svg || question.image_svg_hi);
 
-  const activeImg = isScienceSection ? null : (currentLang === 'hi' && question.image_url_hi)
-    ? question.image_url_hi
-    : (question.image_url || question.question_image_url);
+  const activeSvg = isScienceSection ? null : (dbSvg || inlineSvg || question.svg_content);
+
+  const activeImg = isScienceSection ? null : (
+    currentLang === 'hi'
+      ? (question.image_url_hi || question.image_url || question.question_image_url)
+      : (question.image_url || question.question_image_url || question.image_url_hi)
+  );
 
   // Font size multiplier
   const fontClass = fontSize === 'large' ? 'text-base sm:text-lg' : fontSize === 'small' ? 'text-xs' : 'text-sm';
@@ -162,7 +186,7 @@ export default function QuestionPanel({
         {/* Question Statement */}
         <div className={`text-slate-900 font-medium leading-relaxed mb-6 ${fontClass}`}>
           <div className="whitespace-pre-line">
-            <MathRenderer text={questionText} />
+            <MathRenderer text={cleanQuestionText} />
           </div>
         </div>
 
@@ -369,8 +393,16 @@ export default function QuestionPanel({
               <BookOpen className="w-4 h-4 text-blue-700" />
               <span>Official Solution & Step-by-Step Explanation</span>
             </div>
+            {inlineExplSvg && (
+              <div className="my-3 max-w-xs h-36 bg-white border border-blue-200 rounded-lg p-2 flex items-center justify-center overflow-hidden">
+                <div
+                  className="w-full h-full flex items-center justify-center [&>svg]:max-h-full [&>svg]:max-w-full"
+                  dangerouslySetInnerHTML={{ __html: inlineExplSvg }}
+                />
+              </div>
+            )}
             <div className="text-slate-800 text-xs sm:text-sm leading-relaxed whitespace-pre-line font-medium">
-              <MathRenderer text={explanationText || 'Step-by-step solution calculation: Correct Answer is Option (' + question.correct_option + ').'} />
+              <MathRenderer text={cleanExplanationText || 'Step-by-step solution calculation: Correct Answer is Option (' + question.correct_option + ').'} />
             </div>
           </div>
         )}

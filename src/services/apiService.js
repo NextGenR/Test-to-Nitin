@@ -363,19 +363,43 @@ export const fetchTestQuestions = async (testIdOrMock = 1) => {
             fallbackSection = qNum <= 25 ? 'General Science' : qNum <= 50 ? 'Mathematics' : qNum <= 80 ? 'General Intelligence & Reasoning' : 'General Awareness';
           }
 
+          let qTextEn = q.question_text || q.question_en || '';
+          let qTextHi = q.question_text_hi || q.question_hi || qTextEn;
+
+          let extractedSvgEn = null;
+          if (typeof qTextEn === 'string' && qTextEn.includes('<svg')) {
+            const m = qTextEn.match(/<svg[\s\S]*?<\/svg>/i);
+            if (m) {
+              extractedSvgEn = m[0];
+              qTextEn = qTextEn.replace(/<svg[\s\S]*?<\/svg>/i, '').trim();
+            }
+          }
+
+          let extractedSvgHi = null;
+          if (typeof qTextHi === 'string' && qTextHi.includes('<svg')) {
+            const m = qTextHi.match(/<svg[\s\S]*?<\/svg>/i);
+            if (m) {
+              extractedSvgHi = m[0];
+              qTextHi = qTextHi.replace(/<svg[\s\S]*?<\/svg>/i, '').trim();
+            }
+          }
+
+          const baseSvg = q.image_svg || q.question_image_svg || q.svg_content || extractedSvgEn || extractedSvgHi || null;
+          const baseSvgHi = q.image_svg_hi || extractedSvgHi || baseSvg || null;
+
           return {
             id: qNum,
             section: q.section_title || q.section_name || q.section || fallbackSection,
             chapter_name: q.chapter_name || q.topic || '',
-            question_en: q.question_text || q.question_en || '',
-            question_hi: q.question_text_hi || q.question_hi || q.question_text || '',
+            question_en: qTextEn,
+            question_hi: qTextHi,
             options_en: optsEn,
             options_hi: optsHi,
             correct_option: (q.correct_option || 'A').toUpperCase(),
             positive_marks: Number(q.positive_marks || 1.0),
             negative_marks: Number(q.negative_marks || 0.33),
-            image_svg: isScience ? null : (q.image_svg || q.question_image_svg || null),
-            image_svg_hi: isScience ? null : (q.image_svg_hi || null),
+            image_svg: isScience ? null : baseSvg,
+            image_svg_hi: isScience ? null : baseSvgHi,
             image_url: isScience ? null : (q.image_url || q.question_image_url || null),
             image_url_hi: isScience ? null : (q.image_url_hi || null),
             option_svgs: isScience ? null : (q.option_svgs || null),

@@ -107,6 +107,30 @@ async function run() {
       const secName = q.section_name || `PART-${partNum}`;
       const secTitle = q.section_title || (partNum === 1 ? 'Mathematics' : partNum === 2 ? 'General Intelligence & Reasoning' : 'General Awareness');
 
+      let qText = q.question_text || '';
+      let qTextHi = q.question_text_hi || qText;
+
+      let extractedSvgEn = null;
+      if (typeof qText === 'string' && qText.includes('<svg')) {
+        const m = qText.match(/<svg[\s\S]*?<\/svg>/i);
+        if (m) {
+          extractedSvgEn = m[0];
+          qText = qText.replace(/<svg[\s\S]*?<\/svg>/i, '').trim();
+        }
+      }
+
+      let extractedSvgHi = null;
+      if (typeof qTextHi === 'string' && qTextHi.includes('<svg')) {
+        const m = qTextHi.match(/<svg[\s\S]*?<\/svg>/i);
+        if (m) {
+          extractedSvgHi = m[0];
+          qTextHi = qTextHi.replace(/<svg[\s\S]*?<\/svg>/i, '').trim();
+        }
+      }
+
+      const imageSvg = q.image_svg || q.svg_content || extractedSvgEn || extractedSvgHi || null;
+      const imageSvgHi = q.image_svg_hi || extractedSvgHi || imageSvg || null;
+
       return {
         test_id: testId,
         question_number: qNum,
@@ -115,15 +139,15 @@ async function run() {
         section_title: secTitle,
         chapter_name: q.chapter_name || q.topic || '',
         difficulty: q.difficulty || 'Moderate',
-        question_text: q.question_text,
-        question_text_hi: q.question_text_hi || q.question_text,
+        question_text: qText,
+        question_text_hi: qTextHi,
         options: q.options,
         options_hi: q.options_hi || q.options,
         correct_option: (q.correct_option || 'A').toLowerCase(),
         solution_text: q.solution_text || '',
         solution_text_hi: q.solution_text_hi || q.solution_text || '',
-        image_svg: q.image_svg || null,
-        image_svg_hi: q.image_svg_hi || null,
+        image_svg: imageSvg,
+        image_svg_hi: imageSvgHi,
         option_svgs: q.option_svgs || null
       };
     });

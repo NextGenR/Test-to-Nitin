@@ -1780,38 +1780,8 @@ INSERT INTO public.questions (
   'General Intelligence & Reasoning',
   'Non-Verbal Reasoning (Triangle Figure Counting)',
   'Moderate',
-  'How many triangles are there in the given geometric figure?
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" width="100%" height="auto" style="max-width:320px; display:block; margin:10px auto; background:#ffffff;">
-  <rect x="60" y="20" width="180" height="180" fill="none" stroke="#000000" stroke-width="2.5"/>
-  <line x1="60" y1="20" x2="240" y2="200" stroke="#000000" stroke-width="2"/>
-  <line x1="60" y1="200" x2="240" y2="20" stroke="#000000" stroke-width="2"/>
-  <line x1="150" y1="20" x2="150" y2="200" stroke="#000000" stroke-width="2"/>
-  <line x1="60" y1="110" x2="240" y2="110" stroke="#000000" stroke-width="2"/>
-  <text x="120" y="55" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">1</text>
-  <text x="175" y="55" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">2</text>
-  <text x="210" y="90" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">3</text>
-  <text x="210" y="145" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">4</text>
-  <text x="175" y="180" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">5</text>
-  <text x="120" y="180" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">6</text>
-  <text x="80" y="145" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">7</text>
-  <text x="80" y="90" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">8</text>
-</svg>',
-  'दी गई ज्यामितीय आकृति में कुल कितने त्रिभुज हैं?
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" width="100%" height="auto" style="max-width:320px; display:block; margin:10px auto; background:#ffffff;">
-  <rect x="60" y="20" width="180" height="180" fill="none" stroke="#000000" stroke-width="2.5"/>
-  <line x1="60" y1="20" x2="240" y2="200" stroke="#000000" stroke-width="2"/>
-  <line x1="60" y1="200" x2="240" y2="20" stroke="#000000" stroke-width="2"/>
-  <line x1="150" y1="20" x2="150" y2="200" stroke="#000000" stroke-width="2"/>
-  <line x1="60" y1="110" x2="240" y2="110" stroke="#000000" stroke-width="2"/>
-  <text x="120" y="55" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">1</text>
-  <text x="175" y="55" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">2</text>
-  <text x="210" y="90" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">3</text>
-  <text x="210" y="145" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">4</text>
-  <text x="175" y="180" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">5</text>
-  <text x="120" y="180" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">6</text>
-  <text x="80" y="145" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">7</text>
-  <text x="80" y="90" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">8</text>
-</svg>',
+  'How many triangles are there in the given geometric figure?',
+  'दी गई ज्यामितीय आकृति में कुल कितने त्रिभुज हैं?',
   '{"a":"12","b":"16","c":"14","d":"18"}'::jsonb,
   '{"a":"12","b":"16","c":"14","d":"18"}'::jsonb,
   'b',
@@ -1829,8 +1799,36 @@ Correct Option: (b)',
 कुल त्रिभुज = 8 × 2 = 16 त्रिभुज।
 
 अतः सही उत्तर विकल्प (b) है।',
-  NULL,
-  NULL,
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" width="100%" height="auto" style="max-width:320px; display:block; margin:10px auto; background:#ffffff;">
+  <rect x="60" y="20" width="180" height="180" fill="none" stroke="#000000" stroke-width="2.5"/>
+  <line x1="60" y1="20" x2="240" y2="200" stroke="#000000" stroke-width="2"/>
+  <line x1="60" y1="200" x2="240" y2="20" stroke="#000000" stroke-width="2"/>
+  <line x1="150" y1="20" x2="150" y2="200" stroke="#000000" stroke-width="2"/>
+  <line x1="60" y1="110" x2="240" y2="110" stroke="#000000" stroke-width="2"/>
+  <text x="120" y="55" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">1</text>
+  <text x="175" y="55" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">2</text>
+  <text x="210" y="90" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">3</text>
+  <text x="210" y="145" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">4</text>
+  <text x="175" y="180" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">5</text>
+  <text x="120" y="180" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">6</text>
+  <text x="80" y="145" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">7</text>
+  <text x="80" y="90" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">8</text>
+</svg>',
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" width="100%" height="auto" style="max-width:320px; display:block; margin:10px auto; background:#ffffff;">
+  <rect x="60" y="20" width="180" height="180" fill="none" stroke="#000000" stroke-width="2.5"/>
+  <line x1="60" y1="20" x2="240" y2="200" stroke="#000000" stroke-width="2"/>
+  <line x1="60" y1="200" x2="240" y2="20" stroke="#000000" stroke-width="2"/>
+  <line x1="150" y1="20" x2="150" y2="200" stroke="#000000" stroke-width="2"/>
+  <line x1="60" y1="110" x2="240" y2="110" stroke="#000000" stroke-width="2"/>
+  <text x="120" y="55" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">1</text>
+  <text x="175" y="55" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">2</text>
+  <text x="210" y="90" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">3</text>
+  <text x="210" y="145" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">4</text>
+  <text x="175" y="180" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">5</text>
+  <text x="120" y="180" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">6</text>
+  <text x="80" y="145" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">7</text>
+  <text x="80" y="90" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">8</text>
+</svg>',
   NULL
 )
 ON CONFLICT (test_id, question_number) DO UPDATE SET
@@ -1950,58 +1948,8 @@ INSERT INTO public.questions (
   'General Intelligence & Reasoning',
   'Non-Verbal Reasoning (Cube & Dice Net Folding)',
   'Moderate',
-  'The given figure shows an unfolded sheet of cardboard with numbered faces. If this sheet is folded along the lines to form a cube (dice), which number will appear on the face opposite to the face with number ''2''?
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 220" width="100%" height="auto" style="max-width:380px; display:block; margin:10px auto; background:#ffffff;">
-  <!-- Top Face 1 -->
-  <rect x="130" y="15" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
-  <text x="157" y="50" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">1</text>
-  <!-- Middle Strip: 4, 2, 3, 5 -->
-  <rect x="75" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
-  <text x="102" y="105" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">4</text>
-  <rect x="130" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
-  <text x="157" y="105" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">2</text>
-  <rect x="185" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
-  <text x="212" y="105" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">3</text>
-  <rect x="240" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
-  <text x="267" y="105" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">5</text>
-  <!-- Bottom Face 6 -->
-  <rect x="130" y="125" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
-  <text x="157" y="160" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">6</text>
-  <!-- Dashed Fold Indication Lines -->
-  <line x1="130" y1="70" x2="185" y2="70" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
-  <line x1="130" y1="125" x2="185" y2="125" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
-  <line x1="130" y1="70" x2="130" y2="125" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
-  <line x1="185" y1="70" x2="185" y2="125" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
-  <line x1="240" y1="70" x2="240" y2="125" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
-  <!-- Subtitle -->
-  <text x="190" y="205" font-family="Arial, sans-serif" font-size="12" font-style="italic" text-anchor="middle" fill="#333333">[ Unfolded Cube Net / खुला हुआ पासा ]</text>
-</svg>',
-  'दी गई आकृति में संख्यांकित फलकों वाली एक खुली शीट (Dice Net) दर्शायी गई है। यदि इस शीट को रेखाओं के अनुदिश मोड़कर एक घन (पासा) बनाया जाता है, तो संख्या ''2'' वाले फलक के विपरीत फलक पर कौन सी संख्या दिखाई देगी?
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 220" width="100%" height="auto" style="max-width:380px; display:block; margin:10px auto; background:#ffffff;">
-  <!-- Top Face 1 -->
-  <rect x="130" y="15" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
-  <text x="157" y="50" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">1</text>
-  <!-- Middle Strip: 4, 2, 3, 5 -->
-  <rect x="75" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
-  <text x="102" y="105" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">4</text>
-  <rect x="130" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
-  <text x="157" y="105" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">2</text>
-  <rect x="185" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
-  <text x="212" y="105" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">3</text>
-  <rect x="240" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
-  <text x="267" y="105" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">5</text>
-  <!-- Bottom Face 6 -->
-  <rect x="130" y="125" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
-  <text x="157" y="160" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">6</text>
-  <!-- Dashed Fold Indication Lines -->
-  <line x1="130" y1="70" x2="185" y2="70" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
-  <line x1="130" y1="125" x2="185" y2="125" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
-  <line x1="130" y1="70" x2="130" y2="125" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
-  <line x1="185" y1="70" x2="185" y2="125" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
-  <line x1="240" y1="70" x2="240" y2="125" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
-  <!-- Subtitle -->
-  <text x="190" y="205" font-family="Arial, sans-serif" font-size="12" font-style="italic" text-anchor="middle" fill="#333333">[ Unfolded Cube Net / खुला हुआ पासा ]</text>
-</svg>',
+  'The given figure shows an unfolded sheet of cardboard with numbered faces. If this sheet is folded along the lines to form a cube (dice), which number will appear on the face opposite to the face with number ''2''?',
+  'दी गई आकृति में संख्यांकित फलकों वाली एक खुली शीट (Dice Net) दर्शायी गई है। यदि इस शीट को रेखाओं के अनुदिश मोड़कर एक घन (पासा) बनाया जाता है, तो संख्या ''2'' वाले फलक के विपरीत फलक पर कौन सी संख्या दिखाई देगी?',
   '{"a":"3","b":"5","c":"6","d":"4"}'::jsonb,
   '{"a":"3","b":"5","c":"6","d":"4"}'::jsonb,
   'b',
@@ -2021,8 +1969,56 @@ Correct Option: (b)',
 अतः संख्या ''2'' वाले फलक के विपरीत संख्या 5 होगी।
 
 अतः सही उत्तर विकल्प (b) है।',
-  NULL,
-  NULL,
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 220" width="100%" height="auto" style="max-width:380px; display:block; margin:10px auto; background:#ffffff;">
+  <!-- Top Face 1 -->
+  <rect x="130" y="15" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+  <text x="157" y="50" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">1</text>
+  <!-- Middle Strip: 4, 2, 3, 5 -->
+  <rect x="75" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+  <text x="102" y="105" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">4</text>
+  <rect x="130" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+  <text x="157" y="105" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">2</text>
+  <rect x="185" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+  <text x="212" y="105" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">3</text>
+  <rect x="240" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+  <text x="267" y="105" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">5</text>
+  <!-- Bottom Face 6 -->
+  <rect x="130" y="125" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+  <text x="157" y="160" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">6</text>
+  <!-- Dashed Fold Indication Lines -->
+  <line x1="130" y1="70" x2="185" y2="70" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
+  <line x1="130" y1="125" x2="185" y2="125" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
+  <line x1="130" y1="70" x2="130" y2="125" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
+  <line x1="185" y1="70" x2="185" y2="125" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
+  <line x1="240" y1="70" x2="240" y2="125" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
+  <!-- Subtitle -->
+  <text x="190" y="205" font-family="Arial, sans-serif" font-size="12" font-style="italic" text-anchor="middle" fill="#333333">[ Unfolded Cube Net / खुला हुआ पासा ]</text>
+</svg>',
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 220" width="100%" height="auto" style="max-width:380px; display:block; margin:10px auto; background:#ffffff;">
+  <!-- Top Face 1 -->
+  <rect x="130" y="15" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+  <text x="157" y="50" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">1</text>
+  <!-- Middle Strip: 4, 2, 3, 5 -->
+  <rect x="75" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+  <text x="102" y="105" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">4</text>
+  <rect x="130" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+  <text x="157" y="105" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">2</text>
+  <rect x="185" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+  <text x="212" y="105" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">3</text>
+  <rect x="240" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+  <text x="267" y="105" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">5</text>
+  <!-- Bottom Face 6 -->
+  <rect x="130" y="125" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+  <text x="157" y="160" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#000000">6</text>
+  <!-- Dashed Fold Indication Lines -->
+  <line x1="130" y1="70" x2="185" y2="70" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
+  <line x1="130" y1="125" x2="185" y2="125" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
+  <line x1="130" y1="70" x2="130" y2="125" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
+  <line x1="185" y1="70" x2="185" y2="125" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
+  <line x1="240" y1="70" x2="240" y2="125" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
+  <!-- Subtitle -->
+  <text x="190" y="205" font-family="Arial, sans-serif" font-size="12" font-style="italic" text-anchor="middle" fill="#333333">[ Unfolded Cube Net / खुला हुआ पासा ]</text>
+</svg>',
   NULL
 )
 ON CONFLICT (test_id, question_number) DO UPDATE SET
@@ -2054,60 +2050,8 @@ INSERT INTO public.questions (
   'General Intelligence & Reasoning',
   'Non-Verbal Reasoning (Geometric Venn Diagram)',
   'Moderate',
-  'In the given geometric Venn diagram, the Triangle represents ''Engineers'', the Circle represents ''Doctors'', and the Rectangle represents ''Artists''. Which number represents individuals who are both Engineers and Artists, but NOT Doctors?
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 260" width="100%" height="auto" style="max-width:420px; display:block; margin:10px auto; background:#ffffff;">
-  <!-- Rectangle: Artists -->
-  <rect x="60" y="80" width="220" height="130" fill="none" stroke="#000000" stroke-width="2"/>
-  <text x="65" y="100" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000">Artists / कलाकार</text>
-  <!-- Circle: Doctors -->
-  <circle cx="260" cy="140" r="75" fill="none" stroke="#000000" stroke-width="2"/>
-  <text x="270" y="235" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000">Doctors / डॉक्टर</text>
-  <!-- Triangle: Engineers -->
-  <polygon points="170,25 90,200 250,200" fill="none" stroke="#000000" stroke-width="2"/>
-  <text x="130" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000">Engineers / अभियंता</text>
-  <!-- Region Numbers -->
-  <!-- Only Triangle: 7 -->
-  <text x="165" y="70" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">7</text>
-  <!-- Only Rectangle: 12 -->
-  <text x="90" y="140" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">12</text>
-  <!-- Only Circle: 9 -->
-  <text x="300" y="145" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">9</text>
-  <!-- Triangle & Rectangle only (not Circle): 5 -->
-  <text x="145" y="150" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#b91c1c">5</text>
-  <!-- Triangle & Circle only (not Rectangle): 4 -->
-  <text x="215" y="95" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">4</text>
-  <!-- Rectangle & Circle only (not Triangle): 3 -->
-  <text x="240" y="175" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">3</text>
-  <!-- All three: 2 -->
-  <text x="200" y="145" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">2</text>
-</svg>',
-  'दिए गए ज्यामितीय वेन आरेख में, त्रिभुज ''अभियंताओं'' (Engineers) को, वृत्त ''डॉक्टरों'' (Doctors) को, और आयत ''कलाकारों'' (Artists) को दर्शाता है। कौन सी संख्या उन व्यक्तियों को दर्शाती है जो अभियंता और कलाकार दोनों हैं, लेकिन डॉक्टर नहीं हैं?
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 260" width="100%" height="auto" style="max-width:420px; display:block; margin:10px auto; background:#ffffff;">
-  <!-- Rectangle: Artists -->
-  <rect x="60" y="80" width="220" height="130" fill="none" stroke="#000000" stroke-width="2"/>
-  <text x="65" y="100" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000">Artists / कलाकार</text>
-  <!-- Circle: Doctors -->
-  <circle cx="260" cy="140" r="75" fill="none" stroke="#000000" stroke-width="2"/>
-  <text x="270" y="235" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000">Doctors / डॉक्टर</text>
-  <!-- Triangle: Engineers -->
-  <polygon points="170,25 90,200 250,200" fill="none" stroke="#000000" stroke-width="2"/>
-  <text x="130" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000">Engineers / अभियंता</text>
-  <!-- Region Numbers -->
-  <!-- Only Triangle: 7 -->
-  <text x="165" y="70" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">7</text>
-  <!-- Only Rectangle: 12 -->
-  <text x="90" y="140" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">12</text>
-  <!-- Only Circle: 9 -->
-  <text x="300" y="145" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">9</text>
-  <!-- Triangle & Rectangle only (not Circle): 5 -->
-  <text x="145" y="150" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#b91c1c">5</text>
-  <!-- Triangle & Circle only (not Rectangle): 4 -->
-  <text x="215" y="95" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">4</text>
-  <!-- Rectangle & Circle only (not Triangle): 3 -->
-  <text x="240" y="175" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">3</text>
-  <!-- All three: 2 -->
-  <text x="200" y="145" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">2</text>
-</svg>',
+  'In the given geometric Venn diagram, the Triangle represents ''Engineers'', the Circle represents ''Doctors'', and the Rectangle represents ''Artists''. Which number represents individuals who are both Engineers and Artists, but NOT Doctors?',
+  'दिए गए ज्यामितीय वेन आरेख में, त्रिभुज ''अभियंताओं'' (Engineers) को, वृत्त ''डॉक्टरों'' (Doctors) को, और आयत ''कलाकारों'' (Artists) को दर्शाता है। कौन सी संख्या उन व्यक्तियों को दर्शाती है जो अभियंता और कलाकार दोनों हैं, लेकिन डॉक्टर नहीं हैं?',
   '{"a":"4","b":"5","c":"2","d":"3"}'::jsonb,
   '{"a":"4","b":"5","c":"2","d":"3"}'::jsonb,
   'b',
@@ -2125,8 +2069,58 @@ Correct Option: (b)',
 अतः सही उत्तर 5 है।
 
 अतः सही उत्तर विकल्प (b) है।',
-  NULL,
-  NULL,
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 260" width="100%" height="auto" style="max-width:420px; display:block; margin:10px auto; background:#ffffff;">
+  <!-- Rectangle: Artists -->
+  <rect x="60" y="80" width="220" height="130" fill="none" stroke="#000000" stroke-width="2"/>
+  <text x="65" y="100" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000">Artists / कलाकार</text>
+  <!-- Circle: Doctors -->
+  <circle cx="260" cy="140" r="75" fill="none" stroke="#000000" stroke-width="2"/>
+  <text x="270" y="235" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000">Doctors / डॉक्टर</text>
+  <!-- Triangle: Engineers -->
+  <polygon points="170,25 90,200 250,200" fill="none" stroke="#000000" stroke-width="2"/>
+  <text x="130" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000">Engineers / अभियंता</text>
+  <!-- Region Numbers -->
+  <!-- Only Triangle: 7 -->
+  <text x="165" y="70" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">7</text>
+  <!-- Only Rectangle: 12 -->
+  <text x="90" y="140" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">12</text>
+  <!-- Only Circle: 9 -->
+  <text x="300" y="145" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">9</text>
+  <!-- Triangle & Rectangle only (not Circle): 5 -->
+  <text x="145" y="150" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#b91c1c">5</text>
+  <!-- Triangle & Circle only (not Rectangle): 4 -->
+  <text x="215" y="95" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">4</text>
+  <!-- Rectangle & Circle only (not Triangle): 3 -->
+  <text x="240" y="175" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">3</text>
+  <!-- All three: 2 -->
+  <text x="200" y="145" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">2</text>
+</svg>',
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 260" width="100%" height="auto" style="max-width:420px; display:block; margin:10px auto; background:#ffffff;">
+  <!-- Rectangle: Artists -->
+  <rect x="60" y="80" width="220" height="130" fill="none" stroke="#000000" stroke-width="2"/>
+  <text x="65" y="100" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000">Artists / कलाकार</text>
+  <!-- Circle: Doctors -->
+  <circle cx="260" cy="140" r="75" fill="none" stroke="#000000" stroke-width="2"/>
+  <text x="270" y="235" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000">Doctors / डॉक्टर</text>
+  <!-- Triangle: Engineers -->
+  <polygon points="170,25 90,200 250,200" fill="none" stroke="#000000" stroke-width="2"/>
+  <text x="130" y="20" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000">Engineers / अभियंता</text>
+  <!-- Region Numbers -->
+  <!-- Only Triangle: 7 -->
+  <text x="165" y="70" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">7</text>
+  <!-- Only Rectangle: 12 -->
+  <text x="90" y="140" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">12</text>
+  <!-- Only Circle: 9 -->
+  <text x="300" y="145" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">9</text>
+  <!-- Triangle & Rectangle only (not Circle): 5 -->
+  <text x="145" y="150" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#b91c1c">5</text>
+  <!-- Triangle & Circle only (not Rectangle): 4 -->
+  <text x="215" y="95" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">4</text>
+  <!-- Rectangle & Circle only (not Triangle): 3 -->
+  <text x="240" y="175" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">3</text>
+  <!-- All three: 2 -->
+  <text x="200" y="145" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#000000">2</text>
+</svg>',
   NULL
 )
 ON CONFLICT (test_id, question_number) DO UPDATE SET
@@ -2947,54 +2941,8 @@ INSERT INTO public.questions (
   'General Intelligence & Reasoning',
   'Non-Verbal Reasoning (Mirror Image across MN)',
   'Moderate',
-  'Select the correct mirror image of the given figure when the plane mirror is placed vertically along the line MN as shown:
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 180" width="100%" height="auto" style="max-width:440px; display:block; margin:10px auto; background:#ffffff;">
-  <!-- Left Side: Object Figure -->
-  <rect x="40" y="25" width="120" height="120" fill="none" stroke="#000000" stroke-width="2"/>
-  <line x1="40" y1="25" x2="160" y2="145" stroke="#000000" stroke-width="2"/>
-  <!-- Arrow pointing Right at (100, 85) -->
-  <line x1="65" y1="85" x2="135" y2="85" stroke="#000000" stroke-width="2.5"/>
-  <polygon points="135,85 120,77 120,93" fill="#000000"/>
-  <!-- Dot at top-left -->
-  <circle cx="70" cy="55" r="8" fill="#000000"/>
-  <!-- Shaded small triangle at bottom-right -->
-  <polygon points="160,110 160,145 125,145" fill="#000000"/>
-  <text x="100" y="165" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">Object / मूल आकृति</text>
-
-  <!-- Mirror Line M - N -->
-  <line x1="220" y1="15" x2="220" y2="165" stroke="#000000" stroke-width="2.5" stroke-dasharray="6,4"/>
-  <text x="220" y="12" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#000000">M</text>
-  <text x="220" y="178" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#000000">N</text>
-
-  <!-- Right Side: Mirror Placeholder with Question Mark -->
-  <rect x="280" y="25" width="120" height="120" fill="#f8fafc" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
-  <text x="340" y="95" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#555555">?</text>
-  <text x="340" y="165" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">Mirror Image / दर्पण प्रतिबिम्ब</text>
-</svg>',
-  'दी गई आकृति का सही दर्पण प्रतिबिम्ब चुनिए जब समतल दर्पण को रेखा MN के अनुदिश लंबवत रखा जाता है जैसा कि दर्शाया गया है:
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 180" width="100%" height="auto" style="max-width:440px; display:block; margin:10px auto; background:#ffffff;">
-  <!-- Left Side: Object Figure -->
-  <rect x="40" y="25" width="120" height="120" fill="none" stroke="#000000" stroke-width="2"/>
-  <line x1="40" y1="25" x2="160" y2="145" stroke="#000000" stroke-width="2"/>
-  <!-- Arrow pointing Right at (100, 85) -->
-  <line x1="65" y1="85" x2="135" y2="85" stroke="#000000" stroke-width="2.5"/>
-  <polygon points="135,85 120,77 120,93" fill="#000000"/>
-  <!-- Dot at top-left -->
-  <circle cx="70" cy="55" r="8" fill="#000000"/>
-  <!-- Shaded small triangle at bottom-right -->
-  <polygon points="160,110 160,145 125,145" fill="#000000"/>
-  <text x="100" y="165" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">Object / मूल आकृति</text>
-
-  <!-- Mirror Line M - N -->
-  <line x1="220" y1="15" x2="220" y2="165" stroke="#000000" stroke-width="2.5" stroke-dasharray="6,4"/>
-  <text x="220" y="12" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#000000">M</text>
-  <text x="220" y="178" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#000000">N</text>
-
-  <!-- Right Side: Mirror Placeholder with Question Mark -->
-  <rect x="280" y="25" width="120" height="120" fill="#f8fafc" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
-  <text x="340" y="95" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#555555">?</text>
-  <text x="340" y="165" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">Mirror Image / दर्पण प्रतिबिम्ब</text>
-</svg>',
+  'Select the correct mirror image of the given figure when the plane mirror is placed vertically along the line MN as shown:',
+  'दी गई आकृति का सही दर्पण प्रतिबिम्ब चुनिए जब समतल दर्पण को रेखा MN के अनुदिश लंबवत रखा जाता है जैसा कि दर्शाया गया है:',
   '{"a":"Arrow points left; black dot shifts to top-right; shaded triangle shifts to bottom-left","b":"Arrow points right; black dot remains at top-left; shaded triangle shifts to top-right","c":"Figure is inverted upside down; arrow points left at bottom","d":"Arrow points vertically upward; dot moves to bottom-left"}'::jsonb,
   '{"a":"तीर बायीं ओर इंगित करता है; काला बिंदु शीर्ष-दायें जाता है; छायांकित त्रिभुज तल-बायें जाता है","b":"तीर दायीं ओर रहता है; बिंदु शीर्ष-बायें रहता है; छायांकित त्रिभुज शीर्ष-दायें जाता है","c":"आकृति उल्टी (Inverted) हो जाती है; तीर नीचे की ओर इंगित करता है","d":"तीर लंबवत ऊपर की ओर इंगित करता है; बिंदु नीचे चला जाता है"}'::jsonb,
   'a',
@@ -3013,8 +2961,52 @@ Correct Option: (a)',
 3. शीर्ष-बायें स्थित बिंदु शीर्ष-दायें चला जाएगा।
 4. तल-दायें स्थित छायांकित त्रिभुज तल-बायें आ जाएगा।
 अतः सही उत्तर विकल्प (a) है।',
-  NULL,
-  NULL,
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 180" width="100%" height="auto" style="max-width:440px; display:block; margin:10px auto; background:#ffffff;">
+  <!-- Left Side: Object Figure -->
+  <rect x="40" y="25" width="120" height="120" fill="none" stroke="#000000" stroke-width="2"/>
+  <line x1="40" y1="25" x2="160" y2="145" stroke="#000000" stroke-width="2"/>
+  <!-- Arrow pointing Right at (100, 85) -->
+  <line x1="65" y1="85" x2="135" y2="85" stroke="#000000" stroke-width="2.5"/>
+  <polygon points="135,85 120,77 120,93" fill="#000000"/>
+  <!-- Dot at top-left -->
+  <circle cx="70" cy="55" r="8" fill="#000000"/>
+  <!-- Shaded small triangle at bottom-right -->
+  <polygon points="160,110 160,145 125,145" fill="#000000"/>
+  <text x="100" y="165" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">Object / मूल आकृति</text>
+
+  <!-- Mirror Line M - N -->
+  <line x1="220" y1="15" x2="220" y2="165" stroke="#000000" stroke-width="2.5" stroke-dasharray="6,4"/>
+  <text x="220" y="12" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#000000">M</text>
+  <text x="220" y="178" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#000000">N</text>
+
+  <!-- Right Side: Mirror Placeholder with Question Mark -->
+  <rect x="280" y="25" width="120" height="120" fill="#f8fafc" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
+  <text x="340" y="95" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#555555">?</text>
+  <text x="340" y="165" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">Mirror Image / दर्पण प्रतिबिम्ब</text>
+</svg>',
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 180" width="100%" height="auto" style="max-width:440px; display:block; margin:10px auto; background:#ffffff;">
+  <!-- Left Side: Object Figure -->
+  <rect x="40" y="25" width="120" height="120" fill="none" stroke="#000000" stroke-width="2"/>
+  <line x1="40" y1="25" x2="160" y2="145" stroke="#000000" stroke-width="2"/>
+  <!-- Arrow pointing Right at (100, 85) -->
+  <line x1="65" y1="85" x2="135" y2="85" stroke="#000000" stroke-width="2.5"/>
+  <polygon points="135,85 120,77 120,93" fill="#000000"/>
+  <!-- Dot at top-left -->
+  <circle cx="70" cy="55" r="8" fill="#000000"/>
+  <!-- Shaded small triangle at bottom-right -->
+  <polygon points="160,110 160,145 125,145" fill="#000000"/>
+  <text x="100" y="165" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">Object / मूल आकृति</text>
+
+  <!-- Mirror Line M - N -->
+  <line x1="220" y1="15" x2="220" y2="165" stroke="#000000" stroke-width="2.5" stroke-dasharray="6,4"/>
+  <text x="220" y="12" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#000000">M</text>
+  <text x="220" y="178" font-family="Arial, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#000000">N</text>
+
+  <!-- Right Side: Mirror Placeholder with Question Mark -->
+  <rect x="280" y="25" width="120" height="120" fill="#f8fafc" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
+  <text x="340" y="95" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#555555">?</text>
+  <text x="340" y="165" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">Mirror Image / दर्पण प्रतिबिम्ब</text>
+</svg>',
   NULL
 )
 ON CONFLICT (test_id, question_number) DO UPDATE SET
@@ -3245,62 +3237,8 @@ INSERT INTO public.questions (
   'General Intelligence & Reasoning',
   'Non-Verbal Reasoning (Pattern Series & Rotation)',
   'Moderate',
-  'Select the figure from the given options that will replace the question mark (?) in the sequential figure pattern series:
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 140" width="100%" height="auto" style="max-width:460px; display:block; margin:10px auto; background:#ffffff;">
-  <!-- Frame 1: Diagonal 45 deg line, 1 dot -->
-  <rect x="20" y="20" width="85" height="85" fill="none" stroke="#000000" stroke-width="2"/>
-  <line x1="25" y1="100" x2="100" y2="25" stroke="#000000" stroke-width="2.5"/>
-  <circle cx="45" cy="45" r="5" fill="#000000"/>
-  <text x="62" y="122" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">(1)</text>
-
-  <!-- Frame 2: Vertical 90 deg line, 2 dots -->
-  <rect x="130" y="20" width="85" height="85" fill="none" stroke="#000000" stroke-width="2"/>
-  <line x1="172" y1="25" x2="172" y2="100" stroke="#000000" stroke-width="2.5"/>
-  <circle cx="152" cy="50" r="5" fill="#000000"/>
-  <circle cx="192" cy="75" r="5" fill="#000000"/>
-  <text x="172" y="122" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">(2)</text>
-
-  <!-- Frame 3: Diagonal 135 deg line, 3 dots -->
-  <rect x="240" y="20" width="85" height="85" fill="none" stroke="#000000" stroke-width="2"/>
-  <line x1="245" y1="25" x2="320" y2="100" stroke="#000000" stroke-width="2.5"/>
-  <circle cx="260" cy="75" r="5" fill="#000000"/>
-  <circle cx="282" cy="45" r="5" fill="#000000"/>
-  <circle cx="305" cy="45" r="5" fill="#000000"/>
-  <text x="282" y="122" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">(3)</text>
-
-  <!-- Frame 4: Question Mark ''?'' -->
-  <rect x="350" y="20" width="85" height="85" fill="#f8fafc" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
-  <text x="392" y="73" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#555555">?</text>
-  <text x="392" y="122" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">(4)</text>
-</svg>',
-  'दिए गए विकल्पों में से उस आकृति का चयन करें जो क्रमिक आकृति श्रृंखला में प्रश्नवाचक चिह्न (?) को प्रतिस्थापित करेगी:
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 140" width="100%" height="auto" style="max-width:460px; display:block; margin:10px auto; background:#ffffff;">
-  <!-- Frame 1: Diagonal 45 deg line, 1 dot -->
-  <rect x="20" y="20" width="85" height="85" fill="none" stroke="#000000" stroke-width="2"/>
-  <line x1="25" y1="100" x2="100" y2="25" stroke="#000000" stroke-width="2.5"/>
-  <circle cx="45" cy="45" r="5" fill="#000000"/>
-  <text x="62" y="122" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">(1)</text>
-
-  <!-- Frame 2: Vertical 90 deg line, 2 dots -->
-  <rect x="130" y="20" width="85" height="85" fill="none" stroke="#000000" stroke-width="2"/>
-  <line x1="172" y1="25" x2="172" y2="100" stroke="#000000" stroke-width="2.5"/>
-  <circle cx="152" cy="50" r="5" fill="#000000"/>
-  <circle cx="192" cy="75" r="5" fill="#000000"/>
-  <text x="172" y="122" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">(2)</text>
-
-  <!-- Frame 3: Diagonal 135 deg line, 3 dots -->
-  <rect x="240" y="20" width="85" height="85" fill="none" stroke="#000000" stroke-width="2"/>
-  <line x1="245" y1="25" x2="320" y2="100" stroke="#000000" stroke-width="2.5"/>
-  <circle cx="260" cy="75" r="5" fill="#000000"/>
-  <circle cx="282" cy="45" r="5" fill="#000000"/>
-  <circle cx="305" cy="45" r="5" fill="#000000"/>
-  <text x="282" y="122" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">(3)</text>
-
-  <!-- Frame 4: Question Mark ''?'' -->
-  <rect x="350" y="20" width="85" height="85" fill="#f8fafc" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
-  <text x="392" y="73" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#555555">?</text>
-  <text x="392" y="122" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">(4)</text>
-</svg>',
+  'Select the figure from the given options that will replace the question mark (?) in the sequential figure pattern series:',
+  'दिए गए विकल्पों में से उस आकृति का चयन करें जो क्रमिक आकृति श्रृंखला में प्रश्नवाचक चिह्न (?) को प्रतिस्थापित करेगी:',
   '{"a":"A vertical line with 4 black dots","b":"A horizontal line with 4 black dots (2 above and 2 below)","c":"A diagonal line with 3 black dots","d":"A diagonal line at 45° with 5 black dots"}'::jsonb,
   '{"a":"4 काले बिंदुओं वाली एक ऊर्ध्वाधर (Vertical) रेखा","b":"4 काले बिंदुओं वाली एक क्षैतिज (Horizontal) रेखा (2 ऊपर और 2 नीचे)","c":"3 काले बिंदुओं वाली एक विकर्ण रेखा","d":"45° पर 5 काले बिंदुओं वाली एक विकर्ण रेखा"}'::jsonb,
   'b',
@@ -3326,8 +3264,60 @@ Correct Option: (b)',
 अतः सही आकृति 4 बिंदुओं वाली एक क्षैतिज रेखा होगी (विकल्प b)।
 
 अतः सही उत्तर विकल्प (b) है।',
-  NULL,
-  NULL,
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 140" width="100%" height="auto" style="max-width:460px; display:block; margin:10px auto; background:#ffffff;">
+  <!-- Frame 1: Diagonal 45 deg line, 1 dot -->
+  <rect x="20" y="20" width="85" height="85" fill="none" stroke="#000000" stroke-width="2"/>
+  <line x1="25" y1="100" x2="100" y2="25" stroke="#000000" stroke-width="2.5"/>
+  <circle cx="45" cy="45" r="5" fill="#000000"/>
+  <text x="62" y="122" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">(1)</text>
+
+  <!-- Frame 2: Vertical 90 deg line, 2 dots -->
+  <rect x="130" y="20" width="85" height="85" fill="none" stroke="#000000" stroke-width="2"/>
+  <line x1="172" y1="25" x2="172" y2="100" stroke="#000000" stroke-width="2.5"/>
+  <circle cx="152" cy="50" r="5" fill="#000000"/>
+  <circle cx="192" cy="75" r="5" fill="#000000"/>
+  <text x="172" y="122" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">(2)</text>
+
+  <!-- Frame 3: Diagonal 135 deg line, 3 dots -->
+  <rect x="240" y="20" width="85" height="85" fill="none" stroke="#000000" stroke-width="2"/>
+  <line x1="245" y1="25" x2="320" y2="100" stroke="#000000" stroke-width="2.5"/>
+  <circle cx="260" cy="75" r="5" fill="#000000"/>
+  <circle cx="282" cy="45" r="5" fill="#000000"/>
+  <circle cx="305" cy="45" r="5" fill="#000000"/>
+  <text x="282" y="122" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">(3)</text>
+
+  <!-- Frame 4: Question Mark ''?'' -->
+  <rect x="350" y="20" width="85" height="85" fill="#f8fafc" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
+  <text x="392" y="73" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#555555">?</text>
+  <text x="392" y="122" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">(4)</text>
+</svg>',
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 140" width="100%" height="auto" style="max-width:460px; display:block; margin:10px auto; background:#ffffff;">
+  <!-- Frame 1: Diagonal 45 deg line, 1 dot -->
+  <rect x="20" y="20" width="85" height="85" fill="none" stroke="#000000" stroke-width="2"/>
+  <line x1="25" y1="100" x2="100" y2="25" stroke="#000000" stroke-width="2.5"/>
+  <circle cx="45" cy="45" r="5" fill="#000000"/>
+  <text x="62" y="122" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">(1)</text>
+
+  <!-- Frame 2: Vertical 90 deg line, 2 dots -->
+  <rect x="130" y="20" width="85" height="85" fill="none" stroke="#000000" stroke-width="2"/>
+  <line x1="172" y1="25" x2="172" y2="100" stroke="#000000" stroke-width="2.5"/>
+  <circle cx="152" cy="50" r="5" fill="#000000"/>
+  <circle cx="192" cy="75" r="5" fill="#000000"/>
+  <text x="172" y="122" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">(2)</text>
+
+  <!-- Frame 3: Diagonal 135 deg line, 3 dots -->
+  <rect x="240" y="20" width="85" height="85" fill="none" stroke="#000000" stroke-width="2"/>
+  <line x1="245" y1="25" x2="320" y2="100" stroke="#000000" stroke-width="2.5"/>
+  <circle cx="260" cy="75" r="5" fill="#000000"/>
+  <circle cx="282" cy="45" r="5" fill="#000000"/>
+  <circle cx="305" cy="45" r="5" fill="#000000"/>
+  <text x="282" y="122" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">(3)</text>
+
+  <!-- Frame 4: Question Mark ''?'' -->
+  <rect x="350" y="20" width="85" height="85" fill="#f8fafc" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
+  <text x="392" y="73" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#555555">?</text>
+  <text x="392" y="122" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">(4)</text>
+</svg>',
   NULL
 )
 ON CONFLICT (test_id, question_number) DO UPDATE SET
