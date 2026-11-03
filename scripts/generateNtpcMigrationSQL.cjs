@@ -12,7 +12,10 @@ function escapeJson(obj) {
 }
 
 function run() {
-  const jsonPath = path.join(__dirname, '..', 'RRB_NTPC_GRADUATE_MOCK', 'mock_test_1.json');
+  let jsonPath = path.join(__dirname, '..', 'RRB_NTPC_GRADUATE_MOCK', 'mock_test_1_v2.json');
+  if (!fs.existsSync(jsonPath)) {
+    jsonPath = path.join(__dirname, '..', 'RRB_NTPC_GRADUATE_MOCK', 'mock_test_1.json');
+  }
   if (!fs.existsSync(jsonPath)) {
     console.error('File not found:', jsonPath);
     return;
@@ -20,12 +23,13 @@ function run() {
 
   const rawQuestions = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
   const testId = 'rrb_ntpc_graduate_mock_1';
-  const testTitle = 'RRB NTPC (Graduate Level) CBT-1 Mock Test 01';
+  const testTitle = 'RRB NTPC (Graduate Level) CBT-1 Mock Test 01 (v2 Fresh)';
   const responseTable = 'RRB_NTPC_MOCK_1_responses';
 
   let sql = `-- =========================================================================\n`;
-  sql += `-- TURNKEY REMOTE CLOUD DATABASE MIGRATION FOR RRB NTPC GRADUATE MOCK TEST 01\n`;
-  sql += `-- Schema: mock_tests entry, "${responseTable}" table, and 100 questions\n`;
+  sql += `-- TURNKEY REMOTE CLOUD DATABASE MIGRATION FOR RRB NTPC GRADUATE MOCK TEST 01 (v2 FRESH)\n`;
+  sql += `-- Source: mock_test_1_v2.json (${rawQuestions.length} Questions)\n`;
+  sql += `-- Schema: mock_tests entry, "${responseTable}" table, clean slate DELETE & fresh INSERT\n`;
   sql += `-- Safe, Idempotent, and Fully Compatible with PostgreSQL\n`;
   sql += `-- =========================================================================\n\n`;
 
@@ -35,7 +39,7 @@ function run() {
   sql += `VALUES (\n`;
   sql += `  ${escapeSql(testId)},\n`;
   sql += `  ${escapeSql(testTitle)},\n`;
-  sql += `  100,\n`;
+  sql += `  ${rawQuestions.length},\n`;
   sql += `  90,\n`;
   sql += `  0,\n`;
   sql += `  false\n`;
@@ -54,7 +58,7 @@ function run() {
   sql += `      ${escapeSql(testId)},\n`;
   sql += `      ${escapeSql(testTitle)},\n`;
   sql += `      'Official RRB NTPC Graduate Level CBT-1 pattern: Mathematics (30 Qs), Reasoning (30 Qs), General Awareness (40 Qs). Total 100 Questions, 90 Minutes.',\n`;
-  sql += `      100, 90, ${escapeSql(responseTable)}, true\n`;
+  sql += `      ${rawQuestions.length}, 90, ${escapeSql(responseTable)}, true\n`;
   sql += `    )\n`;
   sql += `    ON CONFLICT (test_id) DO UPDATE SET\n`;
   sql += `      title = EXCLUDED.title,\n`;
@@ -96,15 +100,19 @@ function run() {
   sql += `CREATE POLICY "Allow anon all on ${responseTable}" ON public."${responseTable}" FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);\n\n`;
   sql += `CREATE INDEX IF NOT EXISTS idx_ntpc_mock1_candidate ON public."${responseTable}"(candidate_mobile);\n\n`;
 
-  // 3. Upsert 100 NTPC Questions
-  sql += `-- 3. Upsert 100 Questions for ${testTitle} (${testId})\n\n`;
+  // 3. Clean slate remove previous mock questions before fresh insert
+  sql += `-- 3. Clean slate: Remove any prior mock 1 questions\n`;
+  sql += `DELETE FROM public.questions WHERE test_id = ${escapeSql(testId)};\n\n`;
+
+  // 4. Fresh Insert of 100 Questions from mock_test_1_v2.json
+  sql += `-- 4. Fresh Insert of ${rawQuestions.length} Questions for ${testTitle} (${testId})\n\n`;
 
   for (const q of rawQuestions) {
     const qNum = q.question_number;
     const partNum = q.part_number || (qNum <= 30 ? 1 : qNum <= 60 ? 2 : 3);
     const sectionName = q.section_name || `PART-${partNum}`;
     const sectionTitle = q.section_title || (qNum <= 30 ? 'Mathematics' : qNum <= 60 ? 'General Intelligence & Reasoning' : 'General Awareness');
-    const chapterName = q.topic || null;
+    const chapterName = q.topic || q.chapter_name || null;
     const difficulty = q.difficulty || 'Moderate';
     const qText = q.question_text || '';
     const qTextHi = q.question_text_hi || qText;
@@ -158,9 +166,15 @@ function run() {
     sql += `  option_svgs = EXCLUDED.option_svgs;\n\n`;
   }
 
-  const outPath = path.join(__dirname, '..', 'src', 'sql', 'migrate_ntpc_mock_1.sql');
-  fs.writeFileSync(outPath, sql, 'utf8');
-  console.log(`Generated turnkey SQL migration at: ${outPath} (${rawQuestions.length} questions)`);
+  const outPath1 = path.join(__dirname, '..', 'src', 'sql', 'migrate_ntpc_mock_1.sql');
+  const outPath2 = path.join(__dirname, '..', 'src', 'sql', 'migrate_ntpc_mock_1_v2.sql');
+
+  fs.writeFileSync(outPath1, sql, 'utf8');
+  fs.writeFileSync(outPath2, sql, 'utf8');
+
+  console.log(`Successfully generated fresh turnkey SQL migrations:`);
+  console.log(`  1. ${outPath1} (${rawQuestions.length} questions)`);
+  console.log(`  2. ${outPath2} (${rawQuestions.length} questions)`);
 }
 
 run();

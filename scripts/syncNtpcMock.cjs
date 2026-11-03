@@ -1,7 +1,7 @@
 /**
  * Automated Reusable Runner for RRB NTPC Graduate Level Mocks
  * Usage:
- *   node scripts/syncNtpcMock.cjs --file=RRB_NTPC_GRADUATE_MOCK/mock_test_1.json --mock=1
+ *   node scripts/syncNtpcMock.cjs --file=RRB_NTPC_GRADUATE_MOCK/mock_test_1_v2.json --mock=1
  *   node scripts/syncNtpcMock.cjs --file=RRB_NTPC_GRADUATE_MOCK/mock_test_2.json --mock=2
  */
 
@@ -24,7 +24,11 @@ for (const arg of args) {
 }
 
 if (!filePath) {
-  filePath = 'RRB_NTPC_GRADUATE_MOCK/mock_test_1.json';
+  if (fs.existsSync('RRB_NTPC_GRADUATE_MOCK/mock_test_1_v2.json')) {
+    filePath = 'RRB_NTPC_GRADUATE_MOCK/mock_test_1_v2.json';
+  } else {
+    filePath = 'RRB_NTPC_GRADUATE_MOCK/mock_test_1.json';
+  }
 }
 if (!mockNumber) {
   const match = filePath.match(/mock_test_(\d+)/i) || filePath.match(/mock_(\d+)/i);
@@ -42,7 +46,7 @@ const testId = `rrb_ntpc_graduate_mock_${mockNumber}`;
 const testTitle = `RRB NTPC (Graduate Level) CBT-1 Mock Test 0${mockNumber}`;
 
 console.log(`================================================================`);
-console.log(`Syncing RRB NTPC Graduate Mock Test`);
+console.log(`Syncing RRB NTPC Graduate Mock Test (Fresh Version)`);
 console.log(`  Test ID:       ${testId}`);
 console.log(`  Test Title:    ${testTitle}`);
 console.log(`  Source File:   ${resolvedPath}`);
@@ -80,7 +84,7 @@ function apiRequest(endpoint, method, payload = null) {
 async function run() {
   try {
     // 1. Ensure test is registered in mock_tests table
-    console.log(`Checking registration for ${testId} in mock_tests...`);
+    console.log(`Registering/updating test ${testId} in mock_tests...`);
     const regRes = await apiRequest(`/rest/v1/mock_tests?on_conflict=id`, 'POST', [{
       id: testId,
       title: testTitle,
@@ -89,9 +93,14 @@ async function run() {
       sectional_time_minutes: 0,
       has_sectional_timing: false
     }]);
-    console.log(`Test metadata registration status: ${regRes.status}`);
+    console.log(`Test metadata status: ${regRes.status}`);
 
-    // 2. Format questions according to remote database schema
+    // 2. Clean slate: Delete existing questions for this test to ensure 100% fresh questions
+    console.log(`Cleaning old questions for ${testId}...`);
+    const delRes = await apiRequest(`/rest/v1/questions?test_id=eq.${testId}`, 'DELETE');
+    console.log(`Delete prior questions status: ${delRes.status}`);
+
+    // 3. Format questions according to remote database schema
     const formatted = rawQuestions.map((q, idx) => {
       const qNum = q.question_number || (idx + 1);
       const partNum = q.part_number || (qNum <= 30 ? 1 : qNum <= 60 ? 2 : 3);
@@ -119,12 +128,12 @@ async function run() {
       };
     });
 
-    // 3. Upload questions in chunks of 25
+    // 4. Upload fresh questions in chunks of 25
     const CHUNK_SIZE = 25;
     for (let i = 0; i < formatted.length; i += CHUNK_SIZE) {
       const chunk = formatted.slice(i, i + CHUNK_SIZE);
       const range = `${i + 1} - ${Math.min(i + CHUNK_SIZE, formatted.length)}`;
-      process.stdout.write(`Uploading questions ${range}... `);
+      process.stdout.write(`Uploading fresh questions ${range}... `);
 
       const res = await apiRequest(`/rest/v1/questions?on_conflict=test_id,question_number`, 'POST', chunk);
       if (res.status === 201 || res.status === 200) {
@@ -134,7 +143,7 @@ async function run() {
       }
     }
 
-    console.log(`\nAll ${formatted.length} questions successfully synced to remote database!`);
+    console.log(`\nSuccessfully synced all ${formatted.length} fresh questions from mock_test_1_v2.json to remote database!`);
   } catch (err) {
     console.error('Fatal sync error:', err);
     process.exit(1);
