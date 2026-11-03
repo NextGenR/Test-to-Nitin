@@ -11,6 +11,18 @@ function escapeJson(obj) {
   return escapeSql(JSON.stringify(obj)) + '::jsonb';
 }
 
+function convertToMonochromeSvg(svg) {
+  if (!svg || typeof svg !== 'string') return svg;
+  return svg
+    .replace(/stroke=(\\?["'])(?!none|#000000|#000|black)[^\\"']+(\\?["'])/gi, (m, q1, q2) => `stroke=${q1}#000000${q2}`)
+    .replace(/fill=(\\?["'])(#f8fafc|#f1f5f9|#e2e8f0|#e6f7f9|#f0fdf4|#eff6ff|#fafafa|#ffffff|white|#fff)(\\?["'])/gi, (m, q1, c, q2) => `fill=${q1}#ffffff${q2}`)
+    .replace(/fill=(\\?["'])(?!none|#ffffff|#fff|white|#000000|#000|black)[^\\"']+(\\?["'])/gi, (m, q1, q2) => `fill=${q1}#000000${q2}`)
+    .replace(/stroke:\s*(?!none|#000000|#000|black)[^;"]+/gi, 'stroke: #000000')
+    .replace(/fill:\s*(?!none|#ffffff|#fff|white|#000000|#000|black)[^;"]+/gi, 'fill: #000000')
+    .replace(/color:\s*(?!#000000|#000|black)[^;"]+/gi, 'color: #000000')
+    .replace(/background:\s*[^;"]+/gi, 'background:#ffffff');
+}
+
 function run() {
   let jsonPath = path.join(__dirname, '..', 'RRB_NTPC_GRADUATE_MOCK', 'mock_test_1_v3.json');
   if (!fs.existsSync(jsonPath)) {
@@ -143,8 +155,8 @@ function run() {
     const correctOption = (q.correct_option || 'a').toLowerCase();
     const solutionText = q.solution_text || '';
     const solutionTextHi = q.solution_text_hi || solutionText;
-    const imageSvg = q.image_svg || q.svg_content || extractedSvgEn || extractedSvgHi || null;
-    const imageSvgHi = q.image_svg_hi || extractedSvgHi || imageSvg || null;
+    const imageSvg = convertToMonochromeSvg(q.image_svg || q.svg_content || extractedSvgEn || extractedSvgHi || null);
+    const imageSvgHi = convertToMonochromeSvg(q.image_svg_hi || extractedSvgHi || imageSvg || null);
     const optionSvgs = q.option_svgs || null;
 
     sql += `INSERT INTO public.questions (\n`;

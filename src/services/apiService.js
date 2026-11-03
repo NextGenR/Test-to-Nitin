@@ -301,6 +301,18 @@ export const loginOrRegisterCandidate = async (name, mobile, passcode, category 
   }
 };
 
+export function convertToMonochromeSvg(svg) {
+  if (!svg || typeof svg !== 'string') return svg;
+  return svg
+    .replace(/stroke=(\\?["'])(?!none|#000000|#000|black)[^\\"']+(\\?["'])/gi, (m, q1, q2) => `stroke=${q1}#000000${q2}`)
+    .replace(/fill=(\\?["'])(#f8fafc|#f1f5f9|#e2e8f0|#e6f7f9|#f0fdf4|#eff6ff|#fafafa|#ffffff|white|#fff)(\\?["'])/gi, (m, q1, c, q2) => `fill=${q1}#ffffff${q2}`)
+    .replace(/fill=(\\?["'])(?!none|#ffffff|#fff|white|#000000|#000|black)[^\\"']+(\\?["'])/gi, (m, q1, q2) => `fill=${q1}#000000${q2}`)
+    .replace(/stroke:\s*(?!none|#000000|#000|black)[^;"]+/gi, 'stroke: #000000')
+    .replace(/fill:\s*(?!none|#ffffff|#fff|white|#000000|#000|black)[^;"]+/gi, 'fill: #000000')
+    .replace(/color:\s*(?!#000000|#000|black)[^;"]+/gi, 'color: #000000')
+    .replace(/background:\s*[^;"]+/gi, 'background:#ffffff');
+}
+
 /**
  * Fetch Questions for any mock test (supports rrb_cbt_mock_X or rrb_ntpc_graduate_mock_X)
  */
@@ -384,8 +396,10 @@ export const fetchTestQuestions = async (testIdOrMock = 1) => {
             }
           }
 
-          const baseSvg = q.image_svg || q.question_image_svg || q.svg_content || extractedSvgEn || extractedSvgHi || null;
-          const baseSvgHi = q.image_svg_hi || extractedSvgHi || baseSvg || null;
+          const rawSvg = q.image_svg || q.question_image_svg || q.svg_content || extractedSvgEn || extractedSvgHi || null;
+          const rawSvgHi = q.image_svg_hi || extractedSvgHi || rawSvg || null;
+          const baseSvg = convertToMonochromeSvg(rawSvg);
+          const baseSvgHi = convertToMonochromeSvg(rawSvgHi);
 
           return {
             id: qNum,

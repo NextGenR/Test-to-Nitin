@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowLeft, ArrowRight, RotateCcw, Bookmark, CheckSquare, BookOpen, CheckCircle, XCircle } from 'lucide-react';
 import MathRenderer from './MathRenderer';
+import { convertToMonochromeSvg } from '../services/apiService';
 
 export default function QuestionPanel({
   question,
@@ -72,7 +73,8 @@ export default function QuestionPanel({
     ? (question.image_svg_hi || question.image_svg || question.question_image_svg)
     : (question.image_svg || question.question_image_svg || question.image_svg_hi);
 
-  const activeSvg = isScienceSection ? null : (dbSvg || inlineSvg || question.svg_content);
+  const rawSvg = isScienceSection ? null : (dbSvg || inlineSvg || question.svg_content);
+  const activeSvg = convertToMonochromeSvg(rawSvg);
 
   const activeImg = isScienceSection ? null : (
     currentLang === 'hi'
@@ -190,13 +192,13 @@ export default function QuestionPanel({
           </div>
         </div>
 
-        {/* Question Diagram / Figure Container (Clean Testbook Cyan Style) */}
+        {/* Question Diagram / Figure Container (Monochrome Exam Standard) */}
         {(activeSvg || activeImg) && (
           <div className="mb-6 flex justify-start sm:justify-center">
             <div
               onContextMenu={(e) => e.preventDefault()}
               onDragStart={(e) => e.preventDefault()}
-              className="w-full max-w-sm sm:max-w-md md:max-w-lg min-h-[190px] h-52 sm:h-64 bg-white border-2 border-[#00a8b5] rounded-xl p-3 sm:p-4 flex items-center justify-center shadow-xs overflow-hidden select-none"
+              className="w-full max-w-sm sm:max-w-md md:max-w-lg min-h-[190px] h-52 sm:h-64 bg-white border-2 border-slate-300 rounded-xl p-3 sm:p-4 flex items-center justify-center shadow-xs overflow-hidden select-none"
             >
               {activeSvg ? (
                 <div

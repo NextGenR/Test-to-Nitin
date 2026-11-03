@@ -9,6 +9,18 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
+function convertToMonochromeSvg(svg) {
+  if (!svg || typeof svg !== 'string') return svg;
+  return svg
+    .replace(/stroke=(\\?["'])(?!none|#000000|#000|black)[^\\"']+(\\?["'])/gi, (m, q1, q2) => `stroke=${q1}#000000${q2}`)
+    .replace(/fill=(\\?["'])(#f8fafc|#f1f5f9|#e2e8f0|#e6f7f9|#f0fdf4|#eff6ff|#fafafa|#ffffff|white|#fff)(\\?["'])/gi, (m, q1, c, q2) => `fill=${q1}#ffffff${q2}`)
+    .replace(/fill=(\\?["'])(?!none|#ffffff|#fff|white|#000000|#000|black)[^\\"']+(\\?["'])/gi, (m, q1, q2) => `fill=${q1}#000000${q2}`)
+    .replace(/stroke:\s*(?!none|#000000|#000|black)[^;"]+/gi, 'stroke: #000000')
+    .replace(/fill:\s*(?!none|#ffffff|#fff|white|#000000|#000|black)[^;"]+/gi, 'fill: #000000')
+    .replace(/color:\s*(?!#000000|#000|black)[^;"]+/gi, 'color: #000000')
+    .replace(/background:\s*[^;"]+/gi, 'background:#ffffff');
+}
+
 // Remote database configuration
 const API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpneHNrcHFzanlsYndyaGhyemltIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODczODY0MDIsImV4cCI6MjEwMjk2MjQwMn0.1RSVtWx8gxJhQcmDfJMvRfRLMvl4ju9GuwxgiKn5f8w';
 const BASE_HOST = 'zgxskpqsjylbwrhhrzim.supabase.co';
@@ -130,8 +142,8 @@ async function run() {
         }
       }
 
-      const imageSvg = q.image_svg || q.svg_content || extractedSvgEn || extractedSvgHi || null;
-      const imageSvgHi = q.image_svg_hi || extractedSvgHi || imageSvg || null;
+      const imageSvg = convertToMonochromeSvg(q.image_svg || q.svg_content || extractedSvgEn || extractedSvgHi || null);
+      const imageSvgHi = convertToMonochromeSvg(q.image_svg_hi || extractedSvgHi || imageSvg || null);
 
       return {
         test_id: testId,

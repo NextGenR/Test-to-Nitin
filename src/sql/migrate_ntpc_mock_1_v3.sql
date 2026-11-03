@@ -2416,9 +2416,9 @@ Correct Option: (b)',
   <circle cx="180" cy="240" r="3" fill="#000000"/>
   <circle cx="80" cy="185" r="3" fill="#000000"/>
   <circle cx="80" cy="75" r="3" fill="#000000"/>
-  <circle cx="180" cy="130" r="4" fill="#d97706"/>
+  <circle cx="180" cy="130" r="4" fill="#000000"/>
   <!-- Subtitle -->
-  <text x="180" y="255" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#333333">[ Interlocking Hexagram Grid / षट्कोणीय तारा ग्रिड ]</text>
+  <text x="180" y="255" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#000000">[ Interlocking Hexagram Grid / षट्कोणीय तारा ग्रिड ]</text>
 </svg>',
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 260" width="100%" height="auto" style="max-width:360px; display:block; margin:10px auto; background:#ffffff;">
   <!-- Outer Hexagon -->
@@ -2437,9 +2437,9 @@ Correct Option: (b)',
   <circle cx="180" cy="240" r="3" fill="#000000"/>
   <circle cx="80" cy="185" r="3" fill="#000000"/>
   <circle cx="80" cy="75" r="3" fill="#000000"/>
-  <circle cx="180" cy="130" r="4" fill="#d97706"/>
+  <circle cx="180" cy="130" r="4" fill="#000000"/>
   <!-- Subtitle -->
-  <text x="180" y="255" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#333333">[ Interlocking Hexagram Grid / षट्कोणीय तारा ग्रिड ]</text>
+  <text x="180" y="255" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#000000">[ Interlocking Hexagram Grid / षट्कोणीय तारा ग्रिड ]</text>
 </svg>',
   NULL
 )
@@ -2659,32 +2659,32 @@ Correct Option: (a)',
 अतः सही उत्तर विकल्प (a) है।',
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 260" width="100%" height="auto" style="max-width:380px; display:block; margin:10px auto; background:#ffffff;">
   <!-- Face 1 (Top flap): Arrow UP -->
-  <rect x="130" y="15" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+  <rect x="130" y="15" width="55" height="55" fill="#ffffff" stroke="#000000" stroke-width="2"/>
   <line x1="157" y1="58" x2="157" y2="25" stroke="#000000" stroke-width="3"/>
   <polygon points="157,22 147,35 167,35" fill="#000000"/>
   
   <!-- Middle Strip: 4 Faces [Face 2 (F), Face 3 (L), Face 4 (Circle-X), Face 5 (Black Triangle)] -->
   <!-- Face 2: Letter F -->
-  <rect x="75" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+  <rect x="75" y="70" width="55" height="55" fill="#ffffff" stroke="#000000" stroke-width="2"/>
   <text x="102" y="110" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#000000">F</text>
   
   <!-- Face 3: Letter L -->
-  <rect x="130" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+  <rect x="130" y="70" width="55" height="55" fill="#ffffff" stroke="#000000" stroke-width="2"/>
   <text x="157" y="110" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#000000">L</text>
   
   <!-- Face 4: Circle with X -->
-  <rect x="185" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+  <rect x="185" y="70" width="55" height="55" fill="#ffffff" stroke="#000000" stroke-width="2"/>
   <circle cx="212" cy="97" r="16" fill="none" stroke="#000000" stroke-width="2"/>
   <line x1="201" y1="86" x2="223" y2="108" stroke="#000000" stroke-width="2.5"/>
   <line x1="201" y1="108" x2="223" y2="86" stroke="#000000" stroke-width="2.5"/>
   
   <!-- Face 5: Solid Shaded Triangle -->
-  <rect x="240" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+  <rect x="240" y="70" width="55" height="55" fill="#ffffff" stroke="#000000" stroke-width="2"/>
   <polygon points="267,80 249,115 285,115" fill="#000000"/>
   
   <!-- Face 6 (Bottom flap attached below Face 3): Heart symbol -->
-  <rect x="130" y="125" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
-  <path d="M157,143 C157,137 148,132 143,139 C136,149 157,168 157,168 C157,168 178,149 171,139 C166,132 157,137 157,143 Z" fill="#b91c1c" stroke="#b91c1c"/>
+  <rect x="130" y="125" width="55" height="55" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+  <path d="M157,143 C157,137 148,132 143,139 C136,149 157,168 157,168 C157,168 178,149 171,139 C166,132 157,137 157,143 Z" fill="#000000" stroke="#000000"/>
   
   <!-- Dashed Fold Lines -->
   <line x1="130" y1="70" x2="185" y2="70" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
@@ -2694,36 +2694,36 @@ Correct Option: (a)',
   <line x1="240" y1="70" x2="240" y2="125" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
   
   <!-- Caption -->
-  <text x="180" y="215" font-family="Arial, sans-serif" font-size="12" font-style="italic" text-anchor="middle" fill="#333333">[ Unfolded Cube Net / खुले पासे का नेट ]</text>
+  <text x="180" y="215" font-family="Arial, sans-serif" font-size="12" font-style="italic" text-anchor="middle" fill="#000000">[ Unfolded Cube Net / खुले पासे का नेट ]</text>
 </svg>',
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 260" width="100%" height="auto" style="max-width:380px; display:block; margin:10px auto; background:#ffffff;">
   <!-- Face 1 (Top flap): Arrow UP -->
-  <rect x="130" y="15" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+  <rect x="130" y="15" width="55" height="55" fill="#ffffff" stroke="#000000" stroke-width="2"/>
   <line x1="157" y1="58" x2="157" y2="25" stroke="#000000" stroke-width="3"/>
   <polygon points="157,22 147,35 167,35" fill="#000000"/>
   
   <!-- Middle Strip: 4 Faces [Face 2 (F), Face 3 (L), Face 4 (Circle-X), Face 5 (Black Triangle)] -->
   <!-- Face 2: Letter F -->
-  <rect x="75" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+  <rect x="75" y="70" width="55" height="55" fill="#ffffff" stroke="#000000" stroke-width="2"/>
   <text x="102" y="110" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#000000">F</text>
   
   <!-- Face 3: Letter L -->
-  <rect x="130" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+  <rect x="130" y="70" width="55" height="55" fill="#ffffff" stroke="#000000" stroke-width="2"/>
   <text x="157" y="110" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#000000">L</text>
   
   <!-- Face 4: Circle with X -->
-  <rect x="185" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+  <rect x="185" y="70" width="55" height="55" fill="#ffffff" stroke="#000000" stroke-width="2"/>
   <circle cx="212" cy="97" r="16" fill="none" stroke="#000000" stroke-width="2"/>
   <line x1="201" y1="86" x2="223" y2="108" stroke="#000000" stroke-width="2.5"/>
   <line x1="201" y1="108" x2="223" y2="86" stroke="#000000" stroke-width="2.5"/>
   
   <!-- Face 5: Solid Shaded Triangle -->
-  <rect x="240" y="70" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
+  <rect x="240" y="70" width="55" height="55" fill="#ffffff" stroke="#000000" stroke-width="2"/>
   <polygon points="267,80 249,115 285,115" fill="#000000"/>
   
   <!-- Face 6 (Bottom flap attached below Face 3): Heart symbol -->
-  <rect x="130" y="125" width="55" height="55" fill="#f8fafc" stroke="#000000" stroke-width="2"/>
-  <path d="M157,143 C157,137 148,132 143,139 C136,149 157,168 157,168 C157,168 178,149 171,139 C166,132 157,137 157,143 Z" fill="#b91c1c" stroke="#b91c1c"/>
+  <rect x="130" y="125" width="55" height="55" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+  <path d="M157,143 C157,137 148,132 143,139 C136,149 157,168 157,168 C157,168 178,149 171,139 C166,132 157,137 157,143 Z" fill="#000000" stroke="#000000"/>
   
   <!-- Dashed Fold Lines -->
   <line x1="130" y1="70" x2="185" y2="70" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
@@ -2733,7 +2733,7 @@ Correct Option: (a)',
   <line x1="240" y1="70" x2="240" y2="125" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
   
   <!-- Caption -->
-  <text x="180" y="215" font-family="Arial, sans-serif" font-size="12" font-style="italic" text-anchor="middle" fill="#333333">[ Unfolded Cube Net / खुले पासे का नेट ]</text>
+  <text x="180" y="215" font-family="Arial, sans-serif" font-size="12" font-style="italic" text-anchor="middle" fill="#000000">[ Unfolded Cube Net / खुले पासे का नेट ]</text>
 </svg>',
   NULL
 )
@@ -2810,26 +2810,26 @@ Correct Option: (a)',
 अतः सही उत्तर विकल्प (a) है।',
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 280" width="100%" height="auto" style="max-width:460px; display:block; margin:10px auto; background:#ffffff;">
   <!-- Rectangle: Safety Audit Inspectors -->
-  <rect x="50" y="50" width="220" height="150" fill="none" stroke="#2563eb" stroke-width="2.5"/>
-  <text x="55" y="42" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#2563eb">Safety Inspectors [Rectangle]</text>
+  <rect x="50" y="50" width="220" height="150" fill="none" stroke="#000000" stroke-width="2.5"/>
+  <text x="55" y="42" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000">Safety Inspectors [Rectangle]</text>
   
   <!-- Circle: Traffic Controllers -->
-  <circle cx="270" cy="130" r="75" fill="none" stroke="#059669" stroke-width="2.5"/>
-  <text x="260" y="225" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#059669">Controllers [Circle]</text>
+  <circle cx="270" cy="130" r="75" fill="none" stroke="#000000" stroke-width="2.5"/>
+  <text x="260" y="225" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000">Controllers [Circle]</text>
   
   <!-- Triangle: Locomotive Engineers -->
-  <polygon points="170,25 70,230 270,230" fill="none" stroke="#dc2626" stroke-width="2.5"/>
-  <text x="120" y="18" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#dc2626">Engineers [Triangle]</text>
+  <polygon points="170,25 70,230 270,230" fill="none" stroke="#000000" stroke-width="2.5"/>
+  <text x="120" y="18" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000">Engineers [Triangle]</text>
   
   <!-- Ellipse: Station Managers -->
-  <ellipse cx="230" cy="180" rx="140" ry="50" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="4,3"/>
-  <text x="320" y="165" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#7c3aed">Managers [Ellipse]</text>
+  <ellipse cx="230" cy="180" rx="140" ry="50" fill="none" stroke="#000000" stroke-width="2" stroke-dasharray="4,3"/>
+  <text x="320" y="165" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000">Managers [Ellipse]</text>
   
   <!-- Region Numbers -->
   <text x="80" y="110" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">14</text>
   <text x="125" y="75" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">8</text>
   <text x="165" y="55" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">11</text>
-  <text x="125" y="135" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#b91c1c">7</text>
+  <text x="125" y="135" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000">7</text>
   <text x="200" y="105" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">5</text>
   <text x="295" y="125" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">12</text>
   <text x="200" y="165" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">4</text>
@@ -2839,26 +2839,26 @@ Correct Option: (a)',
 </svg>',
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 280" width="100%" height="auto" style="max-width:460px; display:block; margin:10px auto; background:#ffffff;">
   <!-- Rectangle: Safety Audit Inspectors -->
-  <rect x="50" y="50" width="220" height="150" fill="none" stroke="#2563eb" stroke-width="2.5"/>
-  <text x="55" y="42" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#2563eb">Safety Inspectors [Rectangle]</text>
+  <rect x="50" y="50" width="220" height="150" fill="none" stroke="#000000" stroke-width="2.5"/>
+  <text x="55" y="42" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000">Safety Inspectors [Rectangle]</text>
   
   <!-- Circle: Traffic Controllers -->
-  <circle cx="270" cy="130" r="75" fill="none" stroke="#059669" stroke-width="2.5"/>
-  <text x="260" y="225" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#059669">Controllers [Circle]</text>
+  <circle cx="270" cy="130" r="75" fill="none" stroke="#000000" stroke-width="2.5"/>
+  <text x="260" y="225" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000">Controllers [Circle]</text>
   
   <!-- Triangle: Locomotive Engineers -->
-  <polygon points="170,25 70,230 270,230" fill="none" stroke="#dc2626" stroke-width="2.5"/>
-  <text x="120" y="18" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#dc2626">Engineers [Triangle]</text>
+  <polygon points="170,25 70,230 270,230" fill="none" stroke="#000000" stroke-width="2.5"/>
+  <text x="120" y="18" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000">Engineers [Triangle]</text>
   
   <!-- Ellipse: Station Managers -->
-  <ellipse cx="230" cy="180" rx="140" ry="50" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="4,3"/>
-  <text x="320" y="165" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#7c3aed">Managers [Ellipse]</text>
+  <ellipse cx="230" cy="180" rx="140" ry="50" fill="none" stroke="#000000" stroke-width="2" stroke-dasharray="4,3"/>
+  <text x="320" y="165" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#000000">Managers [Ellipse]</text>
   
   <!-- Region Numbers -->
   <text x="80" y="110" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">14</text>
   <text x="125" y="75" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">8</text>
   <text x="165" y="55" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">11</text>
-  <text x="125" y="135" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#b91c1c">7</text>
+  <text x="125" y="135" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#000000">7</text>
   <text x="200" y="105" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">5</text>
   <text x="295" y="125" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">12</text>
   <text x="200" y="165" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#000000">4</text>
@@ -3949,18 +3949,18 @@ Correct Option: (a)',
     <line x1="35" y1="85" x2="35" y2="72" stroke="#000000" stroke-width="2.5"/>
     <line x1="35" y1="85" x2="23" y2="85" stroke="#000000" stroke-width="2.5"/>
     <!-- Bottom-Right Shaded Corner -->
-    <polygon points="120,85 120,120 85,120" fill="#2563eb"/>
+    <polygon points="120,85 120,120 85,120" fill="#000000"/>
     <text x="60" y="145" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">Object / मूल आकृति</text>
   </g>
   
   <!-- Vertical Mirror Line M - N -->
   <line x1="220" y1="15" x2="220" y2="185" stroke="#000000" stroke-width="2.5" stroke-dasharray="6,4"/>
-  <text x="220" y="12" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#dc2626">M</text>
-  <text x="220" y="202" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#dc2626">N</text>
+  <text x="220" y="12" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000000">M</text>
+  <text x="220" y="202" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000000">N</text>
   
   <!-- Right Side: Mirror Placeholder with Question Mark -->
-  <rect x="270" y="30" width="120" height="120" fill="#f8fafc" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
-  <text x="330" y="105" font-family="Arial, sans-serif" font-size="44" font-weight="bold" text-anchor="middle" fill="#64748b">?</text>
+  <rect x="270" y="30" width="120" height="120" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
+  <text x="330" y="105" font-family="Arial, sans-serif" font-size="44" font-weight="bold" text-anchor="middle" fill="#000000">?</text>
   <text x="330" y="175" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">Mirror Image / दर्पण प्रतिबिम्ब</text>
 </svg>',
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 220" width="100%" height="auto" style="max-width:440px; display:block; margin:10px auto; background:#ffffff;">
@@ -3977,18 +3977,18 @@ Correct Option: (a)',
     <line x1="35" y1="85" x2="35" y2="72" stroke="#000000" stroke-width="2.5"/>
     <line x1="35" y1="85" x2="23" y2="85" stroke="#000000" stroke-width="2.5"/>
     <!-- Bottom-Right Shaded Corner -->
-    <polygon points="120,85 120,120 85,120" fill="#2563eb"/>
+    <polygon points="120,85 120,120 85,120" fill="#000000"/>
     <text x="60" y="145" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">Object / मूल आकृति</text>
   </g>
   
   <!-- Vertical Mirror Line M - N -->
   <line x1="220" y1="15" x2="220" y2="185" stroke="#000000" stroke-width="2.5" stroke-dasharray="6,4"/>
-  <text x="220" y="12" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#dc2626">M</text>
-  <text x="220" y="202" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#dc2626">N</text>
+  <text x="220" y="12" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000000">M</text>
+  <text x="220" y="202" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#000000">N</text>
   
   <!-- Right Side: Mirror Placeholder with Question Mark -->
-  <rect x="270" y="30" width="120" height="120" fill="#f8fafc" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
-  <text x="330" y="105" font-family="Arial, sans-serif" font-size="44" font-weight="bold" text-anchor="middle" fill="#64748b">?</text>
+  <rect x="270" y="30" width="120" height="120" fill="#ffffff" stroke="#000000" stroke-width="2" stroke-dasharray="4,4"/>
+  <text x="330" y="105" font-family="Arial, sans-serif" font-size="44" font-weight="bold" text-anchor="middle" fill="#000000">?</text>
   <text x="330" y="175" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#000000">Mirror Image / दर्पण प्रतिबिम्ब</text>
 </svg>',
   NULL
@@ -4356,11 +4356,11 @@ Correct Option: (a)',
   <circle cx="161" cy="259" r="3" fill="#000000"/>
   
   <!-- Cell (3,3): Question Mark -->
-  <rect x="222" y="202" width="86" height="86" fill="#f8fafc" stroke="#000000" stroke-width="1.5" stroke-dasharray="4,4"/>
-  <text x="265" y="255" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#dc2626">?</text>
+  <rect x="222" y="202" width="86" height="86" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <text x="265" y="255" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#000000">?</text>
   
   <!-- Caption -->
-  <text x="180" y="320" font-family="Arial, sans-serif" font-size="12" font-style="italic" text-anchor="middle" fill="#333333">[ 3x3 Transformation Matrix / 3x3 आकृति आव्यूह ]</text>
+  <text x="180" y="320" font-family="Arial, sans-serif" font-size="12" font-style="italic" text-anchor="middle" fill="#000000">[ 3x3 Transformation Matrix / 3x3 आकृति आव्यूह ]</text>
 </svg>',
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 340" width="100%" height="auto" style="max-width:380px; display:block; margin:10px auto; background:#ffffff;">
   <!-- Grid Matrix 3x3 -->
@@ -4415,11 +4415,11 @@ Correct Option: (a)',
   <circle cx="161" cy="259" r="3" fill="#000000"/>
   
   <!-- Cell (3,3): Question Mark -->
-  <rect x="222" y="202" width="86" height="86" fill="#f8fafc" stroke="#000000" stroke-width="1.5" stroke-dasharray="4,4"/>
-  <text x="265" y="255" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#dc2626">?</text>
+  <rect x="222" y="202" width="86" height="86" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <text x="265" y="255" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#000000">?</text>
   
   <!-- Caption -->
-  <text x="180" y="320" font-family="Arial, sans-serif" font-size="12" font-style="italic" text-anchor="middle" fill="#333333">[ 3x3 Transformation Matrix / 3x3 आकृति आव्यूह ]</text>
+  <text x="180" y="320" font-family="Arial, sans-serif" font-size="12" font-style="italic" text-anchor="middle" fill="#000000">[ 3x3 Transformation Matrix / 3x3 आकृति आव्यूह ]</text>
 </svg>',
   NULL
 )

@@ -2149,7 +2149,7 @@ Correct Option: (a)',
 अतः सही उत्तर (a) है।',
   NULL,
   NULL,
-  '{"a":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#00a8b5\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"42\" cy=\"50\" r=\"32\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"38\" cy=\"50\" r=\"17\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"82\" cy=\"50\" r=\"14\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n  \n  </svg>","b":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#00a8b5\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"39\" cy=\"42\" r=\"21\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"61\" cy=\"42\" r=\"21\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"62\" r=\"21\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n  \n  </svg>","c":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#00a8b5\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"50\" cy=\"50\" r=\"35\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"50\" r=\"23\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"50\" r=\"12\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n  \n  </svg>","d":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#00a8b5\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"34\" cy=\"38\" r=\"17\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"66\" cy=\"38\" r=\"17\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"72\" r=\"17\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n  \n  </svg>"}'::jsonb
+  '{"a":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"42\" cy=\"50\" r=\"32\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"38\" cy=\"50\" r=\"17\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"82\" cy=\"50\" r=\"14\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n  \n  </svg>","b":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"39\" cy=\"42\" r=\"21\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"61\" cy=\"42\" r=\"21\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"62\" r=\"21\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n  \n  </svg>","c":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"50\" cy=\"50\" r=\"35\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"50\" r=\"23\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"50\" r=\"12\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n  \n  </svg>","d":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"34\" cy=\"38\" r=\"17\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"66\" cy=\"38\" r=\"17\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"72\" r=\"17\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n  \n  </svg>"}'::jsonb
 )
 ON CONFLICT (test_id, question_number) DO UPDATE SET
   question_text = EXCLUDED.question_text,
@@ -2234,46 +2234,46 @@ INSERT INTO public.questions (
   'Because the paper is transparent, folding the left half over the right half along the vertical dotted line superimposes the blue triangle ''△'' directly inside/over the green circle ''○''. This matches Figure (A). Since Figure (A) is listed under Option (c), the correct option is (c).',
   'चूंकि कागज पारदर्शी है, बाएं आधे हिस्से को बिंदीदार ऊर्ध्वाधर रेखा के अनुदिश दाएं आधे हिस्से पर मोड़ने पर नीला त्रिभुज ''△'' सीधे हरे वृत्त ''○'' के ऊपर अध्यारोपित हो जाता है। यह पैटर्न चित्र (A) को दर्शाता है। चूंकि चित्र (A) विकल्प (c) में दिया गया है, अतः सही उत्तर (c) है।',
   '<svg viewBox="0 0 340 220" width="100%" height="100%" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="336" height="216" rx="8" fill="#ffffff" stroke="#00a8b5" stroke-width="2" />
-  <rect x="100" y="12" width="140" height="76" rx="6" fill="#ffffff" stroke="#334155" stroke-width="2" />
-  <line x1="170" y1="12" x2="170" y2="88" stroke="#dc2626" stroke-width="2" stroke-dasharray="4,3" />
-  <polygon points="135,26 118,74 152,74" fill="#93c5fd" fill-opacity="0.4" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round" />
-  <circle cx="205" cy="50" r="22" fill="#6ee7b7" fill-opacity="0.4" stroke="#059669" stroke-width="2.5" />
-  <text x="170" y="102" text-anchor="middle" font-size="9.5" font-weight="600" fill="#475569">Question Pattern (Fold left to right)</text>
-  <rect x="14" y="118" width="70" height="76" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1.8" />
-  <text x="22" y="133" font-size="11" font-weight="bold" fill="#334155">(A)</text>
-  <circle cx="49" cy="158" r="19" fill="#6ee7b7" fill-opacity="0.4" stroke="#059669" stroke-width="2.2" />
-  <polygon points="49,138 34,178 64,178" fill="#93c5fd" fill-opacity="0.4" stroke="#2563eb" stroke-width="2.2" stroke-linejoin="round" />
-  <rect x="94" y="118" width="70" height="76" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1.8" />
-  <text x="102" y="133" font-size="11" font-weight="bold" fill="#334155">(B)</text>
-  <circle cx="129" cy="158" r="19" fill="#6ee7b7" fill-opacity="0.4" stroke="#059669" stroke-width="2.2" />
-  <rect x="174" y="118" width="70" height="76" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1.8" />
-  <text x="182" y="133" font-size="11" font-weight="bold" fill="#334155">(C)</text>
-  <polygon points="209,138 194,178 224,178" fill="#93c5fd" fill-opacity="0.4" stroke="#2563eb" stroke-width="2.2" stroke-linejoin="round" />
-  <rect x="254" y="118" width="70" height="76" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1.8" />
-  <text x="262" y="133" font-size="11" font-weight="bold" fill="#334155">(D)</text>
+  <rect x="2" y="2" width="336" height="216" rx="8" fill="#ffffff" stroke="#000000" stroke-width="2" />
+  <rect x="100" y="12" width="140" height="76" rx="6" fill="#ffffff" stroke="#000000" stroke-width="2" />
+  <line x1="170" y1="12" x2="170" y2="88" stroke="#000000" stroke-width="2" stroke-dasharray="4,3" />
+  <polygon points="135,26 118,74 152,74" fill="#000000" fill-opacity="0.4" stroke="#000000" stroke-width="2.5" stroke-linejoin="round" />
+  <circle cx="205" cy="50" r="22" fill="#000000" fill-opacity="0.4" stroke="#000000" stroke-width="2.5" />
+  <text x="170" y="102" text-anchor="middle" font-size="9.5" font-weight="600" fill="#000000">Question Pattern (Fold left to right)</text>
+  <rect x="14" y="118" width="70" height="76" rx="6" fill="#ffffff" stroke="#000000" stroke-width="1.8" />
+  <text x="22" y="133" font-size="11" font-weight="bold" fill="#000000">(A)</text>
+  <circle cx="49" cy="158" r="19" fill="#000000" fill-opacity="0.4" stroke="#000000" stroke-width="2.2" />
+  <polygon points="49,138 34,178 64,178" fill="#000000" fill-opacity="0.4" stroke="#000000" stroke-width="2.2" stroke-linejoin="round" />
+  <rect x="94" y="118" width="70" height="76" rx="6" fill="#ffffff" stroke="#000000" stroke-width="1.8" />
+  <text x="102" y="133" font-size="11" font-weight="bold" fill="#000000">(B)</text>
+  <circle cx="129" cy="158" r="19" fill="#000000" fill-opacity="0.4" stroke="#000000" stroke-width="2.2" />
+  <rect x="174" y="118" width="70" height="76" rx="6" fill="#ffffff" stroke="#000000" stroke-width="1.8" />
+  <text x="182" y="133" font-size="11" font-weight="bold" fill="#000000">(C)</text>
+  <polygon points="209,138 194,178 224,178" fill="#000000" fill-opacity="0.4" stroke="#000000" stroke-width="2.2" stroke-linejoin="round" />
+  <rect x="254" y="118" width="70" height="76" rx="6" fill="#ffffff" stroke="#000000" stroke-width="1.8" />
+  <text x="262" y="133" font-size="11" font-weight="bold" fill="#000000">(D)</text>
 </svg>',
   '<svg viewBox="0 0 340 220" width="100%" height="100%" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="336" height="216" rx="8" fill="#ffffff" stroke="#00a8b5" stroke-width="2" />
-  <rect x="100" y="12" width="140" height="76" rx="6" fill="#ffffff" stroke="#334155" stroke-width="2" />
-  <line x1="170" y1="12" x2="170" y2="88" stroke="#dc2626" stroke-width="2" stroke-dasharray="4,3" />
-  <polygon points="135,26 118,74 152,74" fill="#93c5fd" fill-opacity="0.4" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round" />
-  <circle cx="205" cy="50" r="22" fill="#6ee7b7" fill-opacity="0.4" stroke="#059669" stroke-width="2.5" />
-  <text x="170" y="102" text-anchor="middle" font-size="9.5" font-weight="600" fill="#475569">प्रश्न आकृति (बाएं से दाएं मोड़ें)</text>
-  <rect x="14" y="118" width="70" height="76" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1.8" />
-  <text x="22" y="133" font-size="11" font-weight="bold" fill="#334155">(A)</text>
-  <circle cx="49" cy="158" r="19" fill="#6ee7b7" fill-opacity="0.4" stroke="#059669" stroke-width="2.2" />
-  <polygon points="49,138 34,178 64,178" fill="#93c5fd" fill-opacity="0.4" stroke="#2563eb" stroke-width="2.2" stroke-linejoin="round" />
-  <rect x="94" y="118" width="70" height="76" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1.8" />
-  <text x="102" y="133" font-size="11" font-weight="bold" fill="#334155">(B)</text>
-  <circle cx="129" cy="158" r="19" fill="#6ee7b7" fill-opacity="0.4" stroke="#059669" stroke-width="2.2" />
-  <rect x="174" y="118" width="70" height="76" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1.8" />
-  <text x="182" y="133" font-size="11" font-weight="bold" fill="#334155">(C)</text>
-  <polygon points="209,138 194,178 224,178" fill="#93c5fd" fill-opacity="0.4" stroke="#2563eb" stroke-width="2.2" stroke-linejoin="round" />
-  <rect x="254" y="118" width="70" height="76" rx="6" fill="#ffffff" stroke="#64748b" stroke-width="1.8" />
-  <text x="262" y="133" font-size="11" font-weight="bold" fill="#334155">(D)</text>
+  <rect x="2" y="2" width="336" height="216" rx="8" fill="#ffffff" stroke="#000000" stroke-width="2" />
+  <rect x="100" y="12" width="140" height="76" rx="6" fill="#ffffff" stroke="#000000" stroke-width="2" />
+  <line x1="170" y1="12" x2="170" y2="88" stroke="#000000" stroke-width="2" stroke-dasharray="4,3" />
+  <polygon points="135,26 118,74 152,74" fill="#000000" fill-opacity="0.4" stroke="#000000" stroke-width="2.5" stroke-linejoin="round" />
+  <circle cx="205" cy="50" r="22" fill="#000000" fill-opacity="0.4" stroke="#000000" stroke-width="2.5" />
+  <text x="170" y="102" text-anchor="middle" font-size="9.5" font-weight="600" fill="#000000">प्रश्न आकृति (बाएं से दाएं मोड़ें)</text>
+  <rect x="14" y="118" width="70" height="76" rx="6" fill="#ffffff" stroke="#000000" stroke-width="1.8" />
+  <text x="22" y="133" font-size="11" font-weight="bold" fill="#000000">(A)</text>
+  <circle cx="49" cy="158" r="19" fill="#000000" fill-opacity="0.4" stroke="#000000" stroke-width="2.2" />
+  <polygon points="49,138 34,178 64,178" fill="#000000" fill-opacity="0.4" stroke="#000000" stroke-width="2.2" stroke-linejoin="round" />
+  <rect x="94" y="118" width="70" height="76" rx="6" fill="#ffffff" stroke="#000000" stroke-width="1.8" />
+  <text x="102" y="133" font-size="11" font-weight="bold" fill="#000000">(B)</text>
+  <circle cx="129" cy="158" r="19" fill="#000000" fill-opacity="0.4" stroke="#000000" stroke-width="2.2" />
+  <rect x="174" y="118" width="70" height="76" rx="6" fill="#ffffff" stroke="#000000" stroke-width="1.8" />
+  <text x="182" y="133" font-size="11" font-weight="bold" fill="#000000">(C)</text>
+  <polygon points="209,138 194,178 224,178" fill="#000000" fill-opacity="0.4" stroke="#000000" stroke-width="2.2" stroke-linejoin="round" />
+  <rect x="254" y="118" width="70" height="76" rx="6" fill="#ffffff" stroke="#000000" stroke-width="1.8" />
+  <text x="262" y="133" font-size="11" font-weight="bold" fill="#000000">(D)</text>
 </svg>',
-  '{"a":"<svg viewBox=\"0 0 100 100\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"4\" y=\"4\" width=\"92\" height=\"92\" rx=\"6\" fill=\"#ffffff\" stroke=\"#64748b\" stroke-width=\"2.5\" /></svg>","b":"<svg viewBox=\"0 0 100 100\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"4\" y=\"4\" width=\"92\" height=\"92\" rx=\"6\" fill=\"#ffffff\" stroke=\"#64748b\" stroke-width=\"2.5\" /><circle cx=\"50\" cy=\"50\" r=\"28\" fill=\"#6ee7b7\" fill-opacity=\"0.4\" stroke=\"#059669\" stroke-width=\"3\" /></svg>","c":"<svg viewBox=\"0 0 100 100\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"4\" y=\"4\" width=\"92\" height=\"92\" rx=\"6\" fill=\"#ffffff\" stroke=\"#64748b\" stroke-width=\"2.5\" /><circle cx=\"50\" cy=\"50\" r=\"28\" fill=\"#6ee7b7\" fill-opacity=\"0.4\" stroke=\"#059669\" stroke-width=\"3\" /><polygon points=\"50,22 28,78 72,78\" fill=\"#93c5fd\" fill-opacity=\"0.4\" stroke=\"#2563eb\" stroke-width=\"3\" stroke-linejoin=\"round\" /></svg>","d":"<svg viewBox=\"0 0 100 100\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"4\" y=\"4\" width=\"92\" height=\"92\" rx=\"6\" fill=\"#ffffff\" stroke=\"#64748b\" stroke-width=\"2.5\" /><polygon points=\"50,22 28,78 72,78\" fill=\"#93c5fd\" fill-opacity=\"0.4\" stroke=\"#2563eb\" stroke-width=\"3\" stroke-linejoin=\"round\" /></svg>"}'::jsonb
+  '{"a":"<svg viewBox=\"0 0 100 100\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"4\" y=\"4\" width=\"92\" height=\"92\" rx=\"6\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2.5\" /></svg>","b":"<svg viewBox=\"0 0 100 100\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"4\" y=\"4\" width=\"92\" height=\"92\" rx=\"6\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2.5\" /><circle cx=\"50\" cy=\"50\" r=\"28\" fill=\"#000000\" fill-opacity=\"0.4\" stroke=\"#000000\" stroke-width=\"3\" /></svg>","c":"<svg viewBox=\"0 0 100 100\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"4\" y=\"4\" width=\"92\" height=\"92\" rx=\"6\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2.5\" /><circle cx=\"50\" cy=\"50\" r=\"28\" fill=\"#000000\" fill-opacity=\"0.4\" stroke=\"#000000\" stroke-width=\"3\" /><polygon points=\"50,22 28,78 72,78\" fill=\"#000000\" fill-opacity=\"0.4\" stroke=\"#000000\" stroke-width=\"3\" stroke-linejoin=\"round\" /></svg>","d":"<svg viewBox=\"0 0 100 100\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"4\" y=\"4\" width=\"92\" height=\"92\" rx=\"6\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2.5\" /><polygon points=\"50,22 28,78 72,78\" fill=\"#000000\" fill-opacity=\"0.4\" stroke=\"#000000\" stroke-width=\"3\" stroke-linejoin=\"round\" /></svg>"}'::jsonb
 )
 ON CONFLICT (test_id, question_number) DO UPDATE SET
   question_text = EXCLUDED.question_text,
@@ -2320,13 +2320,13 @@ Correct Option: (a)',
 
 अतः सही उत्तर (a) है।',
   '<svg viewBox="0 0 180 180" width="100%" height="100%" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-  <rect x="3" y="3" width="174" height="174" fill="#ffffff" stroke="#00a8b5" stroke-width="2.5" rx="4" />
-  <rect x="20" y="20" width="140" height="140" fill="#e6f7f9" fill-opacity="0.15" stroke="#00a8b5" stroke-width="2.5" />
-  <line x1="20" y1="20" x2="160" y2="160" stroke="#00a8b5" stroke-width="2" />
-  <line x1="160" y1="20" x2="20" y2="160" stroke="#00a8b5" stroke-width="2" />
-  <line x1="20" y1="90" x2="160" y2="90" stroke="#00a8b5" stroke-width="2" stroke-dasharray="4,2" />
-  <line x1="90" y1="20" x2="90" y2="160" stroke="#00a8b5" stroke-width="2" stroke-dasharray="4,2" />
-  <circle cx="90" cy="90" r="4" fill="#00a8b5" />
+  <rect x="3" y="3" width="174" height="174" fill="#ffffff" stroke="#000000" stroke-width="2.5" rx="4" />
+  <rect x="20" y="20" width="140" height="140" fill="#ffffff" fill-opacity="0.15" stroke="#000000" stroke-width="2.5" />
+  <line x1="20" y1="20" x2="160" y2="160" stroke="#000000" stroke-width="2" />
+  <line x1="160" y1="20" x2="20" y2="160" stroke="#000000" stroke-width="2" />
+  <line x1="20" y1="90" x2="160" y2="90" stroke="#000000" stroke-width="2" stroke-dasharray="4,2" />
+  <line x1="90" y1="20" x2="90" y2="160" stroke="#000000" stroke-width="2" stroke-dasharray="4,2" />
+  <circle cx="90" cy="90" r="4" fill="#000000" />
 </svg>',
   NULL,
   NULL
@@ -2378,46 +2378,46 @@ Correct Option: (b)',
 
 अतः सही उत्तर (b) है।',
   '<svg viewBox="0 0 380 200" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-  <rect x="120" y="70" width="140" height="70" fill="none" stroke="#00a8b5" stroke-width="2.5" />
-  <circle cx="160" cy="85" r="45" fill="none" stroke="#00a8b5" stroke-width="2.5" />
-  <polygon points="120,70 65,160 175,160" fill="none" stroke="#00a8b5" stroke-width="2.5" />
+  <rect x="120" y="70" width="140" height="70" fill="none" stroke="#000000" stroke-width="2.5" />
+  <circle cx="160" cy="85" r="45" fill="none" stroke="#000000" stroke-width="2.5" />
+  <polygon points="120,70 65,160 175,160" fill="none" stroke="#000000" stroke-width="2.5" />
 
-  <text x="160" y="60" text-anchor="middle" font-size="14" font-weight="bold" fill="#007a87">10</text>
-  <text x="98" y="145" text-anchor="middle" font-size="14" font-weight="bold" fill="#007a87">8</text>
-  <text x="130" y="105" text-anchor="middle" font-size="13" font-weight="bold" fill="#007a87">2</text>
-  <text x="165" y="100" text-anchor="middle" font-size="14" font-weight="bold" fill="#007a87">5</text>
-  <text x="132" y="135" text-anchor="middle" font-size="13" font-weight="bold" fill="#007a87">6</text>
-  <text x="230" y="112" text-anchor="middle" font-size="14" font-weight="bold" fill="#007a87">7</text>
+  <text x="160" y="60" text-anchor="middle" font-size="14" font-weight="bold" fill="#000000">10</text>
+  <text x="98" y="145" text-anchor="middle" font-size="14" font-weight="bold" fill="#000000">8</text>
+  <text x="130" y="105" text-anchor="middle" font-size="13" font-weight="bold" fill="#000000">2</text>
+  <text x="165" y="100" text-anchor="middle" font-size="14" font-weight="bold" fill="#000000">5</text>
+  <text x="132" y="135" text-anchor="middle" font-size="13" font-weight="bold" fill="#000000">6</text>
+  <text x="230" y="112" text-anchor="middle" font-size="14" font-weight="bold" fill="#000000">7</text>
 
-  <line x1="185" y1="52" x2="225" y2="52" stroke="#00a8b5" stroke-width="2" />
-  <text x="232" y="56" font-size="14" font-weight="bold" fill="#007a87">Cricket</text>
+  <line x1="185" y1="52" x2="225" y2="52" stroke="#000000" stroke-width="2" />
+  <text x="232" y="56" font-size="14" font-weight="bold" fill="#000000">Cricket</text>
 
-  <line x1="260" y1="105" x2="285" y2="105" stroke="#00a8b5" stroke-width="2" />
-  <text x="292" y="109" font-size="14" font-weight="bold" fill="#007a87">Hockey</text>
+  <line x1="260" y1="105" x2="285" y2="105" stroke="#000000" stroke-width="2" />
+  <text x="292" y="109" font-size="14" font-weight="bold" fill="#000000">Hockey</text>
 
-  <line x1="68" y1="115" x2="88" y2="115" stroke="#00a8b5" stroke-width="2" />
-  <text x="62" y="119" text-anchor="end" font-size="14" font-weight="bold" fill="#007a87">Kabaddi</text>
+  <line x1="68" y1="115" x2="88" y2="115" stroke="#000000" stroke-width="2" />
+  <text x="62" y="119" text-anchor="end" font-size="14" font-weight="bold" fill="#000000">Kabaddi</text>
 </svg>',
   '<svg viewBox="0 0 380 200" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-  <rect x="120" y="70" width="140" height="70" fill="none" stroke="#00a8b5" stroke-width="2.5" />
-  <circle cx="160" cy="85" r="45" fill="none" stroke="#00a8b5" stroke-width="2.5" />
-  <polygon points="120,70 65,160 175,160" fill="none" stroke="#00a8b5" stroke-width="2.5" />
+  <rect x="120" y="70" width="140" height="70" fill="none" stroke="#000000" stroke-width="2.5" />
+  <circle cx="160" cy="85" r="45" fill="none" stroke="#000000" stroke-width="2.5" />
+  <polygon points="120,70 65,160 175,160" fill="none" stroke="#000000" stroke-width="2.5" />
 
-  <text x="160" y="60" text-anchor="middle" font-size="14" font-weight="bold" fill="#007a87">10</text>
-  <text x="98" y="145" text-anchor="middle" font-size="14" font-weight="bold" fill="#007a87">8</text>
-  <text x="130" y="105" text-anchor="middle" font-size="13" font-weight="bold" fill="#007a87">2</text>
-  <text x="165" y="100" text-anchor="middle" font-size="14" font-weight="bold" fill="#007a87">5</text>
-  <text x="132" y="135" text-anchor="middle" font-size="13" font-weight="bold" fill="#007a87">6</text>
-  <text x="230" y="112" text-anchor="middle" font-size="14" font-weight="bold" fill="#007a87">7</text>
+  <text x="160" y="60" text-anchor="middle" font-size="14" font-weight="bold" fill="#000000">10</text>
+  <text x="98" y="145" text-anchor="middle" font-size="14" font-weight="bold" fill="#000000">8</text>
+  <text x="130" y="105" text-anchor="middle" font-size="13" font-weight="bold" fill="#000000">2</text>
+  <text x="165" y="100" text-anchor="middle" font-size="14" font-weight="bold" fill="#000000">5</text>
+  <text x="132" y="135" text-anchor="middle" font-size="13" font-weight="bold" fill="#000000">6</text>
+  <text x="230" y="112" text-anchor="middle" font-size="14" font-weight="bold" fill="#000000">7</text>
 
-  <line x1="185" y1="52" x2="225" y2="52" stroke="#00a8b5" stroke-width="2" />
-  <text x="232" y="56" font-size="14" font-weight="bold" fill="#007a87">Cricket</text>
+  <line x1="185" y1="52" x2="225" y2="52" stroke="#000000" stroke-width="2" />
+  <text x="232" y="56" font-size="14" font-weight="bold" fill="#000000">Cricket</text>
 
-  <line x1="260" y1="105" x2="285" y2="105" stroke="#00a8b5" stroke-width="2" />
-  <text x="292" y="109" font-size="14" font-weight="bold" fill="#007a87">Hockey</text>
+  <line x1="260" y1="105" x2="285" y2="105" stroke="#000000" stroke-width="2" />
+  <text x="292" y="109" font-size="14" font-weight="bold" fill="#000000">Hockey</text>
 
-  <line x1="68" y1="115" x2="88" y2="115" stroke="#00a8b5" stroke-width="2" />
-  <text x="62" y="119" text-anchor="end" font-size="14" font-weight="bold" fill="#007a87">Kabaddi</text>
+  <line x1="68" y1="115" x2="88" y2="115" stroke="#000000" stroke-width="2" />
+  <text x="62" y="119" text-anchor="end" font-size="14" font-weight="bold" fill="#000000">Kabaddi</text>
 </svg>',
   NULL
 )
@@ -2454,18 +2454,18 @@ INSERT INTO public.questions (
   'A 5-pointed star has 5 outer small triangular points and 5 larger overlapping triangles formed with each vertex and the opposing internal base line. Total triangles = 5 + 5 = 10.',
   'एक 5-नुकीले तारे में 5 बाहरी छोटे नुकीले त्रिभुज होते हैं और प्रत्येक शीर्ष तथा आंतरिक आधार से 5 बड़े त्रिभुज बनते हैं। कुल त्रिभुज = 5 + 5 = 10 होते हैं।',
   '<svg viewBox="0 0 200 200" width="100%" height="100%" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-  <rect x="3" y="3" width="194" height="194" fill="#ffffff" stroke="#00a8b5" stroke-width="2.5" rx="4" />
-  <polygon points="100,25 147,170 24,80 176,80 53,170" fill="#e6f7f9" fill-opacity="0.2" stroke="#00a8b5" stroke-width="2.5" stroke-linejoin="round" />
-  <circle cx="100" cy="25" r="4" fill="#00a8b5" />
-  <circle cx="176" cy="80" r="4" fill="#00a8b5" />
-  <circle cx="147" cy="170" r="4" fill="#00a8b5" />
-  <circle cx="53" cy="170" r="4" fill="#00a8b5" />
-  <circle cx="24" cy="80" r="4" fill="#00a8b5" />
-  <text x="100" y="18" text-anchor="middle" font-size="12" font-weight="bold" fill="#007a87">A</text>
-  <text x="188" y="84" text-anchor="start" font-size="12" font-weight="bold" fill="#007a87">B</text>
-  <text x="155" y="186" text-anchor="middle" font-size="12" font-weight="bold" fill="#007a87">C</text>
-  <text x="45" y="186" text-anchor="middle" font-size="12" font-weight="bold" fill="#007a87">D</text>
-  <text x="12" y="84" text-anchor="end" font-size="12" font-weight="bold" fill="#007a87">E</text>
+  <rect x="3" y="3" width="194" height="194" fill="#ffffff" stroke="#000000" stroke-width="2.5" rx="4" />
+  <polygon points="100,25 147,170 24,80 176,80 53,170" fill="#ffffff" fill-opacity="0.2" stroke="#000000" stroke-width="2.5" stroke-linejoin="round" />
+  <circle cx="100" cy="25" r="4" fill="#000000" />
+  <circle cx="176" cy="80" r="4" fill="#000000" />
+  <circle cx="147" cy="170" r="4" fill="#000000" />
+  <circle cx="53" cy="170" r="4" fill="#000000" />
+  <circle cx="24" cy="80" r="4" fill="#000000" />
+  <text x="100" y="18" text-anchor="middle" font-size="12" font-weight="bold" fill="#000000">A</text>
+  <text x="188" y="84" text-anchor="start" font-size="12" font-weight="bold" fill="#000000">B</text>
+  <text x="155" y="186" text-anchor="middle" font-size="12" font-weight="bold" fill="#000000">C</text>
+  <text x="45" y="186" text-anchor="middle" font-size="12" font-weight="bold" fill="#000000">D</text>
+  <text x="12" y="84" text-anchor="end" font-size="12" font-weight="bold" fill="#000000">E</text>
 </svg>',
   NULL,
   NULL
@@ -2595,12 +2595,12 @@ Correct Option: (b)',
 
 अतः सही उत्तर (b) है।',
   '<svg viewBox="0 0 180 180" width="100%" height="100%" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-  <rect x="3" y="3" width="174" height="174" fill="#ffffff" stroke="#00a8b5" stroke-width="2.5" rx="4" />
-  <rect x="20" y="20" width="140" height="140" fill="#e6f7f9" fill-opacity="0.15" stroke="#00a8b5" stroke-width="2.5" />
-  <line x1="20" y1="20" x2="160" y2="160" stroke="#00a8b5" stroke-width="2" />
-  <line x1="160" y1="20" x2="20" y2="160" stroke="#00a8b5" stroke-width="2" />
-  <line x1="20" y1="90" x2="160" y2="90" stroke="#00a8b5" stroke-width="2" stroke-dasharray="5,3" />
-  <circle cx="90" cy="90" r="4" fill="#00a8b5" />
+  <rect x="3" y="3" width="174" height="174" fill="#ffffff" stroke="#000000" stroke-width="2.5" rx="4" />
+  <rect x="20" y="20" width="140" height="140" fill="#ffffff" fill-opacity="0.15" stroke="#000000" stroke-width="2.5" />
+  <line x1="20" y1="20" x2="160" y2="160" stroke="#000000" stroke-width="2" />
+  <line x1="160" y1="20" x2="20" y2="160" stroke="#000000" stroke-width="2" />
+  <line x1="20" y1="90" x2="160" y2="90" stroke="#000000" stroke-width="2" stroke-dasharray="5,3" />
+  <circle cx="90" cy="90" r="4" fill="#000000" />
 </svg>',
   NULL,
   NULL
@@ -6395,18 +6395,18 @@ Correct Option: (c)',
 
 अतः सही उत्तर (c) है।',
   '<svg viewBox="0 0 200 200" width="100%" height="100%" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-  <rect x="3" y="3" width="194" height="194" fill="#ffffff" stroke="#00a8b5" stroke-width="2.5" rx="4" />
-  <polygon points="100,25 147,170 24,80 176,80 53,170" fill="#e6f7f9" fill-opacity="0.2" stroke="#00a8b5" stroke-width="2.5" stroke-linejoin="round" />
-  <circle cx="100" cy="25" r="4" fill="#00a8b5" />
-  <circle cx="176" cy="80" r="4" fill="#00a8b5" />
-  <circle cx="147" cy="170" r="4" fill="#00a8b5" />
-  <circle cx="53" cy="170" r="4" fill="#00a8b5" />
-  <circle cx="24" cy="80" r="4" fill="#00a8b5" />
-  <text x="100" y="18" text-anchor="middle" font-size="12" font-weight="bold" fill="#007a87">A</text>
-  <text x="188" y="84" text-anchor="start" font-size="12" font-weight="bold" fill="#007a87">B</text>
-  <text x="155" y="186" text-anchor="middle" font-size="12" font-weight="bold" fill="#007a87">C</text>
-  <text x="45" y="186" text-anchor="middle" font-size="12" font-weight="bold" fill="#007a87">D</text>
-  <text x="12" y="84" text-anchor="end" font-size="12" font-weight="bold" fill="#007a87">E</text>
+  <rect x="3" y="3" width="194" height="194" fill="#ffffff" stroke="#000000" stroke-width="2.5" rx="4" />
+  <polygon points="100,25 147,170 24,80 176,80 53,170" fill="#ffffff" fill-opacity="0.2" stroke="#000000" stroke-width="2.5" stroke-linejoin="round" />
+  <circle cx="100" cy="25" r="4" fill="#000000" />
+  <circle cx="176" cy="80" r="4" fill="#000000" />
+  <circle cx="147" cy="170" r="4" fill="#000000" />
+  <circle cx="53" cy="170" r="4" fill="#000000" />
+  <circle cx="24" cy="80" r="4" fill="#000000" />
+  <text x="100" y="18" text-anchor="middle" font-size="12" font-weight="bold" fill="#000000">A</text>
+  <text x="188" y="84" text-anchor="start" font-size="12" font-weight="bold" fill="#000000">B</text>
+  <text x="155" y="186" text-anchor="middle" font-size="12" font-weight="bold" fill="#000000">C</text>
+  <text x="45" y="186" text-anchor="middle" font-size="12" font-weight="bold" fill="#000000">D</text>
+  <text x="12" y="84" text-anchor="end" font-size="12" font-weight="bold" fill="#000000">E</text>
 </svg>',
   NULL,
   NULL
@@ -6453,16 +6453,16 @@ Correct Option: (a)',
 
 अतः सही उत्तर (a) है।',
   '<svg viewBox="0 0 240 180" width="100%" height="100%" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-  <rect x="3" y="3" width="234" height="174" fill="#ffffff" stroke="#00a8b5" stroke-width="2.5" rx="4" />
-  <polygon points="120,24 25,150 215,150" fill="#e6f7f9" fill-opacity="0.15" stroke="#00a8b5" stroke-width="2.5" stroke-linejoin="round" />
-  <line x1="120" y1="24" x2="72.5" y2="150" stroke="#00a8b5" stroke-width="2" />
-  <line x1="120" y1="24" x2="120" y2="150" stroke="#00a8b5" stroke-width="2" />
-  <line x1="120" y1="24" x2="167.5" y2="150" stroke="#00a8b5" stroke-width="2" />
-  <text x="120" y="18" text-anchor="middle" font-size="12" font-weight="bold" fill="#007a87">A</text>
-  <text x="49" y="142" text-anchor="middle" font-size="13" font-weight="bold" fill="#007a87">1</text>
-  <text x="96" y="142" text-anchor="middle" font-size="13" font-weight="bold" fill="#007a87">2</text>
-  <text x="144" y="142" text-anchor="middle" font-size="13" font-weight="bold" fill="#007a87">3</text>
-  <text x="191" y="142" text-anchor="middle" font-size="13" font-weight="bold" fill="#007a87">4</text>
+  <rect x="3" y="3" width="234" height="174" fill="#ffffff" stroke="#000000" stroke-width="2.5" rx="4" />
+  <polygon points="120,24 25,150 215,150" fill="#ffffff" fill-opacity="0.15" stroke="#000000" stroke-width="2.5" stroke-linejoin="round" />
+  <line x1="120" y1="24" x2="72.5" y2="150" stroke="#000000" stroke-width="2" />
+  <line x1="120" y1="24" x2="120" y2="150" stroke="#000000" stroke-width="2" />
+  <line x1="120" y1="24" x2="167.5" y2="150" stroke="#000000" stroke-width="2" />
+  <text x="120" y="18" text-anchor="middle" font-size="12" font-weight="bold" fill="#000000">A</text>
+  <text x="49" y="142" text-anchor="middle" font-size="13" font-weight="bold" fill="#000000">1</text>
+  <text x="96" y="142" text-anchor="middle" font-size="13" font-weight="bold" fill="#000000">2</text>
+  <text x="144" y="142" text-anchor="middle" font-size="13" font-weight="bold" fill="#000000">3</text>
+  <text x="191" y="142" text-anchor="middle" font-size="13" font-weight="bold" fill="#000000">4</text>
 </svg>',
   NULL,
   NULL
@@ -6556,13 +6556,13 @@ Correct Option: (a)',
 
 अतः सही उत्तर (a) है।',
   '<svg viewBox="0 0 260 150" width="100%" height="100%" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-  <rect x="3" y="3" width="254" height="144" fill="#ffffff" stroke="#00a8b5" stroke-width="2.5" rx="4" />
-  <rect x="20" y="20" width="110" height="110" fill="#e6f7f9" fill-opacity="0.15" stroke="#00a8b5" stroke-width="2.2" />
-  <line x1="20" y1="20" x2="130" y2="130" stroke="#00a8b5" stroke-width="2" />
-  <line x1="130" y1="20" x2="20" y2="130" stroke="#00a8b5" stroke-width="2" />
-  <rect x="130" y="20" width="110" height="110" fill="#e6f7f9" fill-opacity="0.15" stroke="#00a8b5" stroke-width="2.2" />
-  <line x1="130" y1="20" x2="240" y2="130" stroke="#00a8b5" stroke-width="2" />
-  <line x1="240" y1="20" x2="130" y2="130" stroke="#00a8b5" stroke-width="2" />
+  <rect x="3" y="3" width="254" height="144" fill="#ffffff" stroke="#000000" stroke-width="2.5" rx="4" />
+  <rect x="20" y="20" width="110" height="110" fill="#ffffff" fill-opacity="0.15" stroke="#000000" stroke-width="2.2" />
+  <line x1="20" y1="20" x2="130" y2="130" stroke="#000000" stroke-width="2" />
+  <line x1="130" y1="20" x2="20" y2="130" stroke="#000000" stroke-width="2" />
+  <rect x="130" y="20" width="110" height="110" fill="#ffffff" fill-opacity="0.15" stroke="#000000" stroke-width="2.2" />
+  <line x1="130" y1="20" x2="240" y2="130" stroke="#000000" stroke-width="2" />
+  <line x1="240" y1="20" x2="130" y2="130" stroke="#000000" stroke-width="2" />
 </svg>',
   NULL,
   NULL
@@ -6600,10 +6600,10 @@ INSERT INTO public.questions (
   'A square divided by two intersecting diagonals contains 4 small individual triangles and 4 larger triangles formed by pairs of adjacent small triangles. Total = 4 × 2 = 8 triangles.',
   'दो विकर्णों द्वारा विभाजित वर्ग में 4 छोटे व्यक्तिगत त्रिभुज और 4 बड़े संयुक्त त्रिभुज बनते हैं। कुल त्रिभुज = 4 × 2 = 8।',
   '<svg viewBox="0 0 170 170" width="100%" height="100%" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-  <rect x="3" y="3" width="164" height="164" fill="#ffffff" stroke="#00a8b5" stroke-width="2.5" rx="4" />
-  <rect x="20" y="20" width="130" height="130" fill="#e6f7f9" fill-opacity="0.15" stroke="#00a8b5" stroke-width="2.2" />
-  <line x1="20" y1="20" x2="150" y2="150" stroke="#00a8b5" stroke-width="2.2" />
-  <line x1="150" y1="20" x2="20" y2="150" stroke="#00a8b5" stroke-width="2.2" />
+  <rect x="3" y="3" width="164" height="164" fill="#ffffff" stroke="#000000" stroke-width="2.5" rx="4" />
+  <rect x="20" y="20" width="130" height="130" fill="#ffffff" fill-opacity="0.15" stroke="#000000" stroke-width="2.2" />
+  <line x1="20" y1="20" x2="150" y2="150" stroke="#000000" stroke-width="2.2" />
+  <line x1="150" y1="20" x2="20" y2="150" stroke="#000000" stroke-width="2.2" />
 </svg>',
   NULL,
   NULL
@@ -7021,19 +7021,19 @@ Correct Option: (b)',
 
 अतः सही उत्तर (b) है।',
   '<svg viewBox="0 0 100 100" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-    <rect x="2" y="2" width="96" height="96" fill="#ffffff" stroke="#00a8b5" stroke-width="2.2" rx="3" />
+    <rect x="2" y="2" width="96" height="96" fill="#ffffff" stroke="#000000" stroke-width="2.2" rx="3" />
     
-    <circle cx="44" cy="50" r="32" fill="none" stroke="#00a8b5" stroke-width="2.2" />
-    <circle cx="40" cy="50" r="17" fill="none" stroke="#00a8b5" stroke-width="2.2" />
-    <circle cx="72" cy="50" r="21" fill="none" stroke="#00a8b5" stroke-width="2.2" />
+    <circle cx="44" cy="50" r="32" fill="none" stroke="#000000" stroke-width="2.2" />
+    <circle cx="40" cy="50" r="17" fill="none" stroke="#000000" stroke-width="2.2" />
+    <circle cx="72" cy="50" r="21" fill="none" stroke="#000000" stroke-width="2.2" />
   
   </svg>',
   '<svg viewBox="0 0 100 100" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-    <rect x="2" y="2" width="96" height="96" fill="#ffffff" stroke="#00a8b5" stroke-width="2.2" rx="3" />
+    <rect x="2" y="2" width="96" height="96" fill="#ffffff" stroke="#000000" stroke-width="2.2" rx="3" />
     
-    <circle cx="44" cy="50" r="32" fill="none" stroke="#00a8b5" stroke-width="2.2" />
-    <circle cx="40" cy="50" r="17" fill="none" stroke="#00a8b5" stroke-width="2.2" />
-    <circle cx="72" cy="50" r="21" fill="none" stroke="#00a8b5" stroke-width="2.2" />
+    <circle cx="44" cy="50" r="32" fill="none" stroke="#000000" stroke-width="2.2" />
+    <circle cx="40" cy="50" r="17" fill="none" stroke="#000000" stroke-width="2.2" />
+    <circle cx="72" cy="50" r="21" fill="none" stroke="#000000" stroke-width="2.2" />
   
   </svg>',
   NULL
@@ -7354,7 +7354,7 @@ Correct Option: (a)',
 अतः सही उत्तर (a) है।',
   NULL,
   NULL,
-  '{"a":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#00a8b5\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"50\" cy=\"50\" r=\"35\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"50\" r=\"23\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"50\" r=\"12\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n  \n  </svg>","b":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#00a8b5\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"39\" cy=\"42\" r=\"21\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"61\" cy=\"42\" r=\"21\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"62\" r=\"21\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n  \n  </svg>","c":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#00a8b5\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"44\" cy=\"50\" r=\"32\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"40\" cy=\"50\" r=\"17\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"72\" cy=\"50\" r=\"21\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n  \n  </svg>","d":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#00a8b5\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"50\" cy=\"50\" r=\"36\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"43\" cy=\"50\" r=\"16\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"57\" cy=\"50\" r=\"16\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n  \n  </svg>"}'::jsonb
+  '{"a":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"50\" cy=\"50\" r=\"35\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"50\" r=\"23\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"50\" r=\"12\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n  \n  </svg>","b":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"39\" cy=\"42\" r=\"21\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"61\" cy=\"42\" r=\"21\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"62\" r=\"21\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n  \n  </svg>","c":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"44\" cy=\"50\" r=\"32\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"40\" cy=\"50\" r=\"17\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"72\" cy=\"50\" r=\"21\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n  \n  </svg>","d":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"50\" cy=\"50\" r=\"36\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"43\" cy=\"50\" r=\"16\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"57\" cy=\"50\" r=\"16\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n  \n  </svg>"}'::jsonb
 )
 ON CONFLICT (test_id, question_number) DO UPDATE SET
   question_text = EXCLUDED.question_text,
@@ -7529,7 +7529,7 @@ Correct Option: (a)',
 अतः सही उत्तर (a) है।',
   NULL,
   NULL,
-  '{"a":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#00a8b5\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"42\" cy=\"50\" r=\"32\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"38\" cy=\"50\" r=\"17\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"82\" cy=\"50\" r=\"14\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n  \n  </svg>","b":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#00a8b5\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"39\" cy=\"42\" r=\"21\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"61\" cy=\"42\" r=\"21\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"62\" r=\"21\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n  \n  </svg>","c":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#00a8b5\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"34\" cy=\"38\" r=\"17\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"66\" cy=\"38\" r=\"17\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"72\" r=\"17\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n  \n  </svg>","d":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#00a8b5\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"50\" cy=\"50\" r=\"36\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"43\" cy=\"50\" r=\"16\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"57\" cy=\"50\" r=\"16\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n  \n  </svg>"}'::jsonb
+  '{"a":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"42\" cy=\"50\" r=\"32\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"38\" cy=\"50\" r=\"17\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"82\" cy=\"50\" r=\"14\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n  \n  </svg>","b":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"39\" cy=\"42\" r=\"21\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"61\" cy=\"42\" r=\"21\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"62\" r=\"21\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n  \n  </svg>","c":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"34\" cy=\"38\" r=\"17\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"66\" cy=\"38\" r=\"17\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"72\" r=\"17\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n  \n  </svg>","d":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"50\" cy=\"50\" r=\"36\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"43\" cy=\"50\" r=\"16\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"57\" cy=\"50\" r=\"16\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n  \n  </svg>"}'::jsonb
 )
 ON CONFLICT (test_id, question_number) DO UPDATE SET
   question_text = EXCLUDED.question_text,
@@ -10391,7 +10391,7 @@ Correct Option: (a)',
 अतः सही उत्तर (a) है।',
   NULL,
   NULL,
-  '{"a":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#00a8b5\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"50\" cy=\"50\" r=\"36\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"35\" cy=\"50\" r=\"13\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"65\" cy=\"50\" r=\"13\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n  \n  </svg>","b":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#00a8b5\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"50\" cy=\"50\" r=\"35\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"50\" r=\"23\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"50\" r=\"12\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n  \n  </svg>","c":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#00a8b5\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"39\" cy=\"42\" r=\"21\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"61\" cy=\"42\" r=\"21\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"62\" r=\"21\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n  \n  </svg>","d":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#00a8b5\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"34\" cy=\"38\" r=\"17\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"66\" cy=\"38\" r=\"17\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"72\" r=\"17\" fill=\"none\" stroke=\"#00a8b5\" stroke-width=\"2.2\" />\n  \n  </svg>"}'::jsonb
+  '{"a":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"50\" cy=\"50\" r=\"36\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"35\" cy=\"50\" r=\"13\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"65\" cy=\"50\" r=\"13\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n  \n  </svg>","b":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"50\" cy=\"50\" r=\"35\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"50\" r=\"23\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"50\" r=\"12\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n  \n  </svg>","c":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"39\" cy=\"42\" r=\"21\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"61\" cy=\"42\" r=\"21\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"62\" r=\"21\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n  \n  </svg>","d":"<svg viewBox=\"0 0 100 100\" class=\"w-full h-full\" xmlns=\"http://www.w3.org/2000/svg\">\n    <rect x=\"2\" y=\"2\" width=\"96\" height=\"96\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2.2\" rx=\"3\" />\n    \n    <circle cx=\"34\" cy=\"38\" r=\"17\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"66\" cy=\"38\" r=\"17\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n    <circle cx=\"50\" cy=\"72\" r=\"17\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2.2\" />\n  \n  </svg>"}'::jsonb
 )
 ON CONFLICT (test_id, question_number) DO UPDATE SET
   question_text = EXCLUDED.question_text,
@@ -10440,12 +10440,12 @@ Correct Option: (b)',
 
 अतः सही उत्तर (b) है।',
   '<svg viewBox="0 0 180 180" width="100%" height="100%" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-  <rect x="3" y="3" width="174" height="174" fill="#ffffff" stroke="#00a8b5" stroke-width="2.5" rx="4" />
-  <rect x="20" y="20" width="140" height="140" fill="#e6f7f9" fill-opacity="0.15" stroke="#00a8b5" stroke-width="2.5" />
-  <line x1="20" y1="20" x2="160" y2="160" stroke="#00a8b5" stroke-width="2" />
-  <line x1="160" y1="20" x2="20" y2="160" stroke="#00a8b5" stroke-width="2" />
-  <line x1="20" y1="90" x2="160" y2="90" stroke="#00a8b5" stroke-width="2" stroke-dasharray="5,3" />
-  <circle cx="90" cy="90" r="4" fill="#00a8b5" />
+  <rect x="3" y="3" width="174" height="174" fill="#ffffff" stroke="#000000" stroke-width="2.5" rx="4" />
+  <rect x="20" y="20" width="140" height="140" fill="#ffffff" fill-opacity="0.15" stroke="#000000" stroke-width="2.5" />
+  <line x1="20" y1="20" x2="160" y2="160" stroke="#000000" stroke-width="2" />
+  <line x1="160" y1="20" x2="20" y2="160" stroke="#000000" stroke-width="2" />
+  <line x1="20" y1="90" x2="160" y2="90" stroke="#000000" stroke-width="2" stroke-dasharray="5,3" />
+  <circle cx="90" cy="90" r="4" fill="#000000" />
 </svg>',
   NULL,
   NULL
