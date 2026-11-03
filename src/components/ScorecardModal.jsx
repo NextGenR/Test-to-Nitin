@@ -29,10 +29,8 @@ export default function ScorecardModal({
     responses = {}
   } = results;
 
-  // 1. Category-Wise Cutoff Benchmark
+  // 1. Candidate Category
   const candidateCategory = candidate?.category || 'UR';
-  const cutoffRequirement = candidateCategory === 'ST' ? 25.0 : (candidateCategory === 'SC' || candidateCategory === 'OBC') ? 30.0 : 40.0;
-  const isPassed = score >= cutoffRequirement;
 
   // 2. Speed & Time Analytics Computation
   let correctTime = 0;
@@ -59,49 +57,43 @@ export default function ScorecardModal({
   const avgUnattemptedTime = unattemptedCount > 0 ? Math.round(unattemptedTime / unattemptedCount) : 0;
   const totalTimeSpentSecs = correctTime + incorrectTime + unattemptedTime;
 
-  // 3. Topic-Level Weakness Diagnostics
-  const TOPIC_RANGES = [
-    { name: 'Physics & Mechanics', start: 0, end: 8, section: 'General Science' },
-    { name: 'Chemistry & Elements', start: 9, end: 17, section: 'General Science' },
-    { name: 'Life Sciences & Biology', start: 18, end: 24, section: 'General Science' },
-    { name: 'Arithmetic & Percentages', start: 25, end: 32, section: 'Mathematics' },
-    { name: 'Algebra & Number Systems', start: 33, end: 40, section: 'Mathematics' },
-    { name: 'Geometry & Mensuration', start: 41, end: 49, section: 'Mathematics' },
-    { name: 'Analogy & Series', start: 50, end: 64, section: 'Reasoning' },
-    { name: 'Logic, Puzzles & Syllogisms', start: 65, end: 79, section: 'Reasoning' },
-    { name: 'Polity & History', start: 80, end: 89, section: 'General Awareness' },
-    { name: 'Current Affairs & Railway GK', start: 90, end: 99, section: 'General Awareness' }
-  ];
-
-  const topicAnalytics = TOPIC_RANGES.map(t => {
-    let tTotal = 0;
-    let tCorrect = 0;
-    let tWrong = 0;
-    for (let i = t.start; i <= t.end; i++) {
-      if (!questions[i]) continue;
-      tTotal++;
-      const userOptIdx = responses[i];
-      if (userOptIdx !== undefined && userOptIdx !== null) {
-        const userLetter = String.fromCharCode(65 + userOptIdx);
-        if (userLetter === questions[i].correct_option) {
-          tCorrect++;
-        } else {
-          tWrong++;
-        }
+  // 3. Dynamic Chapter & Topic-Level Diagnostic Analytics
+  const topicMap = {};
+  questions.forEach((q, idx) => {
+    const topicName = q.chapter_name || q.topic || q.section || `Topic ${Math.floor(idx / 10) + 1}`;
+    if (!topicMap[topicName]) {
+      topicMap[topicName] = {
+        name: topicName,
+        section: q.section || '',
+        total: 0,
+        correct: 0,
+        wrong: 0,
+        unattempted: 0
+      };
+    }
+    topicMap[topicName].total++;
+    const userOptIdx = responses[idx];
+    if (userOptIdx === undefined || userOptIdx === null) {
+      topicMap[topicName].unattempted++;
+    } else {
+      const userLetter = String.fromCharCode(65 + userOptIdx);
+      if (userLetter === q.correct_option) {
+        topicMap[topicName].correct++;
+      } else {
+        topicMap[topicName].wrong++;
       }
     }
-    const tAcc = tTotal > 0 ? Math.round((tCorrect / tTotal) * 100) : 0;
-    let status = 'strong';
-    if (tAcc < 40) status = 'weak';
-    else if (tAcc < 70) status = 'moderate';
+  });
 
+  const topicAnalytics = Object.values(topicMap).map(t => {
+    const attempted = t.correct + t.wrong;
+    const accuracy = attempted > 0 ? Math.round((t.correct / attempted) * 100) : 0;
+    let status = 'strong';
+    if (accuracy < 50 || (t.total >= 3 && t.correct === 0)) status = 'weak';
+    else if (accuracy < 75) status = 'moderate';
     return {
-      name: t.name,
-      section: t.section,
-      total: tTotal,
-      correct: tCorrect,
-      wrong: tWrong,
-      accuracy: tAcc,
+      ...t,
+      accuracy,
       status
     };
   });
@@ -116,7 +108,7 @@ export default function ScorecardModal({
             <div className="flex items-center gap-2 mb-1">
               <Award className="w-6 h-6 text-amber-400" />
               <h2 className="text-xl font-bold tracking-wide">
-                RRB Group D CBT Performance Report
+                RRB CBT Examination Performance Report
               </h2>
             </div>
             <p className="text-xs text-slate-200">
@@ -131,14 +123,12 @@ export default function ScorecardModal({
                 {score.toFixed(2)} <span className="text-xs text-white/80 font-normal">/ {totalMarks}</span>
               </div>
             </div>
-            <div className="text-right">
-              <div className={`px-2.5 py-1 rounded text-xs font-bold uppercase tracking-wider ${
-                isPassed ? 'bg-emerald-500 text-white shadow-sm' : 'bg-red-500 text-white'
-              }`}>
-                {isPassed ? 'Qualified' : 'Needs Practice'}
+            <div className="text-right pl-2 border-l border-white/20">
+              <div className="px-2.5 py-1 bg-white/10 rounded text-xs font-bold uppercase tracking-wider text-amber-200">
+                Test Completed
               </div>
-              <div className="text-[10px] text-amber-200 mt-0.5">
-                {candidateCategory} Cutoff: {cutoffRequirement.toFixed(1)} Marks
+              <div className="text-[10px] text-slate-300 mt-0.5">
+                Category: {candidateCategory}
               </div>
             </div>
           </div>

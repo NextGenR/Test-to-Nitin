@@ -166,3 +166,33 @@ DROP POLICY IF EXISTS "Allow anon read on questions" ON public.questions;
 CREATE POLICY "Allow anon read on questions" ON public.questions FOR SELECT TO anon, authenticated USING (true);
 DROP POLICY IF EXISTS "Allow anon write on questions" ON public.questions;
 CREATE POLICY "Allow anon write on questions" ON public.questions FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);
+
+-- 8. RRB_NTPC_MOCK_1_responses (Graduate Level CBT-1)
+CREATE TABLE IF NOT EXISTS public."RRB_NTPC_MOCK_1_responses" (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name_of_candidate VARCHAR(100) NOT NULL,
+    candidate_mobile VARCHAR(15) NOT NULL,
+    question_number INTEGER NOT NULL,
+    section VARCHAR(100) NOT NULL,
+    correct_answer VARCHAR(10) NOT NULL,
+    his_answer VARCHAR(10),
+    time_taken_by_him INTEGER DEFAULT 0,
+    is_correct BOOLEAN GENERATED ALWAYS AS (correct_answer = his_answer) STORED,
+    attempt_number INTEGER DEFAULT 1,
+    try1 VARCHAR(10),
+    try2 VARCHAR(10),
+    try3 VARCHAR(10),
+    try4 VARCHAR(10),
+    try5 VARCHAR(10),
+    time_taken_try1 INTEGER DEFAULT 0,
+    time_taken_try2 INTEGER DEFAULT 0,
+    time_taken_try3 INTEGER DEFAULT 0,
+    submitted_at TIMESTAMPTZ DEFAULT NOW(),
+    CONSTRAINT unique_ntpc_mock1_candidate_question UNIQUE (candidate_mobile, question_number)
+);
+
+ALTER TABLE public."RRB_NTPC_MOCK_1_responses" ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Allow anon all on RRB_NTPC_MOCK_1_responses" ON public."RRB_NTPC_MOCK_1_responses";
+CREATE POLICY "Allow anon all on RRB_NTPC_MOCK_1_responses" ON public."RRB_NTPC_MOCK_1_responses" FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);
+
+CREATE INDEX IF NOT EXISTS idx_ntpc_mock1_candidate ON public."RRB_NTPC_MOCK_1_responses"(candidate_mobile);

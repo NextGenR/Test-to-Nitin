@@ -9,6 +9,9 @@ export const MOCK_TESTS_CATALOG = [
   {
     id: 1,
     testId: 'rrb_cbt_mock_1',
+    category: 'rrb-group-d',
+    categoryLabel: 'RRB Group D (10th Pass Level)',
+    mockNumber: 1,
     title: 'RRB Group D CBT Mock Test 01',
     description: 'Based on official Railway Recruitment Board pattern with high-yield General Science and Math.',
     questionsCount: 100,
@@ -18,6 +21,9 @@ export const MOCK_TESTS_CATALOG = [
   {
     id: 2,
     testId: 'rrb_cbt_mock_2',
+    category: 'rrb-group-d',
+    categoryLabel: 'RRB Group D (10th Pass Level)',
+    mockNumber: 2,
     title: 'RRB Group D CBT Mock Test 02',
     description: 'Comprehensive evaluation covering Physics, Chemistry, Reasoning series, and Railway GK.',
     questionsCount: 100,
@@ -27,13 +33,42 @@ export const MOCK_TESTS_CATALOG = [
   {
     id: 3,
     testId: 'rrb_cbt_mock_3',
+    category: 'rrb-group-d',
+    categoryLabel: 'RRB Group D (10th Pass Level)',
+    mockNumber: 3,
     title: 'RRB Group D CBT Mock Test 03',
     description: 'Advanced full-length test simulation with authentic TCS iON timing and negative marking.',
     questionsCount: 100,
     durationMins: 90,
     responseTable: 'RRB_MOCK_3_responses'
+  },
+  {
+    id: 4,
+    testId: 'rrb_ntpc_graduate_mock_1',
+    category: 'rrb-ntpc',
+    categoryLabel: 'RRB NTPC (Graduate Level)',
+    mockNumber: 1,
+    title: 'RRB NTPC Graduate Level CBT-1 Mock Test 01',
+    description: 'Official CBT-1 pattern with 30 Mathematics, 30 General Intelligence & Reasoning, and 40 General Awareness.',
+    questionsCount: 100,
+    durationMins: 90,
+    responseTable: 'RRB_NTPC_MOCK_1_responses'
   }
 ];
+
+/**
+ * Helper to determine the dedicated candidate responses table name
+ */
+export const getResponseTableName = (mockNumber = 1, testId = null) => {
+  const activeId = testId || (typeof mockNumber === 'string' ? mockNumber : '');
+  if (activeId && String(activeId).includes('ntpc')) {
+    const m = String(activeId).match(/mock_(\d+)/);
+    const n = m ? m[1] : '1';
+    return `RRB_NTPC_MOCK_${n}_responses`;
+  }
+  const num = typeof mockNumber === 'number' ? mockNumber : (String(activeId).slice(-1) || '1');
+  return `RRB_MOCK_${num}_responses`;
+};
 
 /**
  * Dynamically fetch published active tests from the cloud database
@@ -41,7 +76,7 @@ export const MOCK_TESTS_CATALOG = [
  */
 export const fetchPublishedTests = async () => {
   try {
-    const res = await fetchWithTimeout(`${API_ENDPOINT}/tests?is_active=eq.true&order=id.asc`, {
+    const res = await fetchWithTimeout(`${API_ENDPOINT}/mock_tests?order=id.asc`, {
       method: 'GET',
       headers: getHeaders()
     }, 6000);
@@ -49,15 +84,27 @@ export const fetchPublishedTests = async () => {
     if (res.ok) {
       const data = await res.json();
       if (data && Array.isArray(data) && data.length > 0) {
-        return data.map((t) => ({
-          id: Number(t.id),
-          testId: t.test_id,
-          title: t.title,
-          description: t.description || '',
-          questionsCount: Number(t.questions_count || 100),
-          durationMins: Number(t.duration_mins || 90),
-          responseTable: t.response_table || `RRB_MOCK_${t.id}_responses`
-        }));
+        return data.map((t) => {
+          const isNtpc = String(t.id).toLowerCase().includes('ntpc');
+          let mNum = 1;
+          const match = String(t.id).match(/mock_(\d+)/);
+          if (match) mNum = Number(match[1]);
+
+          return {
+            id: isNtpc ? 100 + mNum : mNum,
+            testId: t.id,
+            category: isNtpc ? 'rrb-ntpc' : 'rrb-group-d',
+            categoryLabel: isNtpc ? 'RRB NTPC (Graduate Level)' : 'RRB Group D (10th Pass Level)',
+            mockNumber: mNum,
+            title: t.title,
+            description: isNtpc
+              ? 'Official CBT-1 pattern with 30 Mathematics, 30 General Intelligence & Reasoning, and 40 General Awareness.'
+              : 'Based on official Railway Recruitment Board pattern with high-yield General Science and Math.',
+            questionsCount: Number(t.total_questions || 100),
+            durationMins: Number(t.total_time_minutes || 90),
+            responseTable: isNtpc ? `RRB_NTPC_MOCK_${mNum}_responses` : `RRB_MOCK_${mNum}_responses`
+          };
+        });
       }
     }
   } catch (e) {
@@ -255,10 +302,12 @@ export const loginOrRegisterCandidate = async (name, mobile, passcode, category 
 };
 
 /**
- * Fetch Questions for Mock 1, 2, or 3
+ * Fetch Questions for any mock test (supports rrb_cbt_mock_X or rrb_ntpc_graduate_mock_X)
  */
-export const fetchTestQuestions = async (mockNumber = 1) => {
-  const testId = `rrb_cbt_mock_${mockNumber}`;
+export const fetchTestQuestions = async (testIdOrMock = 1) => {
+  const testId = typeof testIdOrMock === 'string' && testIdOrMock.startsWith('rrb_')
+    ? testIdOrMock
+    : `rrb_cbt_mock_${testIdOrMock}`;
 
   try {
     const url = `${API_ENDPOINT}/questions?test_id=eq.${testId}&order=question_number.asc`;
@@ -270,6 +319,7 @@ export const fetchTestQuestions = async (mockNumber = 1) => {
     if (res.ok) {
       const data = await res.json();
       if (data && data.length > 0) {
+        const isNtpc = testId.includes('ntpc');
         return data.map((q) => {
           const qNum = Number(q.question_number || q.id);
           let optsEn = [];
@@ -304,11 +354,19 @@ export const fetchTestQuestions = async (mockNumber = 1) => {
             ];
           }
 
-          const isScience = (q.part_number === 1) || (q.section_title === 'General Science') || (qNum <= 25);
+          const isScience = !isNtpc && ((q.part_number === 1) || (q.section_title === 'General Science') || (qNum <= 25));
+
+          let fallbackSection = 'General Science';
+          if (isNtpc) {
+            fallbackSection = qNum <= 30 ? 'Mathematics' : qNum <= 60 ? 'General Intelligence & Reasoning' : 'General Awareness';
+          } else {
+            fallbackSection = qNum <= 25 ? 'General Science' : qNum <= 50 ? 'Mathematics' : qNum <= 80 ? 'General Intelligence & Reasoning' : 'General Awareness';
+          }
 
           return {
             id: qNum,
-            section: q.section_title || q.section || (qNum <= 25 ? 'General Science' : 'General Intelligence & Reasoning'),
+            section: q.section_title || q.section_name || q.section || fallbackSection,
+            chapter_name: q.chapter_name || q.topic || '',
             question_en: q.question_text || q.question_en || '',
             question_hi: q.question_text_hi || q.question_hi || q.question_text || '',
             options_en: optsEn,
@@ -329,7 +387,7 @@ export const fetchTestQuestions = async (mockNumber = 1) => {
       }
     }
   } catch (err) {
-    console.warn(`Database questions fetch for mock ${mockNumber} notice:`, err.message);
+    console.warn(`Database questions fetch for ${testId} notice:`, err.message);
   }
 
   return [];
@@ -338,9 +396,9 @@ export const fetchTestQuestions = async (mockNumber = 1) => {
 /**
  * Detect current attempt number for candidate on given mock test
  */
-export const getCandidateAttemptNumber = async (mockNumber = 1, candidateMobile) => {
+export const getCandidateAttemptNumber = async (mockNumber = 1, candidateMobile, testId = null) => {
   if (!candidateMobile) return 1;
-  const tableName = `RRB_MOCK_${mockNumber}_responses`;
+  const tableName = getResponseTableName(mockNumber, testId);
 
   try {
     const checkUrl = `${API_ENDPOINT}/${tableName}?candidate_mobile=eq.${candidateMobile}&select=attempt_number,try1,try2,try3,try4,try5&order=attempt_number.desc&limit=1`;
@@ -371,10 +429,11 @@ export const getCandidateAttemptNumber = async (mockNumber = 1, candidateMobile)
 /**
  * Real-time sync for a single question response.
  * Called immediately when candidate clicks "Save & Next", "Save & Mark for Review", or "Clear Response".
- * Writes directly to the candidate's active attempt column (try1, try2, try3...) and his_answer in RRB_MOCK_X_responses.
+ * Writes directly to the candidate's active attempt column (try1, try2, try3...) and his_answer in dedicated response table.
  */
 export const saveSingleQuestionResponse = async ({
   mockNumber = 1,
+  testId = null,
   candidateName,
   candidateMobile,
   questionNumber,
@@ -385,7 +444,7 @@ export const saveSingleQuestionResponse = async ({
   attemptNumber = 1
 }) => {
   if (!candidateMobile || !questionNumber) return;
-  const tableName = `RRB_MOCK_${mockNumber}_responses`;
+  const tableName = getResponseTableName(mockNumber, testId);
   const tryCol = `try${attemptNumber}`;
   const timeCol = `time_taken_try${Math.min(attemptNumber, 3)}`;
 
@@ -394,7 +453,7 @@ export const saveSingleQuestionResponse = async ({
     name_of_candidate: candidateName || 'Candidate',
     candidate_mobile: candidateMobile,
     question_number: questionNumber,
-    section: section || 'General Science',
+    section: section || 'General Section',
     correct_answer: correctAnswer || '',
     his_answer: hisAnswer || null,
     time_taken_by_him: timeTaken,
@@ -431,11 +490,12 @@ export const saveSingleQuestionResponse = async ({
 };
 
 /**
- * Save candidate responses to table: RRB_MOCK_1_responses, RRB_MOCK_2_responses, or RRB_MOCK_3_responses
+ * Save candidate responses to dedicated table: RRB_MOCK_X_responses or RRB_NTPC_MOCK_X_responses
  * Supports Retakes: saves answers into try1, try2, try3, try4, try5 columns!
  */
 export const saveMockResponses = async ({
   mockNumber = 1,
+  testId = null,
   candidateName,
   candidateMobile,
   questions,
@@ -444,7 +504,7 @@ export const saveMockResponses = async ({
   attemptNumber = 1
 }) => {
   if (!candidateMobile || !questions || questions.length === 0) return;
-  const tableName = `RRB_MOCK_${mockNumber}_responses`;
+  const tableName = getResponseTableName(mockNumber, testId);
 
   let nextAttemptNum = attemptNumber || 1;
   const existingMap = {};

@@ -9,7 +9,7 @@ import ScorecardModal from '../components/ScorecardModal';
 import PauseModal from '../components/PauseModal';
 import ScratchpadModal from '../components/ScratchpadModal';
 import { X, Clock, BookOpen } from 'lucide-react';
-import { SECTIONS, MOCK_TESTS_DATA, MOCK_QUESTIONS } from '../data/mockQuestions';
+import { getTestSections, SECTIONS as DEFAULT_SECTIONS } from '../data/mockQuestions';
 import {
   fetchTestQuestions,
   syncTestAttempt,
@@ -34,6 +34,7 @@ export default function CBTExamPage({
   onFinishExam
 }) {
   const activeTestId = testId || `rrb_cbt_mock_${mockNumber}`;
+  const activeSections = getTestSections(activeTestId);
   const storageKey = `rrb_test_attempt_${activeTestId}_${candidate?.mobile_number}`;
 
   // Instant synchronous recovery from localStorage on page refresh
@@ -82,7 +83,7 @@ export default function CBTExamPage({
   const [questions, setQuestions] = useState(getInitialQuestions);
   const [loadingQuestions, setLoadingQuestions] = useState(questions.length === 0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(savedState?.currentQuestionIndex || 0);
-  const [activeSectionId, setActiveSectionId] = useState('science');
+  const [activeSectionId, setActiveSectionId] = useState(savedState?.activeSectionId || activeSections[0]?.id || 'science');
   const [currentLang, setCurrentLang] = useState(defaultLang);
   const [fontSize, setFontSize] = useState('normal');
   const [attemptNumber, setAttemptNumber] = useState(savedState?.attemptNumber || (isRetake ? 2 : 1));
@@ -196,7 +197,7 @@ export default function CBTExamPage({
         }
       } catch (e) {}
 
-      const rawQuestions = await fetchTestQuestions(mockNumber);
+      const rawQuestions = await fetchTestQuestions(activeTestId);
       if (!mounted) return;
 
       if (!rawQuestions || rawQuestions.length === 0) {
@@ -204,7 +205,7 @@ export default function CBTExamPage({
         return;
       }
 
-      const seedKey = `${candidate?.mobile_number || 'cand'}_mock_${mockNumber}_att_${activeAttempt}`;
+      const seedKey = `${candidate?.mobile_number || 'cand'}_${activeTestId}_att_${activeAttempt}`;
       const randomized = randomizeQuestionsOptions(rawQuestions, seedKey);
 
       if (randomized && randomized.length > 0) {
@@ -221,7 +222,7 @@ export default function CBTExamPage({
 
     // Detect candidate attempt number and load questions
     if (candidate?.mobile_number) {
-      getCandidateAttemptNumber(mockNumber, candidate.mobile_number).then((maxNum) => {
+      getCandidateAttemptNumber(mockNumber, candidate.mobile_number, activeTestId).then((maxNum) => {
         if (!mounted) return;
         let resolvedAttempt = attemptNumber;
         if (savedState?.attemptNumber) {
@@ -248,11 +249,11 @@ export default function CBTExamPage({
   }, [mockNumber, candidate?.mobile_number, isRetake]);
 
   // 2. Active section computation
-  const activeSection = SECTIONS.find((s) => s.id === activeSectionId) || SECTIONS[0];
+  const activeSection = activeSections.find((s) => s.id === activeSectionId) || activeSections[0];
 
   // Sync active section when currentQuestionIndex changes
   useEffect(() => {
-    const sec = SECTIONS.find((s) => currentQuestionIndex >= s.startIndex && currentQuestionIndex <= s.endIndex);
+    const sec = activeSections.find((s) => currentQuestionIndex >= s.startIndex && currentQuestionIndex <= s.endIndex);
     if (sec && sec.id !== activeSectionId) {
       setActiveSectionId(sec.id);
     }
@@ -367,7 +368,7 @@ export default function CBTExamPage({
 
   const handleSelectSection = (sectionId) => {
     setActiveSectionId(sectionId);
-    const sec = SECTIONS.find((s) => s.id === sectionId);
+    const sec = activeSections.find((s) => s.id === sectionId);
     if (sec) {
       setCurrentQuestionIndex(sec.startIndex);
       if (!isReviewMode) {
@@ -402,10 +403,11 @@ export default function CBTExamPage({
 
     const qTime = timeSpentMap[currentQuestionIndex] || 0;
 
-    // Real-time live sync for this question directly to RRB_MOCK_X_responses
+    // Real-time live sync for this question directly to dedicated responses table
     if (currentQ && candidate?.mobile_number) {
       saveSingleQuestionResponse({
         mockNumber,
+        testId: activeTestId,
         candidateName: candidate.name,
         candidateMobile: candidate.mobile_number,
         questionNumber: currentQuestionIndex + 1,
@@ -448,10 +450,11 @@ export default function CBTExamPage({
 
     const qTime = timeSpentMap[currentQuestionIndex] || 0;
 
-    // Real-time live sync for this question directly to RRB_MOCK_X_responses
+    // Real-time live sync for this question directly to dedicated responses table
     if (currentQ && candidate?.mobile_number) {
       saveSingleQuestionResponse({
         mockNumber,
+        testId: activeTestId,
         candidateName: candidate.name,
         candidateMobile: candidate.mobile_number,
         questionNumber: currentQuestionIndex + 1,
@@ -513,6 +516,7 @@ export default function CBTExamPage({
     if (currentQ && candidate?.mobile_number) {
       saveSingleQuestionResponse({
         mockNumber,
+        testId: activeTestId,
         candidateName: candidate.name,
         candidateMobile: candidate.mobile_number,
         questionNumber: currentQuestionIndex + 1,
@@ -556,7 +560,7 @@ export default function CBTExamPage({
     let incorrectCount = 0;
     let unattemptedCount = 0;
 
-    const sectionalScores = SECTIONS.map((sec) => {
+    const sectionalScores = activeSections.map((sec) => {
       let secCorrect = 0;
       let secIncorrect = 0;
       let secUnattempted = 0;
@@ -619,9 +623,10 @@ export default function CBTExamPage({
     setFinalResults(results);
     setShowScorecard(true);
 
-    // 1. Save question-level responses to table: RRB_MOCK_1_responses, RRB_MOCK_2_responses, or RRB_MOCK_3_responses
+    // 1. Save question-level responses to dedicated table
     saveMockResponses({
       mockNumber,
+      testId: activeTestId,
       candidateName: candidate?.name,
       candidateMobile: candidate?.mobile_number,
       questions,
@@ -669,8 +674,8 @@ export default function CBTExamPage({
     setLoadingQuestions(true);
 
     // Randomize new option order for the new attempt!
-    const seedKey = `${candidate?.mobile_number || 'cand'}_mock_${mockNumber}_att_${nextAttempt}`;
-    fetchTestQuestions(mockNumber).then((rawQuestions) => {
+    const seedKey = `${candidate?.mobile_number || 'cand'}_${activeTestId}_att_${nextAttempt}`;
+    fetchTestQuestions(activeTestId).then((rawQuestions) => {
       const randomized = randomizeQuestionsOptions(rawQuestions, seedKey);
       const qCacheKey = `rrb_shuffled_qs_v8_${activeTestId}_${candidate?.mobile_number}_att_${nextAttempt}`;
       if (randomized && randomized.length > 0) {
@@ -742,7 +747,7 @@ export default function CBTExamPage({
           <span className="text-[11px] font-bold text-amber-400 uppercase tracking-wider mr-2 hidden sm:inline">
             Sections:
           </span>
-          {SECTIONS.map((sec) => {
+          {activeSections.map((sec) => {
             const isActive = activeSectionId === sec.id;
             return (
               <button
@@ -831,7 +836,7 @@ export default function CBTExamPage({
         <div className="hidden lg:block w-80 h-full shrink-0">
           <QuestionPalette
             candidate={candidate}
-            sections={SECTIONS}
+            sections={activeSections}
             activeSection={activeSection}
             onSelectSection={handleSelectSection}
             currentQuestionIndex={currentQuestionIndex}
@@ -873,7 +878,7 @@ export default function CBTExamPage({
               <div className="flex-1 overflow-y-auto">
                 <QuestionPalette
                   candidate={candidate}
-                  sections={SECTIONS}
+                  sections={activeSections}
                   activeSection={activeSection}
                   onSelectSection={handleSelectSection}
                   currentQuestionIndex={currentQuestionIndex}
@@ -911,7 +916,7 @@ export default function CBTExamPage({
         isOpen={showQuestionPaper}
         onClose={() => setShowQuestionPaper(false)}
         questions={questions}
-        sections={SECTIONS}
+        sections={activeSections}
         lang={currentLang}
       />
 
@@ -919,7 +924,7 @@ export default function CBTExamPage({
         isOpen={showSubmitConfirm}
         onClose={() => setShowSubmitConfirm(false)}
         onConfirmSubmit={handleFinalSubmit}
-        sections={SECTIONS}
+        sections={activeSections}
         questions={questions}
         responses={responses}
         questionStates={questionStates}
@@ -937,7 +942,7 @@ export default function CBTExamPage({
         isOpen={showScorecard}
         results={finalResults}
         questions={questions}
-        sections={SECTIONS}
+        sections={activeSections}
         candidate={candidate}
         timeSpentMap={timeSpentMap}
         onOpenReviewMode={() => {

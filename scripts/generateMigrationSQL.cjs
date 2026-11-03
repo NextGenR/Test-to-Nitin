@@ -13,9 +13,9 @@ function escapeJson(obj) {
 
 function run() {
   const mocks = [
-    { num: 1, testId: 'rrb_cbt_mock_1', file: 'mock1.json' },
-    { num: 2, testId: 'rrb_cbt_mock_2', file: 'mock2.json' },
-    { num: 3, testId: 'rrb_cbt_mock_3', file: 'mock3.json' }
+    { num: 1, testId: 'rrb_cbt_mock_1', file: 'mock1_with_svgs.json' },
+    { num: 2, testId: 'rrb_cbt_mock_2', file: 'mock2_with_svgs.json' },
+    { num: 3, testId: 'rrb_cbt_mock_3', file: 'mock3_with_svgs.json' }
   ];
 
   let sql = `-- =========================================================================\n`;
@@ -52,7 +52,10 @@ function run() {
 
   let totalQuestions = 0;
   for (const mock of mocks) {
-    const filePath = path.join(__dirname, '..', 'src', 'data', mock.file);
+    let filePath = path.join(__dirname, '..', 'Mock_test_JSON', mock.file);
+    if (!fs.existsSync(filePath)) {
+      filePath = path.join(__dirname, '..', 'src', 'data', mock.file);
+    }
     const questions = JSON.parse(fs.readFileSync(filePath, 'utf8'));
 
     sql += `-- -------------------------------------------------------------------------\n`;

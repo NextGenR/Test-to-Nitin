@@ -1,0 +1,2502 @@
+[
+  {
+    "question_number": 1,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Number System & Divisibility",
+    "difficulty": "Moderate",
+    "question_text": "If the 6-digit number 738a6a is divisible by 11, what is the value of the digit 'a'?",
+    "question_text_hi": "यदि 6-अंकीय संख्या 738a6a, 11 से पूर्णतः विभाज्य है, तो अंक 'a' का मान क्या होगा?",
+    "options": {
+      "a": "3",
+      "b": "6",
+      "c": "9",
+      "d": "4"
+    },
+    "options_hi": {
+      "a": "3",
+      "b": "6",
+      "c": "9",
+      "d": "4"
+    },
+    "correct_option": "c",
+    "solution_text": "Divisibility by 11:\nSum of odd-place digits (1st, 3rd, 5th from right): a + a + 3 = 2a + 3.\nSum of even-place digits (2nd, 4th, 6th from right): 6 + 8 + 7 = 21.\nDifference = 21 - (2a + 3) = 18 - 2a.\nFor divisibility by 11, (18 - 2a) must be 0 or a multiple of 11.\n18 - 2a = 0 => 2a = 18 => a = 9.\n\nCorrect Option: (c)",
+    "solution_text_hi": "11 की विभाज्यता नियम:\nविषम स्थानों के अंकों का योग = a + a + 3 = 2a + 3\nसम स्थानों के अंकों का योग = 6 + 8 + 7 = 21\nअंतर = 21 - (2a + 3) = 18 - 2a = 0 => 2a = 18 => a = 9.\n\nअतः सही उत्तर (c) है।"
+  },
+  {
+    "question_number": 2,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Number System (Unit Digit)",
+    "difficulty": "Moderate",
+    "question_text": "What is the unit digit of the product expression (7⁹⁵ - 3⁵⁸)?",
+    "question_text_hi": "व्यंजक (7⁹⁵ - 3⁵⁸) के प्रसार का इकाई अंक क्या होगा?",
+    "options": {
+      "a": "0",
+      "b": "4",
+      "c": "6",
+      "d": "7"
+    },
+    "options_hi": {
+      "a": "0",
+      "b": "4",
+      "c": "6",
+      "d": "7"
+    },
+    "correct_option": "b",
+    "solution_text": "Cyclicity of powers for 7 and 3 is 4:\n1. For 7⁹⁵: 95 mod 4 = 3 => Unit digit = 7³ = 343 => 3.\n2. For 3⁵⁸: 58 mod 4 = 2 => Unit digit = 3² = 9.\nSince (unit digit 3) < (unit digit 9), borrow 10: 13 - 9 = 4.\nTherefore, the unit digit is 4.\n\nCorrect Option: (b)",
+    "solution_text_hi": "7 और 3 की चक्रीयता 4 होती है:\n1. 7⁹⁵ के लिए: 95 ÷ 4 का शेषफल = 3 => 7³ का इकाई अंक = 3.\n2. 3⁵⁸ के लिए: 58 ÷ 4 का शेषफल = 2 => 3² का इकाई अंक = 9.\nघटाने पर: (13 - 9) = 4.\nअतः इकाई का अंक 4 होगा।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 3,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "LCM & HCF",
+    "difficulty": "Moderate",
+    "question_text": "The HCF and LCM of two numbers are 12 and 336 respectively. If one of the numbers is 48, what is the other number?",
+    "question_text_hi": "दो संख्याओं का म.स. (HCF) और ल.स. (LCM) क्रमशः 12 और 336 हैं। यदि उनमें से एक संख्या 48 है, तो दूसरी संख्या क्या होगी?",
+    "options": {
+      "a": "72",
+      "b": "84",
+      "c": "96",
+      "d": "108"
+    },
+    "options_hi": {
+      "a": "72",
+      "b": "84",
+      "c": "96",
+      "d": "108"
+    },
+    "correct_option": "b",
+    "solution_text": "Fundamental theorem: First number × Second number = HCF × LCM\n48 × N₂ = 12 × 336\nN₂ = (12 × 336) / 48 = 336 / 4 = 84.\n\nCorrect Option: (b)",
+    "solution_text_hi": "सूत्र: पहली संख्या × दूसरी संख्या = HCF × LCM\n48 × N₂ = 12 × 336 => N₂ = (12 × 336) / 48 = 84.\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 4,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Simplification (Identities)",
+    "difficulty": "Moderate",
+    "question_text": "Find the value of the algebraic fraction:\n[(0.73)³ + (0.27)³] / [(0.73)² - 0.73 × 0.27 + (0.27)²]",
+    "question_text_hi": "निम्नलिखित व्यंजक का मान ज्ञात कीजिए:\n[(0.73)³ + (0.27)³] / [(0.73)² - 0.73 × 0.27 + (0.27)²]",
+    "options": {
+      "a": "0.46",
+      "b": "1.00",
+      "c": "0.54",
+      "d": "0.1971"
+    },
+    "options_hi": {
+      "a": "0.46",
+      "b": "1.00",
+      "c": "0.54",
+      "d": "0.1971"
+    },
+    "correct_option": "b",
+    "solution_text": "Using identity: a³ + b³ = (a + b)(a² - ab + b²)\nHere numerator is (a³ + b³) and denominator is (a² - ab + b²).\nFraction = a + b = 0.73 + 0.27 = 1.00.\n\nCorrect Option: (b)",
+    "solution_text_hi": "सर्वसमिका: a³ + b³ = (a + b)(a² - ab + b²)\nमान = a + b = 0.73 + 0.27 = 1.00.\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 5,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Surds & Radicals",
+    "difficulty": "Moderate",
+    "question_text": "Find the value of the infinite radical expression:\n√(20 + √(20 + √(20 + ... ∞)))",
+    "question_text_hi": "अनंत करणी व्यंजक का मान ज्ञात कीजिए:\n√(20 + √(20 + √(20 + ... ∞)))",
+    "options": {
+      "a": "4",
+      "b": "5",
+      "c": "10",
+      "d": "20"
+    },
+    "options_hi": {
+      "a": "4",
+      "b": "5",
+      "c": "10",
+      "d": "20"
+    },
+    "correct_option": "b",
+    "solution_text": "Let x = √(20 + x).\nSquaring both sides: x² = 20 + x\nx² - x - 20 = 0\n(x - 5)(x + 4) = 0\nSince radical values are positive, x = 5.\n(Shortcut: 20 factors into consecutive integers n(n+1) = 4 × 5. With '+' sign, the answer is the larger factor 5).\n\nCorrect Option: (b)",
+    "solution_text_hi": "माना x = √(20 + x).\nx² = 20 + x => x² - x - 20 = 0 => (x - 5)(x + 4) = 0 => x = 5.\n(शॉर्टकट: 20 = 4 × 5; '+' चिन्ह होने पर बड़ा गुणनखंड 5 उत्तर होता है)।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 6,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Percentages (Exam Marks)",
+    "difficulty": "Moderate",
+    "question_text": "In an examination, a candidate must secure a minimum of 40% marks to pass. A student gets 178 marks and fails by 22 marks. What are the maximum aggregate marks of the exam?",
+    "question_text_hi": "एक परीक्षा में उत्तीर्ण होने के लिए एक अभ्यर्थी को न्यूनतम 40% अंक प्राप्त करने होते हैं। एक छात्र 178 अंक प्राप्त करता है और 22 अंकों से अनुत्तीर्ण हो जाता है। परीक्षा के अधिकतम पूर्णांक क्या हैं?",
+    "options": {
+      "a": "450",
+      "b": "500",
+      "c": "550",
+      "d": "600"
+    },
+    "options_hi": {
+      "a": "450",
+      "b": "500",
+      "c": "550",
+      "d": "600"
+    },
+    "correct_option": "b",
+    "solution_text": "Pass marks required = 178 + 22 = 200 marks.\nSince pass percentage = 40%:\n40% of Maximum Marks = 200\nMaximum Marks = 200 × (100 / 40) = 500 marks.\n\nCorrect Option: (b)",
+    "solution_text_hi": "उत्तीर्ण होने के लिए आवश्यक न्यूनतम अंक = 178 + 22 = 200.\n40% = 200 => पूर्णांक (100%) = 200 × (100 / 40) = 500 अंक।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 7,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Profit & Loss (Dishonest Dealer)",
+    "difficulty": "Hard",
+    "question_text": "A dishonest dealer professes to sell his goods at cost price, but uses a false weight of 900 grams instead of a 1 kg weight. What is his actual gain percentage?",
+    "question_text_hi": "एक बेईमान व्यापारी अपनी वस्तुओं को क्रय मूल्य पर बेचने का दावा करता है, लेकिन 1 किग्रा के स्थान पर 900 ग्राम के गलत बाट का उपयोग करता है। उसका वास्तविक लाभ प्रतिशत क्या है?",
+    "options": {
+      "a": "10%",
+      "b": "11 1/9%",
+      "c": "12 1/2%",
+      "d": "9 1/11%"
+    },
+    "options_hi": {
+      "a": "10%",
+      "b": "11 1/9%",
+      "c": "12 1/2%",
+      "d": "9 1/11%"
+    },
+    "correct_option": "b",
+    "solution_text": "Gain % = [Error / (True Value - Error)] × 100%\n= [100 g / 900 g] × 100% = 1/9 × 100% = 11 1/9% (or 11.11%).\n\nCorrect Option: (b)",
+    "solution_text_hi": "लाभ % = [त्रुटि / वास्तविक दिया गया भार] × 100%\n= [100 / 900] × 100% = 11 1/9% (11.11%)।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 8,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Profit & Loss",
+    "difficulty": "Moderate",
+    "question_text": "If the cost price of 15 articles is equal to the selling price of 12 articles, what is the profit percentage?",
+    "question_text_hi": "यदि 15 वस्तुओं का क्रय मूल्य 12 वस्तुओं के विक्रय मूल्य के बराबर है, तो लाभ प्रतिशत क्या होगा?",
+    "options": {
+      "a": "20%",
+      "b": "25%",
+      "c": "30%",
+      "d": "16.67%"
+    },
+    "options_hi": {
+      "a": "20%",
+      "b": "25%",
+      "c": "30%",
+      "d": "16.67%"
+    },
+    "correct_option": "b",
+    "solution_text": "Given: 15 × CP = 12 × SP\nSP / CP = 15 / 12 = 5 / 4.\nProfit per unit = 5 - 4 = 1.\nProfit % = (Profit / CP) × 100% = (1 / 4) × 100% = 25%.\n\nCorrect Option: (b)",
+    "solution_text_hi": "15 CP = 12 SP => SP / CP = 5 / 4.\nलाभ = 5 - 4 = 1 इकाई।\nलाभ % = (1 / 4) × 100% = 25%.\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 9,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Profit, Loss & Discount",
+    "difficulty": "Moderate",
+    "question_text": "A retailer marks his goods 40% above the cost price and allows a discount of 20% on the marked price. What is his net gain percentage?",
+    "question_text_hi": "एक खुदरा विक्रेता अपने माल पर क्रय मूल्य से 40% अधिक अंकित करता है और अंकित मूल्य पर 20% की छूट देता है। उसका शुद्ध लाभ प्रतिशत क्या है?",
+    "options": {
+      "a": "10%",
+      "b": "12%",
+      "c": "15%",
+      "d": "20%"
+    },
+    "options_hi": {
+      "a": "10%",
+      "b": "12%",
+      "c": "15%",
+      "d": "20%"
+    },
+    "correct_option": "b",
+    "solution_text": "Let Cost Price (CP) = 100.\nMarked Price (MP) = 140.\nSelling Price (SP) = MP × (1 - Discount/100) = 140 × 0.80 = 112.\nNet Profit = SP - CP = 112 - 100 = 12%.\nFormula: Profit % = m - d - (m × d)/100 = 40 - 20 - (40 × 20)/100 = 20 - 8 = 12%.\n\nCorrect Option: (b)",
+    "solution_text_hi": "माना क्रय मूल्य = 100.\nअंकित मूल्य = 140.\nविक्रय मूल्य = 140 × 0.80 = 112.\nशुद्ध लाभ % = 112 - 100 = 12%.\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 10,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Simple Interest",
+    "difficulty": "Moderate",
+    "question_text": "At what rate of simple interest per annum will a sum of money double itself in 8 years?",
+    "question_text_hi": "साधारण ब्याज की किस वार्षिक दर पर कोई धनराशि 8 वर्ष में स्वयं की दोगुनी हो जाएगी?",
+    "options": {
+      "a": "10%",
+      "b": "12.5%",
+      "c": "15%",
+      "d": "11.25%"
+    },
+    "options_hi": {
+      "a": "10%",
+      "b": "12.5%",
+      "c": "15%",
+      "d": "11.25%"
+    },
+    "correct_option": "b",
+    "solution_text": "If Principal = P and Amount = 2P, SI = P. $SI = (P \\times R \\times T)/100 \\Rightarrow P = (P \\times R \\times 8)/100 \\Rightarrow R = 100/8 = 12.5\\%$.",
+    "solution_text_hi": "ब्याज SI = P। $R = (SI \\times 100) / (P \\times T) = (100) / 8 = 12.5\\%$ वार्षिक।"
+  },
+  {
+    "question_number": 11,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Simple Interest (Sum & Rate)",
+    "difficulty": "Hard",
+    "question_text": "A certain sum invested at simple interest amounts to ₹756 in 2 years and to ₹873 in 3.5 years. What is the annual rate of interest?",
+    "question_text_hi": "साधारण ब्याज पर निवेश की गई कोई राशि 2 वर्ष में ₹756 और 3.5 वर्ष में ₹873 हो जाती है। ब्याज की वार्षिक दर क्या है?",
+    "options": {
+      "a": "10%",
+      "b": "12%",
+      "c": "13%",
+      "d": "14%"
+    },
+    "options_hi": {
+      "a": "10%",
+      "b": "12%",
+      "c": "13%",
+      "d": "14%"
+    },
+    "correct_option": "c",
+    "solution_text": "Interest in 1.5 years (3.5 - 2 years) = 873 - 756 = ₹117.\nInterest for 1 year = 117 / 1.5 = ₹78.\nInterest for 2 years = 78 × 2 = ₹156.\nPrincipal P = Amount in 2 years - Interest in 2 years = 756 - 156 = ₹600.\nRate R = (SI × 100) / (P × T) = (78 × 100) / (600 × 1) = 78 / 6 = 13% per annum.\n\nCorrect Option: (c)",
+    "solution_text_hi": "1.5 वर्ष का ब्याज = 873 - 756 = ₹117.\n1 वर्ष का ब्याज = 117 / 1.5 = ₹78.\n2 वर्ष का ब्याज = ₹156.\nमूलधन P = 756 - 156 = ₹600.\nदर R = (78 × 100) / (600 × 1) = 13% वार्षिक।\n\nअतः सही उत्तर (c) है।"
+  },
+  {
+    "question_number": 12,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Compound Interest (CI - SI)",
+    "difficulty": "Hard",
+    "question_text": "The difference between compound interest and simple interest on ₹8,000 for 2 years at 5% per annum is:",
+    "question_text_hi": "₹8,000 पर 5% वार्षिक दर से 2 वर्ष के चक्रवृद्धि ब्याज और साधारण ब्याज का अंतर क्या है?",
+    "options": {
+      "a": "₹15",
+      "b": "₹20",
+      "c": "₹25",
+      "d": "₹30"
+    },
+    "options_hi": {
+      "a": "₹15",
+      "b": "₹20",
+      "c": "₹25",
+      "d": "₹30"
+    },
+    "correct_option": "b",
+    "solution_text": "For 2 years: $\\text{Difference} = P(R/100)^2 = 8000 \\times (5/100)^2 = 8000 \\times (1/400) = ₹20$.",
+    "solution_text_hi": "2 वर्ष का अंतर $D = P(R/100)^2 = 8000 \\times (25/10000) = ₹20$।"
+  },
+  {
+    "question_number": 13,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Ratio & Proportion",
+    "difficulty": "Moderate",
+    "question_text": "₹8,400 is divided among A, B, and C in the ratio 1/2 : 1/3 : 1/4. What is the share of B?",
+    "question_text_hi": "₹8,400 को A, B और C के बीच 1/2 : 1/3 : 1/4 के अनुपात में विभाजित किया जाता है। B का हिस्सा क्या होगा?",
+    "options": {
+      "a": "₹2,400",
+      "b": "₹2,584",
+      "c": "₹2,800",
+      "d": "₹3,200"
+    },
+    "options_hi": {
+      "a": "₹2,400",
+      "b": "₹2,584",
+      "c": "₹2,800",
+      "d": "₹3,200"
+    },
+    "correct_option": "b",
+    "solution_text": "Simplifying ratio by multiplying with LCM(2, 3, 4) = 12:\nA : B : C = (12/2) : (12/3) : (12/4) = 6 : 4 : 3.\nTotal parts = 6 + 4 + 3 = 13 parts.\nShare of B = (4 / 13) × ₹8,400 = 33,600 / 13 ≈ ₹2,584.6.\n\nCorrect Option: (b)",
+    "solution_text_hi": "अनुपात को सरल करने पर (12 से गुणा):\nA : B : C = 6 : 4 : 3.\nकुल अनुपात = 6 + 4 + 3 = 13.\nB का हिस्सा = (4 / 13) × 8,400 ≈ ₹2,584.6.\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 14,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Time & Work (Efficiency)",
+    "difficulty": "Moderate",
+    "question_text": "A is twice as efficient as B and together they can finish a piece of work in 18 days. In how many days can A alone complete the work?",
+    "question_text_hi": "A की कार्यक्षमता B से दोगुनी है और दोनों मिलकर एक काम को 18 दिनों में पूरा कर सकते हैं। A अकेला उस काम को कितने दिनों में पूरा कर सकता है?",
+    "options": {
+      "a": "24 days",
+      "b": "27 days",
+      "c": "36 days",
+      "d": "54 days"
+    },
+    "options_hi": {
+      "a": "24 दिन",
+      "b": "27 दिन",
+      "c": "36 दिन",
+      "d": "54 दिन"
+    },
+    "correct_option": "b",
+    "solution_text": "Efficiency ratio A : B = 2 : 1.\nCombined efficiency = 2 + 1 = 3 units/day.\nTotal Work = Combined Efficiency × Total Days = 3 × 18 = 54 units.\nTime taken by A alone = 54 / 2 = 27 days.\n\nCorrect Option: (b)",
+    "solution_text_hi": "कार्यक्षमता अनुपात: A : B = 2 : 1.\nकुल कार्यक्षमता = 2 + 1 = 3 इकाई/दिन।\nकुल कार्य = 3 × 18 = 54 इकाई।\nA अकेले समय लेगा = 54 / 2 = 27 दिन।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 15,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Time & Work (Men-Women)",
+    "difficulty": "Hard",
+    "question_text": "4 men or 6 women can complete a work in 12 days. In how many days can 2 men and 3 women complete the same work?",
+    "question_text_hi": "4 पुरुष या 6 महिलाएं किसी कार्य को 12 दिनों में पूरा कर सकते हैं। 2 पुरुष और 3 महिलाएं मिलकर उसी कार्य को कितने दिनों में पूरा करेंगे?",
+    "options": {
+      "a": "12 days",
+      "b": "10 days",
+      "c": "8 days",
+      "d": "15 days"
+    },
+    "options_hi": {
+      "a": "12 दिन",
+      "b": "10 दिन",
+      "c": "8 दिन",
+      "d": "15 दिन"
+    },
+    "correct_option": "a",
+    "solution_text": "Equivalence: 4 Men = 6 Women -> 2 Men = 3 Women.\nTarget group: (2 Men + 3 Women) = (3 Women + 3 Women) = 6 Women.\nSince 6 women take 12 days to complete the work, 6 women will also take 12 days.\n\nCorrect Option: (a)",
+    "solution_text_hi": "कार्यक्षमता: 4 पुरुष = 6 महिलाएं => 2 पुरुष = 3 महिलाएं।\nपूछा गया समूह = 2 पुरुष + 3 महिलाएं = 3 महिलाएं + 3 महिलाएं = 6 महिलाएं।\nचूंकि 6 महिलाएं कार्य को 12 दिनों में करती हैं, अतः 6 महिलाओं को 12 दिन ही लगेंगे।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 16,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Speed, Time & Distance (Trains)",
+    "difficulty": "Hard",
+    "question_text": "Two trains of lengths 150 m and 120 m are running in opposite directions on parallel tracks at speeds of 42 km/h and 30 km/h respectively. In how many seconds will they completely cross each other?",
+    "question_text_hi": "150 मीटर और 120 मीटर लंबी दो रेलगाड़ियाँ समानांतर पटरियों पर विपरीत दिशाओं में क्रमशः 42 किमी/घंटा और 30 किमी/घंटा की गति से चल रही हैं। वे कितने सेकंड में एक-दूसरे को पूरी तरह पार कर लेंगी?",
+    "options": {
+      "a": "12 seconds",
+      "b": "13.5 seconds",
+      "c": "15 seconds",
+      "d": "16 seconds"
+    },
+    "options_hi": {
+      "a": "12 सेकंड",
+      "b": "13.5 सेकंड",
+      "c": "15 सेकंड",
+      "d": "16 सेकंड"
+    },
+    "correct_option": "b",
+    "solution_text": "Total distance = Length of train 1 + Length of train 2 = 150 + 120 = 270 metres.\nRelative speed (opposite direction) = 42 + 30 = 72 km/h.\nConverting to m/s: 72 × (5 / 18) = 20 m/s.\nTime taken = Total distance / Relative speed = 270 / 20 = 13.5 seconds.\n\nCorrect Option: (b)",
+    "solution_text_hi": "कुल दूरी = 150 + 120 = 270 मीटर।\nसापेक्ष गति (विपरीत दिशा) = 42 + 30 = 72 किमी/घंटा = 72 × (5/18) = 20 मी/से।\nपार करने में लगा समय = 270 / 20 = 13.5 सेकंड।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 17,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Speed, Time & Distance (Relative Speed)",
+    "difficulty": "Hard",
+    "question_text": "A thief is noticed by a policeman from a distance of 200 metres. The thief starts running at 10 km/h and the policeman chases him at 11 km/h. What distance will the thief have run before being overtaken?",
+    "question_text_hi": "एक पुलिसकर्मी 200 मीटर की दूरी पर एक चोर को देखता है। चोर 10 किमी/घंटा की गति से भागने लगता है और पुलिसकर्मी 11 किमी/घंटा की गति से उसका पीछा करता है। पकड़े जाने से पहले चोर कितनी दूरी तय कर चुका होगा?",
+    "options": {
+      "a": "1.5 km",
+      "b": "2.0 km",
+      "c": "2.5 km",
+      "d": "1.8 km"
+    },
+    "options_hi": {
+      "a": "1.5 किमी",
+      "b": "2.0 किमी",
+      "c": "2.5 किमी",
+      "d": "1.8 किमी"
+    },
+    "correct_option": "b",
+    "solution_text": "Relative speed = 11 - 10 = 1 km/h = 1 × (5 / 18) m/s.\nInitial gap = 200 metres.\nTime to catch = Gap / Relative speed = 200 / (5 / 18) = (200 × 18) / 5 = 720 seconds.\nDistance run by thief = Speed × Time = (10 × 5 / 18) m/s × 720 s = 2000 metres = 2.0 km.\n\nCorrect Option: (b)",
+    "solution_text_hi": "सापेक्ष गति = 11 - 10 = 1 किमी/घंटा।\nपकड़ने में लगा समय = दूरी / सापेक्ष गति = 0.2 किमी / 1 किमी/घंटा = 0.2 घंटा।\nचोर द्वारा तय की गई दूरी = 10 किमी/घंटा × 0.2 घंटा = 2.0 किमी।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 18,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Averages & Mixtures (Alligation)",
+    "difficulty": "Moderate",
+    "question_text": "A 60-litre mixture of milk and water contains milk and water in the ratio 2 : 1. How many litres of water must be added to this mixture so that the ratio of milk to water becomes 1 : 2?",
+    "question_text_hi": "दूध और पानी के 60 लीटर मिश्रण में दूध और पानी का अनुपात 2 : 1 है। इस मिश्रण में कितने लीटर पानी मिलाया जाना चाहिए ताकि दूध और पानी का अनुपात 1 : 2 हो जाए?",
+    "options": {
+      "a": "40 litres",
+      "b": "60 litres",
+      "c": "50 litres",
+      "d": "30 litres"
+    },
+    "options_hi": {
+      "a": "40 लीटर",
+      "b": "60 लीटर",
+      "c": "50 लीटर",
+      "d": "30 लीटर"
+    },
+    "correct_option": "b",
+    "solution_text": "In 60 litres:\nMilk = (2/3) × 60 = 40 litres.\nWater = (1/3) × 60 = 20 litres.\nLet x litres of water be added. The milk quantity remains 40 litres:\nMilk / Water = 40 / (20 + x) = 1 / 2\n20 + x = 80 => x = 60 litres.\n\nCorrect Option: (b)",
+    "solution_text_hi": "प्रारंभिक मात्रा: दूध = 40 लीटर, पानी = 20 लीटर।\nमाना x लीटर पानी मिलाया जाता है:\n40 / (20 + x) = 1 / 2 => 20 + x = 80 => x = 60 लीटर।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 19,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Algebra (Polynomial Identities)",
+    "difficulty": "Hard",
+    "question_text": "If x + 1/x = 4, find the value of x^4 + 1/x^4.",
+    "question_text_hi": "यदि x + 1/x = 4 है, तो x^4 + 1/x^4 का मान ज्ञात कीजिए।",
+    "options": {
+      "a": "194",
+      "b": "196",
+      "c": "192",
+      "d": "214"
+    },
+    "options_hi": {
+      "a": "194",
+      "b": "196",
+      "c": "192",
+      "d": "214"
+    },
+    "correct_option": "a",
+    "solution_text": "Given x + 1/x = 4:\nSquaring both sides:\n(x + 1/x)^2 = x^2 + 1/x^2 + 2 = 16\nx^2 + 1/x^2 = 16 - 2 = 14\nNow squarring again:\n(x^2 + 1/x^2)^2 = x^4 + 1/x^4 + 2 = 14^2 = 196\nx^4 + 1/x^4 = 196 - 2 = 194.\n\nCorrect Option: (a)",
+    "solution_text_hi": "x + 1/x = 4\nदोनों पक्षों का वर्ग करने पर: x^2 + 1/x^2 = 4^2 - 2 = 16 - 2 = 14.\nपुनः वर्ग करने पर: x^4 + 1/x^4 = 14^2 - 2 = 196 - 2 = 194.\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 20,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Algebra (Quadratic Roots)",
+    "difficulty": "Hard",
+    "question_text": "If α and β are the roots of the quadratic equation 2x² - 7x + 3 = 0, find the value of (α/β + β/α).",
+    "question_text_hi": "यदि α और β द्विघात समीकरण 2x² - 7x + 3 = 0 के मूल हैं, तो (α/β + β/α) का मान ज्ञात कीजिए।",
+    "options": {
+      "a": "37/6",
+      "b": "49/6",
+      "c": "43/6",
+      "d": "35/6"
+    },
+    "options_hi": {
+      "a": "37/6",
+      "b": "49/6",
+      "c": "43/6",
+      "d": "35/6"
+    },
+    "correct_option": "a",
+    "solution_text": "For 2x² - 7x + 3 = 0:\nSum of roots: α + β = -(-7)/2 = 7/2\nProduct of roots: αβ = 3/2\nNow, α/β + β/α = (α² + β²) / (αβ) = [(α + β)² - 2αβ] / (αβ)\nNumerator = (7/2)² - 2*(3/2) = 49/4 - 3 = 49/4 - 12/4 = 37/4.\nDenominator = 3/2 = 6/4.\nRatio = (37/4) / (3/2) = (37/4) * (2/3) = 37 / 6.\n\nCorrect Option: (a)",
+    "solution_text_hi": "α + β = 7/2, αβ = 3/2\nα/β + β/α = (α² + β²) / (αβ) = [(α + β)² - 2αβ] / (αβ)\n= [(7/2)² - 2(3/2)] / (3/2) = [49/4 - 3] / (3/2) = (37/4) * (2/3) = 37/6.\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 21,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Algebra (Conditional Identity)",
+    "difficulty": "Hard",
+    "question_text": "If a + b + c = 0, what is the value of (a²/bc + b²/ca + c²/ab)?",
+    "question_text_hi": "यदि a + b + c = 0 है, तो (a²/bc + b²/ca + c²/ab) का मान क्या होगा?",
+    "options": {
+      "a": "0",
+      "b": "1",
+      "c": "3",
+      "d": "-3"
+    },
+    "options_hi": {
+      "a": "0",
+      "b": "1",
+      "c": "3",
+      "d": "-3"
+    },
+    "correct_option": "c",
+    "solution_text": "Taking the common denominator abc:\na²/bc + b²/ca + c²/ab = (a³ + b³ + c³) / abc\nAccording to the algebraic identity:\nIf a + b + c = 0, then a³ + b³ + c³ = 3abc.\nTherefore: (3abc) / abc = 3.\n\nCorrect Option: (c)",
+    "solution_text_hi": "लघुत्तम समापवर्त्य (abc) लेने पर:\nव्यंजक = (a³ + b³ + c³) / abc\nबीजगणितीय सर्वसमिका: यदि a + b + c = 0 हो, तो a³ + b³ + c³ = 3abc होता है।\nअतः मान = 3abc / abc = 3.\n\nअतः सही उत्तर (c) है।"
+  },
+  {
+    "question_number": 22,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Trigonometry (Identities)",
+    "difficulty": "Hard",
+    "question_text": "If sin θ + cos θ = √2 cos θ, what is the value of (cos θ - sin θ)?",
+    "question_text_hi": "यदि sin θ + cos θ = √2 cos θ है, तो (cos θ - sin θ) का मान क्या होगा?",
+    "options": {
+      "a": "√2 sin θ",
+      "b": "2 sin θ",
+      "c": "√2 cos θ",
+      "d": "sin θ"
+    },
+    "options_hi": {
+      "a": "√2 sin θ",
+      "b": "2 sin θ",
+      "c": "√2 cos θ",
+      "d": "sin θ"
+    },
+    "correct_option": "a",
+    "solution_text": "Given: sin θ + cos θ = √2 cos θ\nsin θ = √2 cos θ - cos θ = (√2 - 1) cos θ\nMultiplying both sides by (√2 + 1):\n(√2 + 1) sin θ = (√2 + 1)(√2 - 1) cos θ = (2 - 1) cos θ = cos θ\n√2 sin θ + sin θ = cos θ\ncos θ - sin θ = √2 sin θ.\n\nCorrect Option: (a)",
+    "solution_text_hi": "sin θ = (√2 - 1) cos θ\nदोनों पक्षों में (√2 + 1) से गुणा करने पर:\n(√2 + 1) sin θ = cos θ => √2 sin θ + sin θ = cos θ\ncos θ - sin θ = √2 sin θ.\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 23,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Trigonometry (Standard Values)",
+    "difficulty": "Moderate",
+    "question_text": "Evaluate the value of: [sin 30° + tan 45° - cosec 60°] / [sec 30° + cos 60° + cot 45°].",
+    "question_text_hi": "मान ज्ञात कीजिए: [sin 30° + tan 45° - cosec 60°] / [sec 30° + cos 60° + cot 45°].",
+    "options": {
+      "a": "(43 - 24√3) / 11",
+      "b": "(43 + 24√3) / 11",
+      "c": "1",
+      "d": "√3 / 2"
+    },
+    "options_hi": {
+      "a": "(43 - 24√3) / 11",
+      "b": "(43 + 24√3) / 11",
+      "c": "1",
+      "d": "√3 / 2"
+    },
+    "correct_option": "a",
+    "solution_text": "Standard values:\nsin 30° = 1/2, tan 45° = 1, cosec 60° = 2/√3\nsec 30° = 2/√3, cos 60° = 1/2, cot 45° = 1\nNumerator = 1/2 + 1 - 2/√3 = 3/2 - 2/√3 = (3√3 - 4) / 2√3\nDenominator = 2/√3 + 1/2 + 1 = 3/2 + 2/√3 = (3√3 + 4) / 2√3\nRatio = (3√3 - 4) / (3√3 + 4)\nRationalizing denominator with (3√3 - 4):\nNumerator = (3√3 - 4)^2 = 27 + 16 - 24√3 = 43 - 24√3\nDenominator = (3√3)^2 - 4^2 = 27 - 16 = 11\nResult = (43 - 24√3) / 11.\n\nCorrect Option: (a)",
+    "solution_text_hi": "मान रखने पर:\nअंश = 1/2 + 1 - 2/√3 = (3√3 - 4) / 2√3\nहर = 2/√3 + 1/2 + 1 = (3√3 + 4) / 2√3\nव्यंजक = (3√3 - 4) / (3√3 + 4)\nहर का परिमेयकरण करने पर = (43 - 24√3) / 11.\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 24,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Heights & Distances",
+    "difficulty": "Hard",
+    "question_text": "A 15-metre long ladder leans against a vertical wall, reaching a window 12 metres above the ground. How far is the foot of the ladder from the base of the wall?",
+    "question_text_hi": "15 मीटर लंबी एक सीढ़ी एक ऊर्ध्वाधर दीवार के सहारे टिकी है, जो जमीन से 12 मीटर ऊपर एक खिड़की तक पहुँचती है। दीवार के आधार से सीढ़ी के निचले सिरे की दूरी क्या है?",
+    "options": {
+      "a": "8 m",
+      "b": "9 m",
+      "c": "10 m",
+      "d": "11 m"
+    },
+    "options_hi": {
+      "a": "8 मीटर",
+      "b": "9 मीटर",
+      "c": "10 मीटर",
+      "d": "11 मीटर"
+    },
+    "correct_option": "b",
+    "solution_text": "By Pythagoras Theorem in right-angled triangle:\nDistance d = √(Hypotenuse² - Height²) = √(15² - 12²) = √(225 - 144) = √81 = 9 metres.\n\nCorrect Option: (b)",
+    "solution_text_hi": "पाइथागोरस प्रमेय से:\nदूरी = √(कर्ण² - लंब²) = √(15² - 12²) = √(225 - 144) = √81 = 9 मीटर।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 25,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Geometry (Triangles)",
+    "difficulty": "Moderate",
+    "question_text": "The area of an equilateral triangle is 16√3 cm². What is the perimeter of this equilateral triangle?",
+    "question_text_hi": "एक समबाहु त्रिभुज का क्षेत्रफल 16√3 सेमी² है। इस समबाहु त्रिभुज का परिमाप क्या होगा?",
+    "options": {
+      "a": "18 cm",
+      "b": "24 cm",
+      "c": "32 cm",
+      "d": "28 cm"
+    },
+    "options_hi": {
+      "a": "18 सेमी",
+      "b": "24 सेमी",
+      "c": "32 सेमी",
+      "d": "28 सेमी"
+    },
+    "correct_option": "b",
+    "solution_text": "Area of equilateral triangle = (√3 / 4) × a²\n(√3 / 4) × a² = 16√3\na² / 4 = 16 => a² = 64 => side a = 8 cm.\nPerimeter = 3 × a = 3 × 8 = 24 cm.\n\nCorrect Option: (b)",
+    "solution_text_hi": "समबाहु त्रिभुज का क्षेत्रफल = (√3 / 4) × a² = 16√3\na² = 64 => भुजा a = 8 सेमी।\nपरिमाप = 3a = 3 × 8 = 24 सेमी।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 26,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Geometry (Circles & Tangents)",
+    "difficulty": "Hard",
+    "question_text": "From an external point P, a tangent PT of length 12 cm is drawn to a circle. A secant PAB intersects the circle at A and B. If PA = 8 cm, what is the length of chord AB?",
+    "question_text_hi": "एक बाहरी बिंदु P से वृत्त पर 12 सेमी लंबाई की एक स्पर्श रेखा PT खींची जाती है। एक छेदक रेखा PAB वृत्त को A और B पर प्रतिच्छेद करती है। यदि PA = 8 सेमी है, तो जीवा AB की लंबाई क्या है?",
+    "options": {
+      "a": "10 cm",
+      "b": "18 cm",
+      "c": "12 cm",
+      "d": "8 cm"
+    },
+    "options_hi": {
+      "a": "10 सेमी",
+      "b": "18 सेमी",
+      "c": "12 सेमी",
+      "d": "8 सेमी"
+    },
+    "correct_option": "a",
+    "solution_text": "By the Tangent-Secant Theorem:\nPT^2 = PA * PB\nGiven: PT = 12 cm, PA = 8 cm\n12^2 = 8 * PB\n144 = 8 * PB\nPB = 144 / 8 = 18 cm.\nSince PB = PA + AB:\n18 = 8 + AB\nAB = 18 - 8 = 10 cm.\n\nCorrect Option: (a)",
+    "solution_text_hi": "स्पर्श रेखा-छेदक रेखा प्रमेय (Tangent-Secant Theorem) से:\nPT^2 = PA * PB\n(12)^2 = 8 * PB => 144 = 8 * PB => PB = 18 सेमी।\nचूंकि PB = PA + AB => 18 = 8 + AB => AB = 10 सेमी।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 27,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Mensuration 3D (Cone)",
+    "difficulty": "Hard",
+    "question_text": "A right circular cone has a base radius of 7 cm and a slant height of 25 cm. What is its curved surface area? (Take π = 22/7)",
+    "question_text_hi": "एक लंब वृत्तीय शंकु की आधार त्रिज्या 7 सेमी और तिर्यक ऊंचाई 25 सेमी है। इसका वक्र पृष्ठीय क्षेत्रफल क्या होगा? (π = 22/7 लें)",
+    "options": {
+      "a": "500 cm²",
+      "b": "550 cm²",
+      "c": "600 cm²",
+      "d": "616 cm²"
+    },
+    "options_hi": {
+      "a": "500 सेमी²",
+      "b": "550 सेमी²",
+      "c": "600 सेमी²",
+      "d": "616 सेमी²"
+    },
+    "correct_option": "b",
+    "solution_text": "Curved surface area of a cone = π × r × l\n= (22/7) × 7 × 25\n= 22 × 25 = 550 cm².\n\nCorrect Option: (b)",
+    "solution_text_hi": "शंकु का वक्र पृष्ठीय क्षेत्रफल = π r l\n= (22/7) × 7 × 25 = 22 × 25 = 550 सेमी²।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 28,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Mensuration 3D (Cylinder)",
+    "difficulty": "Hard",
+    "question_text": "The radius of the base of a right circular cylinder is 7 cm and its height is 15 cm. Find its total surface area. (Take π = 22/7)",
+    "question_text_hi": "एक लम्ब वृत्तीय बेलन के आधार की त्रिज्या 7 सेमी और ऊंचाई 15 सेमी है। इसका कुल पृष्ठीय क्षेत्रफल ज्ञात कीजिए। (π = 22/7 लें)",
+    "options": {
+      "a": "968 cm²",
+      "b": "880 cm²",
+      "c": "1,056 cm²",
+      "d": "660 cm²"
+    },
+    "options_hi": {
+      "a": "968 सेमी²",
+      "b": "880 सेमी²",
+      "c": "1,056 सेमी²",
+      "d": "660 सेमी²"
+    },
+    "correct_option": "a",
+    "solution_text": "Total Surface Area (TSA) of a cylinder = 2 * π * r * (r + h)\nGiven:\n- r = 7 cm\n- h = 15 cm\nTSA = 2 * (22/7) * 7 * (7 + 15)\n= 44 * 22 = 968 cm².\n\nCorrect Option: (a)",
+    "solution_text_hi": "बेलन का कुल पृष्ठीय क्षेत्रफल = 2πr(r + h)\n= 2 * (22/7) * 7 * (7 + 15)\n= 44 * 22 = 968 सेमी²।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 29,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Elementary Statistics (Empirical Formula)",
+    "difficulty": "Moderate",
+    "question_text": "If the mean and median of a moderately skewed distribution are 24 and 26 respectively, what is the empirical mode of the distribution?",
+    "question_text_hi": "यदि किसी मध्यम विषम बंटन का माध्य (Mean) और माध्यिका (Median) क्रमशः 24 और 26 हैं, तो बंटन का बहुलक (Mode) क्या होगा?",
+    "options": {
+      "a": "28",
+      "b": "30",
+      "c": "32",
+      "d": "25"
+    },
+    "options_hi": {
+      "a": "28",
+      "b": "30",
+      "c": "32",
+      "d": "25"
+    },
+    "correct_option": "b",
+    "solution_text": "Empirical relationship formula:\nMode = 3 × Median - 2 × Mean\n= 3 × 26 - 2 × 24\n= 78 - 48 = 30.\n\nCorrect Option: (b)",
+    "solution_text_hi": "अनुभवजन्य संबंध सूत्र:\nबहुलक = 3 × माध्यिका - 2 × माध्य\n= 3 × 26 - 2 × 24 = 78 - 48 = 30.\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 30,
+    "part_number": 1,
+    "section_name": "PART-1",
+    "section_title": "Mathematics",
+    "topic": "Elementary Statistics (Mean)",
+    "difficulty": "Moderate",
+    "question_text": "What is the arithmetic mean of the first 5 prime numbers?",
+    "question_text_hi": "प्रथम 5 अभाज्य संख्याओं का समांतर माध्य क्या है?",
+    "options": {
+      "a": "5.2",
+      "b": "5.6",
+      "c": "6.0",
+      "d": "6.4"
+    },
+    "options_hi": {
+      "a": "5.2",
+      "b": "5.6",
+      "c": "6.0",
+      "d": "6.4"
+    },
+    "correct_option": "b",
+    "solution_text": "The first 5 prime numbers are: 2, 3, 5, 7, 11.\nSum = 2 + 3 + 5 + 7 + 11 = 28.\nMean = Sum / 5 = 28 / 5 = 5.6.\n\nCorrect Option: (b)",
+    "solution_text_hi": "प्रथम 5 अभाज्य संख्याएँ: 2, 3, 5, 7, 11.\nयोग = 2 + 3 + 5 + 7 + 11 = 28.\nमाध्य = 28 / 5 = 5.6.\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 31,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Linear Seating / Row Order",
+    "difficulty": "Hard",
+    "question_text": "In a row of students, Neha is 15th from the left and Priya is 18th from the right. If they interchange their positions, Neha becomes 23rd from the left. How many total students are there in the row?",
+    "question_text_hi": "विद्यार्थियों की एक पंक्ति में, नेहा बायें से 15वें और प्रिया दायें से 18वें स्थान पर है। यदि वे अपना स्थान आपस में बदल लेती हैं, तो नेहा बायें से 23वीं हो जाती है। पंक्ति में कुल कितने विद्यार्थी हैं?",
+    "options": {
+      "a": "39",
+      "b": "40",
+      "c": "41",
+      "d": "42"
+    },
+    "options_hi": {
+      "a": "39",
+      "b": "40",
+      "c": "41",
+      "d": "42"
+    },
+    "correct_option": "b",
+    "solution_text": "After interchange, Neha occupies Priya's original seat.\nTherefore, that seat is:\n- 23rd from the left end.\n- 18th from the right end.\nTotal students = (Left position + Right position) - 1\n= (23 + 18) - 1 = 41 - 1 = 40 students.\n\nCorrect Option: (b)",
+    "solution_text_hi": "स्थान परिवर्तन के बाद नेहा, प्रिया की पूर्व स्थिति पर आ जाती है।\nवह स्थान बायें से 23वाँ और दायें से 18वाँ है।\nकुल विद्यार्थी = 23 + 18 - 1 = 40.\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 32,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Linear Seating / Position Shift",
+    "difficulty": "Hard",
+    "question_text": "In a row of 30 girls, when Radhika was shifted by 4 places towards her left, she became 10th from the left end. What was her earlier position from the right end of the row?",
+    "question_text_hi": "30 लड़कियों की एक पंक्ति में, जब राधिका को उसके बायें ओर 4 स्थान स्थानांतरित किया गया, तो वह बायें छोर से 10वीं हो गई। पंक्ति के दायें छोर से उसकी पूर्व स्थिति क्या थी?",
+    "options": {
+      "a": "16th",
+      "b": "17th",
+      "c": "18th",
+      "d": "19th"
+    },
+    "options_hi": {
+      "a": "16वीं",
+      "b": "17वीं",
+      "c": "18वीं",
+      "d": "19वीं"
+    },
+    "correct_option": "b",
+    "solution_text": "After shifting 4 places left, position from left = 10th.\nOriginal position from left = 10 + 4 = 14th.\nPosition from right end = Total - (Position from left) + 1\n= 30 - 14 + 1 = 17th.\n\nCorrect Option: (b)",
+    "solution_text_hi": "बायें 4 स्थान खिसकने के बाद स्थिति = 10वीं।\nमूल स्थिति (बायें से) = 10 + 4 = 14वीं।\nदायें छोर से मूल स्थिति = 30 - 14 + 1 = 17वीं।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 33,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Linear Seating (Facing North)",
+    "difficulty": "Hard",
+    "question_text": "Six persons U, V, W, X, Y, and Z are sitting in a row facing North. W is sitting between V and Y. X is sitting between U and Z. U is to the immediate left of V. Z is at the extreme right end. Who is sitting at the extreme left end?",
+    "question_text_hi": "छह व्यक्ति U, V, W, X, Y, और Z उत्तर की ओर मुख करके एक पंक्ति में बैठे हैं। W, V और Y के बीच बैठा है। X, U और Z के बीच बैठा है। U, V के ठीक बायें है। Z एकदम दायें छोर पर बैठा है। एकदम बायें छोर पर कौन बैठा है?",
+    "options": {
+      "a": "Y",
+      "b": "V",
+      "c": "W",
+      "d": "U"
+    },
+    "options_hi": {
+      "a": "Y",
+      "b": "V",
+      "c": "W",
+      "d": "U"
+    },
+    "correct_option": "a",
+    "solution_text": "Arrangement deduction:\n- Z is at position 6 (extreme right).\n- X is between U and Z => X is at position 5, U is at position 4.\n- U is to the immediate left of V => V is at position 3 (wait, if facing North, left of V is U, so U is pos 3, V is pos 4).\nLet's check: Y - W - V - U - X - Z:\n- W is between Y and V.\n- U is to the left of X, and X is between U and Z.\n- Extreme left is Y.\n\nCorrect Option: (a)",
+    "solution_text_hi": "बैठक व्यवस्था (बायें से दायें):\nY - W - V - U - X - Z.\nअतः एकदम बायें छोर पर Y बैठा है।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 34,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Circular Seating Arrangement",
+    "difficulty": "Hard",
+    "question_text": "Six persons A, B, C, D, E, and F are sitting around a circular table facing the centre. B is between A and C. E is between D and F. D is to the immediate left of A. Who is sitting opposite to B?",
+    "question_text_hi": "छह व्यक्ति A, B, C, D, E और F केंद्र की ओर मुख करके एक वृत्ताकार मेज के चारों ओर बैठे हैं। B, A और C के बीच में है। E, D और F के बीच में है। D, A के ठीक बायें है। B के विपरीत कौन बैठा है?",
+    "options": {
+      "a": "E",
+      "b": "D",
+      "c": "F",
+      "d": "C"
+    },
+    "options_hi": {
+      "a": "E",
+      "b": "D",
+      "c": "F",
+      "d": "C"
+    },
+    "correct_option": "a",
+    "solution_text": "Placing in circular order facing centre (clockwise):\n- Let A be at position 1.\n- D is immediate left of A (clockwise) -> D is at position 2.\n- E is between D and F -> E is at position 3, F is at position 4.\n- B is between A and C -> C is at position 5, B is at position 6.\nOpposite pairs in 6-person circle (pos i is opposite pos i+3):\n- Position 6 (B) is opposite Position 3 (E).\nThus, E is sitting opposite to B.\n\nCorrect Option: (a)",
+    "solution_text_hi": "वृत्ताकार व्यवस्था (केंद्रोन्मुख):\nक्रमशः स्थिति: A(1) - D(2) - E(3) - F(4) - C(5) - B(6).\n6 व्यक्तियों की मेज में आमने-सामने की स्थितियां (1-4, 2-5, 3-6) होती हैं।\nअतः B के विपरीत E बैठा है।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 35,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Square Table Seating",
+    "difficulty": "Hard",
+    "question_text": "Four girls A, B, C, and D are sitting around a square table facing the center. A and C sit opposite each other. B sits to the right of A. Who sits to the right of C?",
+    "question_text_hi": "चार लड़कियां A, B, C और D एक वर्गाकार मेज के चारों ओर केंद्र की ओर मुख करके बैठी हैं। A और C एक-दूसरे के विपरीत बैठी हैं। B, A के दाएं बैठी है। C के दाएं कौन बैठा है?",
+    "options": {
+      "a": "D",
+      "b": "B",
+      "c": "A",
+      "d": "Cannot be determined"
+    },
+    "options_hi": {
+      "a": "D",
+      "b": "B",
+      "c": "A",
+      "d": "निर्धारित नहीं किया जा सकता"
+    },
+    "correct_option": "a",
+    "solution_text": "Facing center:\n- Place A at South (facing North).\n- C is opposite A -> C is at North (facing South).\n- B is to the right of A (anticlockwise facing center) -> B is at East.\n- D must occupy the remaining West position.\nNow, looking at C at North facing South:\n- Its left hand points East (B).\n- Its right hand points West (D).\nTherefore, D sits to the right of C.\n\nCorrect Option: (a)",
+    "solution_text_hi": "केंद्र की ओर मुख करके बैठने पर:\nA दक्षिण में है (उत्तर की ओर मुख)।\nC उत्तर में है (दक्षिण की ओर मुख)।\nA के दाएं B बैठा है (पूर्व में)।\nशेष स्थान (पश्चिम) पर D बैठेगी।\nC दक्षिण की ओर मुख किए हुए है, अतः उसका दायां हाथ पश्चिम (D की ओर) होगा।\nअतः C के दाएं D बैठी है।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 36,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Order & Ranking",
+    "difficulty": "Moderate",
+    "question_text": "In a class of 50 students, Mahesh ranks 15th from the top and Suresh ranks 20th from the bottom. How many students are there between Mahesh and Suresh?",
+    "question_text_hi": "50 विद्यार्थियों की एक कक्षा में महेश शीर्ष से 15वें और सुरेश नीचे से 20वें स्थान पर है। महेश और सुरेश के बीच कितने विद्यार्थी हैं?",
+    "options": {
+      "a": "14",
+      "b": "15",
+      "c": "16",
+      "d": "17"
+    },
+    "options_hi": {
+      "a": "14",
+      "b": "15",
+      "c": "16",
+      "d": "17"
+    },
+    "correct_option": "b",
+    "solution_text": "Sum of ranks = 15 + 20 = 35.\nSince (Sum of ranks) < Total students (35 < 50), there is non-overlapping order:\nNumber of students between = Total - (Rank from top + Rank from bottom)\n= 50 - 35 = 15 students.\n\nCorrect Option: (b)",
+    "solution_text_hi": "दोनों सिरों से स्थानों का योग = 15 + 20 = 35.\nचूँकि 35 < 50 (कुल छात्र), अतः दोनों के बीच छात्र = 50 - 35 = 15.\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 37,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Comparison / Heights Puzzle",
+    "difficulty": "Moderate",
+    "question_text": "Five friends A, B, C, D, and E have different heights. A is taller than B but shorter than C. D is taller than C. E is the shortest. Who is the tallest?",
+    "question_text_hi": "पाँच मित्र A, B, C, D और E की ऊँचाइयाँ अलग-अलग हैं। A, B से लंबा है लेकिन C से छोटा है। D, C से लंबा है। E सबसे छोटा है। सबसे लंबा कौन है?",
+    "options": {
+      "a": "C",
+      "b": "D",
+      "c": "A",
+      "d": "B"
+    },
+    "options_hi": {
+      "a": "C",
+      "b": "D",
+      "c": "A",
+      "d": "B"
+    },
+    "correct_option": "b",
+    "solution_text": "From conditions: C > A > B; D > C => D > C > A > B; E is shortest => D > C > A > B > E. The tallest is D.",
+    "solution_text_hi": "शर्तों के अनुसार: C > A > B; D > C => D > C > A > B; E सबसे छोटा है => D > C > A > B > E। सबसे लंबा D है।"
+  },
+  {
+    "question_number": 38,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Dictionary & Alphabetical Ordering",
+    "difficulty": "Moderate",
+    "question_text": "If 'LEMON' is coded as 'ELMNO', how will 'MANGO' be coded?",
+    "question_text_hi": "यदि 'LEMON' को 'ELMNO' के रूप में कूटबद्ध किया जाता है, तो 'MANGO' को कैसे कूटबद्ध किया जाएगा?",
+    "options": {
+      "a": "AGMNO",
+      "b": "AMNGO",
+      "c": "OGNAM",
+      "d": "AMGON"
+    },
+    "options_hi": {
+      "a": "AGMNO",
+      "b": "AMNGO",
+      "c": "OGNAM",
+      "d": "AMGON"
+    },
+    "correct_option": "a",
+    "solution_text": "In 'LEMON', the letters are rearranged in alphabetical dictionary order: E (5), L (12), M (13), N (14), O (15) -> 'ELMNO'.\nArranging the letters of 'MANGO' in alphabetical order:\nA (1), G (7), M (13), N (14), O (15) -> 'AGMNO'.\n\nCorrect Option: (a)",
+    "solution_text_hi": "'LEMON' के अक्षरों को अंग्रेजी वर्णमाला के आरोही क्रम में सजाया गया है: E, L, M, N, O -> 'ELMNO'।\nइसी प्रकार 'MANGO' के अक्षरों को वर्णमाला क्रम में रखने पर: A, G, M, N, O -> 'AGMNO' प्राप्त होता है।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 39,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Word Arrangement / Alphabetical Reorder",
+    "difficulty": "Moderate",
+    "question_text": "If 'LEMON' is coded as 'ELMNO', how will 'MANGO' be coded?",
+    "question_text_hi": "यदि 'LEMON' को 'ELMNO' के रूप में कूटबद्ध किया जाता है, तो 'MANGO' को कैसे कूटबद्ध किया जाएगा?",
+    "options": {
+      "a": "AGMNO",
+      "b": "AMNGO",
+      "c": "OGNAM",
+      "d": "AMGON"
+    },
+    "options_hi": {
+      "a": "AGMNO",
+      "b": "AMNGO",
+      "c": "OGNAM",
+      "d": "AMGON"
+    },
+    "correct_option": "a",
+    "solution_text": "In 'LEMON', the letters are rearranged in alphabetical dictionary order: E (5), L (12), M (13), N (14), O (15) -> 'ELMNO'.\nArranging the letters of 'MANGO' in alphabetical order:\nA (1), G (7), M (13), N (14), O (15) -> 'AGMNO'.\n\nCorrect Option: (a)",
+    "solution_text_hi": "'LEMON' के अक्षरों को अंग्रेजी वर्णमाला के आरोही क्रम में सजाया गया है: E, L, M, N, O -> 'ELMNO'।\nइसी प्रकार 'MANGO' के अक्षरों को वर्णमाला क्रम में रखने पर: A, G, M, N, O -> 'AGMNO' प्राप्त होता है।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 40,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Syllogisms (Universal Affirmative)",
+    "difficulty": "Moderate",
+    "question_text": "Statements:\n1. All birds are animals.\n2. All animals are living beings.\nConclusions:\nI. All birds are living beings.\nII. Some living beings are birds.",
+    "question_text_hi": "कथन:\n1. सभी पक्षी जानवर हैं।\n2. सभी जानवर जीवित प्राणी हैं।\nनिष्कर्ष:\nI. सभी पक्षी जीवित प्राणी हैं।\nII. कुछ जीवित प्राणी पक्षी हैं।",
+    "options": {
+      "a": "Only conclusion I follows",
+      "b": "Only conclusion II follows",
+      "c": "Both conclusions I and II follow",
+      "d": "Neither follows"
+    },
+    "options_hi": {
+      "a": "केवल निष्कर्ष I अनुसरण करता है",
+      "b": "केवल निष्कर्ष II अनुसरण करता है",
+      "c": "निष्कर्ष I और II दोनों अनुसरण करते हैं",
+      "d": "कोई अनुसरण नहीं करता"
+    },
+    "correct_option": "c",
+    "solution_text": "Venn set containment: Birds ⊂ Animals ⊂ Living Beings.\n- Conclusion I: Birds ⊂ Living Beings => Valid.\n- Conclusion II: Some Living Beings are Birds => Valid.\nBoth conclusions I and II follow.\n\nCorrect Option: (c)",
+    "solution_text_hi": "वेन आरेख: पक्षी ⊂ जानवर ⊂ जीवित प्राणी।\nनिष्कर्ष I (सभी पक्षी जीवित प्राणी हैं) और निष्कर्ष II (कुछ जीवित प्राणी पक्षी हैं) दोनों सत्य हैं।\n\nअतः सही उत्तर (c) है।"
+  },
+  {
+    "question_number": 41,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Syllogisms (Particular & Universal)",
+    "difficulty": "Moderate",
+    "question_text": "Statements:\n1. Some doctors are teachers.\n2. All teachers are researchers.\nConclusions:\nI. Some researchers are doctors.\nII. Some teachers are not doctors.",
+    "question_text_hi": "कथन:\n1. कुछ डॉक्टर शिक्षक हैं।\n2. सभी शिक्षक शोधकर्ता हैं।\nनिष्कर्ष:\nI. कुछ शोधकर्ता डॉक्टर हैं।\nII. कुछ शिक्षक डॉक्टर नहीं हैं।",
+    "options": {
+      "a": "Only conclusion I follows",
+      "b": "Only conclusion II follows",
+      "c": "Both follow",
+      "d": "Neither follows"
+    },
+    "options_hi": {
+      "a": "केवल निष्कर्ष I अनुसरण करता है",
+      "b": "केवल निष्कर्ष II अनुसरण करता है",
+      "c": "दोनों अनुसरण करते हैं",
+      "d": "कोई अनुसरण नहीं करता"
+    },
+    "correct_option": "a",
+    "solution_text": "Since some doctors are teachers and all teachers are researchers, the intersection of Doctors and Teachers is completely contained in Researchers. Therefore, 'Some researchers are doctors' is definitely true. However, from positive premises, a negative conclusion ('Some teachers are not doctors') cannot be definitively deduced. Hence, only conclusion I follows.\n\nCorrect Option: (a)",
+    "solution_text_hi": "चूँकि कुछ डॉक्टर शिक्षक हैं और सभी शिक्षक शोधकर्ता हैं, अतः शोधकर्ताओं और डॉक्टरों में सामान्य भाग अवश्य है (निष्कर्ष I सत्य)। सकारात्मक कथनों से नकारात्मक निष्कर्ष (निष्कर्ष II) निश्चित रूप से नहीं निकाला जा सकता। अतः केवल निष्कर्ष I अनुसरण करता है।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 42,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Syllogisms (Negative Deduction)",
+    "difficulty": "Moderate",
+    "question_text": "Statements:\n1. All stones are hammers.\n2. No hammer is a ring.\nConclusions:\nI. No stone is a ring.\nII. Some rings are stones.",
+    "question_text_hi": "कथन:\n1. सभी पत्थर हथौड़े हैं।\n2. कोई हथौड़ा अंगूठी नहीं है।\nनिष्कर्ष:\nI. कोई पत्थर अंगूठी नहीं है।\nII. कुछ अंगूठियां पत्थर हैं।",
+    "options": {
+      "a": "Only conclusion I follows",
+      "b": "Only conclusion II follows",
+      "c": "Either I or II follows",
+      "d": "Neither follows"
+    },
+    "options_hi": {
+      "a": "केवल निष्कर्ष I अनुसरण करता है",
+      "b": "केवल निष्कर्ष II अनुसरण करता है",
+      "c": "या तो I या II अनुसरण करता है",
+      "d": "कोई अनुसरण नहीं करता"
+    },
+    "correct_option": "a",
+    "solution_text": "Since All Stones are inside Hammers, and Hammers have zero intersection with Rings, Stones also have zero intersection with Rings. Therefore, 'No stone is a ring' is definitely true. Conclusion II is false.\n\nCorrect Option: (a)",
+    "solution_text_hi": "चूँकि सभी पत्थर हथौड़े हैं और हथौड़ों का अंगूठियों से कोई संबंध नहीं है, अतः पत्थरों का भी अंगूठियों से कोई संबंध नहीं हो सकता। निष्कर्ष I पूर्णतः सत्य है।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 43,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Statement & Assumptions (Railway Policy)",
+    "difficulty": "Moderate",
+    "question_text": "Statement: 'The government has decided to provide free Wi-Fi connectivity at all major railway stations across the country.'\nAssumptions:\nI. Passengers use internet services during their travel and transit time.\nII. Many passengers cannot afford internet on their mobile phones.",
+    "question_text_hi": "कथन: 'सरकार ने देश के सभी प्रमुख रेलवे स्टेशनों पर मुफ्त वाई-फाई कनेक्टिविटी प्रदान करने का निर्णय लिया है।'\nपूर्वधारणाएं:\nI. यात्री अपनी यात्रा और पारगमन (Transit) समय के दौरान इंटरनेट सेवाओं का उपयोग करते हैं।\nII. कई यात्री अपने मोबाइल फोन पर इंटरनेट का खर्च वहन नहीं कर सकते।",
+    "options": {
+      "a": "Only assumption I is implicit",
+      "b": "Only assumption II is implicit",
+      "c": "Both assumptions are implicit",
+      "d": "Neither assumption is implicit"
+    },
+    "options_hi": {
+      "a": "केवल पूर्वधारणा I अंतर्निहित है",
+      "b": "केवल पूर्वधारणा II अंतर्निहित है",
+      "c": "दोनों पूर्वधारणाएं अंतर्निहित हैं",
+      "d": "कोई भी पूर्वधारणा अंतर्निहित नहीं है"
+    },
+    "correct_option": "a",
+    "solution_text": "- Assumption I is implicit because providing a facility at railway stations directly presumes that passengers need, demand, and utilize internet connectivity while waiting for trains.\n- Assumption II is not necessarily implicit because public amenities are installed for overall public convenience and digital inclusion, not solely because passengers cannot afford cellular data.\nHence, only assumption I is implicit.\n\nCorrect Option: (a)",
+    "solution_text_hi": "- पूर्वधारणा I अंतर्निहित है क्योंकि रेलवे स्टेशनों पर वाई-फाई सुविधा प्रदान करना यह मानकर किया गया है कि यात्री प्रतीक्षा अवधि में इंटरनेट का उपयोग करते हैं।\n- पूर्वधारणा II अंतर्निहित नहीं है क्योंकि सार्वजनिक सुविधाएं केवल सामर्थ्य की कमी के आधार पर नहीं बल्कि आम जन-सुविधा हेतु शुरू की जाती हैं।\nअतः केवल पूर्वधारणा I अंतर्निहित है।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 44,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Statement & Assumptions (Passenger Safety)",
+    "difficulty": "Moderate",
+    "question_text": "Statement: 'Passengers are requested to use the foot overbridge and not cross the railway tracks directly.' - Railway Station Notice.\nAssumptions:\nI. Crossing railway tracks directly on foot is dangerous and poses a risk to life.\nII. People can read and understand notices displayed at railway platforms.",
+    "question_text_hi": "कथन: 'यात्रियों से अनुरोध है कि वे फुट ओवरब्रिज का उपयोग करें और रेलवे पटरियों को सीधे पार न करें।' - रेलवे स्टेशन की सूचना।\nपूर्वधारणाएं:\nI. पैदल सीधे रेलवे ट्रैक पार करना खतरनाक है और इससे जान का जोखिम रहता है।\nII. लोग रेलवे प्लेटफॉर्म पर प्रदर्शित सूचनाओं को पढ़ और समझ सकते हैं।",
+    "options": {
+      "a": "Both assumptions I and II are implicit",
+      "b": "Only assumption I is implicit",
+      "c": "Only assumption II is implicit",
+      "d": "Neither assumption is implicit"
+    },
+    "options_hi": {
+      "a": "पूर्वधारणा I और II दोनों अंतर्निहित हैं",
+      "b": "केवल पूर्वधारणा I अंतर्निहित है",
+      "c": "केवल पूर्वधारणा II अंतर्निहित है",
+      "d": "कोई भी पूर्वधारणा अंतर्निहित नहीं है"
+    },
+    "correct_option": "a",
+    "solution_text": "- Assumption I is implicit because issuing a warning not to cross tracks directly is grounded on the fact that track crossing is life-threatening.\n- Assumption II is implicit because any official public advisory/notice is posted with the underlying expectation that commuters will read and heed it.\nTherefore, both assumptions I and II are implicit.\n\nCorrect Option: (a)",
+    "solution_text_hi": "- पूर्वधारणा I अंतर्निहित है क्योंकि रेलवे ट्रैक पार करने से रोकने की सूचना इसी आधार पर दी जाती है कि यह जानलेवा है।\n- पूर्वधारणा II भी अंतर्निहित है क्योंकि सूचना पट्ट इसी उम्मीद से लगाए जाते हैं कि यात्री उन्हें पढ़ेंगे और पालन करेंगे।\nअतः दोनों पूर्वधारणाएं अंतर्निहित हैं।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 45,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Statement & Conclusions (Health)",
+    "difficulty": "Moderate",
+    "question_text": "Statement: Regular physical exercise helps lower blood pressure and reduces the risk of heart disease.\nConclusions:\nI. People who do not exercise will always suffer from heart disease.\nII. Moderate regular exercise is beneficial for maintaining cardiovascular health.",
+    "question_text_hi": "कथन: नियमित शारीरिक व्यायाम रक्तचाप को कम करने और हृदय रोग के जोखिम को घटाने में मदद करता है।\nनिष्कर्ष:\nI. जो लोग व्यायाम नहीं करते वे हमेशा हृदय रोग से पीड़ित होंगे।\nII. मध्यम नियमित व्यायाम हृदय स्वास्थ्य को बनाए रखने के लिए लाभकारी है।",
+    "options": {
+      "a": "Only conclusion II follows",
+      "b": "Only conclusion I follows",
+      "c": "Both conclusions follow",
+      "d": "Neither conclusion follows"
+    },
+    "options_hi": {
+      "a": "केवल निष्कर्ष II अनुसरण करता है",
+      "b": "केवल निष्कर्ष I अनुसरण करता है",
+      "c": "दोनों निष्कर्ष अनुसरण करते हैं",
+      "d": "कोई भी निष्कर्ष अनुसरण नहीं करता"
+    },
+    "correct_option": "a",
+    "solution_text": "- Conclusion I is an extreme and invalid generalization ('will always suffer').\n- Conclusion II directly restates the positive premise established in the statement.\nTherefore, only conclusion II logically follows.\n\nCorrect Option: (a)",
+    "solution_text_hi": "- निष्कर्ष I एक अतिवादी और गलत अनुमान है ('हमेशा पीड़ित होंगे')।\n- निष्कर्ष II सीधे कथन के तथ्य की पुष्टि करता है।\nअतः केवल निष्कर्ष II अनुसरण करता है।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 46,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Statement & Conclusions (Economy)",
+    "difficulty": "Moderate",
+    "question_text": "Statement: 'The price of petroleum crude oil in the international market has dropped by 25%.' Conclusion I: 'Domestic oil companies may consider reducing retail petrol and diesel rates.' Conclusion II: 'Demand for public transport will immediately collapse.'",
+    "question_text_hi": "कथन: 'अंतर्राष्ट्रीय बाजार में कच्चे तेल की कीमतों में 25% की गिरावट आई है।' निष्कर्ष I: 'घरेलू तेल कंपनियां खुदरा पेट्रोल और डीजल की दरों में कमी करने पर विचार कर सकती हैं।' निष्कर्ष II: 'सार्वजनिक परिवहन की मांग तुरंत पूरी तरह समाप्त हो जाएगी।'",
+    "options": {
+      "a": "Only conclusion I follows",
+      "b": "Only conclusion II follows",
+      "c": "Both conclusions I and II follow",
+      "d": "Neither I nor II follows"
+    },
+    "options_hi": {
+      "a": "केवल निष्कर्ष I अनुसरण करता है",
+      "b": "केवल निष्कर्ष II अनुसरण करता है",
+      "c": "दोनों निष्कर्ष I और II अनुसरण करते हैं",
+      "d": "न तो I और न ही II अनुसरण करता है"
+    },
+    "correct_option": "a",
+    "solution_text": "Lower input crude costs directly allow retail price rationalization (I follows). Demands for mass public transit depend on urbanization, traffic, and affordability, not collapsing outright (II is invalid).",
+    "solution_text_hi": "कच्चे तेल की कीमत घटने पर खुदरा दरों में कमी की संभावना बनती है (I सही)। सार्वजनिक परिवहन की मांग समाप्त होना बेतुका निष्कर्ष है (II गलत)।"
+  },
+  {
+    "question_number": 47,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Statement & Arguments (Environment)",
+    "difficulty": "Moderate",
+    "question_text": "Statement: Should single-use plastics be completely banned across India?\nArguments:\nI. Yes, because single-use plastics are non-biodegradable and cause severe environmental pollution and marine hazards.\nII. No, because plastic manufacturing industries provide employment to millions of workers.",
+    "question_text_hi": "कथन: क्या पूरे भारत में एकल-उपयोग वाले प्लास्टिक (Single-use plastics) पर पूर्ण प्रतिबंध लगाया जाना चाहिए?\nतर्क:\nI. हां, क्योंकि एकल-उपयोग वाले प्लास्टिक गैर-बायोडिग्रेडेबल हैं और गंभीर पर्यावरण प्रदूषण व जलीय जीवों के लिए खतरा पैदा करते हैं।\nII. नहीं, क्योंकि प्लास्टिक विनिर्माण उद्योग लाखों श्रमिकों को रोजगार प्रदान करता है।",
+    "options": {
+      "a": "Only argument I is strong",
+      "b": "Only argument II is strong",
+      "c": "Both arguments I and II are strong",
+      "d": "Neither argument is strong"
+    },
+    "options_hi": {
+      "a": "केवल तर्क I ठोस है",
+      "b": "केवल तर्क II ठोस है",
+      "c": "तर्क I और II दोनों ठोस हैं",
+      "d": "कोई भी तर्क ठोस नहीं है"
+    },
+    "correct_option": "a",
+    "solution_text": "Argument I is strong because environmental sustainability, ecological survival, and health hazards represent a critical public and existential priority recognized globally.\nArgument II is weak because economic transition towards sustainable alternatives can generate green employment, and economic benefits cannot override severe irreversible environmental degradation.\nTherefore, only argument I is strong.\n\nCorrect Option: (a)",
+    "solution_text_hi": "तर्क I एक अत्यंत ठोस और वैज्ञानिक तर्क है क्योंकि पर्यावरण और पारिस्थितिकी तंत्र की सुरक्षा सर्वोच्च प्राथमिकता है।\nतर्क II कमजोर है क्योंकि पर्यावरण के विनाश की कीमत पर रोजगार का तर्क स्थायी नीति नहीं हो सकता और इसके स्थान पर वैकल्पिक हरित उद्योग रोजगार प्रदान कर सकते हैं।\nअतः केवल तर्क I ठोस है।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 48,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Course of Action (Urban Disaster)",
+    "difficulty": "Moderate",
+    "question_text": "Statement: Heavy monsoon rains have inundated low-lying areas of the city, causing waterlogging and traffic paralysis.\nCourses of Action:\nI. The civic administration should deploy emergency water pumps immediately to drain water from major roads.\nII. Citizens should be advised through media to avoid unnecessary travel and take alternate elevated routes.",
+    "question_text_hi": "कथन: भारी मानसूनी बारिश के कारण शहर के निचले इलाकों में पानी भर गया है, जिससे जलभराव और यातायात ठप हो गया है।\nकार्यवाही के उपाय:\nI. नागरिक प्रशासन को प्रमुख सड़कों से पानी निकालने के लिए तुरंत आपातकालीन पानी के पंप तैनात करने चाहिए।\nII. नागरिकों को मीडिया के माध्यम से सलाह दी जानी चाहिए कि वे अनावश्यक यात्रा से बचें और वैकल्पिक ऊंचे मार्गों का उपयोग करें।",
+    "options": {
+      "a": "Only I follows",
+      "b": "Only II follows",
+      "c": "Both I and II follow",
+      "d": "Neither I nor II follows"
+    },
+    "options_hi": {
+      "a": "केवल I अनुसरण करता है",
+      "b": "केवल II अनुसरण करता है",
+      "c": "I और II दोनों अनुसरण करते हैं",
+      "d": "न तो I और न ही II अनुसरण करता है"
+    },
+    "correct_option": "c",
+    "solution_text": "- Course of Action I is a direct and necessary remedial operational measure to restore mobility and remove excess water.\n- Course of Action II is a sensible preventive advisory to minimize congestion and protect citizen safety.\nBoth actions address the problem practically and constructively.\n\nCorrect Option: (c)",
+    "solution_text_hi": "- उपाय I जलभराव की समस्या को दूर करने के लिए आवश्यक त्वरित प्रशासनिक कदम है।\n- उपाय II नागरिकों की सुरक्षा और जाम से बचने के लिए उचित परामर्श है।\nअतः दोनों कार्यवाहियां उचित और आवश्यक हैं।\n\nअतः सही उत्तर (c) है।"
+  },
+  {
+    "question_number": 49,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Coding & Decoding (Direct Substitution)",
+    "difficulty": "Moderate",
+    "question_text": "In a certain code language, 'ROSE' is coded as '6821' and 'CHAIR' is coded as '73456'. How is 'SEARCH' coded in that language?",
+    "question_text_hi": "एक निश्चित कूट भाषा में, 'ROSE' को '6821' और 'CHAIR' को '73456' के रूप में कूटबद्ध किया जाता है। उसी भाषा में 'SEARCH' को कैसे कूटबद्ध किया जाएगा?",
+    "options": {
+      "a": "214573",
+      "b": "214673",
+      "c": "214763",
+      "d": "215473"
+    },
+    "options_hi": {
+      "a": "214573",
+      "b": "214673",
+      "c": "214763",
+      "d": "215473"
+    },
+    "correct_option": "b",
+    "solution_text": "Direct letter-to-digit substitution:\n- R=6, O=8, S=2, E=1\n- C=7, H=3, A=4, I=5, R=6\nNow for 'SEARCH':\nS -> 2\nE -> 1\nA -> 4\nR -> 6\nC -> 7\nH -> 3\nCode = 214673.\n\nCorrect Option: (b)",
+    "solution_text_hi": "प्रत्यक्ष कूट प्रतिस्थापन:\nS=2, E=1, A=4, R=6, C=7, H=3.\nअतः 'SEARCH' = 214673.\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 50,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Coding & Decoding (Direct Letter Codes)",
+    "difficulty": "Moderate",
+    "question_text": "If 'DELHI' is coded as 73541 and 'CALCUTTA' is coded as 82589662, how is 'CALICUT' coded in that language?",
+    "question_text_hi": "यदि 'DELHI' को 73541 और 'CALCUTTA' को 82589662 के रूप में कूटबद्ध किया जाता है, तो 'CALICUT' को कैसे कूटबद्ध किया जाएगा?",
+    "options": {
+      "a": "8251896",
+      "b": "8251869",
+      "c": "8258196",
+      "d": "8251986"
+    },
+    "options_hi": {
+      "a": "8251896",
+      "b": "8251869",
+      "c": "8258196",
+      "d": "8251986"
+    },
+    "correct_option": "a",
+    "solution_text": "Direct letter mapping:\nC=8, A=2, L=5, H=4, I=1, U=9, T=6.\nFor 'CALICUT':\nC -> 8\nA -> 2\nL -> 5\nI -> 1\nC -> 8\nU -> 9\nT -> 6\nCode = 8251896.\n\nCorrect Option: (a)",
+    "solution_text_hi": "प्रत्यक्ष कूट मिलान:\nC=8, A=2, L=5, I=1, C=8, U=9, T=6.\nअतः 'CALICUT' = 8251896.\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 51,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Coding & Decoding (Letter Shift Pattern)",
+    "difficulty": "Moderate",
+    "question_text": "In a certain code, 'TEACHER' is written as 'VGCEJGT'. How will 'STUDENT' be written in that code language?",
+    "question_text_hi": "एक निश्चित कूट में, 'TEACHER' को 'VGCEJGT' लिखा जाता है। उसी कूट भाषा में 'STUDENT' को कैसे लिखा जाएगा?",
+    "options": {
+      "a": "UVWFGPV",
+      "b": "UVWGFPV",
+      "c": "UWVFGVP",
+      "d": "TUVEFOS"
+    },
+    "options_hi": {
+      "a": "UVWFGPV",
+      "b": "UVWGFPV",
+      "c": "UWVFGVP",
+      "d": "TUVEFOS"
+    },
+    "correct_option": "a",
+    "solution_text": "Pattern: Forward shift of +2 for every letter:\nT(+2)=V, E(+2)=G, A(+2)=C, C(+2)=E, H(+2)=J, E(+2)=G, R(+2)=T.\nApplying to STUDENT:\nS(19)+2 = U(21)\nT(20)+2 = V(22)\nU(21)+2 = W(23)\nD(4)+2 = F(6)\nE(5)+2 = G(7)\nN(14)+2 = P(16)\nT(20)+2 = V(22)\nResult = UVWFGPV.\n\nCorrect Option: (a)",
+    "solution_text_hi": "प्रत्येक अक्षर में +2 का अग्रिम विस्थापन:\nS+2=U, T+2=V, U+2=W, D+2=F, E+2=G, N+2=P, T+2=V.\nअतः अभीष्ट कूट UVWFGPV है।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 52,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Coding & Decoding (Railway Domain)",
+    "difficulty": "Moderate",
+    "question_text": "In a certain code language, 'RAILWAY' is coded as 'TCKNYCA'. How will 'STATION' be coded in that same language?",
+    "question_text_hi": "एक निश्चित कूट भाषा में 'RAILWAY' को 'TCKNYCA' लिखा जाता है। उसी कूट भाषा में 'STATION' को किस प्रकार लिखा जाएगा?",
+    "options": {
+      "a": "UVCVKQP",
+      "b": "UVBVKPO",
+      "c": "TVCUKQP",
+      "d": "UVCWLRQ"
+    },
+    "options_hi": {
+      "a": "UVCVKQP",
+      "b": "UVBVKPO",
+      "c": "TVCUKQP",
+      "d": "UVCWLRQ"
+    },
+    "correct_option": "a",
+    "solution_text": "The pattern adds $+2$ to each letter's alphabetical rank: R(+2)->T, A(+2)->C, I(+2)->K, L(+2)->N, W(+2)->Y, A(+2)->C, Y(+2)->A. Applying to STATION: S(+2)=U, T(+2)=V, A(+2)=C, T(+2)=V, I(+2)=K, O(+2)=Q, N(+2)=P -> 'UVCVKQP'.",
+    "solution_text_hi": "पैटर्न में प्रत्येक अक्षर के वर्णमाला क्रम में $+2$ जोड़ा गया है: R(+2)->T, A(+2)->C, आदि। अतः STATION के लिए: S(+2)=U, T(+2)=V, A(+2)=C, T(+2)=V, I(+2)=K, O(+2)=Q, N(+2)=P -> 'UVCVKQP'।"
+  },
+  {
+    "question_number": 53,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Number Series (Arithmetic Difference)",
+    "difficulty": "Moderate",
+    "question_text": "Find the missing number in the following series:\n3, 8, 18, 38, 78, ?",
+    "question_text_hi": "निम्नलिखित संख्या श्रृंखला में लुप्त पद ज्ञात कीजिए:\n3, 8, 18, 38, 78, ?",
+    "options": {
+      "a": "148",
+      "b": "158",
+      "c": "168",
+      "d": "156"
+    },
+    "options_hi": {
+      "a": "148",
+      "b": "158",
+      "c": "168",
+      "d": "156"
+    },
+    "correct_option": "b",
+    "solution_text": "Pattern:\n- 3 × 2 + 2 = 8\n- 8 × 2 + 2 = 18\n- 18 × 2 + 2 = 38\n- 38 × 2 + 2 = 78\n- 78 × 2 + 2 = 156 + 2 = 158.\n(Or differences: +5, +10, +20, +40, +80 => 78 + 80 = 158).\n\nCorrect Option: (b)",
+    "solution_text_hi": "पैटर्न: प्रत्येक पद × 2 + 2\n78 × 2 + 2 = 158 (अथवा अंतर: +5, +10, +20, +40, +80 => 78 + 80 = 158)।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 54,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Number Series (Geometric Double + 3)",
+    "difficulty": "Moderate",
+    "question_text": "Find the missing number in the following sequence:\n5, 13, 29, 61, 125, ?",
+    "question_text_hi": "निम्नलिखित अनुक्रम में लुप्त संख्या ज्ञात कीजिए:\n5, 13, 29, 61, 125, ?",
+    "options": {
+      "a": "251",
+      "b": "253",
+      "c": "257",
+      "d": "249"
+    },
+    "options_hi": {
+      "a": "251",
+      "b": "253",
+      "c": "257",
+      "d": "249"
+    },
+    "correct_option": "b",
+    "solution_text": "Pattern: Multiply by 2 and add 3:\n- 5 × 2 + 3 = 13\n- 13 × 2 + 3 = 29\n- 29 × 2 + 3 = 61\n- 61 × 2 + 3 = 125\n- 125 × 2 + 3 = 250 + 3 = 253.\n\nCorrect Option: (b)",
+    "solution_text_hi": "पैटर्न: संख्या × 2 + 3\n5×2+3=13, 13×2+3=29, 29×2+3=61, 61×2+3=125, 125×2+3 = 253.\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 55,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Letter Series (Decreasing Alphabet Gap)",
+    "difficulty": "Moderate",
+    "question_text": "What letter will come in place of the question mark (?):\nZ, W, S, N, ?",
+    "question_text_hi": "प्रश्नवाचक चिन्ह (?) के स्थान पर कौन सा अक्षर आएगा:\nZ, W, S, N, ?",
+    "options": {
+      "a": "H",
+      "b": "I",
+      "c": "J",
+      "d": "G"
+    },
+    "options_hi": {
+      "a": "H",
+      "b": "I",
+      "c": "J",
+      "d": "G"
+    },
+    "correct_option": "a",
+    "solution_text": "Decreasing positions:\nZ(26) -> (-3) -> W(23)\nW(23) -> (-4) -> S(19)\nS(19) -> (-5) -> N(14)\nN(14) -> (-6) -> H(8).\n\nCorrect Option: (a)",
+    "solution_text_hi": "स्थानीय मान में घटता अंतर (-3, -4, -5, -6):\nZ(26) - 3 = W(23)\nW(23) - 4 = S(19)\nS(19) - 5 = N(14)\nN(14) - 6 = H(8).\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 56,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Blood Relations (Family Tree)",
+    "difficulty": "Moderate",
+    "question_text": "A is the brother of B. C is the father of A. D is the brother of E. E is the daughter of B. Who is the uncle of D?",
+    "question_text_hi": "A, B का भाई है। C, A का पिता है। D, E का भाई है। E, B की पुत्री है। D का चाचा/मामा कौन है?",
+    "options": {
+      "a": "A",
+      "b": "B",
+      "c": "C",
+      "d": "E"
+    },
+    "options_hi": {
+      "a": "A",
+      "b": "B",
+      "c": "C",
+      "d": "E"
+    },
+    "correct_option": "a",
+    "solution_text": "Family tree analysis:\n- E is daughter of B, and D is brother of E => D is the son of B.\n- A is the brother of B.\nSince A is the brother of D's parent (B), A is the uncle of D.\n\nCorrect Option: (a)",
+    "solution_text_hi": "संबंध विश्लेषण:\n- D, E का भाई है और E, B की पुत्री है => D, B का पुत्र है।\n- A, B का भाई है।\nअतः A, D का चाचा/मामा (Uncle) है।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 57,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Blood Relations (Generational Chain)",
+    "difficulty": "Moderate",
+    "question_text": "A is B's sister. C is B's mother. D is C's father. E is D's mother. How is A related to D?",
+    "question_text_hi": "A, B की बहन है। C, B की माँ है। D, C का पिता है। E, D की माँ है। A, D से किस प्रकार संबंधित है?",
+    "options": {
+      "a": "Daughter",
+      "b": "Granddaughter",
+      "c": "Great granddaughter",
+      "d": "Niece"
+    },
+    "options_hi": {
+      "a": "पुत्री",
+      "b": "पौत्री / नातिन (Granddaughter)",
+      "c": "परपौत्री",
+      "d": "भांजी"
+    },
+    "correct_option": "b",
+    "solution_text": "- A is the daughter of C (since A is sister of B, and C is mother of B).\n- D is the father of C.\nTherefore, A is the daughter of D's daughter, which makes A the Granddaughter (नातिन) of D.\n\nCorrect Option: (b)",
+    "solution_text_hi": "A, C की पुत्री है और D, C का पिता है। अतः A, D की नातिन (Granddaughter) है।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 58,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Direction & Distance Sense",
+    "difficulty": "Moderate",
+    "question_text": "Starting from point P, Sachin walks 20 metres South. He turns left and walks 30 metres. He then turns left and walks 20 metres. Finally, he turns left once more and walks 40 metres to stop at point Q. How far and in which direction is point Q from point P?",
+    "question_text_hi": "बिंदु P से शुरू होकर, सचिन 20 मीटर दक्षिण की ओर चलता है। वह बायें मुड़ता है और 30 मीटर चलता है। फिर वह बायें मुड़कर 20 मीटर चलता है। अंत में, वह पुनः बायें मुड़ता है और बिंदु Q पर रुकने के लिए 40 मीटर चलता है। बिंदु Q, बिंदु P से कितनी दूर और किस दिशा में है?",
+    "options": {
+      "a": "10 metres West",
+      "b": "10 metres East",
+      "c": "20 metres West",
+      "d": "10 metres North"
+    },
+    "options_hi": {
+      "a": "10 मीटर पश्चिम",
+      "b": "10 मीटर पूर्व",
+      "c": "20 मीटर पश्चिम",
+      "d": "10 मीटर उत्तर"
+    },
+    "correct_option": "a",
+    "solution_text": "Tracking coordinates from P(0, 0):\n1. 20 m South -> (0, -20)\n2. Turns left (East) 30 m -> (30, -20)\n3. Turns left (North) 20 m -> (30, 0)\n4. Turns left (West) 40 m -> (30 - 40, 0) = (-10, 0).\nPoint Q is at (-10, 0), which is exactly 10 metres West of P.\n\nCorrect Option: (a)",
+    "solution_text_hi": "निर्देशांक विश्लेषण P(0,0) से:\n1. दक्षिण 20 मी -> (0, -20)\n2. बायें (पूर्व) 30 मी -> (30, -20)\n3. बायें (उत्तर) 20 मी -> (30, 0)\n4. बायें (पश्चिम) 40 मी -> (-10, 0)।\nअतः Q, बिंदु P से 10 मीटर पश्चिम में है।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 59,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Direction & Sun Shadow",
+    "difficulty": "Moderate",
+    "question_text": "One morning after sunrise, Suresh was standing facing a pole. The shadow of the pole fell exactly to his right. Which direction was Suresh facing?",
+    "question_text_hi": "एक सुबह सूर्योदय के बाद सुरेश एक खंभे के सामने खड़ा था। खंभे की परछाई ठीक उसके दायीं ओर पड़ रही थी। सुरेश का मुख किस दिशा में था?",
+    "options": {
+      "a": "East",
+      "b": "West",
+      "c": "North",
+      "d": "South"
+    },
+    "options_hi": {
+      "a": "पूर्व",
+      "b": "पश्चिम",
+      "c": "उत्तर",
+      "d": "दक्षिण"
+    },
+    "correct_option": "d",
+    "solution_text": "In the morning, the sun rises in the East, so all shadows fall towards the West.\n- Shadow of the pole is to Suresh's right, which means West is to Suresh's right.\n- When a person faces South, West is to their right (and East is to their left).\nTherefore, Suresh was facing South.\n\nCorrect Option: (d)",
+    "solution_text_hi": "सुबह के समय सूर्य पूर्व में होता है, अतः सभी परछाइयाँ पश्चिम दिशा में पड़ती हैं।\nखंभे की परछाई सुरेश के दायीं ओर है, अर्थात पश्चिम दिशा उसके दायीं ओर है।\nजब कोई व्यक्ति दक्षिण की ओर देखता है, तो पश्चिम उसके दायीं ओर होता है। अतः सुरेश का मुख दक्षिण दिशा में था।\n\nअतः सही उत्तर (d) है।"
+  },
+  {
+    "question_number": 60,
+    "part_number": 2,
+    "section_name": "PART-2",
+    "section_title": "General Intelligence & Reasoning",
+    "topic": "Mathematical Operations (Symbol & Digit Interchange)",
+    "difficulty": "Moderate",
+    "question_text": "If signs '+' and '-' and digits '4' and '8' are interchanged, which of the following equations becomes correct?",
+    "question_text_hi": "यदि चिन्हों '+' और '-' तथा अंकों '4' और '8' को परस्पर बदल दिया जाए, तो निम्नलिखित में से कौन सा समीकरण सही हो जाएगा?",
+    "options": {
+      "a": "4 - 8 + 12 = 0",
+      "b": "8 - 4 + 12 = 8",
+      "c": "4 + 8 - 12 = 16",
+      "d": "8 + 4 - 6 = 2"
+    },
+    "options_hi": {
+      "a": "4 - 8 + 12 = 0",
+      "b": "8 - 4 + 12 = 8",
+      "c": "4 + 8 - 12 = 16",
+      "d": "8 + 4 - 6 = 2"
+    },
+    "correct_option": "a",
+    "solution_text": "Testing option (a): Original: 4 - 8 + 12 = 0\nInterchange 4 ↔ 8 and - ↔ +:\n8 + 4 - 12\n= 12 - 12 = 0. This is perfectly correct!\n\nCorrect Option: (a)",
+    "solution_text_hi": "विकल्प (a) में प्रतिस्थापन करने पर:\n4 - 8 + 12 = 0\n4 और 8 तथा + और - को बदलने पर:\n8 + 4 - 12 = 12 - 12 = 0 (सत्य)।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 61,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Physics (Free Fall & Kinematics)",
+    "difficulty": "Moderate",
+    "question_text": "A stone is released from the top of a tower of height 45 metres. What is its velocity just before it strikes the ground? (Take g = 10 m/s²)",
+    "question_text_hi": "45 मीटर ऊँचे एक टॉवर के शीर्ष से एक पत्थर को विरामावस्था से छोड़ा जाता है। जमीन से टकराने से ठीक पहले इसका वेग क्या होगा? (g = 10 मी/से² लें)",
+    "options": {
+      "a": "25 m/s",
+      "b": "30 m/s",
+      "c": "35 m/s",
+      "d": "40 m/s"
+    },
+    "options_hi": {
+      "a": "25 मी/से",
+      "b": "30 मी/से",
+      "c": "35 मी/से",
+      "d": "40 मी/से"
+    },
+    "correct_option": "b",
+    "solution_text": "Using third equation of motion under gravity:\nv² = u² + 2gh\nHere initial velocity u = 0, h = 45 m, g = 10 m/s²:\nv² = 0 + 2 × 10 × 45 = 900\nv = √900 = 30 m/s.\n\nCorrect Option: (b)",
+    "solution_text_hi": "गति के तीसरे समीकरण से: v² = u² + 2gh\nयहाँ u = 0, h = 45 मीटर, g = 10 मी/से²\nv² = 0 + 2 × 10 × 45 = 900 => v = 30 मी/से।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 62,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Physics (Current Electricity & Resistance)",
+    "difficulty": "Moderate",
+    "question_text": "If a wire of length L and uniform cross-sectional area A has a resistance of 16 Ω, what will be the resistance of another wire of the same material having length 2L and cross-sectional area 2A?",
+    "question_text_hi": "यदि L लंबाई और एकसमान अनुप्रस्थ काट क्षेत्रफल A वाले एक तार का प्रतिरोध 16 Ω है, तो उसी पदार्थ से बने 2L लंबाई और 2A अनुप्रस्थ काट क्षेत्रफल वाले दूसरे तार का प्रतिरोध क्या होगा?",
+    "options": {
+      "a": "8 Ω",
+      "b": "16 Ω",
+      "c": "32 Ω",
+      "d": "64 Ω"
+    },
+    "options_hi": {
+      "a": "8 Ω",
+      "b": "16 Ω",
+      "c": "32 Ω",
+      "d": "64 Ω"
+    },
+    "correct_option": "b",
+    "solution_text": "Resistance formula: R = ρ × (L / A).\nFor the new wire:\nR' = ρ × (2L / 2A) = ρ × (L / A) = R = 16 Ω.\nSince both length and cross-sectional area doubled, the ratio (L/A) remains unchanged.\n\nCorrect Option: (b)",
+    "solution_text_hi": "प्रतिरोध का सूत्र: R = ρ × (L / A).\nनए तार के लिए:\nR' = ρ × (2L / 2A) = ρ × (L / A) = 16 Ω.\nचूँकि लंबाई और क्षेत्रफल दोनों दोगुने हो गए हैं, अतः प्रतिरोध अपरिवर्तित रहेगा।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 63,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Physics (Optics & Mirror Formula)",
+    "difficulty": "Moderate",
+    "question_text": "An object is placed at a distance of 20 cm in front of a concave mirror of focal length 15 cm. What is the distance of the image from the mirror?",
+    "question_text_hi": "15 सेमी फोकस दूरी वाले अवतल दर्पण के सामने 20 सेमी की दूरी पर एक वस्तु रखी गई है। दर्पण से प्रतिबिम्ब की दूरी क्या होगी?",
+    "options": {
+      "a": "-30 cm",
+      "b": "-60 cm",
+      "c": "+60 cm",
+      "d": "-45 cm"
+    },
+    "options_hi": {
+      "a": "-30 सेमी",
+      "b": "-60 सेमी",
+      "c": "+60 सेमी",
+      "d": "-45 सेमी"
+    },
+    "correct_option": "b",
+    "solution_text": "Using the mirror formula: 1/f = 1/v + 1/u.\nAccording to sign convention for concave mirror:\nf = -15 cm, u = -20 cm.\n1/v = 1/f - 1/u = 1/(-15) - 1/(-20) = -1/15 + 1/20 = (-4 + 3) / 60 = -1/60.\nv = -60 cm (real, inverted image formed in front of the mirror).\n\nCorrect Option: (b)",
+    "solution_text_hi": "दर्पण सूत्र: 1/f = 1/v + 1/u.\nचिह्न परिपाटी के अनुसार: f = -15 सेमी, u = -20 सेमी।\n1/v = -1/15 - (-1/20) = -1/15 + 1/20 = -1/60 => v = -60 सेमी।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 64,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Physics (Electric Power & Joule's Heating)",
+    "difficulty": "Moderate",
+    "question_text": "An electric heater having a resistance of 50 Ω draws a current of 4 A from the mains. How much heat energy (in Joules) is produced by the heater in 2 minutes?",
+    "question_text_hi": "50 Ω प्रतिरोध वाला एक विद्युत हीटर मुख्य लाइन से 4 A की धारा लेता है। 2 मिनट में हीटर द्वारा कितनी ऊष्मा ऊर्जा (जूल में) उत्पन्न होगी?",
+    "options": {
+      "a": "48,000 J",
+      "b": "96,000 J",
+      "c": "12,000 J",
+      "d": "120,000 J"
+    },
+    "options_hi": {
+      "a": "48,000 जूल",
+      "b": "96,000 जूल",
+      "c": "12,000 जूल",
+      "d": "120,000 जूल"
+    },
+    "correct_option": "b",
+    "solution_text": "By Joule's law of heating: H = I² × R × t\nGiven: I = 4 A, R = 50 Ω, t = 2 minutes = 2 × 60 = 120 seconds.\nH = (4)² × 50 × 120 = 16 × 50 × 120 = 800 × 120 = 96,000 Joules (96 kJ).\n\nCorrect Option: (b)",
+    "solution_text_hi": "जूल के तापन नियम के अनुसार: H = I² × R × t\nदिया है: I = 4 A, R = 50 Ω, t = 2 मिनट = 120 सेकंड।\nH = (4)² × 50 × 120 = 16 × 50 × 120 = 96,000 जूल।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 65,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Physics (Gravitation & Universal Law)",
+    "difficulty": "Moderate",
+    "question_text": "What is the SI unit and accepted value of the Universal Gravitational Constant (G)?",
+    "question_text_hi": "सार्वत्रिक गुरुत्वाकर्षण नियतांक (G) का SI मात्रक और स्वीकृत मान क्या है?",
+    "options": {
+      "a": "6.67 × 10⁻¹¹ N·m²/kg²",
+      "b": "6.67 × 10⁻¹¹ N·m/kg",
+      "c": "9.8 m/s²",
+      "d": "6.67 × 10⁻⁸ N·m²/kg²"
+    },
+    "options_hi": {
+      "a": "6.67 × 10⁻¹¹ N·m²/kg²",
+      "b": "6.67 × 10⁻¹¹ N·m/kg",
+      "c": "9.8 m/s²",
+      "d": "6.67 × 10⁻⁸ N·m²/kg²"
+    },
+    "correct_option": "a",
+    "solution_text": "From Newton's law of gravitation F = G (m₁ m₂ / r²), we get G = (F × r²) / (m₁ × m₂).\nIts SI unit is N·m²/kg² and its experimentally determined value (by Henry Cavendish) is 6.673 × 10⁻¹¹ N·m²/kg².\n\nCorrect Option: (a)",
+    "solution_text_hi": "न्यूटन के गुरुत्वाकर्षण नियम F = G(m₁m₂/r²) से, G = F·r² / (m₁m₂).\nइसका SI मात्रक N·m²/kg² है तथा इसका मान 6.67 × 10⁻¹¹ N·m²/kg² होता है।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 66,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Chemistry (Periodic Trends & Atomic Radius)",
+    "difficulty": "Moderate",
+    "question_text": "As we move from left to right across a period in the Modern Periodic Table, the atomic radius generally:",
+    "question_text_hi": "आधुनिक आवर्त सारणी में किसी आवर्त में बायें से दायें जाने पर परमाणु त्रिज्या सामान्यतः:",
+    "options": {
+      "a": "Increases",
+      "b": "Decreases",
+      "c": "Remains constant",
+      "d": "First decreases then increases"
+    },
+    "options_hi": {
+      "a": "बढ़ती है",
+      "b": "घटती है",
+      "c": "अपरिवर्तित रहती है",
+      "d": "पहले घटती है फिर बढ़ती है"
+    },
+    "correct_option": "b",
+    "solution_text": "Moving left to right across a period, the atomic number (nuclear charge) increases while electrons enter the same principal valence shell. The increased nuclear attraction pulls valence electrons closer to the nucleus, decreasing atomic radius.\n\nCorrect Option: (b)",
+    "solution_text_hi": "किसी आवर्त में बायें से दायें जाने पर प्रभावी नाभिकीय आवेश बढ़ता है, जिससे बाह्यतम कोश के इलेक्ट्रॉन नाभिक की ओर अधिक आकर्षित होते हैं और परमाणु त्रिज्या घटती है।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 67,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Chemistry (Acids & Bases in Nature)",
+    "difficulty": "Moderate",
+    "question_text": "Which organic acid is naturally present in tomato?",
+    "question_text_hi": "टमाटर में प्राकृतिक रूप से कौन सा कार्बनिक अम्ल उपस्थित होता है?",
+    "options": {
+      "a": "Citric and Oxalic acid",
+      "b": "Tartaric acid",
+      "c": "Methanoic acid",
+      "d": "Lactic acid"
+    },
+    "options_hi": {
+      "a": "साइट्रिक और ऑक्सालिक अम्ल",
+      "b": "टार्टरिक अम्ल",
+      "c": "मेथेनॉइक अम्ल",
+      "d": "लैक्टिक अम्ल"
+    },
+    "correct_option": "a",
+    "solution_text": "Tomatoes naturally contain Oxalic acid and Citric acid. Tartaric acid is found in tamarind, Methanoic (formic) acid in ant stings, and Lactic acid in sour milk/curd.\n\nCorrect Option: (a)",
+    "solution_text_hi": "टमाटर में मुख्य रूप से ऑक्सालिक अम्ल और साइट्रिक अम्ल पाए जाते हैं। इमली में टार्टरिक अम्ल, चींटी के डंक में मेथेनॉइक अम्ल तथा दही में लैक्टिक अम्ल होता है।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 68,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Physics/Chemistry (Total Internal Reflection)",
+    "difficulty": "Moderate",
+    "question_text": "Optical fibres used in modern high-speed telecommunications transmit light signals based on which optical principle?",
+    "question_text_hi": "आधुनिक उच्च-गति दूरसंचार में उपयोग किए जाने वाले ऑप्टिकल फाइबर (प्रकाशिक तंतु) किस प्रकाशीय सिद्धांत के आधार पर प्रकाश संकेतों का संचरण करते हैं?",
+    "options": {
+      "a": "Diffraction of light",
+      "b": "Total Internal Reflection",
+      "c": "Interference of light",
+      "d": "Polarization of light"
+    },
+    "options_hi": {
+      "a": "प्रकाश का विवर्तन",
+      "b": "पूर्ण आंतरिक परावर्तन (Total Internal Reflection)",
+      "c": "प्रकाश का व्यतिकरण",
+      "d": "प्रकाश का ध्रुवण"
+    },
+    "correct_option": "b",
+    "solution_text": "Optical fibres transmit light by repeated Total Internal Reflection (TIR). Light entering the denser core at an angle greater than the critical angle strikes the core-cladding boundary and undergoes total internal reflection without loss of signal strength.\n\nCorrect Option: (b)",
+    "solution_text_hi": "ऑप्टिकल फाइबर पूर्ण आंतरिक परावर्तन (Total Internal Reflection) के सिद्धांत पर कार्य करते हैं। जब प्रकाश क्रांतिक कोण से अधिक कोण पर सघन क्रोड में प्रवेश करता है, तो वह बिना ऊर्जा ह्रास के बार-बार परावर्तित होकर आगे बढ़ता है।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 69,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Chemistry (Chemical Formulas & Hydrates)",
+    "difficulty": "Moderate",
+    "question_text": "Plaster of Paris (POP) is chemically calcium sulphate hemihydrate. At what temperature is gypsum (CaSO4·2H2O) heated to produce Plaster of Paris?",
+    "question_text_hi": "प्लास्टर ऑफ पेरिस (POP) रासायनिक रूप से कैल्शियम सल्फेट हेमीहाइड्रेट (CaSO4·1/2H2O) है। इसे बनाने के लिए जिप्सम (CaSO4·2H2O) को किस तापमान पर गर्म किया जाता है?",
+    "options": {
+      "a": "373 K (100°C)",
+      "b": "273 K (0°C)",
+      "c": "473 K (200°C)",
+      "d": "300 K (27°C)"
+    },
+    "options_hi": {
+      "a": "373 K (100°C)",
+      "b": "273 K (0°C)",
+      "c": "473 K (200°C)",
+      "d": "300 K (27°C)"
+    },
+    "correct_option": "a",
+    "solution_text": "When gypsum (CaSO4·2H2O) is heated to 373 K (100°C), it loses three-fourths of its water of crystallization to form calcium sulphate hemihydrate (Plaster of Paris):\nCaSO4·2H2O -> CaSO4·(1/2)H2O + 1.5H2O\nIf heated above 373 K, all water of crystallization is lost, forming anhydrous calcium sulphate ('dead burnt plaster').\n\nCorrect Option: (a)",
+    "solution_text_hi": "जब जिप्सम (CaSO4·2H2O) को 373 K (100°C) पर गर्म किया जाता है, तो यह अपने क्रिस्टलन जल का 1.5 अणु त्यागकर कैल्शियम सल्फेट हेमीहाइड्रेट (CaSO4·1/2H2O) बनाता है, जिसे प्लास्टर ऑफ पेरिस कहते हैं।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 70,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Chemistry (Chemical Reactions & Displacement)",
+    "difficulty": "Moderate",
+    "question_text": "When an iron nail is immersed in a blue copper sulphate (CuSO₄) solution, the color of the solution gradually turns pale green due to the formation of which compound?",
+    "question_text_hi": "जब लोहे की एक कील को नीले कॉपर सल्फेट (CuSO₄) के विलयन में डुबोया जाता है, तो किस यौगिक के बनने के कारण विलयन का रंग धीरे-धीरे हल्का हरा हो जाता है?",
+    "options": {
+      "a": "Iron Oxide",
+      "b": "Ferrous Sulphate (FeSO₄)",
+      "c": "Copper Oxide",
+      "d": "Ferric Hydroxide"
+    },
+    "options_hi": {
+      "a": "आयरन ऑक्साइड",
+      "b": "फेरस सल्फेट (FeSO₄)",
+      "c": "कॉपर ऑक्साइड",
+      "d": "फेरिक हाइड्रॉक्साइड"
+    },
+    "correct_option": "b",
+    "solution_text": "Iron is more reactive than copper in the metal activity series. It displaces copper from copper sulphate solution:\nFe + CuSO₄ (blue) → FeSO₄ (pale green) + Cu (reddish-brown deposit).\n\nCorrect Option: (b)",
+    "solution_text_hi": "आयरन कॉपर से अधिक क्रियाशील धातु है। यह कॉपर को विस्थापित कर फेरस सल्फेट (FeSO₄) बनाता है:\nFe + CuSO₄ (नीला) → FeSO₄ (हल्का हरा) + Cu (भूरा निक्षेप)।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 71,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Biology (Cell Division - Meiosis Crossing Over)",
+    "difficulty": "Moderate",
+    "question_text": "Crossing over (recombination of genetic material between homologous chromosomes) takes place during which sub-stage of Prophase-I in meiosis?",
+    "question_text_hi": "अर्धसूत्रीविभाजन (Meiosis) के प्रोफेज-I की किस उप-अवस्था के दौरान क्रॉसिंग ओवर (जीन विनिमय) होता है?",
+    "options": {
+      "a": "Leptotene",
+      "b": "Zygotene",
+      "c": "Pachytene",
+      "d": "Diakinesis"
+    },
+    "options_hi": {
+      "a": "लेप्टोटीन",
+      "b": "जाइगोटीन",
+      "c": "पैचीटीन (Pachytene)",
+      "d": "डायकाइनेसिस"
+    },
+    "correct_option": "c",
+    "solution_text": "Crossing over between non-sister chromatids of homologous chromosomes occurs during the Pachytene stage of Prophase-I, facilitated by the enzyme recombinase.\n\nCorrect Option: (c)",
+    "solution_text_hi": "समजात गुणसूत्रों के गैर-सहोदर क्रोमैटिड्स के बीच क्रॉसिंग ओवर (जीन विनिमय) प्रोफेज-I की पैचीटीन (Pachytene) उप-अवस्था में रिकॉम्बिनेज एंजाइम द्वारा होता है।\n\nअतः सही उत्तर (c) है।"
+  },
+  {
+    "question_number": 72,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Biology (Human Respiratory System & Alveoli)",
+    "difficulty": "Moderate",
+    "question_text": "In human beings, where does the exchange of gases (oxygen and carbon dioxide) actually occur in the lungs?",
+    "question_text_hi": "मनुष्य के फेफड़ों में गैसों (ऑक्सीजन और कार्बन डाइऑक्साइड) का वास्तविक विनिमय कहाँ होता है?",
+    "options": {
+      "a": "Trachea",
+      "b": "Bronchioles",
+      "c": "Alveoli",
+      "d": "Larynx"
+    },
+    "options_hi": {
+      "a": "श्वासनली (Trachea)",
+      "b": "श्वसनिका (Bronchioles)",
+      "c": "कूपिकाएँ (Alveoli)",
+      "d": "कंठ (Larynx)"
+    },
+    "correct_option": "c",
+    "solution_text": "Alveoli are balloon-like microstructures with extremely thin epithelial walls surrounded by extensive capillary networks. They provide a massive surface area for diffusion of oxygen into blood and CO₂ out of blood.\n\nCorrect Option: (c)",
+    "solution_text_hi": "फेफड़ों में कूपिकाएँ (Alveoli) गुब्बारेनुमा सूक्ष्म संरचनाएँ हैं जिनकी पतली झिल्ली के चारों ओर रक्त केशिकाओं का घना जाल होता है, जहाँ गैसों का वास्तविक विनिमय होता है।\n\nअतः सही उत्तर (c) है।"
+  },
+  {
+    "question_number": 73,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Biology (Human Nervous System & Medulla)",
+    "difficulty": "Moderate",
+    "question_text": "Which part of the human brain regulates involuntary actions like heartbeat, blood pressure, and peristalsis?",
+    "question_text_hi": "मानव मस्तिष्क का कौन सा भाग हृदय की धड़कन, रक्तचाप और क्रमाकुंचन (peristalsis) जैसी अनैच्छिक क्रियाओं को नियंत्रित करता है?",
+    "options": {
+      "a": "Cerebrum",
+      "b": "Cerebellum",
+      "c": "Medulla Oblongata",
+      "d": "Hypothalamus"
+    },
+    "options_hi": {
+      "a": "प्रमस्तिष्क (Cerebrum)",
+      "b": "अनुमस्तिष्क (Cerebellum)",
+      "c": "मेडुला ऑबलांगाटा (Medulla Oblongata)",
+      "d": "हाइपोथैलेमस"
+    },
+    "correct_option": "c",
+    "solution_text": "The Medulla Oblongata (part of the hindbrain) controls autonomic involuntary functions such as cardiac rate, respiration, vasomotor reflexes, and swallowing/vomiting.\n\nCorrect Option: (c)",
+    "solution_text_hi": "पश्च मस्तिष्क में स्थित मेडुला ऑबलांगाटा (Medulla Oblongata) हृदय गति, रक्तचाप, उल्टी आना और श्वसन जैसी जीवन रक्षक अनैच्छिक क्रियाओं का मुख्य केंद्र है।\n\nअतः सही उत्तर (c) है।"
+  },
+  {
+    "question_number": 74,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Biology (Plant Tissues & Sclerenchyma)",
+    "difficulty": "Moderate",
+    "question_text": "The husk of a coconut is made up of which type of plant tissue?",
+    "question_text_hi": "नारियल का रेशेदार छिलका (husk) किस प्रकार के पादप ऊतक से बना होता है?",
+    "options": {
+      "a": "Parenchyma",
+      "b": "Collenchyma",
+      "c": "Sclerenchyma",
+      "d": "Aerenchyma"
+    },
+    "options_hi": {
+      "a": "मृदूतक (Parenchyma)",
+      "b": "स्थूलकोण ऊतक (Collenchyma)",
+      "c": "दृढ़ोतक (Sclerenchyma)",
+      "d": "वायुतक (Aerenchyma)"
+    },
+    "correct_option": "c",
+    "solution_text": "The husk of coconut consists of sclerenchymatous fibers. Sclerenchyma cells are dead, long, narrow, and have heavily lignified thick walls providing mechanical stiffness and protection.\n\nCorrect Option: (c)",
+    "solution_text_hi": "नारियल का छिलका दृढ़ोतक (Sclerenchyma) रेशों से बना होता है। ये मृत कोशिकाएं होती हैं जिनकी भित्तियाँ लिग्निन के जमाव के कारण अत्यधिक मोटी और कठोर होती हैं।\n\nअतः सही उत्तर (c) है।"
+  },
+  {
+    "question_number": 75,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Indian History (Modern - Dandi Salt March)",
+    "difficulty": "Moderate",
+    "question_text": "The historic Dandi March (Salt Satyagraha) was launched by Mahatma Gandhi in 1930 from which place?",
+    "question_text_hi": "महात्मा गांधी द्वारा 1930 में ऐतिहासिक दांडी मार्च (नमक सत्याग्रह) किस स्थान से प्रारंभ किया गया था?",
+    "options": {
+      "a": "Champaran",
+      "b": "Sabarmati Ashram (Ahmedabad)",
+      "c": "Wardha",
+      "d": "Sevagram"
+    },
+    "options_hi": {
+      "a": "चंपारण",
+      "b": "साबरमती आश्रम (अहमदाबाद)",
+      "c": "वर्धा",
+      "d": "सेवाग्राम"
+    },
+    "correct_option": "b",
+    "solution_text": "Mahatma Gandhi began the Dandi March on 12 March 1930 from Sabarmati Ashram with 78 followers and walked 241 miles to the coastal village of Dandi, breaking the salt law on 6 April 1930 to inaugurate the Civil Disobedience Movement.\n\nCorrect Option: (b)",
+    "solution_text_hi": "महात्मा गांधी ने 12 मार्च 1930 को साबरमती आश्रम (अहमदाबाद) से 78 अनुयायियों के साथ दांडी मार्च शुरू किया और 6 अप्रैल 1930 को दांडी पहुँचकर नमक कानून तोड़ा।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 76,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Indian History (Ancient - Kailash Temple Ellora)",
+    "difficulty": "Moderate",
+    "question_text": "The famous rock-cut Kailash Temple at Ellora (Cave 16) was built during the reign of which dynasty?",
+    "question_text_hi": "एलोरा का प्रसिद्ध शैलकृत कैलाश मंदिर (गुफा संख्या 16) किस राजवंश के शासनकाल में बनवाया गया था?",
+    "options": {
+      "a": "Chola Dynasty",
+      "b": "Rashtrakuta Dynasty",
+      "c": "Pallava Dynasty",
+      "d": "Chalukya Dynasty"
+    },
+    "options_hi": {
+      "a": "चोल राजवंश",
+      "b": "राष्ट्रकूट राजवंश",
+      "c": "पल्लव राजवंश",
+      "d": "चालुक्य राजवंश"
+    },
+    "correct_option": "b",
+    "solution_text": "The Kailash Temple at Ellora (Maharashtra) is a monolithic rock-cut monument commissioned by the Rashtrakuta King Krishna I (756–774 CE).\n\nCorrect Option: (b)",
+    "solution_text_hi": "एलोरा का कैलाश मंदिर एकाश्म चट्टान को काटकर बनाया गया एक भव्य मंदिर है, जिसका निर्माण राष्ट्रकूट राजा कृष्ण प्रथम (8वीं शताब्दी) ने करवाया था।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 77,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Indian History (Modern - Indian National Congress)",
+    "difficulty": "Moderate",
+    "question_text": "Who was the founder of the Indian National Congress (INC) in December 1885, and who presided over its first session in Bombay?",
+    "question_text_hi": "दिसंबर 1885 में भारतीय राष्ट्रीय कांग्रेस (INC) के संस्थापक कौन थे और बॉम्बे में इसके पहले अधिवेशन की अध्यक्षता किसने की थी?",
+    "options": {
+      "a": "A.O. Hume; W.C. Bonnerjee",
+      "b": "Dadabhai Naoroji; Dinshaw Wacha",
+      "c": "Surendranath Banerjee; Gopal Krishna Gokhale",
+      "d": "Lord Dufferin; Badruddin Tyabji"
+    },
+    "options_hi": {
+      "a": "ए.ओ. ह्यूम; व्योमेश चंद्र बनर्जी (W.C. Bonnerjee)",
+      "b": "दादाभाई नौरोजी; दिनशा वाचा",
+      "c": "सुरेंद्रनाथ बनर्जी; गोपाल कृष्ण गोखले",
+      "d": "लॉर्ड डफरिन; बदरुद्दीन तैयबजी"
+    },
+    "correct_option": "a",
+    "solution_text": "The Indian National Congress was founded by retired British civil servant Allan Octavian Hume (A.O. Hume) in December 1885. The first session was held at Gokuldas Tejpal Sanskrit College, Bombay, presided over by Womesh Chandra Bonnerjee (W.C. Bonnerjee) with 72 delegates.\n\nCorrect Option: (a)",
+    "solution_text_hi": "भारतीय राष्ट्रीय कांग्रेस की स्थापना ए.ओ. ह्यूम (A.O. Hume) ने दिसंबर 1885 में की थी। इसके पहले अधिवेशन की अध्यक्षता व्योमेश चंद्र बनर्जी ने बॉम्बे में की थी जिसमें 72 प्रतिनिधियों ने भाग लिया था।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 78,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Indian History (Medieval - Mughal Architecture)",
+    "difficulty": "Moderate",
+    "question_text": "Which Mughal Emperor commissioned the construction of the Red Fort (Lal Qila) and Jama Masjid in Delhi?",
+    "question_text_hi": "किस मुगल सम्राट ने दिल्ली में लाल किला और जामा मस्जिद का निर्माण करवाया था?",
+    "options": {
+      "a": "Akbar",
+      "b": "Jahangir",
+      "c": "Shah Jahan",
+      "d": "Aurangzeb"
+    },
+    "options_hi": {
+      "a": "अकबर",
+      "b": "जहाँगीर",
+      "c": "शाहजहाँ",
+      "d": "औरंगजेब"
+    },
+    "correct_option": "c",
+    "solution_text": "Shah Jahan (reigned 1628–1658) shifted the Mughal capital from Agra to Delhi (Shahjahanabad) in 1638 and commissioned the Red Fort (completed in 1648) and the grand Jama Masjid.\n\nCorrect Option: (c)",
+    "solution_text_hi": "मुगल सम्राट शाहजहाँ ने अपनी राजधानी आगरा से दिल्ली स्थानांतरित की और लाल किला तथा जामा मस्जिद का भव्य निर्माण करवाया।\n\nअतः सही उत्तर (c) है।"
+  },
+  {
+    "question_number": 79,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Indian History (Modern - Battle of Plassey 1757)",
+    "difficulty": "Moderate",
+    "question_text": "On which date was the decisive Battle of Plassey fought between the British East India Company under Robert Clive and Siraj-ud-Daulah, the Nawab of Bengal?",
+    "question_text_hi": "रॉबर्ट क्लाइव के नेतृत्व में ब्रिटिश ईस्ट इंडिया कंपनी और बंगाल के नवाब सिराजुद्दौला के बीच प्लासी का निर्णायक युद्ध किस तिथि को लड़ा गया था?",
+    "options": {
+      "a": "23 June 1757",
+      "b": "22 October 1764",
+      "c": "14 January 1761",
+      "d": "10 May 1857"
+    },
+    "options_hi": {
+      "a": "23 जून 1757",
+      "b": "22 अक्टूबर 1764",
+      "c": "14 जनवरी 1761",
+      "d": "10 मई 1857"
+    },
+    "correct_option": "a",
+    "solution_text": "The Battle of Plassey was fought on 23 June 1757 along the Bhagirathi River in Bengal. Clive defeated Siraj-ud-Daulah due to the treachery of Mir Jafar, establishing British political dominance in India.\n\nCorrect Option: (a)",
+    "solution_text_hi": "प्लासी का युद्ध 23 जून 1757 को लड़ा गया था, जिसमें रॉबर्ट क्लाइव ने मीर जाफर के विश्वासघात के कारण नवाब सिराजुद्दौला को हराकर भारत में ब्रिटिश शासन की नींव रखी।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 80,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Indian Geography (Rift Valley Rivers - Narmada)",
+    "difficulty": "Moderate",
+    "question_text": "Which of the following west-flowing rivers flows through a rift valley between the Vindhya and Satpura mountain ranges?",
+    "question_text_hi": "निम्नलिखित में से कौन सी पश्चिम की ओर बहने वाली नदी विंध्य और सतपुड़ा पर्वत श्रृंखलाओं के बीच भ्रंश घाटी (Rift Valley) से होकर बहती है?",
+    "options": {
+      "a": "Godavari",
+      "b": "Narmada",
+      "c": "Mahanadi",
+      "d": "Krishna"
+    },
+    "options_hi": {
+      "a": "गोदावरी",
+      "b": "नर्मदा",
+      "c": "महानदी",
+      "d": "कृष्णा"
+    },
+    "correct_option": "b",
+    "solution_text": "The Narmada River originates from the Amarkantak plateau in Madhya Pradesh and flows westward through a linear tectonic rift valley between the Vindhya range (north) and Satpura range (south) before emptying into the Arabian Sea.\n\nCorrect Option: (b)",
+    "solution_text_hi": "नर्मदा नदी अमरकंटक से निकलकर विंध्य (उत्तर) और सतपुड़ा (दक्षिण) के बीच भ्रंश घाटी से होकर पश्चिम की ओर बहती है और अरब सागर (खंभात की खाड़ी) में गिरती है।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 81,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Indian Geography (Black Regur Soil & Agriculture)",
+    "difficulty": "Moderate",
+    "question_text": "Black soil, extensively found in the Deccan Lava Plateau and ideal for cotton cultivation, is also known by which name?",
+    "question_text_hi": "दक्कन के लावा पठार में पाई जाने वाली और कपास की खेती के लिए सर्वाधिक उपयुक्त काली मिट्टी को किस अन्य नाम से भी जाना जाता है?",
+    "options": {
+      "a": "Khadar soil",
+      "b": "Regur soil",
+      "c": "Bangar soil",
+      "d": "Laterite soil"
+    },
+    "options_hi": {
+      "a": "खादर मिट्टी",
+      "b": "रेगुर मिट्टी (Regur soil)",
+      "c": "बांगर मिट्टी",
+      "d": "लेटराइट मिट्टी"
+    },
+    "correct_option": "b",
+    "solution_text": "Black soil is popularly called 'Regur soil' (from Telugu reguda) or 'Black Cotton Soil'. It has high moisture retention capacity and is rich in montmorillonite clay.\n\nCorrect Option: (b)",
+    "solution_text_hi": "काली मिट्टी को 'रेगुर मिट्टी' या 'काली कपास मिट्टी' भी कहा जाता है। इसमें जल धारण की असाधारण क्षमता होती है और यह बेसाल्टिक लावा के अपक्षय से बनती है।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 82,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Indian Geography (Majuli River Island - Brahmaputra)",
+    "difficulty": "Moderate",
+    "question_text": "Majuli, officially recognized by Guinness World Records as the largest inhabited river island in the world, is situated on which river in Assam?",
+    "question_text_hi": "गिनीज वर्ल्ड रिकॉर्ड्स द्वारा दुनिया के सबसे बड़े बसे हुए नदी द्वीप के रूप में मान्यता प्राप्त 'माजुली' द्वीप असम में किस नदी पर स्थित है?",
+    "options": {
+      "a": "Brahmaputra River",
+      "b": "Ganga River",
+      "c": "Godavari River",
+      "d": "Barak River"
+    },
+    "options_hi": {
+      "a": "ब्रह्मपुत्र नदी (Brahmaputra)",
+      "b": "गंगा नदी",
+      "c": "गोदावरी नदी",
+      "d": "बराक नदी"
+    },
+    "correct_option": "a",
+    "solution_text": "Majuli is a large riverine island formed by the Brahmaputra River and the Kherkutia Xuti (an anabranch) in Assam. In September 2016, it became the first island in India to be made a full-fledged administrative district.\n\nCorrect Option: (a)",
+    "solution_text_hi": "माजुली द्वीप असम में ब्रह्मपुत्र नदी के मध्य में स्थित है। यह विश्व का सबसे बड़ा नदी द्वीप है और 2016 में भारत का पहला द्वीप जिला बना। यह नव-वैष्णव संस्कृति का प्रमुख केंद्र है।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 83,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Indian Geography (Tropic of Cancer in India)",
+    "difficulty": "Moderate",
+    "question_text": "Through how many Indian states does the Tropic of Cancer (23.5° N latitude) pass?",
+    "question_text_hi": "कर्क रेखा (23.5° N अक्षांश) भारत के कितने राज्यों से होकर गुजरती है?",
+    "options": {
+      "a": "6 states",
+      "b": "7 states",
+      "c": "8 states",
+      "d": "9 states"
+    },
+    "options_hi": {
+      "a": "6 राज्य",
+      "b": "7 राज्य",
+      "c": "8 राज्य",
+      "d": "9 राज्य"
+    },
+    "correct_option": "c",
+    "solution_text": "The Tropic of Cancer passes through 8 Indian states (from west to east): Gujarat, Rajasthan, Madhya Pradesh, Chhattisgarh, Jharkhand, West Bengal, Tripura, and Mizoram.\n\nCorrect Option: (c)",
+    "solution_text_hi": "कर्क रेखा भारत के 8 राज्यों से होकर गुजरती है: गुजरात, राजस्थान, मध्य प्रदेश, छत्तीसगढ़, झारखंड, पश्चिम बंगाल, त्रिपुरा और मिजोरम।\n\nअतः सही उत्तर (c) है।"
+  },
+  {
+    "question_number": 84,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Indian Polity (Election Commission of India)",
+    "difficulty": "Moderate",
+    "question_text": "Under Article 324 of the Constitution of India, what is the official tenure of the Chief Election Commissioner (CEC) of India?",
+    "question_text_hi": "भारतीय संविधान के अनुच्छेद 324 के तहत भारत के मुख्य चुनाव आयुक्त (CEC) का आधिकारिक कार्यकाल कितना होता है?",
+    "options": {
+      "a": "6 years or up to 65 years of age, whichever is earlier",
+      "b": "5 years or up to 65 years of age, whichever is earlier",
+      "c": "6 years or up to 62 years of age, whichever is earlier",
+      "d": "5 years or up to 60 years of age, whichever is earlier"
+    },
+    "options_hi": {
+      "a": "6 वर्ष या 65 वर्ष की आयु, जो भी पहले हो",
+      "b": "5 वर्ष या 65 वर्ष की आयु, जो भी पहले हो",
+      "c": "6 वर्ष या 62 वर्ष की आयु, जो भी पहले हो",
+      "d": "5 वर्ष या 60 वर्ष की आयु, जो भी पहले हो"
+    },
+    "correct_option": "a",
+    "solution_text": "The Chief Election Commissioner and Election Commissioners hold office for a term of 6 years or until they attain the age of 65 years, whichever is earlier. They enjoy the same status and salary as Judges of the Supreme Court of India.\n\nCorrect Option: (a)",
+    "solution_text_hi": "भारत के मुख्य चुनाव आयुक्त और अन्य चुनाव आयुक्तों का कार्यकाल 6 वर्ष या 65 वर्ष की आयु तक (जो भी पहले हो) होता है। उन्हें सर्वोच्च न्यायालय के न्यायाधीश के समान दर्जा प्राप्त होता है।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 85,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Indian Polity (42nd Constitutional Amendment 1976)",
+    "difficulty": "Moderate",
+    "question_text": "Which three words were added to the Preamble of the Constitution of India by the 42nd Constitutional Amendment Act, 1976?",
+    "question_text_hi": "42वें संविधान संशोधन अधिनियम, 1976 द्वारा भारतीय संविधान की प्रस्तावना में कौन से तीन शब्द जोड़े गए थे?",
+    "options": {
+      "a": "Socialist, Secular, Integrity",
+      "b": "Sovereign, Democratic, Republic",
+      "c": "Liberty, Equality, Fraternity",
+      "d": "Justice, Liberty, Socialist"
+    },
+    "options_hi": {
+      "a": "समाजवादी, पंथनिरपेक्ष, अखंडता (Socialist, Secular, Integrity)",
+      "b": "संप्रभु, लोकतांत्रिक, गणराज्य",
+      "c": "स्वतंत्रता, समानता, बंधुत्व",
+      "d": "न्याय, स्वतंत्रता, समाजवादी"
+    },
+    "correct_option": "a",
+    "solution_text": "The 42nd Constitutional Amendment Act of 1976 amended the Preamble to add three new terms: 'Socialist', 'Secular', and 'Integrity'.\n\nCorrect Option: (a)",
+    "solution_text_hi": "1976 के 42वें संविधान संशोधन द्वारा प्रस्तावना में 'समाजवादी', 'पंथनिरपेक्ष' और 'अखंडता' शब्द जोड़े गए थे।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 86,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Indian Polity (Lok Sabha Qualifications)",
+    "difficulty": "Moderate",
+    "question_text": "What is the minimum age prescribed by the Constitution to be eligible for election as a member of the Lok Sabha?",
+    "question_text_hi": "लोकसभा सदस्य के रूप में चुनाव लड़ने के लिए संविधान द्वारा निर्धारित न्यूनतम आयु क्या है?",
+    "options": {
+      "a": "21 years",
+      "b": "25 years",
+      "c": "30 years",
+      "d": "35 years"
+    },
+    "options_hi": {
+      "a": "21 वर्ष",
+      "b": "25 वर्ष",
+      "c": "30 वर्ष",
+      "d": "35 वर्ष"
+    },
+    "correct_option": "b",
+    "solution_text": "Under Article 84(b) of the Constitution of India, a person must be not less than 25 years of age to be qualified to be chosen as a member of the Lok Sabha (and not less than 30 years for Rajya Sabha).\n\nCorrect Option: (b)",
+    "solution_text_hi": "अनुच्छेद 84(b) के अनुसार लोकसभा सदस्य बनने के लिए न्यूनतम आयु 25 वर्ष (और राज्यसभा के लिए 30 वर्ष) होनी चाहिए।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 87,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Indian Polity (Article 352 National Emergency)",
+    "difficulty": "Moderate",
+    "question_text": "Under which Article of the Constitution of India can the President proclaim a National Emergency on grounds of war, external aggression, or armed rebellion?",
+    "question_text_hi": "भारतीय संविधान के किस अनुच्छेद के तहत राष्ट्रपति युद्ध, बाह्य आक्रमण या सशस्त्र विद्रोह के आधार पर राष्ट्रीय आपातकाल की घोषणा कर सकते हैं?",
+    "options": {
+      "a": "Article 352",
+      "b": "Article 356",
+      "c": "Article 360",
+      "d": "Article 368"
+    },
+    "options_hi": {
+      "a": "अनुच्छेद 352",
+      "b": "अनुच्छेद 356",
+      "c": "अनुच्छेद 360",
+      "d": "अनुच्छेद 368"
+    },
+    "correct_option": "a",
+    "solution_text": "Article 352 deals with the Proclamation of National Emergency. Article 356 deals with President's Rule in States (State Emergency), and Article 360 deals with Financial Emergency.\n\nCorrect Option: (a)",
+    "solution_text_hi": "अनुच्छेद 352 के तहत राष्ट्रपति राष्ट्रीय आपातकाल की घोषणा करते हैं। अनुच्छेद 356 राज्य में राष्ट्रपति शासन तथा अनुच्छेद 360 वित्तीय आपातकाल से संबंधित है।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 88,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Indian Economy (RBI Lender of Last Resort)",
+    "difficulty": "Moderate",
+    "question_text": "Which institution in India acts as the 'Lender of Last Resort' for the commercial banking system?",
+    "question_text_hi": "भारत में कौन सा संस्थान वाणिज्यिक बैंकिंग प्रणाली के लिए 'अंतिम ऋणदाता' (Lender of Last Resort) के रूप में कार्य करता है?",
+    "options": {
+      "a": "State Bank of India (SBI)",
+      "b": "Reserve Bank of India (RBI)",
+      "c": "Ministry of Finance",
+      "d": "National Bank for Agriculture and Rural Development (NABARD)"
+    },
+    "options_hi": {
+      "a": "भारतीय स्टेट बैंक (SBI)",
+      "b": "भारतीय रिज़र्व बैंक (RBI)",
+      "c": "वित्त मंत्रालय",
+      "d": "नाबार्ड (NABARD)"
+    },
+    "correct_option": "b",
+    "solution_text": "The Reserve Bank of India (RBI) functions as the Lender of Last Resort to provide emergency liquidity assistance to solvent banks facing temporary liquidity crunches, safeguarding financial stability.\n\nCorrect Option: (b)",
+    "solution_text_hi": "भारतीय रिज़र्व बैंक (RBI) संकट के समय वाणिज्यिक बैंकों को तरलता सहायता प्रदान करके देश की वित्तीय स्थिरता की रक्षा हेतु 'अंतिम ऋणदाता' के रूप में कार्य करता है।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 89,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Indian Economy (National Income & GDP)",
+    "difficulty": "Moderate",
+    "question_text": "Gross Domestic Product (GDP) is defined as the total monetary market value of all:",
+    "question_text_hi": "सकल घरेलू उत्पाद (GDP) को किसके कुल मौद्रिक बाजार मूल्य के रूप में परिभाषित किया जाता है?",
+    "options": {
+      "a": "Intermediate goods produced within a country in a year",
+      "b": "Final goods and services produced within the domestic territory of a country in a specified time period",
+      "c": "Consumer goods consumed in a country",
+      "d": "Export goods sent abroad"
+    },
+    "options_hi": {
+      "a": "एक वर्ष में देश के भीतर उत्पादित मध्यवर्ती वस्तुएं",
+      "b": "एक निश्चित समय अवधि में देश की घरेलू सीमा के भीतर उत्पादित सभी अंतिम वस्तुओं और सेवाओं",
+      "c": "देश में उपभोग की जाने वाली उपभोक्ता वस्तुएं",
+      "d": "विदेशों में भेजी जाने वाली निर्यात वस्तुएं"
+    },
+    "correct_option": "b",
+    "solution_text": "GDP represents the total monetary value of all final goods and services produced within the geographic borders of a nation during a specific time period (usually a financial year).\n\nCorrect Option: (b)",
+    "solution_text_hi": "सकल घरेलू उत्पाद (GDP) किसी देश की भौगोलिक सीमा के भीतर एक वित्तीय वर्ष में उत्पादित सभी अंतिम वस्तुओं और सेवाओं का कुल मौद्रिक बाजार मूल्य होता है।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 90,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Indian Economy (NITI Aayog Policy)",
+    "difficulty": "Moderate",
+    "question_text": "What is the full form of NITI Aayog, which replaced the 65-year-old Planning Commission of India on 1 January 2015?",
+    "question_text_hi": "1 जनवरी 2015 को योजना आयोग के स्थान पर गठित 'नीति आयोग' (NITI Aayog) का पूर्ण रूप क्या है?",
+    "options": {
+      "a": "National Institute for Transforming India",
+      "b": "National Institution for Transforming India",
+      "c": "National Initiative for Technical India",
+      "d": "National Integration for Trade in India"
+    },
+    "options_hi": {
+      "a": "नेशनल इंस्टीट्यूट फॉर ट्रांसफॉर्मिंग इंडिया",
+      "b": "नेशनल इंस्टीट्यूशन फॉर ट्रांसफॉर्मिंग इंडिया (National Institution for Transforming India)",
+      "c": "नेशनल इनिशिएटिव फॉर टेक्निकल इंडिया",
+      "d": "नेशनल इंटीग्रेशन फॉर ट्रेड इन इंडिया"
+    },
+    "correct_option": "b",
+    "solution_text": "NITI Aayog stands for 'National Institution for Transforming India'. It serves as the apex public policy think tank of the Government of India, headed by the Prime Minister as its Chairperson.\n\nCorrect Option: (b)",
+    "solution_text_hi": "नीति आयोग का पूर्ण रूप 'National Institution for Transforming India' (राष्ट्रीय भारत परिवर्तन संस्थान) है। प्रधानमंत्री इसके पदेन अध्यक्ष होते हैं।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 91,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Indian Railways GK (Northern Railway Headquarters)",
+    "difficulty": "Moderate",
+    "question_text": "Where is the headquarters of the Northern Railway (NR) zone of Indian Railways situated?",
+    "question_text_hi": "भारतीय रेलवे के उत्तर रेलवे (Northern Railway) ज़ोन का मुख्यालय कहाँ स्थित है?",
+    "options": {
+      "a": "Gorakhpur",
+      "b": "New Delhi",
+      "c": "Prayagraj",
+      "d": "Jaipur"
+    },
+    "options_hi": {
+      "a": "गोरखपुर",
+      "b": "नई दिल्ली (New Delhi)",
+      "c": "प्रयागराज",
+      "d": "जयपुर"
+    },
+    "correct_option": "b",
+    "solution_text": "The headquarters of Northern Railway (the largest railway zone by route route length in India) is located at Baroda House, New Delhi.\n\nCorrect Option: (b)",
+    "solution_text_hi": "उत्तर रेलवे (NR) का मुख्यालय बड़ौदा हाउस, नई दिल्ली में स्थित है।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 92,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Indian Railways GK (Hubballi Junction Platform Record)",
+    "difficulty": "Moderate",
+    "question_text": "Which railway station currently holds the Guinness World Record for the longest railway platform in the world (1,507 metres long)?",
+    "question_text_hi": "वर्तमान में किस रेलवे स्टेशन के पास 1,507 मीटर लंबे विश्व के सबसे लंबे रेलवे प्लेटफॉर्म का गिनीज वर्ल्ड रिकॉर्ड है?",
+    "options": {
+      "a": "Gorakhpur Junction (Uttar Pradesh)",
+      "b": "Kollam Junction (Kerala)",
+      "c": "Shree Siddharoodha Swamiji Hubballi Station (Karnataka)",
+      "d": "Kharagpur Railway Station (West Bengal)"
+    },
+    "options_hi": {
+      "a": "गोरखपुर जंक्शन (उत्तर प्रदेश)",
+      "b": "कोल्लम जंक्शन (केरल)",
+      "c": "श्री सिद्धारूढ़ स्वामीजी हुबली स्टेशन (कर्नाटक)",
+      "d": "खड़गपुर रेलवे स्टेशन (पश्चिम बंगाल)"
+    },
+    "correct_option": "c",
+    "solution_text": "Platform No. 8 of Shree Siddharoodha Swamiji Hubballi Junction (SWR) in Karnataka measures 1,507 metres, making it the longest railway platform in the world, certified by Guinness World Records in March 2023 (surpassing Gorakhpur's 1,366 m).\n\nCorrect Option: (c)",
+    "solution_text_hi": "कर्नाटक के श्री सिद्धारूढ़ स्वामीजी हुबली जंक्शन का प्लेटफॉर्म नंबर 8 (1,507 मीटर) वर्तमान में विश्व का सबसे लंबा रेलवे प्लेटफॉर्म है।\n\nअतः सही उत्तर (c) है।"
+  },
+  {
+    "question_number": 93,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Indian Railways GK (Kavach Indigenous ATP System)",
+    "difficulty": "Moderate",
+    "question_text": "What is 'KAVACH', indigenously developed by the Indian Railways?",
+    "question_text_hi": "भारतीय रेल द्वारा स्वदेशी रूप से विकसित 'कवच' (KAVACH) क्या है?",
+    "options": {
+      "a": "An anti-collision automatic train protection (ATP) system",
+      "b": "Bullet-proof passenger coaches",
+      "c": "A railway satellite surveillance system",
+      "d": "An automated ticket vending machine"
+    },
+    "options_hi": {
+      "a": "ट्रेनों की टक्कर रोकने वाली स्वचालित सुरक्षा प्रणाली (Automatic Train Protection - ATP)",
+      "b": "बुलेटप्रूफ बोगियां",
+      "c": "रेलवे उपग्रह निगरानी प्रणाली",
+      "d": "स्वचालित टिकट वेंडिंग मशीन"
+    },
+    "correct_option": "a",
+    "solution_text": "Kavach is an indigenous Automatic Train Protection (ATP) system certified to Safety Integrity Level-4 (SIL-4) to prevent collisions caused by signal passing at danger.",
+    "solution_text_hi": "'कवच' भारतीय रेल की स्वदेशी ऑटोमैटिक ट्रेन प्रोटेक्शन प्रणाली है जो ट्रेनों को आमने-सामने की टक्कर से बचाती है।"
+  },
+  {
+    "question_number": 94,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Indian Railways GK (Vande Bharat - ICF Chennai)",
+    "difficulty": "Moderate",
+    "question_text": "India's indigenous semi-high speed train, Vande Bharat Express (initially known as Train 18), was designed and manufactured by which Indian Railways production unit?",
+    "question_text_hi": "भारत की स्वदेशी सेमी-हाई स्पीड ट्रेन 'वंदे भारत एक्सप्रेस' (शुरुआत में ट्रेन 18 के नाम से जानी गई) को भारतीय रेलवे की किस उत्पादन इकाई द्वारा डिजाइन और निर्मित किया गया था?",
+    "options": {
+      "a": "Chittaranjan Locomotive Works (CLW), Asansol",
+      "b": "Integral Coach Factory (ICF), Chennai",
+      "c": "Rail Coach Factory (RCF), Kapurthala",
+      "d": "Diesel Locomotive Works (DLW), Varanasi"
+    },
+    "options_hi": {
+      "a": "चित्तरंजन लोकोमोटिव वर्क्स (CLW), आसनसोल",
+      "b": "सवारी डिब्बा कारखाना (ICF), चेन्नई",
+      "c": "रेल कोच फैक्ट्री (RCF), कपूरथला",
+      "d": "डीजल रेलइंजन कारखाना (DLW), वाराणसी"
+    },
+    "correct_option": "b",
+    "solution_text": "Vande Bharat Express (Train 18) was designed and manufactured by the Integral Coach Factory (ICF) at Perambur, Chennai under the 'Make in India' initiative. The first Vande Bharat train was flagged off on February 15, 2019, between New Delhi and Varanasi.\n\nCorrect Option: (b)",
+    "solution_text_hi": "वंदे भारत एक्सप्रेस (ट्रेन 18) को इंटीग्रल कोच फैक्ट्री (ICF), चेन्नई द्वारा 'मेक इन इंडिया' पहल के तहत स्वदेशी रूप से डिजाइन और निर्मित किया गया था। पहली वंदे भारत ट्रेन 15 फरवरी 2019 को नई दिल्ली से वाराणसी के बीच शुरू की गई थी।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 95,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Current Affairs & Tech (ISRO Gaganyaan Mission)",
+    "difficulty": "Moderate",
+    "question_text": "What is the official project name of India's first indigenous human spaceflight mission aiming to send astronauts to Low Earth Orbit (LEO)?",
+    "question_text_hi": "अंतरिक्ष यात्रियों को पृथ्वी की निचली कक्षा (LEO) में भेजने के लिए इसरो द्वारा संचालित भारत के पहले स्वदेशी मानव अंतरिक्ष उड़ान मिशन का आधिकारिक नाम क्या है?",
+    "options": {
+      "a": "Gaganyaan",
+      "b": "Mangalyaan-2",
+      "c": "Shukrayaan",
+      "d": "Vyommitra"
+    },
+    "options_hi": {
+      "a": "गगनयान (Gaganyaan)",
+      "b": "मंगलयान-2",
+      "c": "शुक्रयान",
+      "d": "व्योममित्र"
+    },
+    "correct_option": "a",
+    "solution_text": "Gaganyaan is ISRO's flagship human spaceflight programme aimed at demonstrating human spaceflight capability by sending a crew of astronauts to an orbit of 400 km for a 3-day mission and returning them safely to Earth.\n\nCorrect Option: (a)",
+    "solution_text_hi": "गगनयान (Gaganyaan) इसरो का महत्वाकांक्षी मानवयुक्त अंतरिक्ष मिशन है, जिसका उद्देश्य 3 सदस्यीय चालक दल को 400 किमी की निचली कक्षा में भेजकर सुरक्षित वापस लाना है।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 96,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Current Affairs & Sports (Badminton World Championships)",
+    "difficulty": "Moderate",
+    "question_text": "The prestigious 'Thomas Cup' (Men's) and 'Uber Cup' (Women's) are premier world team championships associated with which sport?",
+    "question_text_hi": "प्रतिष्ठित 'थॉमस कप' (पुरुष) और 'उबेर कप' (महिला) किस खेल से संबंधित प्रमुख विश्व टीम चैंपियनशिप हैं?",
+    "options": {
+      "a": "Lawn Tennis",
+      "b": "Badminton",
+      "c": "Table Tennis",
+      "d": "Squash"
+    },
+    "options_hi": {
+      "a": "लॉन टेनिस",
+      "b": "बैडमिंटन (Badminton)",
+      "c": "टेबल टेनिस",
+      "d": "स्क्वैश"
+    },
+    "correct_option": "b",
+    "solution_text": "The Thomas Cup and Uber Cup are the premier international team tournaments in Badminton governed by the Badminton World Federation (BWF). India made history by winning its maiden Thomas Cup title in 2022.\n\nCorrect Option: (b)",
+    "solution_text_hi": "थॉमस कप और उबेर कप बैडमिंटन (Badminton) की प्रतिष्ठित अंतरराष्ट्रीय टीम प्रतियोगिताएं हैं। भारत ने 2022 में ऐतिहासिक रूप से थॉमस कप जीता था।\n\nअतः सही उत्तर (b) है।"
+  },
+  {
+    "question_number": 97,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Computer & IT (India's First Supercomputer - PARAM 8000)",
+    "difficulty": "Moderate",
+    "question_text": "What was the name of India's first indigenously developed supercomputer built by C-DAC Pune in 1991 under the leadership of Dr. Vijay Bhatkar?",
+    "question_text_hi": "डॉ. विजय भटकर के नेतृत्व में 1991 में C-DAC पुणे द्वारा विकसित भारत के पहले स्वदेशी सुपरकंप्यूटर का क्या नाम था?",
+    "options": {
+      "a": "PARAM 8000",
+      "b": "PARAM Shivay",
+      "c": "Pratyush",
+      "d": "Mihir"
+    },
+    "options_hi": {
+      "a": "परम 8000 (PARAM 8000)",
+      "b": "परम शिवाय",
+      "c": "प्रत्युष",
+      "d": "मिहिर"
+    },
+    "correct_option": "a",
+    "solution_text": "PARAM 8000 was unveiled in 1991 by the Centre for Development of Advanced Computing (C-DAC), Pune, marking India's entry into supercomputing capability.\n\nCorrect Option: (a)",
+    "solution_text_hi": "C-DAC पुणे द्वारा 1991 में विकसित 'परम 8000' (PARAM 8000) भारत का पहला स्वदेशी सुपरकंप्यूटर था।\n\nअतः सही उत्तर (a) है।"
+  },
+  {
+    "question_number": 98,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Computer & IT (Computer Memory & Architecture)",
+    "difficulty": "Moderate",
+    "question_text": "Which type of computer memory is volatile in nature, meaning it loses its stored contents immediately when the electrical power is switched off?",
+    "question_text_hi": "कंप्यूटर की कौन सी मेमोरी प्रकृति में अस्थिर (Volatile) होती है, जिसका अर्थ है कि बिजली बंद होते ही इसमें संग्रहीत डेटा तुरंत नष्ट हो जाता है?",
+    "options": {
+      "a": "ROM (Read-Only Memory)",
+      "b": "RAM (Random Access Memory)",
+      "c": "Hard Disk Drive (HDD)",
+      "d": "Flash Memory"
+    },
+    "options_hi": {
+      "a": "रॉम (ROM - Read-Only Memory)",
+      "b": "रैम (RAM - Random Access Memory)",
+      "c": "हार्ड डिस्क ड्राइव (HDD)",
+      "d": "फ्लैश मेमोरी (Flash Memory)"
+    },
+    "correct_option": "b",
+    "solution_text": "RAM (Random Access Memory) is a primary, volatile computer memory that temporarily stores data and machine instructions required by the CPU during program execution. Since its memory cells require continuous power to maintain state, all stored information is wiped when power is turned off. Conversely, ROM, HDD, SSD, and Flash memory are non-volatile storage media.",
+    "solution_text_hi": "रैम (RAM - Random Access Memory) कंप्यूटर की प्राथमिक अस्थिर (Volatile) मेमोरी है, जो प्रोग्राम निष्पादन के दौरान सीपीयू द्वारा आवश्यक डेटा को अस्थायी रूप से संग्रहीत करती है। बिजली की आपूर्ति बंद होने पर इसमें संग्रहीत सभी डेटा नष्ट हो जाता है। जबकि रॉम (ROM), हार्ड डिस्क तथा फ्लैश मेमोरी गैर-अस्थिर (Non-volatile) मेमोरी हैं।"
+  },
+  {
+    "question_number": 99,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Computer & IT (Networking Protocols & IP Addressing)",
+    "difficulty": "Moderate",
+    "question_text": "What is the size (address length) in bits of an Internet Protocol Version 4 (IPv4) address and an Internet Protocol Version 6 (IPv6) address respectively?",
+    "question_text_hi": "इंटरनेट प्रोटोकॉल संस्करण 4 (IPv4) पते और इंटरनेट प्रोटोकॉल संस्करण 6 (IPv6) पते का आकार (Address Length) बिट्स में क्रमशः कितना होता है?",
+    "options": {
+      "a": "32 bits and 64 bits",
+      "b": "32 bits and 128 bits",
+      "c": "64 bits and 128 bits",
+      "d": "16 bits and 32 bits"
+    },
+    "options_hi": {
+      "a": "32 बिट्स और 64 बिट्स",
+      "b": "32 बिट्स और 128 बिट्स",
+      "c": "64 बिट्स और 128 बिट्स",
+      "d": "16 बिट्स और 32 बिट्स"
+    },
+    "correct_option": "b",
+    "solution_text": "An IPv4 address is 32 bits (4 bytes) long, written in dot-decimal notation (e.g., 192.168.1.1), providing approximately 4.3 billion unique addresses ($2^{32}$). An IPv6 address is 128 bits (16 bytes) long, written in hexadecimal notation separated by colons (e.g., 2001:0db8:85a3::8a2e:0370:7334), providing $2^{128}$ addresses.",
+    "solution_text_hi": "IPv4 (इंटरनेट प्रोटोकॉल संस्करण 4) का पता 32 बिट्स (4 बाइट्स) लंबा होता है, जो दशमलव प्रारूप में लिखा जाता है (लगभग $2^{32} \\approx 4.3$ बिलियन पते)। जबकि IPv6 का पता 128 बिट्स (16 बाइट्स) लंबा होता है, जिसे हेक्साडेसिमल प्रारूप में कोलन द्वारा अलग करके लिखा जाता है ($2^{128}$ पते)। अतः सही उत्तर विकल्प (b) है।"
+  },
+  {
+    "question_number": 100,
+    "part_number": 3,
+    "section_name": "PART-3",
+    "section_title": "General Awareness",
+    "topic": "Computer & IT (Operating System Shortcuts & Architecture)",
+    "difficulty": "Moderate",
+    "question_text": "What is the primary function of the keyboard shortcut 'Alt + Tab' in the Microsoft Windows Operating System?",
+    "question_text_hi": "माइक्रोसॉफ्ट विंडोज ऑपरेटिंग सिस्टम में कीबोर्ड शॉर्टकट 'Alt + Tab' का प्राथमिक कार्य क्या होता है?",
+    "options": {
+      "a": "Close the active window or document immediately",
+      "b": "Switch between currently open running applications and windows",
+      "c": "Open the Windows Task Manager dialog",
+      "d": "Permanently delete the selected file without sending to Recycle Bin"
+    },
+    "options_hi": {
+      "a": "सक्रिय विंडो या दस्तावेज़ को तुरंत बंद करना",
+      "b": "वर्तमान में खुली हुई सक्रिय एप्लिकेशन/विंडोज के बीच स्विच (अदला-बदली) करना",
+      "c": "विंडोज टास्क मैनेजर डायलॉग बॉक्स खोलना",
+      "d": "चयनित फ़ाइल को रीसायकल बिन में भेजे बिना स्थायी रूप से हटाना"
+    },
+    "correct_option": "b",
+    "solution_text": "In Windows, pressing Alt + Tab displays the Task Switcher interface, allowing users to rapidly navigate and switch between currently running applications and active windows. Alt + F4 is used to close an active window, Ctrl + Shift + Esc opens Task Manager, and Shift + Delete permanently deletes a file.",
+    "solution_text_hi": "विंडोज़ ऑपरेटिंग सिस्टम में 'Alt + Tab' दबाने पर टास्क स्विचर इंटरफेस खुलता है, जिससे उपयोगकर्ता वर्तमान में चल रहे खुले हुए विभिन्न प्रोग्रामों और विंडोज़ के बीच तेजी से स्विच (अदला-बदली) कर सकता है। Alt + F4 विंडो बंद करने के लिए और Ctrl + Shift + Esc टास्क मैनेजर खोलने के लिए उपयोग होता है।"
+  }
+]
