@@ -45,7 +45,8 @@ export default function QuestionPaperModal({
                   {secQuestions.map((q, idx) => {
                     const qNumber = sec.startIndex + idx + 1;
                     const questionText = lang === 'hi' && q.question_hi ? q.question_hi : q.question_en;
-                    const options = lang === 'hi' && q.options_hi ? q.options_hi : q.options_en;
+                    const rawOptions = lang === 'hi' && q.options_hi ? q.options_hi : q.options_en;
+                    const options = Array.isArray(rawOptions) ? rawOptions : [];
 
                     return (
                       <div key={q.id || idx} className="p-3.5 bg-slate-50 border border-slate-200 rounded-lg">

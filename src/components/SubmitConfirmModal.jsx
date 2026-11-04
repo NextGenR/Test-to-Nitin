@@ -5,26 +5,29 @@ export default function SubmitConfirmModal({
   isOpen,
   onClose,
   onConfirmSubmit,
-  sections,
-  questions,
-  responses,
-  questionStates
+  sections = [],
+  questions = [],
+  responses = {},
+  questionStates = {}
 }) {
   if (!isOpen) return null;
 
   // Compute breakdown per section
-  const sectionSummaries = sections.map((sec) => {
+  const sectionSummaries = (sections || []).map((sec) => {
     let answered = 0;
     let notAnswered = 0;
     let markedReview = 0;
     let markedReviewAnswered = 0;
     let notVisited = 0;
 
-    for (let i = sec.startIndex; i <= sec.endIndex; i++) {
+    const start = sec.startIndex ?? 0;
+    const end = sec.endIndex ?? -1;
+
+    for (let i = start; i <= end; i++) {
       const q = questions[i];
       if (!q) continue;
-      const state = questionStates[i] || 'not_visited';
-      const hasAnswer = responses[i] !== undefined && responses[i] !== null;
+      const state = (questionStates && questionStates[i]) || 'not_visited';
+      const hasAnswer = responses && responses[i] !== undefined && responses[i] !== null;
 
       if (state === 'answered' || (hasAnswer && state !== 'review_answered')) {
         answered++;
@@ -40,8 +43,8 @@ export default function SubmitConfirmModal({
     }
 
     return {
-      name: sec.nameEn,
-      total: sec.total,
+      name: sec.nameEn || sec.name || 'Section',
+      total: sec.total || 0,
       answered,
       notAnswered,
       markedReview,
@@ -156,4 +159,3 @@ export default function SubmitConfirmModal({
     </div>
   );
 }
-

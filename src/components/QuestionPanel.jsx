@@ -33,7 +33,8 @@ export default function QuestionPanel({
   }
 
   const rawQuestionText = currentLang === 'hi' && question.question_hi ? question.question_hi : (question.question_en || question.question_text || '');
-  const options = currentLang === 'hi' && question.options_hi ? question.options_hi : question.options_en;
+  const rawOptions = currentLang === 'hi' && question.options_hi ? question.options_hi : question.options_en;
+  const options = Array.isArray(rawOptions) ? rawOptions : [];
   const rawExplanationText = currentLang === 'hi' && question.explanation_hi ? question.explanation_hi : (question.explanation_en || question.solution_text || '');
 
   // Resilient Inline SVG Extraction (Frontend Defense-in-Depth)

@@ -16,8 +16,24 @@ function sanitizeText(raw) {
 }
 
 /**
- * MathRenderer component: Parses LaTeX ($...$, $$...$$, or raw math symbols) and renders crisp KaTeX math.
- * Fallback gracefully to clean text if parsing fails.
+ * Ensures any embedded SVG is rendered strictly in monochrome black & white
+ */
+function convertToMonochrome(svg) {
+  if (!svg || typeof svg !== 'string') return svg;
+  return svg
+    .replace(/stroke=(\\?["'])(?!none|#000000|#000|black)[^\\"']+(\\?["'])/gi, (m, q1, q2) => `stroke=${q1}#000000${q2}`)
+    .replace(/fill=(\\?["'])(#f8fafc|#f1f5f9|#e2e8f0|#e6f7f9|#f0fdf4|#eff6ff|#fafafa|#ffffff|white|#fff)(\\?["'])/gi, (m, q1, c, q2) => `fill=${q1}#ffffff${q2}`)
+    .replace(/fill=(\\?["'])(?!none|#ffffff|#fff|white|#000000|#000|black)[^\\"']+(\\?["'])/gi, (m, q1, q2) => `fill=${q1}#000000${q2}`)
+    .replace(/stroke:\s*(?!none|#000000|#000|black)[^;"]+/gi, 'stroke: #000000')
+    .replace(/fill:\s*(?!none|#ffffff|#fff|white|#000000|#000|black)[^;"]+/gi, 'fill: #000000')
+    .replace(/color:\s*(?!#000000|#000|black)[^;"]+/gi, 'color: #000000')
+    .replace(/background:\s*[^;"]+/gi, 'background:#ffffff');
+}
+
+/**
+ * MathRenderer component: Parses LaTeX ($...$, $$...$$), raw math symbols,
+ * and embedded inline SVGs, ensuring SVGs render cleanly as vector graphics
+ * instead of leaking raw XML markup into candidate views.
  */
 export default function MathRenderer({ text, className = '' }) {
   if (!text) return null;
@@ -30,7 +46,7 @@ export default function MathRenderer({ text, className = '' }) {
   let processedText = sanitized;
 
   // If there are no $ delimiters, but the entire string is a math formula (like 'f \times T = 1' or '2\pi r')
-  if (!hasDelimiters) {
+  if (!hasDelimiters && !sanitized.includes('<svg')) {
     const isShortFormula = sanitized.length < 80 && /(\\[a-zA-Z]+|\^|\_|[=<>+\-*/])/.test(sanitized);
     const hasLatexCommands = /\\[a-zA-Z]+/.test(sanitized);
     if (hasLatexCommands && isShortFormula) {
@@ -38,9 +54,9 @@ export default function MathRenderer({ text, className = '' }) {
     }
   }
 
-  // Split by $...$ (inline math) and $$...$$ (display math)
+  // Split by $...$ (inline math), $$...$$ (display math), or <svg>...</svg> (embedded diagrams)
   const tokens = [];
-  const regex = /(\$\$[\s\S]*?\$\$|\$[^$\n]+?\$)/g;
+  const regex = /(\$\$[\s\S]*?\$\$|\$[^$\n]+?\$|<svg[\s\S]*?<\/svg>)/gi;
   let lastIndex = 0;
   let match;
 
@@ -54,25 +70,32 @@ export default function MathRenderer({ text, className = '' }) {
     }
 
     const rawToken = match[0];
-    const isDisplay = rawToken.startsWith('$$');
-    let mathContent = isDisplay ? rawToken.slice(2, -2).trim() : rawToken.slice(1, -1).trim();
+    if (rawToken.toLowerCase().startsWith('<svg')) {
+      tokens.push({
+        type: 'svg',
+        content: convertToMonochrome(rawToken)
+      });
+    } else {
+      const isDisplay = rawToken.startsWith('$$');
+      let mathContent = isDisplay ? rawToken.slice(2, -2).trim() : rawToken.slice(1, -1).trim();
 
-    try {
-      const renderedHtml = katex.renderToString(mathContent, {
-        displayMode: isDisplay,
-        throwOnError: false,
-        strict: 'ignore', // Crucial: avoid breaking on ₹, Unicode, or unknown text symbols
-        trust: true
-      });
-      tokens.push({
-        type: 'html',
-        content: renderedHtml
-      });
-    } catch (e) {
-      tokens.push({
-        type: 'text',
-        content: mathContent
-      });
+      try {
+        const renderedHtml = katex.renderToString(mathContent, {
+          displayMode: isDisplay,
+          throwOnError: false,
+          strict: 'ignore', // Crucial: avoid breaking on ₹, Unicode, or unknown text symbols
+          trust: true
+        });
+        tokens.push({
+          type: 'html',
+          content: renderedHtml
+        });
+      } catch (e) {
+        tokens.push({
+          type: 'text',
+          content: mathContent
+        });
+      }
     }
 
     lastIndex = regex.lastIndex;
@@ -89,6 +112,15 @@ export default function MathRenderer({ text, className = '' }) {
   return (
     <span className={`inline-block ${className}`}>
       {tokens.map((token, idx) => {
+        if (token.type === 'svg') {
+          return (
+            <span
+              key={idx}
+              className="block my-2 w-full text-center [&>svg]:max-w-full [&>svg]:mx-auto"
+              dangerouslySetInnerHTML={{ __html: token.content }}
+            />
+          );
+        }
         if (token.type === 'html') {
           return (
             <span
