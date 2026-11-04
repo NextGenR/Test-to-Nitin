@@ -36,7 +36,9 @@ for (const arg of args) {
 }
 
 if (!filePath) {
-  if (fs.existsSync('RRB_NTPC_GRADUATE_MOCK/mock_test_1_v3.json')) {
+  if (fs.existsSync('RRB_NTPC_GRADUATE_MOCK/mock_test_1_v4.json')) {
+    filePath = 'RRB_NTPC_GRADUATE_MOCK/mock_test_1_v4.json';
+  } else if (fs.existsSync('RRB_NTPC_GRADUATE_MOCK/mock_test_1_v3.json')) {
     filePath = 'RRB_NTPC_GRADUATE_MOCK/mock_test_1_v3.json';
   } else if (fs.existsSync('RRB_NTPC_GRADUATE_MOCK/mock_test_1_v2.json')) {
     filePath = 'RRB_NTPC_GRADUATE_MOCK/mock_test_1_v2.json';
