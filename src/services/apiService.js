@@ -401,6 +401,14 @@ export const fetchTestQuestions = async (testIdOrMock = 1) => {
           const baseSvg = convertToMonochromeSvg(rawSvg);
           const baseSvgHi = convertToMonochromeSvg(rawSvgHi);
 
+          let baseOptionSvgs = null;
+          if (q.option_svgs && typeof q.option_svgs === 'object') {
+            baseOptionSvgs = {};
+            for (const [key, val] of Object.entries(q.option_svgs)) {
+              baseOptionSvgs[key] = convertToMonochromeSvg(val);
+            }
+          }
+
           return {
             id: qNum,
             section: q.section_title || q.section_name || q.section || fallbackSection,
@@ -416,7 +424,7 @@ export const fetchTestQuestions = async (testIdOrMock = 1) => {
             image_svg_hi: isScience ? null : baseSvgHi,
             image_url: isScience ? null : (q.image_url || q.question_image_url || null),
             image_url_hi: isScience ? null : (q.image_url_hi || null),
-            option_svgs: isScience ? null : (q.option_svgs || null),
+            option_svgs: isScience ? null : (baseOptionSvgs || q.option_svgs || null),
             option_images: isScience ? null : (q.option_images || null),
             explanation_en: q.solution_text || q.explanation_en || '',
             explanation_hi: q.solution_text_hi || q.explanation_hi || ''

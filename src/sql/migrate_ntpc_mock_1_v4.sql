@@ -2472,63 +2472,79 @@ INSERT INTO public.questions (
   '{"a":"4","b":"3","c":"5","d":"6"}'::jsonb,
   '{"a":"4","b":"3","c":"5","d":"6"}'::jsonb,
   'a',
-  'Rules of Unfolded Cube Nets:
-1. In any continuous row or column of squares, alternate faces (separated by one face) are opposite to each other.
-2. Looking at the vertical column: faces are 1, 2, 3, 4 from top to bottom.
-- Face 1 is opposite to Face 3.
-- Face 2 is opposite to Face 4.
-3. The horizontal wings are 5 (left) and 6 (right) adjacent to Face 3: Face 5 is opposite to Face 6.
+  'Opposite Face Rules for an Unfolded Cube Net:
+1. In a continuous linear strip of squares, alternate faces (separated by exactly one face) are strictly opposite to each other:
+   - Face 1 is opposite to Face 3.
+   - Face 2 is opposite to Face 4.
+2. The two projecting lateral wings are opposite to each other:
+   - Face 5 (left wing) is opposite to Face 6 (right wing).
 Therefore, the face opposite to number ''2'' is ''4''.
 Hence, Correct Option is (a).',
-  'खुले पासे के नियम:
-ऊर्ध्वाधर स्तंभ में एक छोड़कर एक फलक एक-दूसरे के विपरीत होते हैं:
-- फलक 1 के विपरीत फलक 3 होगा।
-- फलक 2 के विपरीत फलक 4 होगा।
-- बायां फलक 5 दाएं फलक 6 के विपरीत होगा।
-अतः संख्या ''2'' के विपरीत संख्या ''4'' होगी। सही विकल्प: (a)।',
-  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 260" width="100%" height="auto" style="max-width:380px; display:block; margin:10px auto; background:#ffffff;">
-  <rect width="380" height="260" fill="#ffffff" rx="8" stroke="#000000" stroke-width="1.5"/>
+  'खुले पासे (Cube Net) के विपरीत फलक नियम:
+1. एक सीधी पंक्ति या स्तंभ में एक छोड़कर एक फलक एक-दूसरे के विपरीत होते हैं:
+   - फलक 1 के विपरीत फलक 3 है।
+   - फलक 2 के विपरीत फलक 4 है।
+2. दोनों पार्श्व पंख (wings) एक-दूसरे के विपरीत होते हैं:
+   - फलक 5 के विपरीत फलक 6 है।
+अतः संख्या ''2'' वाले फलक के विपरीत संख्या ''4'' होगी।
+सही विकल्प: (a)।',
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 270" width="100%" height="auto" style="max-width:380px; display:block; margin:10px auto; background:#ffffff;">
+  <rect width="380" height="270" fill="#ffffff" rx="8" stroke="#000000" stroke-width="1.5"/>
   <text x="190" y="24" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#000000">Unfolded Cube Net / पासे का खुला रूप</text>
-  <!-- Face 1 (Top) -->
-  <rect x="160" y="40" width="50" height="50" fill="#ffffff" stroke="#000000" stroke-width="2"/>
-  <text x="185" y="72" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">1</text>
-  <!-- Face 2 -->
-  <rect x="160" y="90" width="50" height="50" fill="#ffffff" stroke="#000000" stroke-width="2"/>
-  <text x="185" y="122" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">2</text>
-  <!-- Face 3 (Center) -->
-  <rect x="160" y="140" width="50" height="50" fill="#ffffff" stroke="#000000" stroke-width="2"/>
-  <text x="185" y="172" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">3</text>
-  <!-- Face 4 (Bottom) -->
-  <rect x="160" y="190" width="50" height="50" fill="#ffffff" stroke="#000000" stroke-width="2"/>
-  <text x="185" y="222" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">4</text>
-  <!-- Face 5 (Left Wing) -->
-  <rect x="110" y="140" width="50" height="50" fill="#ffffff" stroke="#000000" stroke-width="2"/>
-  <text x="135" y="172" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">5</text>
-  <!-- Face 6 (Right Wing) -->
-  <rect x="210" y="140" width="50" height="50" fill="#ffffff" stroke="#000000" stroke-width="2"/>
-  <text x="235" y="172" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">6</text>
+  
+  <!-- Outer perimeter contour -->
+  <!-- Vertical Strip: 4 squares (165,35) to (215,235) -->
+  <rect x="165" y="35" width="50" height="200" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+  <!-- Left Wing (Face 5): (115, 135) width 50, height 50 -->
+  <rect x="115" y="135" width="50" height="50" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+  <!-- Right Wing (Face 6): (215, 135) width 50, height 50 -->
+  <rect x="215" y="135" width="50" height="50" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+  
+  <!-- Interior Dashed Fold Lines (Where the cardboard folds) -->
+  <line x1="165" y1="85" x2="215" y2="85" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,3"/>
+  <line x1="165" y1="135" x2="215" y2="135" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,3"/>
+  <line x1="165" y1="185" x2="215" y2="185" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,3"/>
+  <line x1="165" y1="135" x2="165" y2="185" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,3"/>
+  <line x1="215" y1="135" x2="215" y2="185" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,3"/>
+  
+  <!-- Numbers on Faces -->
+  <text x="190" y="68" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="bold" fill="#000000">1</text>
+  <text x="190" y="118" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="bold" fill="#000000">2</text>
+  <text x="190" y="168" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="bold" fill="#000000">3</text>
+  <text x="190" y="218" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="bold" fill="#000000">4</text>
+  <text x="140" y="168" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="bold" fill="#000000">5</text>
+  <text x="240" y="168" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="bold" fill="#000000">6</text>
+  
+  <text x="190" y="255" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#000000">Dashed lines represent fold lines / बिंदीदार रेखाएं मोड़ने की रेखाएं हैं</text>
 </svg>',
-  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 260" width="100%" height="auto" style="max-width:380px; display:block; margin:10px auto; background:#ffffff;">
-  <rect width="380" height="260" fill="#ffffff" rx="8" stroke="#000000" stroke-width="1.5"/>
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 270" width="100%" height="auto" style="max-width:380px; display:block; margin:10px auto; background:#ffffff;">
+  <rect width="380" height="270" fill="#ffffff" rx="8" stroke="#000000" stroke-width="1.5"/>
   <text x="190" y="24" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#000000">Unfolded Cube Net / पासे का खुला रूप</text>
-  <!-- Face 1 (Top) -->
-  <rect x="160" y="40" width="50" height="50" fill="#ffffff" stroke="#000000" stroke-width="2"/>
-  <text x="185" y="72" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">1</text>
-  <!-- Face 2 -->
-  <rect x="160" y="90" width="50" height="50" fill="#ffffff" stroke="#000000" stroke-width="2"/>
-  <text x="185" y="122" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">2</text>
-  <!-- Face 3 (Center) -->
-  <rect x="160" y="140" width="50" height="50" fill="#ffffff" stroke="#000000" stroke-width="2"/>
-  <text x="185" y="172" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">3</text>
-  <!-- Face 4 (Bottom) -->
-  <rect x="160" y="190" width="50" height="50" fill="#ffffff" stroke="#000000" stroke-width="2"/>
-  <text x="185" y="222" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">4</text>
-  <!-- Face 5 (Left Wing) -->
-  <rect x="110" y="140" width="50" height="50" fill="#ffffff" stroke="#000000" stroke-width="2"/>
-  <text x="135" y="172" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">5</text>
-  <!-- Face 6 (Right Wing) -->
-  <rect x="210" y="140" width="50" height="50" fill="#ffffff" stroke="#000000" stroke-width="2"/>
-  <text x="235" y="172" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">6</text>
+  
+  <!-- Outer perimeter contour -->
+  <!-- Vertical Strip: 4 squares (165,35) to (215,235) -->
+  <rect x="165" y="35" width="50" height="200" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+  <!-- Left Wing (Face 5): (115, 135) width 50, height 50 -->
+  <rect x="115" y="135" width="50" height="50" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+  <!-- Right Wing (Face 6): (215, 135) width 50, height 50 -->
+  <rect x="215" y="135" width="50" height="50" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+  
+  <!-- Interior Dashed Fold Lines (Where the cardboard folds) -->
+  <line x1="165" y1="85" x2="215" y2="85" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,3"/>
+  <line x1="165" y1="135" x2="215" y2="135" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,3"/>
+  <line x1="165" y1="185" x2="215" y2="185" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,3"/>
+  <line x1="165" y1="135" x2="165" y2="185" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,3"/>
+  <line x1="215" y1="135" x2="215" y2="185" stroke="#000000" stroke-width="1.8" stroke-dasharray="4,3"/>
+  
+  <!-- Numbers on Faces -->
+  <text x="190" y="68" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="bold" fill="#000000">1</text>
+  <text x="190" y="118" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="bold" fill="#000000">2</text>
+  <text x="190" y="168" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="bold" fill="#000000">3</text>
+  <text x="190" y="218" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="bold" fill="#000000">4</text>
+  <text x="140" y="168" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="bold" fill="#000000">5</text>
+  <text x="240" y="168" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="bold" fill="#000000">6</text>
+  
+  <text x="190" y="255" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#000000">Dashed lines represent fold lines / बिंदीदार रेखाएं मोड़ने की रेखाएं हैं</text>
 </svg>',
   NULL
 )
@@ -3387,52 +3403,97 @@ INSERT INTO public.questions (
   'General Intelligence & Reasoning',
   'Missing Number Matrix',
   'Moderate',
-  'Select the missing number from the given options:
-[ 7    8   120 ]
-[ 9    6   120 ]
-[ 11   5    ?  ]',
-  'दिए गए विकल्पों में से लुप्त संख्या का चयन करें:
-[ 7    8   120 ]
-[ 9    6   120 ]
-[ 11   5    ?  ]',
-  '{"a":"96","b":"110","c":"100","d":"88"}'::jsonb,
-  '{"a":"96","b":"110","c":"100","d":"88"}'::jsonb,
+  'Select the missing number from the given options that will replace the question mark (?) in the number matrix.',
+  'दिए गए संख्या आव्यूह (matrix) में प्रश्न चिह्न (?) को प्रतिस्थापित करने वाली लुप्त संख्या का चयन करें।',
+  '{"a":"128","b":"120","c":"112","d":"144"}'::jsonb,
+  '{"a":"128","b":"120","c":"112","d":"144"}'::jsonb,
   'a',
-  'Analyzing the row relationship:
-Row 1: 7, 8 -> 120
-Notice: (7 + 8) = 15, and 15 * 8 = 120.
-Row 2: 9, 6 -> 120
-Notice: (9 + 6) = 15, and 15 * 8 = 120 (or (Row 1 + Row 2) * (Row 1 - Row 2)? Let''s check: 7^2 - ? No).
-Let''s test (Col 1 + Col 2) * (Col 1 - Col 2 + ...):
-Row 1: (7 + 8) * (8) = 120.
-Row 2: (9 + 6) * (6)? 15 * 6 = 90, not 120.
-Let''s check: Col 1 * Col 2 + ?
-7 * 8 = 56; 56 * 2 + 8 = 120.
-9 * 6 = 54; 54 * 2 + 12 = 120.
-Another standard pattern:
-Row 1: (7^2 - 8) or (8^2 - 7) = 57.
-Notice: (7 + 1) * (8 + 7) = 120.
-What if: (Col 1 + Col 2) * 8 = 120 for Row 1, (Col 1 + Col 2) * 8 = 120 for Row 2 (since 9+6=15, 15*8=120)!
-Yes! Both Row 1 and Row 2 have (Col 1 + Col 2) = 15, and 15 * 8 = 120!
-For Row 3: Col 1 = 11, Col 2 = 5.
-Sum = 11 + 5 = 16.
-Multiplying by 8: 16 * 6? Or 16 * (constant factor): if factor is (Col 2 - ?):
-Wait! If pattern is (Col 1 + Col 2) * (Col 2)? For row 1: 15 * 8 = 120. For row 2: 15 * 8 = 120 (wait, Col 2 is 6, 15*6=90).
-If constant multiplier is 6: 16 * 6 = 96!
-Let''s check: Row 1 multiplier is (15 - 7) = 8. Row 2 multiplier is (15 - 9) = 6? Wait: 15 * 6 = 90, not 120.
-Wait, why is Row 2 = 120?
-Notice: (9^2 + 6^2) = 81 + 36 = 117 + 3 = 120!
-And for Row 1: 7^2 + 8^2 = 49 + 64 = 113 + 7 = 120!
-What if: (Col 1)^2 - (Col 2)^2: 81 - 36 = 45.
-What if: 11 * 5 = 55; 55 * 2 - 14 = 96!
-Let''s keep the clear standard formula: (Col 1 + Col 2) * 6 = 16 * 6 = 96.
+  'Step-by-Step Row Pattern Analysis:
+1. Row 1: The sum of the first two numbers multiplied by 8 gives the third number:
+   (7 + 8) × 8 = 15 × 8 = 120
+2. Row 2: Applying the identical consistent rule:
+   (9 + 6) × 8 = 15 × 8 = 120
+3. Row 3: Following the established pattern for the third row:
+   (11 + 5) × 8 = 16 × 8 = 128
+Therefore, the missing number replacing (?) is 128.
 Hence, Correct Option is (a).',
-  'पंक्तिवार तर्क:
-पहली दो पंक्तियों में उभयनिष्ठ गुणक तथा योग का नियम लागू करने पर:
-(11 + 5) × 6 = 16 × 6 = 96.
-अतः लुप्त संख्या 96 है। सही विकल्प: (a)।',
-  NULL,
-  NULL,
+  'पंक्तिवार पैटर्न का विश्लेषण:
+1. पहली पंक्ति: पहली दो संख्याओं के योग को 8 से गुणा करने पर तीसरी संख्या प्राप्त होती है:
+   (7 + 8) × 8 = 15 × 8 = 120
+2. दूसरी पंक्ति: समान नियम लागू करने पर:
+   (9 + 6) × 8 = 15 × 8 = 120
+3. तीसरी पंक्ति: इसी स्थापित नियम के अनुसार:
+   (11 + 5) × 8 = 16 × 8 = 128
+अतः प्रश्न चिह्न (?) के स्थान पर लुप्त संख्या 128 होगी।
+सही विकल्प: (a)।',
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 230" width="100%" height="auto" style="max-width:380px; display:block; margin:10px auto; background:#ffffff;">
+  <rect width="380" height="230" fill="#ffffff" rx="8" stroke="#000000" stroke-width="1.5"/>
+  <text x="190" y="24" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#000000">Number Matrix / संख्या आव्यूह</text>
+  
+  <!-- Outer Matrix Table: 240x150, centered at x=70, y=45 -->
+  <rect x="70" y="45" width="240" height="150" fill="#ffffff" rx="6" stroke="#000000" stroke-width="2.5"/>
+  
+  <!-- Column Grid Lines (3 columns, width 80 each) -->
+  <line x1="150" y1="45" x2="150" y2="195" stroke="#000000" stroke-width="2"/>
+  <line x1="230" y1="45" x2="230" y2="195" stroke="#000000" stroke-width="2"/>
+  
+  <!-- Row Grid Lines (3 rows, height 50 each) -->
+  <line x1="70" y1="95" x2="310" y2="95" stroke="#000000" stroke-width="2"/>
+  <line x1="70" y1="145" x2="310" y2="145" stroke="#000000" stroke-width="2"/>
+  
+  <!-- Row 1: 7 | 8 | 120 -->
+  <text x="110" y="78" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">7</text>
+  <text x="190" y="78" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">8</text>
+  <text x="270" y="78" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">120</text>
+  
+  <!-- Row 2: 9 | 6 | 120 -->
+  <text x="110" y="128" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">9</text>
+  <text x="190" y="128" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">6</text>
+  <text x="270" y="128" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">120</text>
+  
+  <!-- Row 3: 11 | 5 | ? -->
+  <text x="110" y="178" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">11</text>
+  <text x="190" y="178" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">5</text>
+  <!-- Question Mark Cell with dashed inner border -->
+  <rect x="236" y="151" width="68" height="38" rx="4" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="270" y="179" text-anchor="middle" font-family="sans-serif" font-size="22" font-weight="bold" fill="#000000">?</text>
+  
+  <text x="190" y="218" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#000000">Find the missing number / लुप्त संख्या ज्ञात कीजिए</text>
+</svg>',
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 230" width="100%" height="auto" style="max-width:380px; display:block; margin:10px auto; background:#ffffff;">
+  <rect width="380" height="230" fill="#ffffff" rx="8" stroke="#000000" stroke-width="1.5"/>
+  <text x="190" y="24" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#000000">Number Matrix / संख्या आव्यूह</text>
+  
+  <!-- Outer Matrix Table: 240x150, centered at x=70, y=45 -->
+  <rect x="70" y="45" width="240" height="150" fill="#ffffff" rx="6" stroke="#000000" stroke-width="2.5"/>
+  
+  <!-- Column Grid Lines (3 columns, width 80 each) -->
+  <line x1="150" y1="45" x2="150" y2="195" stroke="#000000" stroke-width="2"/>
+  <line x1="230" y1="45" x2="230" y2="195" stroke="#000000" stroke-width="2"/>
+  
+  <!-- Row Grid Lines (3 rows, height 50 each) -->
+  <line x1="70" y1="95" x2="310" y2="95" stroke="#000000" stroke-width="2"/>
+  <line x1="70" y1="145" x2="310" y2="145" stroke="#000000" stroke-width="2"/>
+  
+  <!-- Row 1: 7 | 8 | 120 -->
+  <text x="110" y="78" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">7</text>
+  <text x="190" y="78" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">8</text>
+  <text x="270" y="78" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">120</text>
+  
+  <!-- Row 2: 9 | 6 | 120 -->
+  <text x="110" y="128" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">9</text>
+  <text x="190" y="128" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">6</text>
+  <text x="270" y="128" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">120</text>
+  
+  <!-- Row 3: 11 | 5 | ? -->
+  <text x="110" y="178" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">11</text>
+  <text x="190" y="178" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#000000">5</text>
+  <!-- Question Mark Cell with dashed inner border -->
+  <rect x="236" y="151" width="68" height="38" rx="4" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="270" y="179" text-anchor="middle" font-family="sans-serif" font-size="22" font-weight="bold" fill="#000000">?</text>
+  
+  <text x="190" y="218" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#000000">Find the missing number / लुप्त संख्या ज्ञात कीजिए</text>
+</svg>',
   NULL
 )
 ON CONFLICT (test_id, question_number) DO UPDATE SET
@@ -3528,51 +3589,71 @@ INSERT INTO public.questions (
   'General Intelligence & Reasoning',
   'Non-Verbal Reasoning (Mirror Image across MN)',
   'Moderate',
-  'Select the correct mirror image of the given combination ''RRB 2026'' when the vertical mirror is placed to its right along line MN.',
-  'दिए गए संयोजन ''RRB 2026'' का सही दर्पण प्रतिबिम्ब चुनें जब ऊर्ध्वाधर दर्पण को इसके दाईं ओर रेखा MN पर रखा जाता है।',
-  '{"a":"Lateral inversion where rightmost character ''6'' appears first (reversed), followed by reversed ''2'', ''0'', reversed ''2'', reversed ''B'', reversed ''R'', reversed ''R''","b":"Direct sequence ''RRB 2026'' without lateral inversion","c":"Inverted upside-down water image of ''RRB 2026''","d":"Sequence starting with reversed ''R'' followed by reversed ''6''"}'::jsonb,
-  '{"a":"पार्श्व परिवर्तन (lateral inversion) जहाँ सबसे दायां अक्षर ''6'' उलटा होकर सबसे पहले आता है, उसके बाद उलटा ''2'', ''0'', उलटा ''2'', उलटा ''B'', उलटा ''R'', उलटा ''R''","b":"बिना पार्श्व परिवर्तन के सीधा क्रम ''RRB 2026''","c":"''RRB 2026'' का उल्टा (जल प्रतिबिम्ब) रूप","d":"उलटे ''R'' से शुरू होकर उलटे ''6'' पर समाप्त होने वाला क्रम"}'::jsonb,
+  'Select the correct mirror image of the given combination ''RRB 2026'' when a vertical mirror is placed to its right along line MN.',
+  'जब एक ऊर्ध्वाधर दर्पण रेखा MN के अनुदिश दाईं ओर रखा जाता है, तो दिए गए संयोजन ''RRB 2026'' का सही दर्पण प्रतिबिम्ब चुनिए।',
+  '{"a":"Figure (A)","b":"Figure (B)","c":"Figure (C)","d":"Figure (D)"}'::jsonb,
+  '{"a":"आकृति (A)","b":"आकृति (B)","c":"आकृति (C)","d":"आकृति (D)"}'::jsonb,
   'a',
   'Mirror Image Properties (Vertical Mirror MN on Right):
-1. In a vertical mirror reflection, left and right are inverted (lateral inversion), while top and bottom remain unchanged.
-2. The character closest to the mirror (the rightmost character ''6'') will appear closest to the mirror in the reflection (i.e., first from the left).
-3. Each individual digit and letter is laterally reversed: ''6'' flips horizontally, ''2'' flips horizontally, ''0'' remains symmetric, ''B'' flips horizontally, and ''R'' flips horizontally.
-4. The resulting sequence reads from left to right: reversed 6, reversed 2, 0, reversed 2, reversed B, reversed R, reversed R.
+1. In a vertical mirror reflection, lateral inversion takes place: left and right are interchanged, while top and bottom remain unchanged.
+2. The character closest to the mirror line MN (the rightmost digit ''6'') appears closest to the mirror in the reflection (i.e. first on the left).
+3. Each individual glyph is laterally reversed:
+   - ''6'' turns into a reversed 6.
+   - ''2'' turns into a reversed 2.
+   - ''0'' remains symmetric.
+   - ''B'' turns into a reversed B.
+   - ''R'' turns into a reversed R.
+4. The resulting sequence reads from left to right as shown in Figure (A).
 Hence, Correct Option is (a).',
-  'ऊर्ध्वाधर दर्पण (MN) प्रतिबिम्ब के नियम:
-1. दर्पण के सबसे पास वाला अक्षर (''6'') प्रतिबिम्ब में सबसे पहले दिखाई देगा।
-2. सभी अक्षरों और अंकों का पार्श्व व्युत्क्रमण (lateral inversion) होगा (दायां भाग बायां और बायां भाग दायां हो जाएगा)।
-3. क्रम होगा: उलटा 6, उलटा 2, 0, उलटा 2, उलटा B, उलटा R, उलटा R.
-अतः सही विकल्प (a) है।',
-  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 200" width="100%" height="auto" style="max-width:440px; display:block; margin:10px auto; background:#ffffff;">
-  <rect width="440" height="200" fill="#ffffff" rx="8" stroke="#000000" stroke-width="1.5"/>
-  <text x="220" y="26" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#000000">Mirror Image across Vertical Line MN / दर्पण प्रतिबिम्ब</text>
+  'दर्पण प्रतिबिम्ब के नियम (ऊर्ध्वाधर दर्पण MN दाईं ओर):
+1. ऊर्ध्वाधर दर्पण में पार्श्व उत्क्रमण (lateral inversion) होता है: बायां और दायां आपस में बदल जाते हैं, जबकि ऊपर और नीचे अपरिवर्तित रहते हैं।
+2. दर्पण MN के सबसे निकट का अक्षर/अंक (सबसे दायां अंक ''6'') प्रतिबिम्ब में सबसे पहले (बाईं ओर) दिखाई देगा।
+3. प्रत्येक अक्षर व अंक व्यक्तिगत रूप से भी पार्श्व रूप से उल्टा हो जाता है (''6'', ''2'', ''B'', ''R'' उल्टे हो जाते हैं तथा ''0'' सममित रहता है)।
+4. यह सही विन्यास केवल आकृति (A) में दर्शाया गया है।
+सही विकल्प: (a)।',
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 210" width="100%" height="auto" style="max-width:460px; display:block; margin:10px auto; background:#ffffff;">
+  <rect width="460" height="210" fill="#ffffff" rx="8" stroke="#000000" stroke-width="1.5"/>
+  <text x="230" y="24" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#000000">Mirror Image across Vertical Line MN / दर्पण प्रतिबिम्ब</text>
+  
   <!-- Original String Box -->
-  <rect x="30" y="60" width="220" height="80" rx="6" fill="#ffffff" stroke="#000000" stroke-width="2"/>
-  <text x="140" y="112" text-anchor="middle" font-family="sans-serif" font-size="28" font-weight="bold" letter-spacing="6" fill="#000000">R R B 2 0 2 6</text>
+  <rect x="30" y="55" width="220" height="90" rx="6" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+  <text x="140" y="112" text-anchor="middle" font-family="sans-serif" font-size="28" font-weight="bold" letter-spacing="4" fill="#000000">RRB 2026</text>
+  <text x="140" y="135" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#000000">[ Problem Figure / प्रश्न आकृति ]</text>
+  
   <!-- Vertical Mirror Line MN -->
-  <line x1="285" y1="45" x2="285" y2="165" stroke="#000000" stroke-width="3" stroke-dasharray="6,4"/>
-  <text x="285" y="40" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#000000">M</text>
+  <line x1="285" y1="40" x2="285" y2="160" stroke="#000000" stroke-width="3" stroke-dasharray="6,4"/>
+  <text x="285" y="32" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#000000">M</text>
   <text x="285" y="180" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#000000">N</text>
+  
   <!-- Reflected Preview Placeholder -->
-  <rect x="320" y="60" width="90" height="80" rx="6" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-dasharray="4,4"/>
-  <text x="365" y="108" text-anchor="middle" font-family="sans-serif" font-size="32" font-weight="bold" fill="#000000">?</text>
+  <rect x="320" y="55" width="110" height="90" rx="6" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <text x="375" y="110" text-anchor="middle" font-family="sans-serif" font-size="36" font-weight="bold" fill="#000000">?</text>
+  <text x="375" y="135" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#000000">[ Answer / उत्तर ]</text>
+  
+  <text x="230" y="198" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#000000">Select the correct reflected figure from the options below</text>
 </svg>',
-  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 200" width="100%" height="auto" style="max-width:440px; display:block; margin:10px auto; background:#ffffff;">
-  <rect width="440" height="200" fill="#ffffff" rx="8" stroke="#000000" stroke-width="1.5"/>
-  <text x="220" y="26" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#000000">Mirror Image across Vertical Line MN / दर्पण प्रतिबिम्ब</text>
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 210" width="100%" height="auto" style="max-width:460px; display:block; margin:10px auto; background:#ffffff;">
+  <rect width="460" height="210" fill="#ffffff" rx="8" stroke="#000000" stroke-width="1.5"/>
+  <text x="230" y="24" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#000000">Mirror Image across Vertical Line MN / दर्पण प्रतिबिम्ब</text>
+  
   <!-- Original String Box -->
-  <rect x="30" y="60" width="220" height="80" rx="6" fill="#ffffff" stroke="#000000" stroke-width="2"/>
-  <text x="140" y="112" text-anchor="middle" font-family="sans-serif" font-size="28" font-weight="bold" letter-spacing="6" fill="#000000">R R B 2 0 2 6</text>
+  <rect x="30" y="55" width="220" height="90" rx="6" fill="#ffffff" stroke="#000000" stroke-width="2"/>
+  <text x="140" y="112" text-anchor="middle" font-family="sans-serif" font-size="28" font-weight="bold" letter-spacing="4" fill="#000000">RRB 2026</text>
+  <text x="140" y="135" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#000000">[ Problem Figure / प्रश्न आकृति ]</text>
+  
   <!-- Vertical Mirror Line MN -->
-  <line x1="285" y1="45" x2="285" y2="165" stroke="#000000" stroke-width="3" stroke-dasharray="6,4"/>
-  <text x="285" y="40" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#000000">M</text>
+  <line x1="285" y1="40" x2="285" y2="160" stroke="#000000" stroke-width="3" stroke-dasharray="6,4"/>
+  <text x="285" y="32" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#000000">M</text>
   <text x="285" y="180" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="bold" fill="#000000">N</text>
+  
   <!-- Reflected Preview Placeholder -->
-  <rect x="320" y="60" width="90" height="80" rx="6" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-dasharray="4,4"/>
-  <text x="365" y="108" text-anchor="middle" font-family="sans-serif" font-size="32" font-weight="bold" fill="#000000">?</text>
+  <rect x="320" y="55" width="110" height="90" rx="6" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <text x="375" y="110" text-anchor="middle" font-family="sans-serif" font-size="36" font-weight="bold" fill="#000000">?</text>
+  <text x="375" y="135" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#000000">[ Answer / उत्तर ]</text>
+  
+  <text x="230" y="198" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="bold" fill="#000000">Select the correct reflected figure from the options below</text>
 </svg>',
-  NULL
+  '{"a":"<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 160 50\" width=\"100%\" height=\"100%\">\n  <rect width=\"160\" height=\"50\" rx=\"4\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"1.5\"/>\n  <g transform=\"translate(160, 0) scale(-1, 1)\">\n    <text x=\"80\" y=\"34\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"20\" font-weight=\"bold\" letter-spacing=\"3\" fill=\"#000000\">RRB 2026</text>\n  </g>\n</svg>","b":"<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 160 50\" width=\"100%\" height=\"100%\">\n  <rect width=\"160\" height=\"50\" rx=\"4\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"1.5\"/>\n  <text x=\"80\" y=\"34\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"20\" font-weight=\"bold\" letter-spacing=\"3\" fill=\"#000000\">RRB 2026</text>\n</svg>","c":"<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 160 50\" width=\"100%\" height=\"100%\">\n  <rect width=\"160\" height=\"50\" rx=\"4\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"1.5\"/>\n  <g transform=\"translate(0, 50) scale(1, -1)\">\n    <text x=\"80\" y=\"16\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"20\" font-weight=\"bold\" letter-spacing=\"3\" fill=\"#000000\">RRB 2026</text>\n  </g>\n</svg>","d":"<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 160 50\" width=\"100%\" height=\"100%\">\n  <rect width=\"160\" height=\"50\" rx=\"4\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"1.5\"/>\n  <text x=\"80\" y=\"34\" text-anchor=\"middle\" font-family=\"sans-serif\" font-size=\"20\" font-weight=\"bold\" letter-spacing=\"3\" fill=\"#000000\">6202 BRR</text>\n</svg>"}'::jsonb
 )
 ON CONFLICT (test_id, question_number) DO UPDATE SET
   part_number = EXCLUDED.part_number,
@@ -3819,60 +3900,109 @@ INSERT INTO public.questions (
   'General Intelligence & Reasoning',
   'Non-Verbal Reasoning (Symmetric Pattern Completion)',
   'Moderate',
-  'Select the figure that will replace the question mark (?) to complete the symmetric quadrant pattern in the given 2x2 grid.',
-  'दी गई 2x2 ग्रिड में सममित चतुर्थांश पैटर्न को पूरा करने के लिए प्रश्न चिह्न (?) को प्रतिस्थापित करने वाली आकृति का चयन करें।',
-  '{"a":"A quarter-circle arc centered at bottom-right corner with a diagonal running from center to bottom-right corner","b":"A solid dark square filling the entire bottom-right quadrant","c":"Two parallel horizontal lines without any curved arc","d":"A full circular disc centered in the bottom-right quadrant"}'::jsonb,
-  '{"a":"निचले-दाएं कोने पर केंद्रित एक वृत्त-चाप और केंद्र से निचले-दाएं कोने तक जाने वाला एक विकर्ण","b":"एक ठोस गहरा वर्ग जो पूरे निचले-दाएं चतुर्थांश को भरता है","c":"बिना किसी घुमावदार चाप के दो समानांतर क्षैतिज रेखाएं","d":"निचले-दाएं चतुर्थांश में केंद्रित एक पूर्ण वृत्ताकार डिस्क"}'::jsonb,
+  'Select the figure from the given options that will replace the question mark (?) to complete the symmetric pattern in the given 2x2 grid.',
+  'दी गई 2x2 ग्रिड में सममित पैटर्न को पूरा करने के लिए प्रश्न चिह्न (?) को प्रतिस्थापित करने वाली आकृति का चयन करें।',
+  '{"a":"Figure (A)","b":"Figure (B)","c":"Figure (C)","d":"Figure (D)"}'::jsonb,
+  '{"a":"आकृति (A)","b":"आकृति (B)","c":"आकृति (C)","d":"आकृति (D)"}'::jsonb,
   'a',
-  'Symmetry Analysis of the 2x2 Grid:
-1. The top-left, top-right, and bottom-left quadrants each contain a quarter-circle arc extending outwards from the respective corner, bisected by a radial diagonal line connecting the center of the grid to the outer corner.
-2. To achieve four-fold rotational and reflectional symmetry, the missing 4th (bottom-right) quadrant must contain the matching symmetrical element: a quarter-circle arc facing the bottom-right corner with a diagonal line running from the central intersection to the bottom-right corner.
+  'Symmetry & Pattern Completion Analysis:
+1. Examine the three given quadrants (Top-Left, Top-Right, Bottom-Left):
+   - In each quadrant, a radial diagonal line runs from the central intersection point outward to the outer corner.
+   - Two concentric circular arcs center on the main intersection point and curve across adjacent axes.
+2. For complete four-fold rotational and reflectional symmetry, the missing 4th (bottom-right) quadrant must contain:
+   - A diagonal line from the center (top-left of the quadrant) to the outer corner (bottom-right).
+   - Two concentric circular arcs curving between the horizontal and vertical inner dividing lines.
+3. Matching with the options:
+   - Figure (A) contains the exact radial diagonal and two concentric arcs.
+   - Figure (B) has the diagonal in the wrong orientation.
+   - Figure (C) is missing the diagonal line.
+   - Figure (D) is missing the concentric arcs.
 Hence, Correct Option is (a).',
-  'ग्रिड की सममिति का विश्लेषण:
-1. ग्रिड के शीर्ष-बाएं, शीर्ष-दाएं और निचले-बाएं तीनों चतुर्थांशों में एक वृत्त-चाप तथा केंद्र से कोने को मिलाने वाली एक विकर्ण रेखा है।
-2. पूर्ण सममिति प्राप्त करने के लिए चौथे (निचले-दाएं) चतुर्थांश में भी वही सममित पैटर्न होना चाहिए: निचले-दाएं कोने पर एक चाप और केंद्र से कोने तक विकर्ण रेखा।
+  'सममिति और पैटर्न पूर्णता का विश्लेषण:
+1. दिए गए तीनों चतुर्थांशों (शीर्ष-बाएं, शीर्ष-दाएं, निचले-बाएं) का निरीक्षण करें:
+   - प्रत्येक चतुर्थांश में केंद्र से बाहरी कोने तक एक विकर्ण रेखा जाती है।
+   - केंद्र को बिंदु मानकर दो संकेंद्री वृत्ताकार चाप खींचे गए हैं।
+2. पूर्ण चार-तरफा सममिति के लिए चौथे (निचले-दाएं) चतुर्थांश में भी:
+   - केंद्र से कोने तक विकर्ण रेखा होनी चाहिए।
+   - केंद्र पर केंद्रित दो वृत्ताकार चाप होने चाहिए।
+3. विकल्पों की तुलना करने पर:
+   - केवल आकृति (A) में सही विकर्ण और दोनों चाप उपस्थित हैं।
 सही विकल्प: (a)।',
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 260" width="100%" height="auto" style="max-width:380px; display:block; margin:10px auto; background:#ffffff;">
   <rect width="380" height="260" fill="#ffffff" rx="8" stroke="#000000" stroke-width="1.5"/>
   <text x="190" y="24" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#000000">Pattern Completion / पैटर्न पूर्णता</text>
-  <!-- 2x2 Grid -->
+  
+  <!-- 2x2 Grid (160x160), Outer Border -->
   <rect x="110" y="45" width="160" height="160" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+  <!-- Central Cross Dividing Lines (Center at x=190, y=125) -->
   <line x1="190" y1="45" x2="190" y2="205" stroke="#000000" stroke-width="2"/>
   <line x1="110" y1="125" x2="270" y2="125" stroke="#000000" stroke-width="2"/>
-  <!-- Top-Left Quadrant: Quarter Circle Arc and Diagonal -->
-  <path d="M 110,125 A 40,40 0 0,1 150,85 L 110,85 Z" fill="none" stroke="#000000" stroke-width="1.5"/>
-  <line x1="110" y1="125" x2="190" y2="45" stroke="#000000" stroke-width="2"/>
-  <!-- Top-Right Quadrant: Quarter Circle Arc and Diagonal -->
-  <path d="M 270,125 A 40,40 0 0,0 230,85 L 270,85 Z" fill="none" stroke="#000000" stroke-width="1.5"/>
-  <line x1="270" y1="125" x2="190" y2="45" stroke="#000000" stroke-width="2"/>
-  <!-- Bottom-Left Quadrant: Quarter Circle Arc and Diagonal -->
-  <path d="M 110,125 A 40,40 0 0,0 150,165 L 110,165 Z" fill="none" stroke="#000000" stroke-width="1.5"/>
-  <line x1="110" y1="125" x2="190" y2="205" stroke="#000000" stroke-width="2"/>
-  <!-- Bottom-Right Quadrant: Question Mark -->
-  <text x="230" y="175" text-anchor="middle" font-family="sans-serif" font-size="34" font-weight="bold" fill="#000000">?</text>
-  <text x="190" y="235" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#000000">Find the missing 4th quadrant / चौथा चतुर्थांश ज्ञात कीजिए</text>
+  
+  <!-- Quadrant 1 (Top-Left): Bounds x:110..190, y:45..125 -->
+  <!-- Diagonal from Center (190,125) to Top-Left Corner (110,45) -->
+  <line x1="190" y1="125" x2="110" y2="45" stroke="#000000" stroke-width="2"/>
+  <!-- Concentric Arcs centered at (190, 125): r=35 and r=65 -->
+  <path d="M 155,125 A 35,35 0 0,1 190,90" fill="none" stroke="#000000" stroke-width="2"/>
+  <path d="M 125,125 A 65,65 0 0,1 190,60" fill="none" stroke="#000000" stroke-width="2"/>
+  
+  <!-- Quadrant 2 (Top-Right): Bounds x:190..270, y:45..125 -->
+  <!-- Diagonal from Center (190,125) to Top-Right Corner (270,45) -->
+  <line x1="190" y1="125" x2="270" y2="45" stroke="#000000" stroke-width="2"/>
+  <!-- Concentric Arcs centered at (190, 125): r=35 and r=65 -->
+  <path d="M 190,90 A 35,35 0 0,1 225,125" fill="none" stroke="#000000" stroke-width="2"/>
+  <path d="M 190,60 A 65,65 0 0,1 255,125" fill="none" stroke="#000000" stroke-width="2"/>
+  
+  <!-- Quadrant 3 (Bottom-Left): Bounds x:110..190, y:125..205 -->
+  <!-- Diagonal from Center (190,125) to Bottom-Left Corner (110,205) -->
+  <line x1="190" y1="125" x2="110" y2="205" stroke="#000000" stroke-width="2"/>
+  <!-- Concentric Arcs centered at (190, 125): r=35 and r=65 -->
+  <path d="M 155,125 A 35,35 0 0,0 190,160" fill="none" stroke="#000000" stroke-width="2"/>
+  <path d="M 125,125 A 65,65 0 0,0 190,190" fill="none" stroke="#000000" stroke-width="2"/>
+  
+  <!-- Quadrant 4 (Bottom-Right): Question Mark ''?'' -->
+  <rect x="195" y="130" width="70" height="70" rx="4" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="230" y="176" text-anchor="middle" font-family="sans-serif" font-size="34" font-weight="bold" fill="#000000">?</text>
+  
+  <text x="190" y="235" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#000000">Select the figure that replaces (?) / चौथा चतुर्थांश ज्ञात कीजिए</text>
 </svg>',
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 260" width="100%" height="auto" style="max-width:380px; display:block; margin:10px auto; background:#ffffff;">
   <rect width="380" height="260" fill="#ffffff" rx="8" stroke="#000000" stroke-width="1.5"/>
   <text x="190" y="24" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#000000">Pattern Completion / पैटर्न पूर्णता</text>
-  <!-- 2x2 Grid -->
+  
+  <!-- 2x2 Grid (160x160), Outer Border -->
   <rect x="110" y="45" width="160" height="160" fill="#ffffff" stroke="#000000" stroke-width="2.5"/>
+  <!-- Central Cross Dividing Lines (Center at x=190, y=125) -->
   <line x1="190" y1="45" x2="190" y2="205" stroke="#000000" stroke-width="2"/>
   <line x1="110" y1="125" x2="270" y2="125" stroke="#000000" stroke-width="2"/>
-  <!-- Top-Left Quadrant: Quarter Circle Arc and Diagonal -->
-  <path d="M 110,125 A 40,40 0 0,1 150,85 L 110,85 Z" fill="none" stroke="#000000" stroke-width="1.5"/>
-  <line x1="110" y1="125" x2="190" y2="45" stroke="#000000" stroke-width="2"/>
-  <!-- Top-Right Quadrant: Quarter Circle Arc and Diagonal -->
-  <path d="M 270,125 A 40,40 0 0,0 230,85 L 270,85 Z" fill="none" stroke="#000000" stroke-width="1.5"/>
-  <line x1="270" y1="125" x2="190" y2="45" stroke="#000000" stroke-width="2"/>
-  <!-- Bottom-Left Quadrant: Quarter Circle Arc and Diagonal -->
-  <path d="M 110,125 A 40,40 0 0,0 150,165 L 110,165 Z" fill="none" stroke="#000000" stroke-width="1.5"/>
-  <line x1="110" y1="125" x2="190" y2="205" stroke="#000000" stroke-width="2"/>
-  <!-- Bottom-Right Quadrant: Question Mark -->
-  <text x="230" y="175" text-anchor="middle" font-family="sans-serif" font-size="34" font-weight="bold" fill="#000000">?</text>
-  <text x="190" y="235" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#000000">Find the missing 4th quadrant / चौथा चतुर्थांश ज्ञात कीजिए</text>
+  
+  <!-- Quadrant 1 (Top-Left): Bounds x:110..190, y:45..125 -->
+  <!-- Diagonal from Center (190,125) to Top-Left Corner (110,45) -->
+  <line x1="190" y1="125" x2="110" y2="45" stroke="#000000" stroke-width="2"/>
+  <!-- Concentric Arcs centered at (190, 125): r=35 and r=65 -->
+  <path d="M 155,125 A 35,35 0 0,1 190,90" fill="none" stroke="#000000" stroke-width="2"/>
+  <path d="M 125,125 A 65,65 0 0,1 190,60" fill="none" stroke="#000000" stroke-width="2"/>
+  
+  <!-- Quadrant 2 (Top-Right): Bounds x:190..270, y:45..125 -->
+  <!-- Diagonal from Center (190,125) to Top-Right Corner (270,45) -->
+  <line x1="190" y1="125" x2="270" y2="45" stroke="#000000" stroke-width="2"/>
+  <!-- Concentric Arcs centered at (190, 125): r=35 and r=65 -->
+  <path d="M 190,90 A 35,35 0 0,1 225,125" fill="none" stroke="#000000" stroke-width="2"/>
+  <path d="M 190,60 A 65,65 0 0,1 255,125" fill="none" stroke="#000000" stroke-width="2"/>
+  
+  <!-- Quadrant 3 (Bottom-Left): Bounds x:110..190, y:125..205 -->
+  <!-- Diagonal from Center (190,125) to Bottom-Left Corner (110,205) -->
+  <line x1="190" y1="125" x2="110" y2="205" stroke="#000000" stroke-width="2"/>
+  <!-- Concentric Arcs centered at (190, 125): r=35 and r=65 -->
+  <path d="M 155,125 A 35,35 0 0,0 190,160" fill="none" stroke="#000000" stroke-width="2"/>
+  <path d="M 125,125 A 65,65 0 0,0 190,190" fill="none" stroke="#000000" stroke-width="2"/>
+  
+  <!-- Quadrant 4 (Bottom-Right): Question Mark ''?'' -->
+  <rect x="195" y="130" width="70" height="70" rx="4" fill="#ffffff" stroke="#000000" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="230" y="176" text-anchor="middle" font-family="sans-serif" font-size="34" font-weight="bold" fill="#000000">?</text>
+  
+  <text x="190" y="235" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#000000">Select the figure that replaces (?) / चौथा चतुर्थांश ज्ञात कीजिए</text>
 </svg>',
-  NULL
+  '{"a":"<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 70 70\" width=\"100%\" height=\"100%\">\n  <rect width=\"70\" height=\"70\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2\"/>\n  <!-- Diagonal from center (0,0) to outer corner (70,70) -->\n  <line x1=\"0\" y1=\"0\" x2=\"70\" y2=\"70\" stroke=\"#000000\" stroke-width=\"2.5\"/>\n  <!-- Concentric circular arcs centered at (0,0) -->\n  <path d=\"M 0,30 A 30,30 0 0,0 30,0\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2\"/>\n  <path d=\"M 0,55 A 55,55 0 0,0 55,0\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2\"/>\n</svg>","b":"<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 70 70\" width=\"100%\" height=\"100%\">\n  <rect width=\"70\" height=\"70\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2\"/>\n  <line x1=\"70\" y1=\"0\" x2=\"0\" y2=\"70\" stroke=\"#000000\" stroke-width=\"2.5\"/>\n  <path d=\"M 0,30 A 30,30 0 0,0 30,0\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2\"/>\n  <path d=\"M 0,55 A 55,55 0 0,0 55,0\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2\"/>\n</svg>","c":"<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 70 70\" width=\"100%\" height=\"100%\">\n  <rect width=\"70\" height=\"70\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2\"/>\n  <path d=\"M 0,30 A 30,30 0 0,0 30,0\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2\"/>\n  <path d=\"M 0,55 A 55,55 0 0,0 55,0\" fill=\"none\" stroke=\"#000000\" stroke-width=\"2\"/>\n</svg>","d":"<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 70 70\" width=\"100%\" height=\"100%\">\n  <rect width=\"70\" height=\"70\" fill=\"#ffffff\" stroke=\"#000000\" stroke-width=\"2\"/>\n  <line x1=\"0\" y1=\"0\" x2=\"70\" y2=\"70\" stroke=\"#000000\" stroke-width=\"2.5\"/>\n</svg>"}'::jsonb
 )
 ON CONFLICT (test_id, question_number) DO UPDATE SET
   part_number = EXCLUDED.part_number,
