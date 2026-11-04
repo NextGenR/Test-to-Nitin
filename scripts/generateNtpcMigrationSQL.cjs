@@ -15,7 +15,7 @@ function convertToMonochromeSvg(svg) {
   if (!svg || typeof svg !== 'string') return svg;
   return svg
     .replace(/stroke=(\\?["'])(?!none|#000000|#000|black)[^\\"']+(\\?["'])/gi, (m, q1, q2) => `stroke=${q1}#000000${q2}`)
-    .replace(/fill=(\\?["'])(#f8fafc|#f1f5f9|#e2e8f0|#e6f7f9|#f0fdf4|#eff6ff|#fafafa|#ffffff|white|#fff)(\\?["'])/gi, (m, q1, c, q2) => `fill=${q1}#ffffff${q2}`)
+    .replace(/fill=(\\?["'])(#f8fafc|#f1f5f9|#e2e8f0|#e6f7f9|#f0fdf4|#eff6ff|#fafafa|#ffffff|white|#fff|#fef3c7|#f3e8ff|#dcfce7)(\\?["'])/gi, (m, q1, c, q2) => `fill=${q1}#ffffff${q2}`)
     .replace(/fill=(\\?["'])(?!none|#ffffff|#fff|white|#000000|#000|black)[^\\"']+(\\?["'])/gi, (m, q1, q2) => `fill=${q1}#000000${q2}`)
     .replace(/stroke:\s*(?!none|#000000|#000|black)[^;"]+/gi, 'stroke: #000000')
     .replace(/fill:\s*(?!none|#ffffff|#fff|white|#000000|#000|black)[^;"]+/gi, 'fill: #000000')
@@ -24,15 +24,12 @@ function convertToMonochromeSvg(svg) {
 }
 
 function run() {
-  let jsonPath = path.join(__dirname, '..', 'RRB_NTPC_GRADUATE_MOCK', 'mock_test_1_v4.json');
+  let jsonPath = path.join(__dirname, '..', 'RRB_NTPC_GRADUATE_MOCK', 'mock_test_1_v5.json');
+  if (!fs.existsSync(jsonPath)) {
+    jsonPath = path.join(__dirname, '..', 'RRB_NTPC_GRADUATE_MOCK', 'mock_test_1_v4.json');
+  }
   if (!fs.existsSync(jsonPath)) {
     jsonPath = path.join(__dirname, '..', 'RRB_NTPC_GRADUATE_MOCK', 'mock_test_1_v3.json');
-  }
-  if (!fs.existsSync(jsonPath)) {
-    jsonPath = path.join(__dirname, '..', 'RRB_NTPC_GRADUATE_MOCK', 'mock_test_1_v2.json');
-  }
-  if (!fs.existsSync(jsonPath)) {
-    jsonPath = path.join(__dirname, '..', 'RRB_NTPC_GRADUATE_MOCK', 'mock_test_1.json');
   }
   if (!fs.existsSync(jsonPath)) {
     console.error('File not found:', jsonPath);
@@ -41,12 +38,12 @@ function run() {
 
   const rawQuestions = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
   const testId = 'rrb_ntpc_graduate_mock_1';
-  const testTitle = 'RRB NTPC (Graduate Level) CBT-1 Mock Test 01 (v4 Fresh)';
+  const testTitle = 'RRB NTPC (Graduate Level) CBT-1 Mock Test 01 (v5 Multi-SVG)';
   const responseTable = 'RRB_NTPC_MOCK_1_responses';
 
   let sql = `-- =========================================================================\n`;
-  sql += `-- TURNKEY REMOTE CLOUD DATABASE MIGRATION FOR RRB NTPC GRADUATE MOCK TEST 01 (v4 FRESH)\n`;
-  sql += `-- Source: mock_test_1_v4.json (${rawQuestions.length} Questions)\n`;
+  sql += `-- TURNKEY REMOTE CLOUD DATABASE MIGRATION FOR RRB NTPC GRADUATE MOCK TEST 01 (v5 MULTI-SVG)\n`;
+  sql += `-- Source: mock_test_1_v5.json (${rawQuestions.length} Questions)\n`;
   sql += `-- Schema: mock_tests entry, "${responseTable}" table, clean slate DELETE & fresh INSERT\n`;
   sql += `-- Safe, Idempotent, and Fully Compatible with PostgreSQL\n`;
   sql += `-- =========================================================================\n\n`;
@@ -75,7 +72,7 @@ function run() {
   sql += `    VALUES (\n`;
   sql += `      ${escapeSql(testId)},\n`;
   sql += `      ${escapeSql(testTitle)},\n`;
-  sql += `      'Official RRB NTPC Graduate Level CBT-1 pattern: Mathematics (30 Qs), Reasoning (30 Qs), General Awareness (40 Qs). Total 100 Questions, 90 Minutes.',\n`;
+  sql += `      'Official RRB NTPC Graduate Level CBT-1 pattern: Mathematics (30 Qs), Reasoning (30 Qs), General Awareness (40 Qs). Total 100 Questions, 90 Minutes. Includes full multi-tier SVG vector graphics in questions, options, and solutions.',\n`;
   sql += `      ${rawQuestions.length}, 90, ${escapeSql(responseTable)}, true\n`;
   sql += `    )\n`;
   sql += `    ON CONFLICT (test_id) DO UPDATE SET\n`;
@@ -118,20 +115,21 @@ function run() {
   sql += `CREATE POLICY "Allow anon all on ${responseTable}" ON public."${responseTable}" FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);\n\n`;
   sql += `CREATE INDEX IF NOT EXISTS idx_ntpc_mock1_candidate ON public."${responseTable}"(candidate_mobile);\n\n`;
 
-  // 3. Clean slate remove previous mock questions before fresh insert
+  // 3. Clean slate delete prior questions
   sql += `-- 3. Clean slate: Remove any prior mock 1 questions\n`;
   sql += `DELETE FROM public.questions WHERE test_id = ${escapeSql(testId)};\n\n`;
 
-  // 4. Fresh Insert of 100 Questions from mock_test_1_v2.json
+  // 4. Insert each question
   sql += `-- 4. Fresh Insert of ${rawQuestions.length} Questions for ${testTitle} (${testId})\n\n`;
 
   for (const q of rawQuestions) {
     const qNum = q.question_number;
     const partNum = q.part_number || (qNum <= 30 ? 1 : qNum <= 60 ? 2 : 3);
-    const sectionName = q.section_name || `PART-${partNum}`;
-    const sectionTitle = q.section_title || (qNum <= 30 ? 'Mathematics' : qNum <= 60 ? 'General Intelligence & Reasoning' : 'General Awareness');
-    const chapterName = q.topic || q.chapter_name || null;
+    const secName = q.section_name || `PART-${partNum}`;
+    const secTitle = q.section_title || (partNum === 1 ? 'Mathematics' : partNum === 2 ? 'General Intelligence & Reasoning' : 'General Awareness');
+    const chapterName = q.chapter_name || q.topic || '';
     const difficulty = q.difficulty || 'Moderate';
+
     let qText = q.question_text || '';
     let qTextHi = q.question_text_hi || qText;
 
@@ -153,14 +151,16 @@ function run() {
       }
     }
 
-    const options = q.options || {};
-    const optionsHi = q.options_hi || options;
-    const correctOption = (q.correct_option || 'a').toLowerCase();
-    const solutionText = q.solution_text || '';
-    const solutionTextHi = q.solution_text_hi || solutionText;
     const imageSvg = convertToMonochromeSvg(q.image_svg || q.svg_content || extractedSvgEn || extractedSvgHi || null);
     const imageSvgHi = convertToMonochromeSvg(q.image_svg_hi || extractedSvgHi || imageSvg || null);
-    const optionSvgs = q.option_svgs || null;
+
+    let optSvgs = null;
+    if (q.option_svgs && typeof q.option_svgs === 'object') {
+      optSvgs = {};
+      for (const [k, v] of Object.entries(q.option_svgs)) {
+        optSvgs[k] = convertToMonochromeSvg(v);
+      }
+    }
 
     sql += `INSERT INTO public.questions (\n`;
     sql += `  test_id, question_number, part_number, section_name, section_title, chapter_name, difficulty,\n`;
@@ -170,20 +170,20 @@ function run() {
     sql += `  ${escapeSql(testId)},\n`;
     sql += `  ${qNum},\n`;
     sql += `  ${partNum},\n`;
-    sql += `  ${escapeSql(sectionName)},\n`;
-    sql += `  ${escapeSql(sectionTitle)},\n`;
+    sql += `  ${escapeSql(secName)},\n`;
+    sql += `  ${escapeSql(secTitle)},\n`;
     sql += `  ${escapeSql(chapterName)},\n`;
     sql += `  ${escapeSql(difficulty)},\n`;
     sql += `  ${escapeSql(qText)},\n`;
     sql += `  ${escapeSql(qTextHi)},\n`;
-    sql += `  ${escapeJson(options)},\n`;
-    sql += `  ${escapeJson(optionsHi)},\n`;
-    sql += `  ${escapeSql(correctOption)},\n`;
-    sql += `  ${escapeSql(solutionText)},\n`;
-    sql += `  ${escapeSql(solutionTextHi)},\n`;
+    sql += `  ${escapeJson(q.options)},\n`;
+    sql += `  ${escapeJson(q.options_hi || q.options)},\n`;
+    sql += `  ${escapeSql((q.correct_option || 'a').toLowerCase())},\n`;
+    sql += `  ${escapeSql(q.solution_text || '')},\n`;
+    sql += `  ${escapeSql(q.solution_text_hi || q.solution_text || '')},\n`;
     sql += `  ${escapeSql(imageSvg)},\n`;
     sql += `  ${escapeSql(imageSvgHi)},\n`;
-    sql += `  ${escapeJson(optionSvgs)}\n`;
+    sql += `  ${escapeJson(optSvgs)}\n`;
     sql += `)\n`;
     sql += `ON CONFLICT (test_id, question_number) DO UPDATE SET\n`;
     sql += `  part_number = EXCLUDED.part_number,\n`;
@@ -203,7 +203,7 @@ function run() {
     sql += `  option_svgs = EXCLUDED.option_svgs;\n\n`;
   }
 
-  const outPath = path.join(__dirname, '..', 'src', 'sql', 'migrate_ntpc_mock_1_v4.sql');
+  const outPath = path.join(__dirname, '..', 'src', 'sql', 'migrate_ntpc_mock_1_v5.sql');
   fs.writeFileSync(outPath, sql, 'utf8');
 
   console.log(`Successfully generated fresh turnkey SQL migration:`);

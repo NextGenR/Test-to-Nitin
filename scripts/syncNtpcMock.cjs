@@ -36,7 +36,9 @@ for (const arg of args) {
 }
 
 if (!filePath) {
-  if (fs.existsSync('RRB_NTPC_GRADUATE_MOCK/mock_test_1_v4.json')) {
+  if (fs.existsSync('RRB_NTPC_GRADUATE_MOCK/mock_test_1_v5.json')) {
+    filePath = 'RRB_NTPC_GRADUATE_MOCK/mock_test_1_v5.json';
+  } else if (fs.existsSync('RRB_NTPC_GRADUATE_MOCK/mock_test_1_v4.json')) {
     filePath = 'RRB_NTPC_GRADUATE_MOCK/mock_test_1_v4.json';
   } else if (fs.existsSync('RRB_NTPC_GRADUATE_MOCK/mock_test_1_v3.json')) {
     filePath = 'RRB_NTPC_GRADUATE_MOCK/mock_test_1_v3.json';
@@ -59,7 +61,7 @@ if (!fs.existsSync(resolvedPath)) {
 
 const rawQuestions = JSON.parse(fs.readFileSync(resolvedPath, 'utf8'));
 const testId = `rrb_ntpc_graduate_mock_${mockNumber}`;
-const testTitle = `RRB NTPC (Graduate Level) CBT-1 Mock Test 0${mockNumber}`;
+const testTitle = `RRB NTPC (Graduate Level) CBT-1 Mock Test 0${mockNumber} (v5 Multi-SVG)`;
 
 console.log(`================================================================`);
 console.log(`Syncing RRB NTPC Graduate Mock Test (Fresh Version)`);
@@ -147,6 +149,14 @@ async function run() {
       const imageSvg = convertToMonochromeSvg(q.image_svg || q.svg_content || extractedSvgEn || extractedSvgHi || null);
       const imageSvgHi = convertToMonochromeSvg(q.image_svg_hi || extractedSvgHi || imageSvg || null);
 
+      let optSvgs = null;
+      if (q.option_svgs && typeof q.option_svgs === 'object') {
+        optSvgs = {};
+        for (const [k, v] of Object.entries(q.option_svgs)) {
+          optSvgs[k] = convertToMonochromeSvg(v);
+        }
+      }
+
       return {
         test_id: testId,
         question_number: qNum,
@@ -164,7 +174,7 @@ async function run() {
         solution_text_hi: q.solution_text_hi || q.solution_text || '',
         image_svg: imageSvg,
         image_svg_hi: imageSvgHi,
-        option_svgs: q.option_svgs || null
+        option_svgs: optSvgs
       };
     });
 

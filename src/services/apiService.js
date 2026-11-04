@@ -48,8 +48,8 @@ export const MOCK_TESTS_CATALOG = [
     category: 'rrb-ntpc',
     categoryLabel: 'RRB NTPC (Graduate Level)',
     mockNumber: 1,
-    title: 'RRB NTPC Graduate Level CBT-1 Mock Test 01',
-    description: 'Official CBT-1 pattern with 30 Mathematics, 30 General Intelligence & Reasoning, and 40 General Awareness.',
+    title: 'RRB NTPC Graduate Level CBT-1 Mock Test 01 (v5 Multi-SVG)',
+    description: 'Official CBT-1 pattern with 30 Mathematics, 30 General Intelligence & Reasoning, and 40 General Awareness. Authentic monochrome SVG vector diagrams and visual option cards.',
     questionsCount: 100,
     durationMins: 90,
     responseTable: 'RRB_NTPC_MOCK_1_responses'
