@@ -823,3 +823,90 @@ export const fetchAllAttempts = async () => {
   }
   return [];
 };
+
+/**
+ * Save candidate response for a single PYQ question to dedicated table:
+ * public."RRB_NTPC_PYQ_responses"
+ */
+export const savePyqResponse = async ({
+  candidateName = 'Candidate',
+  candidateMobile,
+  questionId,
+  subject = 'General Intelligence & Reasoning',
+  chapterId = '',
+  chapterName = '',
+  correctAnswer,
+  hisAnswer,
+  timeTakenSeconds = 0,
+  attemptNumber = 1
+}) => {
+  if (!candidateMobile || !questionId) return;
+
+  const payload = {
+    name_of_candidate: candidateName || 'Candidate',
+    candidate_mobile: candidateMobile,
+    question_id: questionId,
+    subject: subject || 'General Intelligence & Reasoning',
+    chapter_id: chapterId || '',
+    chapter_name: chapterName || '',
+    correct_answer: (correctAnswer || '').toUpperCase(),
+    his_answer: (hisAnswer || '').toUpperCase(),
+    time_taken_seconds: timeTakenSeconds || 0,
+    attempt_number: attemptNumber || 1
+  };
+
+  const url = `${API_ENDPOINT}/RRB_NTPC_PYQ_responses?on_conflict=candidate_mobile,question_id`;
+  const options = {
+    method: 'POST',
+    headers: {
+      ...getHeaders(),
+      "Prefer": "resolution=merge-duplicates"
+    },
+    body: JSON.stringify([payload])
+  };
+
+  try {
+    if (typeof navigator !== 'undefined' && !navigator.onLine) {
+      enqueueOfflineSync(url, options);
+      return;
+    }
+    const res = await fetch(url, options);
+    if (!res.ok && res.status >= 500) {
+      enqueueOfflineSync(url, options);
+    } else {
+      flushOfflineSyncQueue();
+    }
+  } catch (err) {
+    enqueueOfflineSync(url, options);
+    console.warn(`PYQ response sync notice (${questionId}):`, err.message);
+  }
+};
+
+/**
+ * Fetch candidate's PYQ attempt history from public."RRB_NTPC_PYQ_responses"
+ */
+export const fetchCandidatePyqResponses = async (candidateMobile) => {
+  if (!candidateMobile) return {};
+  try {
+    const url = `${API_ENDPOINT}/RRB_NTPC_PYQ_responses?candidate_mobile=eq.${candidateMobile}&select=question_id,his_answer,correct_answer,time_taken_seconds`;
+    const res = await fetch(url, {
+      method: 'GET',
+      headers: getHeaders()
+    });
+    if (res.ok) {
+      const data = await res.json();
+      const responseMap = {};
+      if (Array.isArray(data)) {
+        data.forEach(item => {
+          if (item.question_id && item.his_answer) {
+            responseMap[item.question_id] = item.his_answer.toLowerCase();
+          }
+        });
+      }
+      return responseMap;
+    }
+  } catch (err) {
+    console.warn('Failed to fetch candidate PYQ responses:', err.message);
+  }
+  return {};
+};

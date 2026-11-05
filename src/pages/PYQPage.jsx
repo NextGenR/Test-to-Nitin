@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import Navbar from '../components/Navbar';
 import MathRenderer from '../components/MathRenderer';
+import { savePyqResponse, fetchCandidatePyqResponses } from '../services/apiService';
 import { 
   BookOpen, CheckCircle, XCircle, ArrowLeft, Search, Filter, 
   Sparkles, Award, Eye, EyeOff, Bookmark, BookmarkCheck,
   ChevronLeft, ChevronRight, Layers, FileText, Check, HelpCircle,
-  Clock, Hash, Image as ImageIcon, Flame
+  Clock, Hash, Image as ImageIcon, Flame, RotateCcw, AlertCircle
 } from 'lucide-react';
 
 export default function PYQPage({ candidate, onBackToDashboard, onLogout }) {
@@ -17,8 +18,17 @@ export default function PYQPage({ candidate, onBackToDashboard, onLogout }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [lang, setLang] = useState('en'); // 'en' | 'hi'
 
-  // Candidate practice interaction state (stored in memory/localStorage)
-  const [userAnswers, setUserAnswers] = useState({});
+  // Candidate practice interaction state (offline-first localStorage + remote sync)
+  const candidateKey = candidate?.mobile ? candidate.mobile : 'guest';
+  const [userAnswers, setUserAnswers] = useState(() => {
+    try {
+      const saved = localStorage.getItem('rrb_pyq_answers_' + candidateKey);
+      return saved ? JSON.parse(saved) : {};
+    } catch (e) {
+      return {};
+    }
+  });
+  const [statusFilter, setStatusFilter] = useState('all'); // 'all' | 'attempted' | 'unattempted' | 'incorrect' | 'bookmarked'
   const [revealedSolutions, setRevealedSolutions] = useState({});
   const [bookmarkedIds, setBookmarkedIds] = useState(() => {
     try {
@@ -51,6 +61,20 @@ export default function PYQPage({ candidate, onBackToDashboard, onLogout }) {
           const qData = await qRes.json();
           setAllQuestions(qData);
         }
+
+        // Fetch saved responses from Remote Database if logged in
+        if (candidate?.mobile) {
+          const remoteAnswers = await fetchCandidatePyqResponses(candidate.mobile);
+          if (remoteAnswers && Object.keys(remoteAnswers).length > 0) {
+            setUserAnswers(prev => {
+              const merged = { ...prev, ...remoteAnswers };
+              try {
+                localStorage.setItem('rrb_pyq_answers_' + candidate.mobile, JSON.stringify(merged));
+              } catch (e) {}
+              return merged;
+            });
+          }
+        }
       } catch (err) {
         console.error('Failed to load PYQ dataset:', err);
       } finally {
@@ -70,10 +94,35 @@ export default function PYQPage({ candidate, onBackToDashboard, onLogout }) {
   };
 
   const handleSelectOption = (questionId, optionLetter) => {
-    setUserAnswers(prev => ({
-      ...prev,
-      [questionId]: optionLetter
-    }));
+    const nextAnswers = { ...userAnswers, [questionId]: optionLetter };
+    setUserAnswers(nextAnswers);
+    try {
+      localStorage.setItem('rrb_pyq_answers_' + candidateKey, JSON.stringify(nextAnswers));
+    } catch (e) {}
+
+    // Remote database sync
+    const targetQ = allQuestions.find(item => item.id === questionId);
+    if (candidate?.mobile && targetQ) {
+      savePyqResponse({
+        candidateName: candidate.name || 'Candidate',
+        candidateMobile: candidate.mobile,
+        questionId: targetQ.id,
+        subject: targetQ.subject || 'General Intelligence & Reasoning',
+        chapterId: targetQ.chapter_id || '',
+        chapterName: targetQ.chapter_name || '',
+        correctAnswer: targetQ.correct_option || '',
+        hisAnswer: optionLetter
+      });
+    }
+  };
+
+  const handleResetProgress = () => {
+    if (window.confirm('Are you sure you want to clear your recorded answers for this practice session?')) {
+      setUserAnswers({});
+      try {
+        localStorage.removeItem('rrb_pyq_answers_' + candidateKey);
+      } catch (e) {}
+    }
   };
 
   const toggleSolution = (questionId) => {
@@ -105,14 +154,31 @@ export default function PYQPage({ candidate, onBackToDashboard, onLogout }) {
           return false;
         }
       }
+
+      // Status filter
+      if (statusFilter === 'attempted' && !userAnswers[q.id]) {
+        return false;
+      }
+      if (statusFilter === 'unattempted' && userAnswers[q.id]) {
+        return false;
+      }
+      if (statusFilter === 'incorrect') {
+        const ans = userAnswers[q.id];
+        if (!ans) return false;
+        if (ans.toLowerCase() === (q.correct_option || '').toLowerCase()) return false;
+      }
+      if (statusFilter === 'bookmarked' && !bookmarkedIds.includes(q.id)) {
+        return false;
+      }
+
       return true;
     });
-  }, [allQuestions, selectedChapterId, filterVisualOnly, searchQuery]);
+  }, [allQuestions, selectedChapterId, filterVisualOnly, searchQuery, statusFilter, userAnswers, bookmarkedIds]);
 
   // Reset pagination when filter changes
   useEffect(() => {
     setCurrentPageNum(1);
-  }, [selectedChapterId, filterVisualOnly, searchQuery]);
+  }, [selectedChapterId, filterVisualOnly, searchQuery, statusFilter]);
 
   // Paginated questions
   const totalPages = Math.ceil(filteredQuestions.length / pageSize) || 1;
@@ -127,6 +193,7 @@ export default function PYQPage({ candidate, onBackToDashboard, onLogout }) {
     const q = allQuestions.find(item => item.id === qId);
     return q && q.correct_option && q.correct_option.toLowerCase() === ans.toLowerCase();
   }).length;
+  const incorrectCount = answeredCount - correctCount;
   const accuracyPercent = answeredCount > 0 ? ((correctCount / answeredCount) * 100).toFixed(0) : 0;
 
   return (
@@ -239,35 +306,108 @@ export default function PYQPage({ candidate, onBackToDashboard, onLogout }) {
         <main className="flex-1 space-y-4 min-w-0">
           
           {/* Filters Bar */}
-          <div className="bg-white p-3.5 rounded-xl border border-slate-200 shadow-xs flex flex-wrap items-center justify-between gap-3">
-            {/* Search Input */}
-            <div className="relative flex-1 min-w-[220px]">
-              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
-                placeholder="Search PYQs by keyword, subtopic, or shift..."
-                className="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-amber-500/50"
-              />
+          <div className="bg-white p-3.5 rounded-xl border border-slate-200 shadow-xs space-y-3">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              {/* Search Input */}
+              <div className="relative flex-1 min-w-[220px]">
+                <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={e => setSearchQuery(e.target.value)}
+                  placeholder="Search PYQs by keyword, subtopic, or shift..."
+                  className="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-amber-500/50"
+                />
+              </div>
+
+              {/* Visual Questions Toggle */}
+              <button
+                onClick={() => setFilterVisualOnly(v => !v)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition ${
+                  filterVisualOnly
+                    ? 'bg-purple-600 text-white border-purple-600 shadow-xs'
+                    : 'bg-white hover:bg-slate-50 text-slate-700 border-slate-200'
+                }`}
+              >
+                <ImageIcon className="w-3.5 h-3.5" />
+                <span>Diagrams (301)</span>
+              </button>
+
+              {/* Clear / Reset Progress */}
+              {answeredCount > 0 && (
+                <button
+                  onClick={handleResetProgress}
+                  className="flex items-center gap-1 px-2.5 py-1.5 text-xs font-semibold text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-lg border border-slate-200 transition"
+                  title="Clear all recorded responses"
+                >
+                  <RotateCcw className="w-3 h-3" />
+                  <span>Reset Progress</span>
+                </button>
+              )}
             </div>
 
-            {/* Visual Questions Toggle */}
-            <button
-              onClick={() => setFilterVisualOnly(v => !v)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition ${
-                filterVisualOnly
-                  ? 'bg-purple-600 text-white border-purple-600 shadow-xs'
-                  : 'bg-white hover:bg-slate-50 text-slate-700 border-slate-200'
-              }`}
-            >
-              <ImageIcon className="w-3.5 h-3.5" />
-              <span>Diagram Questions Only (301)</span>
-            </button>
+            {/* Practice Status Tabs (All, Attempted, Incorrect, Unattempted, Bookmarked) */}
+            <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100 text-xs">
+              <div className="flex flex-wrap items-center gap-1.5">
+                <button
+                  onClick={() => setStatusFilter('all')}
+                  className={`px-2.5 py-1 rounded-md font-semibold transition ${
+                    statusFilter === 'all'
+                      ? 'bg-slate-800 text-white'
+                      : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                  }`}
+                >
+                  All ({allQuestions.length})
+                </button>
+                <button
+                  onClick={() => setStatusFilter('attempted')}
+                  className={`px-2.5 py-1 rounded-md font-semibold transition flex items-center gap-1 ${
+                    statusFilter === 'attempted'
+                      ? 'bg-emerald-600 text-white'
+                      : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                  }`}
+                >
+                  <CheckCircle className="w-3 h-3" />
+                  <span>Attempted ({answeredCount})</span>
+                </button>
+                <button
+                  onClick={() => setStatusFilter('incorrect')}
+                  className={`px-2.5 py-1 rounded-md font-semibold transition flex items-center gap-1 ${
+                    statusFilter === 'incorrect'
+                      ? 'bg-red-600 text-white'
+                      : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                  }`}
+                >
+                  <XCircle className="w-3 h-3" />
+                  <span>Mistakes ({incorrectCount})</span>
+                </button>
+                <button
+                  onClick={() => setStatusFilter('unattempted')}
+                  className={`px-2.5 py-1 rounded-md font-semibold transition ${
+                    statusFilter === 'unattempted'
+                      ? 'bg-amber-600 text-white'
+                      : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                  }`}
+                >
+                  Unattempted ({allQuestions.length - answeredCount})
+                </button>
+                <button
+                  onClick={() => setStatusFilter('bookmarked')}
+                  className={`px-2.5 py-1 rounded-md font-semibold transition flex items-center gap-1 ${
+                    statusFilter === 'bookmarked'
+                      ? 'bg-indigo-600 text-white'
+                      : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                  }`}
+                >
+                  <Bookmark className="w-3 h-3" />
+                  <span>Bookmarked ({bookmarkedIds.length})</span>
+                </button>
+              </div>
 
-            {/* Question count indicator */}
-            <div className="text-xs text-slate-500 font-medium">
-              Showing <span className="font-bold text-slate-800">{paginatedQuestions.length}</span> of {filteredQuestions.length} Qs
+              {/* Showing count */}
+              <div className="text-xs text-slate-500 font-medium">
+                Showing <span className="font-bold text-slate-800">{paginatedQuestions.length}</span> of {filteredQuestions.length} Qs
+              </div>
             </div>
           </div>
 
@@ -503,3 +643,4 @@ export default function PYQPage({ candidate, onBackToDashboard, onLogout }) {
     </div>
   );
 }
+
