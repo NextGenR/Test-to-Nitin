@@ -1,0 +1,135 @@
+[
+  {
+    "id": "reason_ch01",
+    "number": 1,
+    "name": "Analogy",
+    "total_questions": 82,
+    "visual_questions": 3
+  },
+  {
+    "id": "reason_ch02",
+    "number": 2,
+    "name": "Blood Relation",
+    "total_questions": 48,
+    "visual_questions": 0
+  },
+  {
+    "id": "reason_ch03",
+    "number": 3,
+    "name": "Classification / Odd One Out",
+    "total_questions": 65,
+    "visual_questions": 17
+  },
+  {
+    "id": "reason_ch04",
+    "number": 4,
+    "name": "Coding-Decoding",
+    "total_questions": 114,
+    "visual_questions": 0
+  },
+  {
+    "id": "reason_ch05",
+    "number": 5,
+    "name": "Data Sufficiency",
+    "total_questions": 24,
+    "visual_questions": 0
+  },
+  {
+    "id": "reason_ch06",
+    "number": 6,
+    "name": "Direction & Distance",
+    "total_questions": 25,
+    "visual_questions": 0
+  },
+  {
+    "id": "reason_ch07",
+    "number": 7,
+    "name": "Mathematical Operations",
+    "total_questions": 12,
+    "visual_questions": 0
+  },
+  {
+    "id": "reason_ch08",
+    "number": 8,
+    "name": "Mix Series",
+    "total_questions": 53,
+    "visual_questions": 5
+  },
+  {
+    "id": "reason_ch09",
+    "number": 9,
+    "name": "Number Series / Missing Number",
+    "total_questions": 106,
+    "visual_questions": 58
+  },
+  {
+    "id": "reason_ch10",
+    "number": 10,
+    "name": "Puzzle Test",
+    "total_questions": 68,
+    "visual_questions": 0
+  },
+  {
+    "id": "reason_ch11",
+    "number": 11,
+    "name": "Seating Arrangement",
+    "total_questions": 50,
+    "visual_questions": 0
+  },
+  {
+    "id": "reason_ch12",
+    "number": 12,
+    "name": "Syllogism",
+    "total_questions": 49,
+    "visual_questions": 1
+  },
+  {
+    "id": "reason_ch13",
+    "number": 13,
+    "name": "Miscellaneous Verbal",
+    "total_questions": 89,
+    "visual_questions": 0
+  },
+  {
+    "id": "reason_ch14",
+    "number": 14,
+    "name": "Venn Diagram",
+    "total_questions": 47,
+    "visual_questions": 47
+  },
+  {
+    "id": "reason_ch15",
+    "number": 15,
+    "name": "Diagram Based Problems",
+    "total_questions": 93,
+    "visual_questions": 93
+  },
+  {
+    "id": "reason_ch16",
+    "number": 16,
+    "name": "Line and Figure Counting",
+    "total_questions": 27,
+    "visual_questions": 27
+  },
+  {
+    "id": "reason_ch17",
+    "number": 17,
+    "name": "Water and Mirror Image",
+    "total_questions": 4,
+    "visual_questions": 4
+  },
+  {
+    "id": "reason_ch18",
+    "number": 18,
+    "name": "Cube and Dice",
+    "total_questions": 19,
+    "visual_questions": 19
+  },
+  {
+    "id": "reason_ch19",
+    "number": 19,
+    "name": "Visual Patterns and Miscellaneous",
+    "total_questions": 15,
+    "visual_questions": 15
+  }
+]

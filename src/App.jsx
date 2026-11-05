@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import CBTExamPage from './pages/CBTExamPage';
+import PYQPage from './pages/PYQPage';
 import { getCachedCandidate, clearCandidateSession, getTestAttempt } from './services/apiService';
 
 const ACTIVE_PAGE_KEY = 'rrb_active_page';
@@ -42,7 +43,11 @@ export default function App() {
         }
       }
 
-      setCurrentPage('dashboard');
+      if (savedPage === 'pyq') {
+        setCurrentPage('pyq');
+      } else {
+        setCurrentPage('dashboard');
+      }
     } else {
       setCurrentPage('login');
     }
@@ -135,6 +140,16 @@ export default function App() {
     setCurrentPage('dashboard');
   };
 
+  const handleOpenPyq = () => {
+    localStorage.setItem(ACTIVE_PAGE_KEY, 'pyq');
+    setCurrentPage('pyq');
+  };
+
+  const handleBackFromPyq = () => {
+    localStorage.setItem(ACTIVE_PAGE_KEY, 'dashboard');
+    setCurrentPage('dashboard');
+  };
+
   return (
     <div className="w-full min-h-screen font-sans bg-[#f4f7f9]">
       {currentPage === 'login' && (
@@ -147,6 +162,15 @@ export default function App() {
           onStartExam={handleStartExam}
           onResumeExam={handleResumeExam}
           onReviewExam={handleReviewExam}
+          onOpenPyq={handleOpenPyq}
+          onLogout={handleLogout}
+        />
+      )}
+
+      {currentPage === 'pyq' && (
+        <PYQPage
+          candidate={activeCandidate}
+          onBackToDashboard={handleBackFromPyq}
           onLogout={handleLogout}
         />
       )}

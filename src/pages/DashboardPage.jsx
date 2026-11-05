@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import InstructionsModal from '../components/InstructionsModal';
-import { Play, RotateCcw, Clock, Award, BookOpen, CheckCircle, BarChart3, AlertCircle, FileCheck2, Sparkles, Trophy, Medal, Users, TrendingUp, Target, Shield, Download, Search, KeyRound, Check, RefreshCw } from 'lucide-react';
+import { Play, RotateCcw, Clock, Award, BookOpen, CheckCircle, BarChart3, AlertCircle, FileCheck2, Sparkles, Trophy, Medal, Users, TrendingUp, Target, Shield, Download, Search, KeyRound, Check, RefreshCw, ArrowRight } from 'lucide-react';
 import { getTestAttempt, fetchLeaderboard, fetchAllCandidates, fetchAllAttempts, fetchPublishedTests, MOCK_TESTS_CATALOG } from '../services/apiService';
 
 
@@ -10,6 +10,7 @@ export default function DashboardPage({
   onStartExam,
   onResumeExam,
   onReviewExam,
+  onOpenPyq,
   onLogout
 }) {
   const [activeTab, setActiveTab] = useState('rrb-series');
@@ -294,6 +295,14 @@ export default function DashboardPage({
               Test Series ({testsCatalog.length} Tests)
             </button>
             <button
+              onClick={onOpenPyq}
+              className="pb-3 font-bold text-xs sm:text-sm tracking-wide whitespace-nowrap transition border-b-2 border-transparent text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5"
+            >
+              <Sparkles className="w-4 h-4 text-amber-500" />
+              <span>PYQ Question Bank (990 Qs)</span>
+              <span className="bg-amber-500 text-slate-900 text-[10px] font-black px-1.5 py-0.5 rounded-full uppercase">NEW</span>
+            </button>
+            <button
               onClick={() => setActiveTab('leaderboard')}
               className={`pb-3 font-bold text-xs sm:text-sm tracking-wide whitespace-nowrap transition border-b-2 flex items-center gap-1.5 ${
                 activeTab === 'leaderboard'
@@ -331,6 +340,30 @@ export default function DashboardPage({
         {/* Tab 1: Mock Tests Cards */}
         {activeTab === 'rrb-series' && (
           <div className="space-y-6">
+            {/* PYQ Question Bank Callout Banner */}
+            <div className="bg-gradient-to-r from-indigo-900 via-indigo-800 to-slate-900 rounded-2xl p-5 sm:p-6 text-white shadow-md border border-indigo-700/50 flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="space-y-1.5 max-w-2xl">
+                <div className="flex items-center gap-2">
+                  <span className="bg-amber-500 text-slate-900 text-[10px] font-black uppercase px-2 py-0.5 rounded tracking-wider flex items-center gap-1">
+                    <Sparkles className="w-3 h-3 fill-slate-900" /> Complete Question Bank
+                  </span>
+                  <span className="text-xs text-indigo-300 font-semibold">RRB NTPC Graduate Level</span>
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold tracking-tight text-white">
+                  990 Real Exam Reasoning PYQs Across 19 Chapters
+                </h3>
+                <p className="text-xs sm:text-sm text-indigo-200 leading-relaxed">
+                  Practice real previous year questions with 301 vector visual problems, bilingual questions, and step-by-step logical solutions.
+                </p>
+              </div>
+              <button
+                onClick={onOpenPyq}
+                className="px-5 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-900 font-extrabold text-xs sm:text-sm rounded-xl shadow-md transition shrink-0 flex items-center gap-2 cursor-pointer"
+              >
+                <span>Explore PYQ Bank</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
             
             {/* Category Filter Pills (Strictly RRB Group D vs RRB NTPC Graduate - NO All Exams option) */}
             <div className="bg-white p-3.5 sm:p-4 rounded-2xl border border-slate-200 shadow-xs flex flex-wrap items-center justify-between gap-3">
